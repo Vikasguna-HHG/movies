@@ -63,15 +63,8 @@ const Home = () => {
   // {
 
   // }
-  const submit = async () => {
-    // if (!First_Name || !Last_Name || !imageval) {
-    //   toast.warning("data Fild", {
-    //     autoClose: 2000,
+  const submit = async () => {                     
 
-    //   });
-    //   return;
-
-    // }
     setFirst_Name('');
     setLast_Name('');
     setUser_Name('')
@@ -80,22 +73,7 @@ const Home = () => {
       //   alert("hello")
       // }
     if (id === 0) {
-      // axios.post('http://localhost:5000/InsertBanner', {
-      //   First_Name: First_Name,
-      //   Last_Name: Last_Name,
-      //   image_user: imageval,
-      // })
-      //   .then(function (res) {
-      //     // console.log();
-      //     setList([...list, res.data.data])
-      //     console.log(res);
-
-      //     toast.success("data insrted", {
-      //       autoClose: 2000
-      //     });
-      //   })
-
-
+   
       const formData = new FormData();
       // formData.append("image", imageval);
       formData.append("First_Name", First_Name);
