@@ -16,6 +16,7 @@ const movie_makers1 = new mongoose.Schema({
     User_Name:
     {
         type:String,
+        unique:true,
         required:true
         
     },
