@@ -108,7 +108,7 @@ exports.Minsert_data = async function (req, res, next) {
 
     var result = "";
     var characters =
-      "ABCD@EFGHIJKLMNOP!QRSTUVWX#YZ&abcdefghijklmnopqrstuvwxyz012345%6789$";
+      "ABCD34636755@EFGH012345IJKLMNOP!QRSTUVWX#YZ&abcdefghijklmnopqrstuvwxyz%6789$";
     var charactersLength = characters.length;
     for (var i = 0; i < 8; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));

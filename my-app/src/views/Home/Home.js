@@ -62,6 +62,39 @@ const Home = () => {
     // const update = (e) =>
   // {
 
+  // }
+                     
+
+    // setFirst_Name('');
+    // setLast_Name('');
+    //   });
+    //   return;
+
+    // }
+    // setFirst_Name('')
+    // setLast_Name('')
+    // setUser_Name('')
+    // setEmail('')
+    // if(!Email){
+    //   alert("hello")
+    // }
+    // if (id === 0) {
+   
+    //   const formData = new FormData();
+      // axios.post('http://localhost:5000/InsertBanner', {
+      //   First_Name: First_Name,
+      //   Last_Name: Last_Name,
+      //   image_user: imageval,
+      // })
+      //   .then(function (res) {
+      //     // console.log();
+      //     setList([...list, res.data.data])
+      //     console.log(res);
+
+      //     toast.success("data insrted", {
+      //       autoClose: 2000
+      //     });
+      //   })
     // }
     const submit = async () => {
       const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
@@ -191,7 +224,7 @@ const Home = () => {
     // setImageval('');
     setVisible(false)
   }
-
+    
   const edithandler = async (id) => {
     setVisible(true)
 
@@ -454,5 +487,5 @@ const Home = () => {
       {/* edit data */}
     </>
   )
-}
+                }
 export default Home
