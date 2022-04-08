@@ -16,6 +16,7 @@ const Mukunj = new mongoose.Schema({
     User_Name:
     {
         type:String,
+        unique:true,
         required:true
         
     },
@@ -24,11 +25,11 @@ const Mukunj = new mongoose.Schema({
         type:String,
         unique:true,
         required:true,
-        validate(value){
-            if(validator.isEmail(value)){
-                throw new Error("Email is in valid")
-            }
-        }
+        // validate(value){
+        //     if(validator.isEmail(value)){
+        //         throw new Error("Email is in valid")
+        //     }
+        // }
     },
     Password:
     {
