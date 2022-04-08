@@ -65,6 +65,12 @@ const Home = () => {
     // }
     const submit = async () => {
       const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+      if(!First_Name || !Last_Name || !User_Name || !Email)
+      {
+        toast.warning('please fil data', {
+          autoClose: 1000,
+        })
+      }
     
     if (id === 0 ) {
    
@@ -74,9 +80,7 @@ const Home = () => {
       if(!First_Name)
       {
         document.getElementById("First_Name").style.border="1px solid red"
-        // toast.warning('please fil data', {
-        //   autoClose: 1000,
-        // })
+        
       }
       else{
         formData.append('First_Name', First_Name)
