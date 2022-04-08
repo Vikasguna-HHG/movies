@@ -1,6 +1,6 @@
 const mongoose = require ("mongoose");
 
-const hel = new mongoose.Schema({
+const subcategoires1 = new mongoose.Schema({
     category:{
         type:String
     },
@@ -15,5 +15,5 @@ const hel = new mongoose.Schema({
         type:String
     }
 })
-const keyur_schema = new mongoose.model("SubCategories",hel);
-module.exports = keyur_schema;
+const subcategoires = new mongoose.model("SubCategories",subcategoires1);
+module.exports = subcategoires;

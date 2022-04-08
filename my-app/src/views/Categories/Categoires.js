@@ -13,7 +13,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import {Link} from "react-router-dom";
 import SubCategoires from '../base/subcategoires/subcategoires';
-import queryString from 'query-string'
+// import queryString from 'query-string'
 const axios = require('axios')
 toast.configure()
 

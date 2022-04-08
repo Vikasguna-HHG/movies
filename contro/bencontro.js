@@ -1,8 +1,11 @@
-var Parth = require("../Models/Parth");
-var Mukunj_Schema = require("../Models/Mukunj");
-var vikas_schema = require("../Models/vikas");
-var keyur_schema = require("../Models/keyur");
-var vikas1_schema = require("../Models/video");
+var Categoires = require("../Models/Categoires");
+var subcategoires = require("../Models/subcategoires");
+var movie_maker = require("../Models/movie_maker");
+var language = require("../Models/language");
+var video =require("../Models/video");
+
+
+
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -17,7 +20,7 @@ exports.insert_data = async function (req, res, next) {
     data = {
       language: req.body.language,
     };
-    const tag = await Parth.create(data);
+    const tag = await language.create(data);
 
     res.status(201).json({
       data: tag,
@@ -30,7 +33,7 @@ exports.insert_data = async function (req, res, next) {
 
 exports.find_data = async function (req, res, next) {
   try {
-    const tag = await Parth.find();
+    const tag = await language.find();
 
     res.status(200).json({
       status: "find data",
@@ -43,7 +46,7 @@ exports.find_data = async function (req, res, next) {
 
 exports.find_data_Id = async function (req, res, next) {
   try {
-    const tag = await Parth.findById(req.params.id);
+    const tag = await language.findById(req.params.id);
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -55,7 +58,7 @@ exports.find_data_Id = async function (req, res, next) {
 
 exports.Delete_data = async function (req, res, next) {
   try {
-    await Parth.findByIdAndDelete(req.params.id);
+    await language.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: "delete",
     });
@@ -66,9 +69,9 @@ exports.Delete_data = async function (req, res, next) {
 
 exports.Update_data = async function (req, res, next) {
   try {
-    var BannerData = await Parth.findById(req.body.Id);
+    var BannerData = await language.findById(req.body.Id);
     BannerData.language = req.body.language;
-    await Parth.findByIdAndUpdate(req.body.Id, BannerData);
+    await language.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: req.file,
@@ -97,7 +100,7 @@ exports.Minsert_data = async function (req, res, next) {
     };
     // console.log(data);
 
-    const tag = await Mukunj_Schema.create(data); 
+    const tag = await movie_maker.create(data); 
     res.status(201).json({
       data: tag,
       status: "Data insert",
@@ -105,7 +108,7 @@ exports.Minsert_data = async function (req, res, next) {
 
     var result = "";
     var characters =
-      "ABCD@EFGHIJKLMNOP!QRSTUVWX#YZ&abcdefghijklmnopqrstuvwxyz012345%6789$";
+      "ABCD34636755@EFGH012345IJKLMNOP!QRSTUVWX#YZ&abcdefghijklmnopqrstuvwxyz%6789$";
     var charactersLength = characters.length;
     for (var i = 0; i < 8; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -145,7 +148,7 @@ exports.Minsert_data = async function (req, res, next) {
 
 exports.Mfind_data = async function (req, res, next) {
   try {
-    const tag = await Mukunj_Schema.find();
+    const tag = await movie_maker.find();
 
       res.status(200).json({
       status: "find data",
@@ -158,7 +161,7 @@ exports.Mfind_data = async function (req, res, next) {
 
 exports.Mfind_data_Id = async function (req, res, next) {
   try {
-    const tag = await Mukunj_Schema.findById(req.params.id);
+    const tag = await movie_maker.findById(req.params.id);
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -170,7 +173,7 @@ exports.Mfind_data_Id = async function (req, res, next) {
 
 exports.MDelete_data = async function (req, res, next) {
   try {
-    await Mukunj_Schema.findByIdAndDelete(req.params.id);
+    await movie_maker.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: "delete",
     });
@@ -181,13 +184,13 @@ exports.MDelete_data = async function (req, res, next) {
 
 exports.MUpdate_data = async function (req, res, next) {
   try {
-    var BannerData = await Mukunj_Schema.findById(req.body.Id);
+    var BannerData = await movie_maker.findById(req.body.Id);
     (BannerData.First_Name = req.body.First_Name),
       (BannerData.Last_Name = req.body.Last_Name),
       (BannerData.User_Name = req.body.User_Name),
       (BannerData.Email = req.body.Email);
 
-    await Parth.findByIdAndUpdate(req.body.Id, BannerData);
+    await movie_maker.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: req.file,
@@ -207,7 +210,7 @@ exports.vinsert_data = async function (req, res, next) {
       Description: req.body.Description,
       image_user: req.file.path,
     };
-    const tag = await vikas_schema.create(data);
+    const tag = await Categoires.create(data);
 
     res.status(201).json({
       data: tag,
@@ -220,7 +223,7 @@ exports.vinsert_data = async function (req, res, next) {
 
 exports.vfind_data = async function (req, res, next) {
   try {
-    const tag = await vikas_schema.find();
+    const tag = await Categoires.find();
 
     res.status(200).json({
       status: "find data",
@@ -233,7 +236,7 @@ exports.vfind_data = async function (req, res, next) {
 
 exports.vfind_data_Id = async function (req, res, next) {
   try {
-    const tag = await vikas_schema.findById(req.params.id);
+    const tag = await Categoires.findById(req.params.id);
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -245,7 +248,7 @@ exports.vfind_data_Id = async function (req, res, next) {
 
 exports.vDelete_data = async function (req, res, next) {
   try {
-    await vikas_schema.findByIdAndDelete(req.params.id);
+    await Categoires.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: "delete",
     });
@@ -256,14 +259,14 @@ exports.vDelete_data = async function (req, res, next) {
 
 exports.vUpdate_data = async function (req, res, next) {
   try {
-    var BannerData = await vikas_schema.findById(req.body.Id);
+    var BannerData = await Categoires.findById(req.body.Id);
     BannerData.category = req.body.category;
     BannerData.Description = req.body.Description;
     if (req.file != null) {
       await unlinkAsync(BannerData.image_user);
       BannerData.image_user = req.file.path;
     }
-    await vikas_schema.findByIdAndUpdate(req.body.Id, BannerData);
+    await Categoires.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: req.file,
@@ -282,7 +285,7 @@ exports.kinsert_data = async function (req, res, next) {
       description: req.body.description,
       image_user: req.file.path,
     };
-    const tag = await keyur_schema.create(data);
+    const tag = await subcategoires.create(data);
 
     res.status(201).json({
       data: tag,
@@ -295,7 +298,7 @@ exports.kinsert_data = async function (req, res, next) {
 
 exports.kfind_data = async function (req, res, next) {
   try {
-    const tag = await keyur_schema.find();
+    const tag = await subcategoires.find();
 
     res.status(200).json({
       status: "find data",
@@ -308,7 +311,7 @@ exports.kfind_data = async function (req, res, next) {
 
 exports.kfind_data_Id = async function (req, res, next) {
   try {
-    const tag = await keyur_schema.findById(req.params.id);
+    const tag = await subcategoires.findById(req.params.id);
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -320,7 +323,7 @@ exports.kfind_data_Id = async function (req, res, next) {
 
 exports.kDelete_data = async function (req, res, next) {
   try {
-    await keyur_schema.findByIdAndDelete(req.params.id);
+    await subcategoires.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: "delete",
     });
@@ -331,7 +334,7 @@ exports.kDelete_data = async function (req, res, next) {
 
 exports.kUpdate_data = async function (req, res, next) {
   try {
-    var BannerData = await keyur_schema.findById(req.body.Id);
+    var BannerData = await subcategoires.findById(req.body.Id);
     BannerData.category = req.body.category;
     BannerData.subcategorie = req.body.subcategorie;
     BannerData.description = req.body.description;
@@ -339,7 +342,7 @@ exports.kUpdate_data = async function (req, res, next) {
       await unlinkAsync(BannerData.image_user);
       BannerData.image_user = req.file.path;
     }
-    await keyur_schema.findByIdAndUpdate(req.body.Id, BannerData);
+    await subcategoires.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: req.file,
@@ -366,7 +369,7 @@ exports.viinsert_data = async function (req, res, next) {
       banner_video: req.files[1].path,
 
     };
-    const tag = await vikas1_schema.create(data);
+    const tag = await video.create(data);
 
     res.status(201).json({
       data: tag,
@@ -381,7 +384,7 @@ exports.viinsert_data = async function (req, res, next) {
 
 exports.vifind_data = async function (req, res, next) {
   try {
-    const tag = await vikas1_schema.find();
+    const tag = await video.find();
 
     res.status(200).json({
       status: "find data",
@@ -394,7 +397,7 @@ exports.vifind_data = async function (req, res, next) {
 
 exports.vifind_data_Id = async function (req, res, next) {
   try {
-    const tag = await vikas1_schema.findById(req.params.id);
+    const tag = await video.findById(req.params.id);
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -406,7 +409,7 @@ exports.vifind_data_Id = async function (req, res, next) {
 
 exports.viDelete_data = async function (req, res, next) {
   try {
-    await vikas1_schema.findByIdAndDelete(req.params.id);
+    await video.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: "delete",
     });
@@ -417,7 +420,7 @@ exports.viDelete_data = async function (req, res, next) {
 
 exports.viUpdate_data = async function (req, res, next) {
   try {
-    var BannerData = await vikas1_schema.findById(req.body.Id);
+    var BannerData = await video.findById(req.body.Id);
     BannerData.category = req.body.category;
     BannerData.title = req.body.title;
     BannerData.language = req.body.language;
@@ -431,7 +434,7 @@ exports.viUpdate_data = async function (req, res, next) {
           await unlinkAsync(BannerData.banner_video);
           BannerData.banner_video = req.file.path;
       }
-    await vikas1_schema.findByIdAndUpdate(req.body.Id, BannerData);
+    await video.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: req.file,
