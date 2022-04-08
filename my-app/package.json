@@ -46,6 +46,7 @@
     "core-js": "^3.21.1",
     "node-sass": "^7.0.1",
     "prop-types": "^15.8.1",
+    "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-app-polyfill": "^3.0.0",
     "react-bootstrap": "^2.2.2",

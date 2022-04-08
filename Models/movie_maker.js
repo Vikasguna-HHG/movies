@@ -3,7 +3,7 @@ const mongoose = require ("mongoose");
 const validator = require('validator');
 
 // Mukunj schema start
-const Mukunj = new mongoose.Schema({
+const movie_makers1 = new mongoose.Schema({
     First_Name:{
         type:String,
         required:true
@@ -16,6 +16,7 @@ const Mukunj = new mongoose.Schema({
     User_Name:
     {
         type:String,
+        unique:true,
         required:true
         
     },
@@ -24,11 +25,11 @@ const Mukunj = new mongoose.Schema({
         type:String,
         unique:true,
         required:true,
-        validate(value){
-            if(validator.isEmail(value)){
-                throw new Error("Email is in valid")
-            }
-        }
+        // validate(value){
+        //     if(validator.isEmail(value)){
+        //         throw new Error("Email is in valid")
+        //     }
+        // }
     },
     Password:
     {
@@ -38,7 +39,7 @@ const Mukunj = new mongoose.Schema({
     }
    
 })
-const Mukunj_Schema = new mongoose.model("movie_maker",Mukunj);
-module.exports = Mukunj_Schema;
+const movie_makers = new mongoose.model("movie_maker",movie_makers1);
+module.exports = movie_makers;
 
 // mukunj schema end

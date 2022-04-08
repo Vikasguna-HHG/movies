@@ -1,7 +1,7 @@
 //vikas Schema start
 const mongoose = require ("mongoose");
 
-const vikas = new mongoose.Schema({
+const category1 = new mongoose.Schema({
     category:{
         type:String
     },
@@ -14,6 +14,6 @@ const vikas = new mongoose.Schema({
     }
    
 })
-const vikas_schema = new mongoose.model("category",vikas);
-module.exports = vikas_schema;
+const Categoires = new mongoose.model("category",category1);
+module.exports = Categoires;
 
