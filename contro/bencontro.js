@@ -1,7 +1,3 @@
-// var Mukunj_Schema = require("../Models/movie_maker");
-// var vikas_schema = require("../Models/Categoires");
-// var keyur_schema = require("../Models/subcategoires");
-var vikas1_schema = require("../Models/video");
 var Categoires = require("../Models/Categoires");
 var subcategoires = require("../Models/subcategoires");
 var movie_maker = require("../Models/movie_maker");
