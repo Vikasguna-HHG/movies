@@ -8,18 +8,38 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import ImageViewer from 'react-simple-image-viewer'
 import swal from 'sweetalert'
 import { FaHandPointRight } from "react-icons/fa";
-import {CFormSelect,CCardImage,CCardTitle,CCardText,CCard,CCardBody,CCardHeader,CCol,CTable,CForm,CFormLabel,CFormInput,CFormTextarea,CButton,CTableHead, CTableRow,CTableHeaderCell,CTableBody, CTableDataCell,CInputGroup,CInputGroupText,CModalBody,CModalTitle,CModalHeader,CModalFooter,CModal,CRow,} from '@coreui/react'
+import { CFormSelect, CCardImage, CCardTitle, CCardText, CCard, CCardBody, CCardHeader, CCol, CTable, CForm, CFormLabel, CFormInput, CFormTextarea, CButton, CTableHead, CTableRow, CTableHeaderCell, CTableBody, CTableDataCell, CInputGroup, CInputGroupText, CModalBody, CModalTitle, CModalHeader, CModalFooter, CModal, CRow, } from '@coreui/react'
 import { toast } from 'react-toastify'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import 'react-toastify/dist/ReactToastify.css'
+import {
+  BrowserRouter as Router,
+  useParams,
+  useLocation
+} from "react-router-dom";
+
 // import zIndex from '@mui/material/styles/zIndex'
 const axios = require('axios')
 toast.configure()
+
+function useQuery() {
+  const { search123 } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search123), [search123]);
+}
+
 const SubCategoires = () => {
   const [alignment, setAlignment] = React.useState('left')
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment)
   }
+
+  let query123 = useQuery();
+
+  let a = query123.get("category")
+  console.log(a);
+  const abc = useParams();
+  console.log(abc );
   const [id, setId] = useState(0)
   const [maintitle, setmaintitle] = useState('')
   const [subtitle, setsubtitle] = useState('')
@@ -32,6 +52,7 @@ const SubCategoires = () => {
   const [currentImage, setCurrentImage] = useState(0)
   const [isViewerOpen, setIsViewerOpen] = useState(false)
   const [categry, setcategry] = useState([])
+  const [query,setQuery] = useState('');
   // -----------------------------------------------------------------------
   const openImageViewer = useCallback((index) => {
     setCurrentImage([index])
@@ -45,11 +66,11 @@ const SubCategoires = () => {
 
 
   function openhandler() {
-      setsubcat('')
-      setmaintitle('')
-      setsubtitle('')
-      setImageval('')
-      setVisible(true)
+    setsubcat('')
+    setmaintitle('')
+    setsubtitle('')
+    setImageval('')
+    setVisible(true)
 
   }
 
@@ -69,7 +90,7 @@ const SubCategoires = () => {
       formData.append('description', subtitle)
       try {
         const res = await axios.post('http://localhost:5000/kInsertBanner', formData)
-        debugger
+
         setList([...list, res.data.data])
         toast.success('New Add...!', {
           autoClose: 2000,
@@ -92,7 +113,7 @@ const SubCategoires = () => {
       formData.append('description', subtitle)
       try {
         const res = await axios.post('http://localhost:5000/kUpdateBanner', formData)
-        debugger
+    
         if (res.data.status == 'success') {
           getdata()
           toast.success('New Updated...!', {
@@ -128,6 +149,8 @@ const SubCategoires = () => {
   }
   // -----------------------------------------------------------------------
   function getdata() {
+
+    console.log(category)
     axios
       .get(`http://localhost:5000/kfinddata`)
       .then(function (res) {
@@ -152,9 +175,29 @@ const SubCategoires = () => {
       })
   }
   // -----------------------------------------------------------------------
+
+
+ 
+
   useEffect(() => {
-    getdata()
-    category()
+    
+    let url = new URL(window.location.href);
+    let c = url.searchParams.get("category");
+
+    setQuery(c)
+
+    getdata();
+    category();
+    
+    // const params = new URLSearchParams(location.search);
+    // setcategry(params.get('category'));
+    
+    // const queryParams = new URLSearchParams(location)
+    // const term = queryParams.get("category")
+    // console.log(term );
+    // const location = queryParams.get("location")
+
+
   }, [])
   // -----------------------------------------------------------------------
   const deletehandler = async (id) => {
@@ -201,26 +244,26 @@ const SubCategoires = () => {
           <CForm>
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
-                <CFormSelect aria-label="Default select example" onChange={(e) => {setmaintitle(e.target.value)}}>
-                  <option align="center"  selected>Select Category</option>
-                  {categry.map((item, i) => (
-                    <option key={i}>{item.category}</option>
-                  ))}
-                </CFormSelect>
+              <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
+                <option align="center" selected>Select Category</option>
+                {categry.map((item, i) => (
+                  <option key={i}>{item.category}</option>
+                ))}
+              </CFormSelect>
             </div>
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Sub Category</CFormLabel>
-              <CFormInput type="text" id="exampleFormControlInput1" value={subcat} onChange={(e) => {setsubcat(e.target.value)}} placeholder="Enter Sub Category"/>
+              <CFormInput type="text" id="exampleFormControlInput1" value={subcat} onChange={(e) => { setsubcat(e.target.value) }} placeholder="Enter Sub Category" />
             </div>
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlTextarea1">Description</CFormLabel>
-              <CFormTextarea id="exampleFormControlTextarea1" value={subtitle}  maxLength="200"  onChange={(e) => {setsubtitle(e.target.value)}} placeholder="Enter Description"
+              <CFormTextarea id="exampleFormControlTextarea1" value={subtitle} maxLength="200" onChange={(e) => { setsubtitle(e.target.value) }} placeholder="Enter Description"
                 rows="3"
               ></CFormTextarea>
             </div>
             <div className="mb-3">
               <CFormLabel htmlFor="formFileMultiple">Select Image</CFormLabel>
-              <CFormInput type="file" id="formFileMultiple" placeholder="Select Image"   onChange={saveFile}/>
+              <CFormInput type="file" id="formFileMultiple" placeholder="Select Image" onChange={saveFile} />
             </div>
           </CForm>
         </CModalBody>
@@ -229,8 +272,8 @@ const SubCategoires = () => {
           <CButton className="btn1" onClick={submit} id="demo">Save</CButton>
         </CModalFooter>
       </CModal>
-     {/*card and search  */}
-      <CCol xs={12} id="table1"  style={{ display: 'none' }}>
+      {/*card and search  */}
+      <CCol xs={12} id="table1" style={{ display: 'none' }}>
         <CCard className="mb-2">
           <CCardBody>
             <CInputGroup className="flex-nowrap">
@@ -239,7 +282,7 @@ const SubCategoires = () => {
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>&nbsp;&nbsp;&nbsp;Search
               </CInputGroupText>
-              <CFormInput placeholder="Search" value={search} onChange={(e) => { setSearch(e.target.value)}} aria-label="Username" aria-describedby="addon-wrapping"/>
+              <CFormInput placeholder="Search" value={search} onChange={(e) => { setSearch(e.target.value) }} aria-label="Username" aria-describedby="addon-wrapping" />
               <ToggleButtonGroup style={{ marginLeft: '400px', width: '100px', height: '40px' }} value={alignment} exclusive onChange={handleAlignment} aria-label="text alignment">
                 <ToggleButton value="center" aria-label="left aligned" onClick={table1}>
                   <TableViewRoundedIcon />
@@ -248,7 +291,7 @@ const SubCategoires = () => {
                   <FormatListNumberedIcon />
                 </ToggleButton>
               </ToggleButtonGroup>
-              <CButton  style={{ marginLeft: '30px',borderRadius:"5px" }} className="btn1" onClick={() => openhandler()}>Add Sub Category</CButton>
+              <CButton style={{ marginLeft: '30px', borderRadius: "5px" }} className="btn1" onClick={() => openhandler()}>Add Sub Category</CButton>
             </CInputGroup>
             <br></br>
             {list
@@ -256,30 +299,30 @@ const SubCategoires = () => {
               .map((item, i) => {
                 return (
                   <>
-                    <CCard style={{ width: '19.5rem',display: 'flex', display: 'inline-block',margin: '1px 1px',backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)',borderRadius: '10px'}}>
+                    <CCard style={{ width: '19.5rem',  display: 'inline-block', margin: '1px 1px', backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)', borderRadius: '10px' }}>
                       <div className="hover01 column">
                         <div>
                           <figure>
-                            <img src={`http://localhost:5000/${item.image_user}`} width="282px" height="200px" key={i}  onClick={() => openImageViewer('http://localhost:5000/' + item.image_user)}/>
+                            <img src={`http://localhost:5000/${item.image_user}`} width="282px" height="200px" key={i} onClick={() => openImageViewer('http://localhost:5000/' + item.image_user)} />
                           </figure>
                           <span>Hover</span>
                         </div>
-                      </div>   
+                      </div>
                       <CCardBody>
-                      <CCardTitle style={{ color: 'white',textAlign:"center" ,backgroundColor:"#3A6073"  }}>{item.category}</CCardTitle>
-                        <CCardText style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.subcategorie}</CCardText>
-                        <CCardText className='font'><FaHandPointRight style={{color:"#3A6073"}}/> {item.description}</CCardText>
-                        <CButton  value="Update"  color='success' variant="outline"  onClick={() => edithandler(item._id)}>
-                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <CCardTitle style={{ color: 'white', textAlign: "center", backgroundColor: "#3A6073" }}>{item.category}</CCardTitle>
+                        <CCardText style={{ color: 'white' }}><FaHandPointRight style={{ color: "#3A6073" }} /> {item.subcategorie}</CCardText>
+                        <CCardText className='font'><FaHandPointRight style={{ color: "#3A6073" }} /> {item.description}</CCardText>
+                        <CButton value="Update" color='success' variant="outline" onClick={() => edithandler(item._id)}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fillRule="evenodd"  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                           </svg>
-                        </CButton>  
-                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <CButton color="danger"  variant="outline" value="delete" onClick={() => deletehandler(item._id)}>
-                        <svg xmlns="http://www.w3.org/2000/svg"  width="16"  height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16" >
-                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                        </svg>
+                        </CButton>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <CButton color="danger" variant="outline" value="delete" onClick={() => deletehandler(item._id)}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16" >
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                          </svg>
                         </CButton>
                       </CCardBody>
                     </CCard>
@@ -288,23 +331,23 @@ const SubCategoires = () => {
                       <CModalHeader><CModalTitle>Update Sub Category Form</CModalTitle></CModalHeader>
                       <CModalBody>
                         <CForm>
-                            <div className="mb-3">
-                                <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
-                                      <CFormSelect aria-label="Default select example"  onChange={(e) => {  setmaintitle(e.target.value) }}>
-                                      <option align="center" selected> Select category</option>	
-                                          {categry.map((item, i) => (
-                                              <option key={i}>{item.category}</option>
-                                          ))}
-                                      </CFormSelect>
-                            </div>
-                            <div className="mb-3">
-                                <CFormLabel htmlFor="exampleFormControlInput1">Sub Category</CFormLabel>
-                                    <CFormInput type="text" value={subcat} onChange={(e) => { setsubcat(e.target.value) }}  id="exampleFormControlInput1" placeholder="Enter your Tital" />
-                            </div>  
-                            <div className="mb-3">
-                                <CFormLabel htmlFor="exampleFormControlTextarea1">Description</CFormLabel>
-                                    <CFormTextarea value={subtitle}  maxLength="200"  onChange={(e) => {  setsubtitle(e.target.value)    }} id="exampleFormControlTextarea1"  placeholder="Enter Your Sub-Tital" rows="3" ></CFormTextarea>
-                            </div>
+                          <div className="mb-3">
+                            <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
+                            <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
+                              <option align="center" selected> Select category</option>
+                              {categry.map((item, i) => (
+                                <option key={i}>{item.category}</option>
+                              ))}
+                            </CFormSelect>
+                          </div>
+                          <div className="mb-3">
+                            <CFormLabel htmlFor="exampleFormControlInput1">Sub Category</CFormLabel>
+                            <CFormInput type="text" value={subcat} onChange={(e) => { setsubcat(e.target.value) }} id="exampleFormControlInput1" placeholder="Enter your Tital" />
+                          </div>
+                          <div className="mb-3">
+                            <CFormLabel htmlFor="exampleFormControlTextarea1">Description</CFormLabel>
+                            <CFormTextarea value={subtitle} maxLength="200" onChange={(e) => { setsubtitle(e.target.value) }} id="exampleFormControlTextarea1" placeholder="Enter Your Sub-Tital" rows="3" ></CFormTextarea>
+                          </div>
                         </CForm>
                         <div>
                           <CRow>
@@ -314,8 +357,8 @@ const SubCategoires = () => {
                             </CCol>
                             <CCol>
                               <img style={{ height: '200px', width: '250px', borderRadius: '6px' }} src={'http://localhost:5000/' + imageval} ></img>
-                            </CCol>    
-                          </CRow>     
+                            </CCol>
+                          </CRow>
                         </div>
                       </CModalBody>
                       <CModalFooter>
@@ -323,15 +366,15 @@ const SubCategoires = () => {
                         <CButton color="primary" onClick={submit} id="demo" className="btn1" type="submit">Update</CButton>
                       </CModalFooter>
                     </CModal>
-                  </>              
+                  </>
                 )
               })}
-              {/* image click evenet */}
-            {isViewerOpen && ( <ImageViewer src={currentImage} currentIndex={0} disableScroll={false}  closeOnClickOutside={true} onClose={setIsViewerOpen} color="white"  backgroundStyle={{ backgroundColor: '#3A6073',  backgroundSize: 'cover',  zIndex: '2',}}/> )}
+            {/* image click evenet */}
+            {isViewerOpen && (<ImageViewer src={currentImage} currentIndex={0} disableScroll={false} closeOnClickOutside={true} onClose={setIsViewerOpen} color="white" backgroundStyle={{ backgroundColor: '#3A6073', backgroundSize: 'cover', zIndex: '2', }} />)}
           </CCardBody>
         </CCard>
       </CCol>
-     {/* table and search */}
+      {/* table and search */}
       <CCol xs={12} id="table2">
         <CCard className="mb-4">
           <CCardBody>
@@ -339,9 +382,9 @@ const SubCategoires = () => {
               <CInputGroupText className="btn1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>&nbsp;&nbsp;&nbsp;Search   
-              </CInputGroupText>    
-              <CFormInput placeholder="Search" value={search}  onChange={(e) => {setSearch(e.target.value)}}  aria-label="Username" aria-describedby="addon-wrapping"/>
+                </svg>&nbsp;&nbsp;&nbsp;Search
+              </CInputGroupText>
+              <CFormInput placeholder="Search" value={search} onChange={(e) => { setSearch(e.target.value) }} aria-label="Username" aria-describedby="addon-wrapping" />
               <ToggleButtonGroup style={{ marginLeft: '400px', width: '100px', height: '40px' }} value={alignment} exclusive onChange={handleAlignment} aria-label="text alignment">
                 <ToggleButton value="center" aria-label="left aligned" onClick={table1}>
                   <TableViewRoundedIcon />
@@ -349,20 +392,20 @@ const SubCategoires = () => {
                 <ToggleButton value="left" aria-label="centered" onClick={table2}>
                   <FormatListNumberedIcon />
                 </ToggleButton>
-              </ToggleButtonGroup>    
-              <CButton style={{ marginLeft: '30px',borderRadius:"5px"}} className="btn1" onClick={() => openhandler()}>Add Sub Category</CButton>    
+              </ToggleButtonGroup>
+              <CButton style={{ marginLeft: '30px', borderRadius: "5px" }} className="btn1" onClick={() => openhandler()}>Add Sub Category</CButton>
             </CInputGroup>
             <br />
             {/* table */}
-            <CTable style={{ textAlign: 'center' }}  hover>
+            <CTable style={{ textAlign: 'center' }} hover>
               <CTableHead >
-                <CTableRow style={{backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)'}}>
-                  <CTableHeaderCell style={{color:"white"}}>Id</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Category</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Sub Category</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Image</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Description</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Action</CTableHeaderCell>
+                <CTableRow style={{ backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}>
+                  <CTableHeaderCell style={{ color: "white" }}>Id</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: "white" }}>Category</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: "white" }}>Sub Category</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: "white" }}>Image</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: "white" }}>Description</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: "white" }}>Action</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
@@ -372,27 +415,27 @@ const SubCategoires = () => {
                   .map((item, i) => {
                     return (
                       <>
-                        <CTableRow key={i} style={{backgroundImage: 'repeating-linear-gradient(to right,#16222A,#3A6073)'}}>
-                          <CTableDataCell  style={{ paddingTop: '30px',color:"white"}}>{i + 1}</CTableDataCell>
-                          <CTableHeaderCell style={{paddingTop: '30px',color:"white"}}>{item.category}</CTableHeaderCell>
-                          <CTableDataCell  style={{ paddingTop: '30px',color:"white"}}>{item.subcategorie}</CTableDataCell>
+                        <CTableRow key={i} style={{ backgroundImage: 'repeating-linear-gradient(to right,#16222A,#3A6073)' }}>
+                          <CTableDataCell style={{ paddingTop: '30px', color: "white" }}>{i + 1}</CTableDataCell>
+                          <CTableHeaderCell style={{ paddingTop: '30px', color: "white" }}>{item.category}</CTableHeaderCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: "white" }}>{item.subcategorie}</CTableDataCell>
                           <CTableDataCell >
-                             <div className="hover01 column1">
+                            <div className="hover01 column1">
                               <figure className='figure1'>
-                                <img src={`http://localhost:5000/${item.image_user}`} width="250px" height="150px" key={i} onClick={() =>openImageViewer('http://localhost:5000/' + item.image_user)}/>
+                                <img src={`http://localhost:5000/${item.image_user}`} width="250px" height="150px" key={i} onClick={() => openImageViewer('http://localhost:5000/' + item.image_user)} />
                               </figure>
                             </div>
-                            {isViewerOpen && (<ImageViewer src={currentImage}  currentIndex={0} disableScroll={false} closeOnClickOutside={true} onClose={setIsViewerOpen} backgroundStyle={{  backgroundColor: '#3A6073',zIndex: '2'}}/> )}
+                            {isViewerOpen && (<ImageViewer src={currentImage} currentIndex={0} disableScroll={false} closeOnClickOutside={true} onClose={setIsViewerOpen} backgroundStyle={{ backgroundColor: '#3A6073', zIndex: '2' }} />)}
                           </CTableDataCell>
-                          <CTableDataCell  className='font1' style={{ paddingTop: '30px',width:"400px",color:"white"  }}>{item.description}</CTableDataCell>
-                          <CTableDataCell style={{ paddingTop: '30px',color:"white"  }}>
+                          <CTableDataCell className='font1' style={{ paddingTop: '30px', width: "400px", color: "white" }}>{item.description}</CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: "white" }}>
                             <CButton color="success" variant="outline" value="Update" onClick={() => edithandler(item._id)}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                               </svg>
                             </CButton>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <CButton color="danger"variant="outline"value="delete"onClick={() => deletehandler(item._id)}>
+                            <CButton color="danger" variant="outline" value="delete" onClick={() => deletehandler(item._id)}>
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
                                 <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                               </svg>
