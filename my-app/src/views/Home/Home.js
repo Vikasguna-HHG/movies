@@ -269,7 +269,7 @@ const Home = () => {
                   </div>
                   <div className="mb-3">
                     <CFormLabel htmlFor="exampleFormControlInput1">Email</CFormLabel>
-                    <CFormInput type="email" name=""  id="" value={Email} onChange={(e) => { setEmail(e.target.value) }} placeholder='Enter Email' />
+                    <CFormInput type="email" name=""  required id="" value={Email} onChange={(e) => { setEmail(e.target.value) }} placeholder='Enter Email' />
                   </div>
 
                 </CForm>
