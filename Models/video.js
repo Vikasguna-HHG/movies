@@ -1,6 +1,6 @@
 const mongoose = require ("mongoose");
 
-const vikas1 = new mongoose.Schema({
+const video1 = new mongoose.Schema({
     title:
     {
         type:String
@@ -33,5 +33,5 @@ const vikas1 = new mongoose.Schema({
     
    
 })
-const vikas1_schema = new mongoose.model("video",vikas1);
-module.exports = vikas1_schema;
+const video = new mongoose.model("video",video1);
+module.exports = video;

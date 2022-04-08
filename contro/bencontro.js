@@ -1,14 +1,12 @@
-var Parth = require("../Models/language");
 // var Mukunj_Schema = require("../Models/movie_maker");
 // var vikas_schema = require("../Models/Categoires");
 // var keyur_schema = require("../Models/subcategoires");
 var vikas1_schema = require("../Models/video");
-var Categoires = require("../Models/Categoires")
-var subcategoires = require("../Models/subcategoires")
-var movie_maker = require("../Models/movie_maker")
-var language = require("../Models/language")
-
-
+var Categoires = require("../Models/Categoires");
+var subcategoires = require("../Models/subcategoires");
+var movie_maker = require("../Models/movie_maker");
+var language = require("../Models/language");
+var video =require("../Models/video");
 
 
 
@@ -375,7 +373,7 @@ exports.viinsert_data = async function (req, res, next) {
       banner_video: req.files[1].path,
 
     };
-    const tag = await vikas1_schema.create(data);
+    const tag = await video.create(data);
 
     res.status(201).json({
       data: tag,
@@ -390,7 +388,7 @@ exports.viinsert_data = async function (req, res, next) {
 
 exports.vifind_data = async function (req, res, next) {
   try {
-    const tag = await vikas1_schema.find();
+    const tag = await video.find();
 
     res.status(200).json({
       status: "find data",
@@ -403,7 +401,7 @@ exports.vifind_data = async function (req, res, next) {
 
 exports.vifind_data_Id = async function (req, res, next) {
   try {
-    const tag = await vikas1_schema.findById(req.params.id);
+    const tag = await video.findById(req.params.id);
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -415,7 +413,7 @@ exports.vifind_data_Id = async function (req, res, next) {
 
 exports.viDelete_data = async function (req, res, next) {
   try {
-    await vikas1_schema.findByIdAndDelete(req.params.id);
+    await video.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: "delete",
     });
@@ -426,7 +424,7 @@ exports.viDelete_data = async function (req, res, next) {
 
 exports.viUpdate_data = async function (req, res, next) {
   try {
-    var BannerData = await vikas1_schema.findById(req.body.Id);
+    var BannerData = await video.findById(req.body.Id);
     BannerData.category = req.body.category;
     BannerData.title = req.body.title;
     BannerData.language = req.body.language;
@@ -440,7 +438,7 @@ exports.viUpdate_data = async function (req, res, next) {
           await unlinkAsync(BannerData.banner_video);
           BannerData.banner_video = req.file.path;
       }
-    await vikas1_schema.findByIdAndUpdate(req.body.Id, BannerData);
+    await video.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: req.file,
