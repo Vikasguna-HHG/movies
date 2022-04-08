@@ -1,8 +1,14 @@
 var Parth = require("../Models/Parth");
 var Mukunj_Schema = require("../Models/Mukunj");
-var vikas_schema = require("../Models/vikas");
+// var vikas_schema = require("../Models/Categoires");
 var keyur_schema = require("../Models/keyur");
 var vikas1_schema = require("../Models/video");
+var Categoires = require("../Models/Categoires")
+
+
+
+
+
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -207,7 +213,7 @@ exports.vinsert_data = async function (req, res, next) {
       Description: req.body.Description,
       image_user: req.file.path,
     };
-    const tag = await vikas_schema.create(data);
+    const tag = await Categoires.create(data);
 
     res.status(201).json({
       data: tag,
@@ -220,7 +226,7 @@ exports.vinsert_data = async function (req, res, next) {
 
 exports.vfind_data = async function (req, res, next) {
   try {
-    const tag = await vikas_schema.find();
+    const tag = await Categoires.find();
 
     res.status(200).json({
       status: "find data",
@@ -233,7 +239,7 @@ exports.vfind_data = async function (req, res, next) {
 
 exports.vfind_data_Id = async function (req, res, next) {
   try {
-    const tag = await vikas_schema.findById(req.params.id);
+    const tag = await Categoires.findById(req.params.id);
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -245,7 +251,7 @@ exports.vfind_data_Id = async function (req, res, next) {
 
 exports.vDelete_data = async function (req, res, next) {
   try {
-    await vikas_schema.findByIdAndDelete(req.params.id);
+    await Categoires.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: "delete",
     });
@@ -256,14 +262,14 @@ exports.vDelete_data = async function (req, res, next) {
 
 exports.vUpdate_data = async function (req, res, next) {
   try {
-    var BannerData = await vikas_schema.findById(req.body.Id);
+    var BannerData = await Categoires.findById(req.body.Id);
     BannerData.category = req.body.category;
     BannerData.Description = req.body.Description;
     if (req.file != null) {
       await unlinkAsync(BannerData.image_user);
       BannerData.image_user = req.file.path;
     }
-    await vikas_schema.findByIdAndUpdate(req.body.Id, BannerData);
+    await Categoires.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: req.file,
