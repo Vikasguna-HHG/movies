@@ -266,7 +266,7 @@ const Home = () => {
   }, [])
 
   //parth hhg
-  //parth - surat
+  //parth - surat - surat2
 
   const deletehandler = async (id) => {
     swal({
