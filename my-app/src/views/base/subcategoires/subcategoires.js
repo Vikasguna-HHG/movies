@@ -22,26 +22,11 @@ import {
 const axios = require('axios')
 toast.configure()
 
-function useQuery() {
-  const { search123 } = useLocation();
-
-  return React.useMemo(() => new URLSearchParams(search123), [search123]);
-}
-
 const SubCategoires = () => {
-
-
   const [alignment, setAlignment] = React.useState('left')
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment)
   }
-
-  let query123 = useQuery();
-
-  let a = query123.get("category")
-  console.log(a);
-  const abc = useParams();
-  console.log(abc);
   const [id, setId] = useState(0)
   const [maintitle, setmaintitle] = useState('')
   const [subtitle, setsubtitle] = useState('')
@@ -66,15 +51,12 @@ const SubCategoires = () => {
     setImageval(e.target.files[0])
   }
 
-
-
   function openhandler() {
     setsubcat('')
     setmaintitle('')
     setsubtitle('')
     setImageval('')
     setVisible(true)
-
   }
 
   // -----------------------------------------------------------------------
@@ -137,6 +119,7 @@ const SubCategoires = () => {
   }
   // -----------------------------------------------------------------------
   const edithandler = async (id) => {
+    debugger;
     setVisible1(true)
     axios
       .get(`http://localhost:5000/kfinddata/${id}`, {
@@ -152,10 +135,12 @@ const SubCategoires = () => {
   }
   // -----------------------------------------------------------------------
   function getdata() {
-
-    console.log(category)
+debugger;
+let url = new URL(window.location.href);
+let c = url.searchParams.get("category");
+    console.log(c)
     axios
-      .get(`http://localhost:5000/kfinddata`)
+      .get("http://localhost:5000/kfinddata/?category="+c)
       .then(function (res) {
         // console.log(res.data);
         setList(res.data.data)
@@ -179,29 +164,15 @@ const SubCategoires = () => {
       })
   }
   // -----------------------------------------------------------------------
-
-
+  
 
 
   useEffect(() => {
-
     let url = new URL(window.location.href);
-    let c = url.searchParams.get("category");
-
-    setQuery(c)
-
-    getdata();
-    category();
-
-    // const params = new URLSearchParams(location.search);
-    // setcategry(params.get('category'));
-
-    // const queryParams = new URLSearchParams(location)
-    // const term = queryParams.get("category")
-    // console.log(term );
-    // const location = queryParams.get("location")
-
-
+  let c = url.searchParams.get("category");
+  setQuery(c)
+      getdata();
+      category();
   }, [])
   // -----------------------------------------------------------------------
   const deletehandler = async (id) => {

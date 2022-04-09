@@ -303,32 +303,37 @@ exports.kinsert_data = async function (req, res, next) {
 // }
 
 exports.kfind_data = async function (req, res, next) {
-  // if(subcategoires   == null){
+  console.log("res : "+req.query.category)
+  console.log("res1 : ",req)
+  if(req.query.category == 'null'){
+   
    try {
       const tag = await subcategoires.find();
+      // console.log(tag);
   
       res.status(200).json({
         status: "find data",
         data: tag,
       });
     } catch (error) {
-      console.log("not find data........!");
+      console.log("error :" + error)
+      // console.log("not find data........!");
     }
     
-  // }
-  // else{
-    // try {
+  }
+  else{
+    try {
     
-    //   const tag = await subcategoires.find({category:"Gujarati"});
-  
-    //    res.status(200).json({
-    //     status: "find data",
-    //     data: tag,
-    //   });
-    // } catch (error) {
-    //   console.log("not find data........!")
-    // }
-  // }
+      const tag = await subcategoires.find({category:req.query.category});
+       console.log("filter :" + tag)
+       res.status(200).json({
+        status: "find data",
+        data: tag,
+      });
+    } catch (error) {
+      console.log("not find data........!")
+    }
+  }
   
 };
 
