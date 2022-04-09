@@ -135,12 +135,8 @@ const SubCategoires = () => {
   }
   // -----------------------------------------------------------------------
   function getdata() {
-debugger;
-let url = new URL(window.location.href);
-let c = url.searchParams.get("category");
-    console.log(c)
     axios
-      .get("http://localhost:5000/kfinddata/?category="+c)
+      .get("http://localhost:5000/kfinddata/?category="+categoryName)
       .then(function (res) {
         // console.log(res.data);
         setList(res.data.data)
@@ -165,12 +161,13 @@ let c = url.searchParams.get("category");
   }
   // -----------------------------------------------------------------------
   
-
+var categoryName;
 
   useEffect(() => {
+    
     let url = new URL(window.location.href);
-  let c = url.searchParams.get("category");
-  setQuery(c)
+    categoryName = url.searchParams.get("category");
+   setQuery(categoryName)
       getdata();
       category();
   }, [])
