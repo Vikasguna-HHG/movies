@@ -13,18 +13,18 @@ const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
 
-// exports.find_category = async function (req, res, next)
-// {
-//   try {
-//     const tag = await subcategoires.find({category:});
-//      res.status(200).json({
-//       status: "find data",
-//       data: tag,
-//     });
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+exports.find_category = async function (req, res, next)
+{
+  try {
+    const tag = await subcategoires.find({category:"Hindi"});
+     res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    console.log(error)
+  }
+}
 // parth api start
 exports.insert_data = async function (req, res, next) {
   try {
