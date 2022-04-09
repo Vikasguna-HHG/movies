@@ -303,7 +303,7 @@ exports.kinsert_data = async function (req, res, next) {
 // }
 
 exports.kfind_data = async function (req, res, next) {
-  if(subcategoires   == null){
+  // if(subcategoires   == null){
    try {
       const tag = await subcategoires.find();
   
@@ -315,20 +315,20 @@ exports.kfind_data = async function (req, res, next) {
       console.log("not find data........!");
     }
     
-  }
-  else{
-    try {
+  // }
+  // else{
+    // try {
     
-      const tag = await subcategoires.find({category:"Bangli"});
+    //   const tag = await subcategoires.find({category:"Gujarati"});
   
-       res.status(200).json({
-        status: "find data",
-        data: tag,
-      });
-    } catch (error) {
-      console.log("not find data........!")
-    }
-  }
+    //    res.status(200).json({
+    //     status: "find data",
+    //     data: tag,
+    //   });
+    // } catch (error) {
+    //   console.log("not find data........!")
+    // }
+  // }
   
 };
 
