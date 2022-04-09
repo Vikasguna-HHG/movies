@@ -99,6 +99,8 @@ const Category = () => {
             toast.success('Updated Data...!', {
               autoClose: 2000,
             })
+
+            
           }
         } catch (ex) {
           console.log(ex)
