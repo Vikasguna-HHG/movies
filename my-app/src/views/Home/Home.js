@@ -265,7 +265,7 @@ const Home = () => {
     getdata()
   }, [])
 
-  //Test 
+  //parth
 
   const deletehandler = async (id) => {
     swal({
