@@ -164,7 +164,7 @@ const SubCategoires = () => {
 var categoryName;
 
   useEffect(() => {
-    
+
     let url = new URL(window.location.href);
     categoryName = url.searchParams.get("category");
    setQuery(categoryName)
@@ -204,7 +204,7 @@ var categoryName;
   }
   return (
     <>
-      {query}
+
       {/*model popup*/}
       <br />
       <br />

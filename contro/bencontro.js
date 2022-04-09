@@ -303,8 +303,8 @@ exports.kinsert_data = async function (req, res, next) {
 // }
 
 exports.kfind_data = async function (req, res, next) {
-  console.log("res : "+req.query.category)
-  console.log("res1 : ",req)
+  // console.log("res : "+req.query.category)
+  // console.log("res1 : ",req)
   if(req.query.category == 'null'){
    
    try {
