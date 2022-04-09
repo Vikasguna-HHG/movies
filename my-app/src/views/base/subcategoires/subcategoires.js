@@ -29,6 +29,8 @@ function useQuery() {
 }
 
 const SubCategoires = () => {
+
+
   const [alignment, setAlignment] = React.useState('left')
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment)
@@ -53,6 +55,7 @@ const SubCategoires = () => {
   const [isViewerOpen, setIsViewerOpen] = useState(false)
   const [categry, setcategry] = useState([])
   const [query,setQuery] = useState('');
+  
   // -----------------------------------------------------------------------
   const openImageViewer = useCallback((index) => {
     setCurrentImage([index])
@@ -236,6 +239,7 @@ const SubCategoires = () => {
       {/*model popup*/}
       <br />
       <br />
+
       <CModal visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader onClose={() => setVisible(false)}>
           <CModalTitle>Sub Category Form</CModalTitle>
