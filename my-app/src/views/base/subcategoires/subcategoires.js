@@ -1,4 +1,4 @@
- import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import './table.css'
 // import * as React from 'react';
 // import DashboardIcon from '@mui/icons-material/Dashboard'
@@ -41,7 +41,7 @@ const SubCategoires = () => {
   let a = query123.get("category")
   console.log(a);
   const abc = useParams();
-  console.log(abc );
+  console.log(abc);
   const [id, setId] = useState(0)
   const [maintitle, setmaintitle] = useState('')
   const [subtitle, setsubtitle] = useState('')
@@ -54,8 +54,8 @@ const SubCategoires = () => {
   const [currentImage, setCurrentImage] = useState(0)
   const [isViewerOpen, setIsViewerOpen] = useState(false)
   const [categry, setcategry] = useState([])
-  const [query,setQuery] = useState('');
-  
+  const [query, setQuery] = useState('');
+
   // -----------------------------------------------------------------------
   const openImageViewer = useCallback((index) => {
     setCurrentImage([index])
@@ -116,7 +116,7 @@ const SubCategoires = () => {
       formData.append('description', subtitle)
       try {
         const res = await axios.post('http://localhost:5000/kUpdateBanner', formData)
-    
+
         if (res.data.status == 'success') {
           getdata()
           toast.success('New Updated...!', {
@@ -164,6 +164,7 @@ const SubCategoires = () => {
         console.log(error)
       })
   }
+
   // -----------------------------------------------------------------------
   function category() {
     axios
@@ -180,10 +181,10 @@ const SubCategoires = () => {
   // -----------------------------------------------------------------------
 
 
- 
+
 
   useEffect(() => {
-    
+
     let url = new URL(window.location.href);
     let c = url.searchParams.get("category");
 
@@ -191,10 +192,10 @@ const SubCategoires = () => {
 
     getdata();
     category();
-    
+
     // const params = new URLSearchParams(location.search);
     // setcategry(params.get('category'));
-    
+
     // const queryParams = new URLSearchParams(location)
     // const term = queryParams.get("category")
     // console.log(term );
@@ -235,7 +236,7 @@ const SubCategoires = () => {
   }
   return (
     <>
-
+      {query}
       {/*model popup*/}
       <br />
       <br />
@@ -303,7 +304,7 @@ const SubCategoires = () => {
               .map((item, i) => {
                 return (
                   <>
-                    <CCard style={{ width: '19.5rem',  display: 'inline-block', margin: '1px 1px', backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)', borderRadius: '10px' }}>
+                    <CCard style={{ width: '19.5rem', display: 'inline-block', margin: '1px 1px', backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)', borderRadius: '10px' }}>
                       <div className="hover01 column">
                         <div>
                           <figure>

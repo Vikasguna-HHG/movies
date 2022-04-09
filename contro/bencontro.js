@@ -13,18 +13,7 @@ const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
 
-// exports.find_category = async function (req, res, next)
-// {
-//   try {
-//     const tag = await subcategoires.find({category:});
-//      res.status(200).json({
-//       status: "find data",
-//       data: tag,
-//     });
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+
 // parth api start
 exports.insert_data = async function (req, res, next) {
   try {
@@ -288,6 +277,7 @@ exports.vUpdate_data = async function (req, res, next) {
 };
 
 //keyur api start
+
 exports.kinsert_data = async function (req, res, next) {
   try {
     data = {
@@ -307,19 +297,39 @@ exports.kinsert_data = async function (req, res, next) {
   }
 };
 
-  
+// exports.find_category = async function (req, res, next)
+// {
+ 
+// }
 
 exports.kfind_data = async function (req, res, next) {
-  try {
-    const tag = await subcategoires.find();
-
-    res.status(200).json({
-      status: "find data",
-      data: tag,
-    });
-  } catch (error) {
-    console.log("not find data........!");
+  if(subcategoires   == null){
+   try {
+      const tag = await subcategoires.find();
+  
+      res.status(200).json({
+        status: "find data",
+        data: tag,
+      });
+    } catch (error) {
+      console.log("not find data........!");
+    }
+    
   }
+  else{
+    try {
+    
+      const tag = await subcategoires.find({category:"Bangli"});
+  
+       res.status(200).json({
+        status: "find data",
+        data: tag,
+      });
+    } catch (error) {
+      console.log("not find data........!")
+    }
+  }
+  
 };
 
 exports.kfind_data_Id = async function (req, res, next) {
