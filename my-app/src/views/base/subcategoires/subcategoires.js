@@ -164,7 +164,7 @@ const SubCategoires = () => {
 var categoryName;
 
   useEffect(() => {
-
+debugger;
     let url = new URL(window.location.href);
     categoryName = url.searchParams.get("category");
    setQuery(categoryName)
@@ -268,7 +268,7 @@ var categoryName;
             </CInputGroup>
             <br></br>
             {list
-              .filter((data) => data.subcategorie.match(new RegExp(search, 'i')))
+              .filter((data) => data.category.match(new RegExp(search, 'i')))
               .map((item, i) => {
                 return (
                   <>
@@ -383,7 +383,7 @@ var categoryName;
               </CTableHead>
               <CTableBody>
                 {list
-                  .filter((data) => data.subcategorie.match(new RegExp(search, 'i')))
+                  .filter((data) => data.category.match(new RegExp(search, 'i')))
                   .reverse()
                   .map((item, i) => {
                     return (
