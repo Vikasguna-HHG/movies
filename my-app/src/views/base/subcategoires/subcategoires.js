@@ -119,7 +119,7 @@ const SubCategoires = () => {
   }
   // -----------------------------------------------------------------------
   const edithandler = async (id) => {
-    debugger;
+    debugger; 
     setVisible1(true)
     axios
       .get(`http://localhost:5000/kfinddata/${id}`, {

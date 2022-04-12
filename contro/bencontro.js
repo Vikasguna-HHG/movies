@@ -92,7 +92,24 @@ exports.Minsert_data = async function (req, res, next) {
     // // otp = otp * 10000000;
     // otp = parseInt(otp);
     // console.log(otp);
+<<<<<<< HEAD
    
+=======
+    data = {
+      First_Name: req.body.First_Name,
+      Last_Name: req.body.Last_Name,
+      User_Name: req.body.User_Name,
+      Email: req.body.Email
+    };
+    // console.log(data);
+    const tag = await movie_maker.create(data); 
+    res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
+>>>>>>> 6329ff1866ffe2bca1fba2f105310c680bd9ccf9
+
+    
 
     var result = "";
     var characters =
