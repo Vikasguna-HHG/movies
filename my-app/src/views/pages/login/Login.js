@@ -46,7 +46,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                        <CButton  className="px-4" style={{backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
                           Login
                         </CButton>
                       </CCol>
@@ -59,7 +59,7 @@ const Login = () => {
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
+              <CCard className="text-white bg-primary py-5" style={{ width: '44%',backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>
@@ -67,8 +67,8 @@ const Login = () => {
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                       tempor incididunt ut labore et dolore magna aliqua.
                     </p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
+                    <Link to="/base/Home">
+                      <CButton active tabIndex={-1} style={{backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
                         Register Now!
                       </CButton>
                     </Link>

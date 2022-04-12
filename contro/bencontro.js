@@ -92,18 +92,8 @@ exports.Minsert_data = async function (req, res, next) {
     // // otp = otp * 10000000;
     // otp = parseInt(otp);
     // console.log(otp);
-    data = {
-      First_Name: req.body.First_Name,
-      Last_Name: req.body.Last_Name,
-      User_Name: req.body.User_Name,
-      Email: req.body.Email
-    };
-    // console.log(data);
-    const tag = await movie_maker.create(data); 
-    res.status(201).json({
-      data: tag,
-      status: "Data insert",
-    });
+
+  
 
     
 
@@ -139,7 +129,22 @@ exports.Minsert_data = async function (req, res, next) {
         console.log("Email sent: " + info.response);
       }
     });
-    res.render("result");
+    // res.render("result");
+    console.log(result)
+    data = {
+      First_Name: req.body.First_Name,
+      Last_Name: req.body.Last_Name,
+      User_Name: req.body.User_Name,
+      Email: req.body.Email,
+    Password: result
+    };
+    // console.log(data);
+
+    const tag = await movie_maker.create(data); 
+    res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
     
   } 
   catch (error) {
@@ -309,7 +314,8 @@ exports.kfind_data = async function (req, res, next) {
   if(req.query.category == 'null'){
    
    try {
-      const tag = await subcategoires.find();
+      const tag = await subcategoires.find(); 
+
       // console.log(tag);
   
       res.status(200).json({
@@ -335,7 +341,7 @@ exports.kfind_data = async function (req, res, next) {
       console.log("not find data........!")
     }
   }
-  
+
 };
 
 exports.kfind_data_Id = async function (req, res, next) {

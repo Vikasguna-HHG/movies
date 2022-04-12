@@ -93,7 +93,6 @@ const Category = () => {
         formData.append('Id', id)
         try {
           const res = await axios.post('http://localhost:5000/vUpdateBanner', formData)
-          debugger
           if (res.data.status == 'success') {
             getdata()
             toast.success('Updated Data...!', {

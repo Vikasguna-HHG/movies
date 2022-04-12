@@ -4,6 +4,7 @@ import Category from '../Categories/Categoires'
 import Home from '../Home/Home'
 import Tables from '../base/Language/Language'
 import Video from '../base/Video/Video'
+import Login from '../pages/login/Login'
 
 function Dashboard() {
   return (
@@ -12,7 +13,10 @@ function Dashboard() {
       {/*<Category />*/}
       {/*<SubCategoires />*/}
       {/*<Tables />*/}
-      <Video />
+      {/* <Video /> */}
+
+
+      <Login/>
     </div>
   )
 }

@@ -632,13 +632,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>Category</b>
             </CFormLabel>
-            <CFormSelect
-              aria-label="Default select example"
-              onChange={(e) => {
-                setcategory(e.target.value)
-              }}
-              value={category}
-            >
+            <CFormSelect  aria-label="Default select example" onChange={(e) => {setcategory(e.target.value)}} value={category} >
               <option align="center" selected>
                 Update Category
               </option>

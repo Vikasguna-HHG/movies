@@ -104,12 +104,14 @@ const SubCategoires = () => {
           toast.success('New Updated...!', {
             autoClose: 2000,
           })
+        // getdata()
+
         }
       } catch (ex) {
         console.log(ex)
+
       }
     }
-    document.getElementById('demo').innerHTML = 'ADD DATA'
     setId(0)
     setmaintitle('')
     setsubcat('')
@@ -119,7 +121,7 @@ const SubCategoires = () => {
   }
   // -----------------------------------------------------------------------
   const edithandler = async (id) => {
-    debugger; 
+    debugger;
     setVisible1(true)
     axios
       .get(`http://localhost:5000/kfinddata/${id}`, {
@@ -132,6 +134,11 @@ const SubCategoires = () => {
         setsubtitle(result.data.data.description)
         setImageval(result.data.data.image_user)
       })
+
+        setsubcat()
+        setmaintitle()
+        setsubtitle()
+        setImageval()
   }
   // -----------------------------------------------------------------------
   function getdata() {
@@ -164,7 +171,7 @@ const SubCategoires = () => {
 var categoryName;
 
   useEffect(() => {
-
+debugger;
     let url = new URL(window.location.href);
     categoryName = url.searchParams.get("category");
    setQuery(categoryName)
@@ -218,7 +225,7 @@ var categoryName;
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
               <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
-                <option align="center" selected>Select Category</option>
+                <option align="center" selected >Select Category</option>
                 {categry.map((item, i) => (
                   <option key={i}>{item.category}</option>
                 ))}
@@ -268,7 +275,7 @@ var categoryName;
             </CInputGroup>
             <br></br>
             {list
-              .filter((data) => data.subcategorie.match(new RegExp(search, 'i')))
+              .filter((data) => data.category.match(new RegExp(search, 'i')))
               .map((item, i) => {
                 return (
                   <>
@@ -383,14 +390,14 @@ var categoryName;
               </CTableHead>
               <CTableBody>
                 {list
-                  .filter((data) => data.subcategorie.match(new RegExp(search, 'i')))
+                  .filter((data) => data.category.match(new RegExp(search, 'i')))
                   .reverse()
                   .map((item, i) => {
                     return (
                       <>
                         <CTableRow key={i} style={{ backgroundImage: 'repeating-linear-gradient(to right,#16222A,#3A6073)' }}>
                           <CTableDataCell style={{ paddingTop: '30px', color: "white" }}>{i + 1}</CTableDataCell>
-                          <CTableHeaderCell style={{ paddingTop: '30px', color: "white" }}>{item.category}</CTableHeaderCell>
+                          <CTableHeaderCell style={{ paddingTop: '30px', color: "white" }} >{item.category}</CTableHeaderCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: "white" }}>{item.subcategorie}</CTableDataCell>
                           <CTableDataCell >
                             <div className="hover01 column1">

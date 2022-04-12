@@ -32,6 +32,7 @@ const movie_makers1 = new mongoose.Schema({
         //     validator.isEmail(value) , msg: 'Email already exists'
         // }
         // isVerified: { type: Boolean, default: false , required: true }
+        // validate: [validator.notEmpty, 'Username is empty']
         // validate(value){
         //     console.log(value);
         //     // console.log(validator);
@@ -44,7 +45,7 @@ const movie_makers1 = new mongoose.Schema({
     Password:
     {
         type:String,
-        unique:true
+        // unique:true
 
     }
    
