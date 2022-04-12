@@ -99,12 +99,13 @@ exports.Minsert_data = async function (req, res, next) {
       Email: req.body.Email
     };
     // console.log(data);
-
     const tag = await movie_maker.create(data); 
     res.status(201).json({
       data: tag,
       status: "Data insert",
     });
+
+    
 
     var result = "";
     var characters =

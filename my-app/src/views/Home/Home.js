@@ -97,6 +97,8 @@ const Home = () => {
       //   })
     // }
     const submit = async () => {
+      debugger;
+      
       const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
       if(!First_Name || !Last_Name || !User_Name || !Email)
       {
@@ -152,11 +154,18 @@ const Home = () => {
         
 
       }
+      else  if(formData.data.data.Email === Email){
+        alert("hello");
+
+        // setEmailmsg("Already email existed") 
+        // document.getElementById("email").style.border="1px solid red"
+      }
       else if (Email === "") {
         setEmailmsg("");
         document.getElementById("email").style.border="1px solid red"
 
       }
+      
       else{
         setEmailmsg("please enter valid email ");
         document.getElementById("email").style.border="1px solid red"
@@ -167,6 +176,8 @@ const Home = () => {
         toast.success('data insrted', {
           autoClose: 2000,
         })
+        
+       
 
         setList([...list, res.data.data])
 
