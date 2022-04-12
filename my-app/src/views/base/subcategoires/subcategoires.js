@@ -104,12 +104,14 @@ const SubCategoires = () => {
           toast.success('New Updated...!', {
             autoClose: 2000,
           })
+        // getdata()
+
         }
       } catch (ex) {
         console.log(ex)
+
       }
     }
-    document.getElementById('demo').innerHTML = 'ADD DATA'
     setId(0)
     setmaintitle('')
     setsubcat('')
@@ -132,6 +134,11 @@ const SubCategoires = () => {
         setsubtitle(result.data.data.description)
         setImageval(result.data.data.image_user)
       })
+
+        setsubcat()
+        setmaintitle()
+        setsubtitle()
+        setImageval()
   }
   // -----------------------------------------------------------------------
   function getdata() {
@@ -218,7 +225,7 @@ debugger;
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
               <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
-                <option align="center" selected>Select Category</option>
+                <option align="center" selected >Select Category</option>
                 {categry.map((item, i) => (
                   <option key={i}>{item.category}</option>
                 ))}
@@ -390,7 +397,7 @@ debugger;
                       <>
                         <CTableRow key={i} style={{ backgroundImage: 'repeating-linear-gradient(to right,#16222A,#3A6073)' }}>
                           <CTableDataCell style={{ paddingTop: '30px', color: "white" }}>{i + 1}</CTableDataCell>
-                          <CTableHeaderCell style={{ paddingTop: '30px', color: "white" }}>{item.category}</CTableHeaderCell>
+                          <CTableHeaderCell style={{ paddingTop: '30px', color: "white" }} >{item.category}</CTableHeaderCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: "white" }}>{item.subcategorie}</CTableDataCell>
                           <CTableDataCell >
                             <div className="hover01 column1">

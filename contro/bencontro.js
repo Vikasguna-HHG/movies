@@ -334,7 +334,7 @@ exports.kfind_data = async function (req, res, next) {
       console.log("not find data........!")
     }
   }
-  
+
 };
 
 exports.kfind_data_Id = async function (req, res, next) {

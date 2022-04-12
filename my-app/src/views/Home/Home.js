@@ -218,7 +218,7 @@ const Home = () => {
       <br />
       <CModal visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader onClose={() => setVisible(false)}>
-          <CModalTitle>Movie Maker Form</CModalTitle>
+          <CModalTitle>Admin user Form</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm action="/MInsertBanner" method="POST">
@@ -313,7 +313,7 @@ const Home = () => {
                 className="btn1"
                 onClick={() => setVisible(!visible)}
               >
-                Add Movie Make
+                Add Admin 
               </CButton>
             </CInputGroup>
             <br></br>

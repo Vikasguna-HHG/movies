@@ -103,7 +103,7 @@ const _nav = [
    
   {
     component: CNavItem,
-    name: 'Movie Maker',
+    name: 'Admin user',
     to: '/base/Home',
     icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
   },
@@ -117,9 +117,9 @@ const _nav = [
 
   {
     component: CNavItem,
-    name: 'SubCategoires',
-    to: '/base/subcategoires',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+    // name: 'SubCategoires',
+    // to: '/base/subcategoires',
+    // icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
