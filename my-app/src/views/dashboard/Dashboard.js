@@ -13,7 +13,7 @@ function Dashboard() {
       {/*<Category />*/}
       {/*<SubCategoires />*/}
       {/*<Tables />*/}
-      <Video />
+      {/* <Video /> */}
 
 
       <Login/>
