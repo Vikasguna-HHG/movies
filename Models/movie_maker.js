@@ -25,6 +25,7 @@ const movie_makers1 = new mongoose.Schema({
         type:String,
         unique:true,
         required:true,
+        // validate: [validator.notEmpty, 'Username is empty']
         // validate(value){
         //     if(validator.isEmail(value)){
         //         throw new Error("Email is in valid")
@@ -34,7 +35,7 @@ const movie_makers1 = new mongoose.Schema({
     Password:
     {
         type:String,
-        unique:true
+        // unique:true
 
     }
    

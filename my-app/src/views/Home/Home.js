@@ -35,6 +35,14 @@ import 'react-toastify/dist/ReactToastify.css'
 const axios = require('axios')
 toast.configure()
 const Home = () => {
+  // const [currentImage, setCurrentImage] = useState(0);
+  // const [isViewerOpen, setIsViewerOpen] = useState(false);
+  // const images = ["https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"];
+
+  // const openImageViewer = useCallback((index) => {
+  //   setCurrentImage([index]);
+  //   setIsViewerOpen(true);
+  // }, []);
   const [id, setId] = useState(0)
   const [First_Name, setFirst_Name] = useState('')
   const [Last_Name, setLast_Name] = useState('')
@@ -44,46 +52,123 @@ const Home = () => {
   const [Email, setEmail] = useState('')
   const [Emailmsg, setEmailmsg] = useState('')
 
+  // const [visible1, setVisible1] = useState(false)
   const [search, setSearch] = useState('')
+  
+  // const saveFile = (e) => {
+    //   setImageval(e.target.files[0]);
+    // }
+    
+    // const update = (e) =>
+  // {
 
-  const submit = async () => {
-    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
-    if (!First_Name || !Last_Name || !User_Name || !Email) {
-      toast.warning('please fil data', {
-        autoClose: 1000,
-      })
-    }
+  // }
+                     
 
-    if (id === 0) {
+    // setFirst_Name('');
+    // setLast_Name('');
+    //   });
+    //   return;
+
+    // }
+    // setFirst_Name('')
+    // setLast_Name('')
+    // setUser_Name('')
+    // setEmail('')
+    // if(!Email){
+    //   alert("hello")
+    // }
+    // if (id === 0) {
+   
+    //   const formData = new FormData();
+      // axios.post('http://localhost:5000/InsertBanner', {
+      //   First_Name: First_Name,
+      //   Last_Name: Last_Name,
+      //   image_user: imageval,
+      // })
+      //   .then(function (res) {
+      //     // console.log();
+      //     setList([...list, res.data.data])
+      //     console.log(res);
+
+      //     toast.success("data insrted", {
+      //       autoClose: 2000
+      //     });
+      //   })
+    // }
+    const submit = async () => {
+      debugger;
+      
+      const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+      if(!First_Name || !Last_Name || !User_Name || !Email)
+      {
+        toast.warning('please fil data', {
+          autoClose: 1000,
+        })
+      }
+    
+    if (id === 0 ) {
+   
+
       const formData = new FormData()
       // formData.append("image", imageval);
-      if (!First_Name) {
-        document.getElementById('First_Name').style.border = '1px solid red'
-      } else {
+      if(!First_Name)
+      {
+        document.getElementById("First_Name").style.border="1px solid red"
+        
+      }
+      else{
         formData.append('First_Name', First_Name)
-        document.getElementById('First_Name').style.border = '1px solid black'
+        document.getElementById("First_Name").style.border="1px solid black"
+
+
+
       }
-      if (!Last_Name) {
-        document.getElementById('Last_Name').style.border = '1px solid red'
-      } else {
+      if(!Last_Name)
+      {
+        document.getElementById("Last_Name").style.border="1px solid red"
+        // toast.warning('please fil data', {
+        //   autoClose: 1000,
+        // })
+      }
+      else{
         formData.append('Last_Name', Last_Name)
-        document.getElementById('Last_Name').style.border = '1px solid black'
+        document.getElementById("Last_Name").style.border="1px solid black"
+
+
       }
-      if (!User_Name) {
-        document.getElementById('User_Name').style.border = '1px solid red'
-      } else {
-        formData.append('User_Name', User_Name)
-        document.getElementById('User_Name').style.border = '1px solid black'
+      if(!User_Name)
+      {
+        document.getElementById("User_Name").style.border="1px solid red"
+        
       }
-      if (regEx.test(Email)) {
-        formData.append('Email', Email)
-        document.getElementById('email').style.border = '1px solid black'
-      } else if (Email === '') {
-        setEmailmsg('')
-        document.getElementById('email').style.border = '1px solid red'
-      } else {
-        setEmailmsg('please enter valid email ')
-        document.getElementById('email').style.border = '1px solid red'
+      else{
+      formData.append('User_Name', User_Name)
+      document.getElementById("User_Name").style.border="1px solid black"
+
+
+      }
+      if(regEx.test(Email)){
+      formData.append('Email', Email)
+      document.getElementById("email").style.border="1px solid black"
+        
+
+      }
+      else  if(formData.data.data.Email === Email){
+        alert("hello");
+
+        // setEmailmsg("Already email existed") 
+        // document.getElementById("email").style.border="1px solid red"
+      }
+      else if (Email === "") {
+        setEmailmsg("");
+        document.getElementById("email").style.border="1px solid red"
+
+      }
+      
+      else{
+        setEmailmsg("please enter valid email ");
+        document.getElementById("email").style.border="1px solid red"
       }
 
       try {
@@ -91,6 +176,8 @@ const Home = () => {
         toast.success('data insrted', {
           autoClose: 2000,
         })
+        
+       
 
         setList([...list, res.data.data])
 
@@ -98,7 +185,7 @@ const Home = () => {
       } catch (ex) {
         console.log(ex)
       }
-
+   
       setFirst_Name('')
       setLast_Name('')
       setUser_Name('')
@@ -112,9 +199,10 @@ const Home = () => {
       formData.append('First_Name', First_Name)
       formData.append('Last_Name', Last_Name)
       formData.append('User_Name', User_Name)
-      if (regEx.test(Email)) {
+      if(regEx.test(Email)){
         formData.append('Email', Email)
-      }
+  
+        }
 
       formData.append('Id', id)
 
@@ -138,7 +226,7 @@ const Home = () => {
     }
 
     // await axios.post(`http://localhost:5000/MEmail`)
-
+    
     setId(0)
     setFirst_Name('')
     setLast_Name('')
@@ -147,7 +235,7 @@ const Home = () => {
     // setImageval('');
     setVisible(false)
   }
-
+    
   const edithandler = async (id) => {
     setVisible(true)
 
@@ -176,7 +264,7 @@ const Home = () => {
     axios
       .get(`http://localhost:5000/Mfinddata`)
       .then(function (res) {
-        console.log(res.data)
+        console.log(res.data.data)
         setList(res.data.data)
       })
       .catch(function (error) {
@@ -212,6 +300,14 @@ const Home = () => {
       }
     })
   }
+  // const[text1,settext1] = ('')
+  // const buton = (e)=>{
+  //   var g = e.target.value;
+  //   settext1(g);
+  //   document.getElementById('text').style.width="500px";
+
+
+  // }
   return (
     <>
       <br />
@@ -238,7 +334,7 @@ const Home = () => {
               <CFormLabel htmlFor="exampleFormControlTextarea1">Last Name</CFormLabel>
               <CFormInput
                 type="text"
-                id="Last_Name"
+                id='Last_Name'
                 value={Last_Name}
                 onChange={(e) => {
                   setLast_Name(e.target.value)
@@ -251,7 +347,7 @@ const Home = () => {
               <CFormLabel htmlFor="exampleFormControlTextarea1">User Name</CFormLabel>
               <CFormInput
                 type="text"
-                id="User_Name"
+                id='User_Name'
                 value={User_Name}
                 onChange={(e) => {
                   setUser_Name(e.target.value)
@@ -264,7 +360,7 @@ const Home = () => {
               <CFormLabel htmlFor="exampleFormControlInput1">Email</CFormLabel>
               <CFormInput
                 type="email"
-                id="email"
+                id='email'
                 value={Email}
                 onChange={(e) => {
                   setEmail(e.target.value)
@@ -409,7 +505,19 @@ const Home = () => {
         </CCard>
       </CCol>
       {/* edit data */}
+
+
+      {/* <table border="1" width="50%">
+        <tr>
+          <td><input  type="text" id='text' style={{width:{text1}}} onChange={(e)=> buton(e)}></input></td>
+          <td><input  type="text"></input></td>
+          <td><input  type="text"></input></td>
+          <td><input  type="text"></input></td>
+          <td><input  type="text"></input></td>
+       n
+        </tr>
+      </table> */}
     </>
   )
-}
+                }
 export default Home
