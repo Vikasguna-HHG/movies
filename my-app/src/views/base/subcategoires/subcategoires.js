@@ -218,7 +218,7 @@ var categoryName;
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
               <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
-                <option align="center" selected>Select Category</option>
+                <option align="center" selected value={categoryName}></option>
                 {categry.map((item, i) => (
                   <option key={i}>{item.category}</option>
                 ))}
@@ -307,7 +307,7 @@ var categoryName;
                           <div className="mb-3">
                             <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
                             <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
-                              <option align="center" selected> Select category</option>
+                              {/* <option align="center" selected>Select category</option> */}
                               {categry.map((item, i) => (
                                 <option key={i}>{item.category}</option>
                               ))}

@@ -253,7 +253,7 @@ const Home = () => {
     axios
       .get(`http://localhost:5000/Mfinddata`)
       .then(function (res) {
-        console.log(res.data)
+        console.log(res.data.data)
         setList(res.data.data)
       })
       .catch(function (error) {
@@ -289,6 +289,14 @@ const Home = () => {
       }
     })
   }
+  // const[text1,settext1] = ('')
+  // const buton = (e)=>{
+  //   var g = e.target.value;
+  //   settext1(g);
+  //   document.getElementById('text').style.width="500px";
+
+
+  // }
   return (
     <>
       <br />
@@ -486,6 +494,18 @@ const Home = () => {
         </CCard>
       </CCol>
       {/* edit data */}
+
+
+      {/* <table border="1" width="50%">
+        <tr>
+          <td><input  type="text" id='text' style={{width:{text1}}} onChange={(e)=> buton(e)}></input></td>
+          <td><input  type="text"></input></td>
+          <td><input  type="text"></input></td>
+          <td><input  type="text"></input></td>
+          <td><input  type="text"></input></td>
+       n
+        </tr>
+      </table> */}
     </>
   )
                 }
