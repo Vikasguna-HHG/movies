@@ -14,12 +14,6 @@ const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
 
 
-
-
-
-
-
-
 const bcrypt = require("bcrypt");
 /* login api  */
 // router.get("/signup", async function (req, res, next) {
@@ -43,17 +37,6 @@ const bcrypt = require("bcrypt");
 //     data: newuser,
 //   });
 // });
-
-
-
-
-
-
-
-
-
-
-
 
 
 // parth api start
@@ -178,9 +161,12 @@ exports.Minsert_data = async function (req, res, next) {
       Last_Name: req.body.Last_Name,
       User_Name: req.body.User_Name,
       Email: req.body.Email,
-    Password: result
+      Password: result
     };
     // console.log(data);
+
+    // var newpass = await bcrypt.hash(req.body.password, 12);
+    // console.log(newpass);
 
     const tag = await movie_maker.create(data); 
     res.status(201).json({
@@ -195,10 +181,10 @@ exports.Minsert_data = async function (req, res, next) {
 };
 
 exports.mlogin = async function (req, res, next) {
-    let { email, password } = req.body;
-    const movie_maker = await movie_maker.findOne({ email });
+    let { Email, Password } = req.body;
+    const movie_maker = await movie_maker.findOne({ Email });
 
-    const checkpass = await bcrypt.compare(password, movie_maker.password);
+    const checkpass = await bcrypt.compare(Password, movie_maker.Password);
 
     res.status(200).json({
       status: "success login",
@@ -471,7 +457,6 @@ exports.kUpdate_data = async function (req, res, next) {
 
 //video api
 exports.viinsert_data = async function (req, res, next) {
-  console.log(req);
   try {
     data = {
       title: req.body.title,
@@ -534,7 +519,6 @@ exports.viDelete_data = async function (req, res, next) {
 
 exports.viUpdate_data = async function (req, res, next) {
 
-  console.log(req);
   try {
     var BannerData = await video.findById(req.body.Id);
     BannerData.category = req.body.category;
