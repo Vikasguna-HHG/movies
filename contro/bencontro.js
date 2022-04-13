@@ -14,6 +14,48 @@ const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
 
 
+
+
+
+
+
+
+const bcrypt = require("bcrypt");
+/* login api  */
+// router.get("/signup", async function (req, res, next) {
+//   if (req.body.password != req.body.confirmpassword) {
+//     res.status(200).json({
+//       status: "success",
+//     });
+//   }
+
+//   var newpass = await bcrypt.hash(req.body.password, 12);
+//   console.log(newpass);
+
+//   const newuser = await User.create({
+//     name: req.body.name,
+//     email: req.body.email,
+//     password: newpass,
+//   });
+
+//   res.status(200).json({
+//     status: "password not sem... ",
+//     data: newuser,
+//   });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
 // parth api start
 exports.insert_data = async function (req, res, next) {
   try {
@@ -150,6 +192,19 @@ exports.Minsert_data = async function (req, res, next) {
   catch (error) {
     console.log("not data insert........!");
   }
+};
+
+exports.mlogin = async function (req, res, next) {
+    let { email, password } = req.body;
+    const movie_maker = await movie_maker.findOne({ email });
+
+    const checkpass = await bcrypt.compare(password, movie_maker.password);
+
+    res.status(200).json({
+      status: "success login",
+      data: checkpass,
+      
+    });
 };
 
 exports.Mfind_data = async function (req, res, next) {

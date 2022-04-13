@@ -225,7 +225,7 @@ debugger;
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
               <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
-                <option align="center" selected >Select Category</option>
+                <option align="center" selected value={query}>Select Category</option>
                 {categry.map((item, i) => (
                   <option key={i}>{item.category}</option>
                 ))}
