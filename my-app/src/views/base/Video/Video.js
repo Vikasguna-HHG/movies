@@ -291,7 +291,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function subcata_data() {
     axios
-      .get(`http://localhost:5000/kfinddata`)
+      .get(`http://localhost:5000/kfindonedata`)
       .then(function (res) {
         console.log(res.data)
         setsubcategory1(res.data.data)
@@ -386,10 +386,6 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           getdata()
         })
         toast.error('Data Delete...!', {
-          autoClose: 2000,
-        })
-      } else {
-        toast.info('Data Safe...!', {
           autoClose: 2000,
         })
       }
@@ -488,6 +484,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               onChange={(e) => {
                 setsubcategory(e.target.value)
               }}
+              value={subcategory}
             >
               <option align="center" selected>
                 Select SubCategory

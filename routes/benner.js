@@ -38,6 +38,7 @@ router.delete('/DeleteBanner/:id', upload.single('image'), BannerController.Dele
 router.post('./mlogin', BannerController.mlogin)
 
 router.get('/Mfinddata',BannerController.Mfind_data);
+// router.get('/Mfindonedata',BannerController.Mfindone_data);
 router.get('/Mfinddata/:id',BannerController.Mfind_data_Id);
 router.post('/MInsertBanner', upload.single('image'), BannerController.Minsert_data);
 router.post('/MUpdateBanner', upload.single('image'), BannerController.MUpdate_data);
@@ -70,6 +71,7 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 
 //keyur api start
 router.get('/kfinddata',BannerController.kfind_data);
+router.get('/kfindonedata',BannerController.kfindone_data);
 router.get('/kfinddata/:id',BannerController.kfind_data_Id);
 router.post('/kInsertBanner', upload.single('image'), BannerController.kinsert_data);
 router.post('/kUpdateBanner', upload.single('image'), BannerController.kUpdate_data);

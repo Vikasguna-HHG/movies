@@ -154,12 +154,12 @@ const Home = () => {
         
 
       }
-      else  if(formData.data.data.Email === Email){
-        alert("hello");
+      // else  if(formData.data.data.Email === Email){
+      //   alert("hello");
 
-        // setEmailmsg("Already email existed") 
-        // document.getElementById("email").style.border="1px solid red"
-      }
+      //   // setEmailmsg("Already email existed") 
+      //   // document.getElementById("email").style.border="1px solid red"
+      // }
       else if (Email === "") {
         setEmailmsg("");
         document.getElementById("email").style.border="1px solid red"

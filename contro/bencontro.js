@@ -3,7 +3,7 @@ var subcategoires = require("../Models/subcategoires");
 var movie_maker = require("../Models/movie_maker");
 var language = require("../Models/language");
 var video =require("../Models/video");
-
+var $ = require("jquery");
 
 
 // var banner_schema = require("../Models/banner_video");
@@ -364,11 +364,24 @@ exports.kinsert_data = async function (req, res, next) {
 // }
 
 exports.kfind_data = async function (req, res, next) {
-  // console.log("res : "+req.query.category)
-  // console.log("res1 : ",req)
-  if(req.query.category == 'null'){
-   
-   try {
+  console.log("res : "+req.query.category)
+  console.log("res1 : ",req)
+  if(req.query.category != 'null'){
+    try {
+    
+      const tag = await subcategoires.find({category:req.query.category});
+       console.log("filter :" + tag)
+       res.status(200).json({
+        status: "find data",
+        data: tag,
+      });
+    } catch (error) {
+      console.log("not find data........!")
+    }
+
+  }
+  else{
+    try {
       const tag = await subcategoires.find(); 
 
       // console.log(tag);
@@ -382,26 +395,37 @@ exports.kfind_data = async function (req, res, next) {
       // console.log("not find data........!");
     }
     
-  }
-  else{
-    try {
     
-      const tag = await subcategoires.find({category:req.query.category});
-       console.log("filter :" + tag)
-       res.status(200).json({
-        status: "find data",
-        data: tag,
-      });
-    } catch (error) {
-      console.log("not find data........!")
-    }
   }
 
+  // try {
+    
+  //       const tag = await subcategoires.find({category:req.query.category});
+  //        console.log("filter :" + tag)
+  //        res.status(200).json({
+  //         status: "find data",
+  //         data: tag,
+  //       });
+  //     } catch (error) {
+  //       console.log("not find data........!")
+  //     }
 };
 
 exports.kfind_data_Id = async function (req, res, next) {
   try {
     const tag = await subcategoires.findById(req.params.id);
+    res.status(200).json({
+      status: "find id",
+      data: tag,
+    });
+  } catch (error) {
+    console.log("Data not find by id........!");
+  }
+};
+
+exports.kfindone_data = async function (req, res, next) {
+  try {
+    const tag = await subcategoires.find();
     res.status(200).json({
       status: "find id",
       data: tag,
@@ -509,6 +533,8 @@ exports.viDelete_data = async function (req, res, next) {
 };
 
 exports.viUpdate_data = async function (req, res, next) {
+
+  console.log(req);
   try {
     var BannerData = await video.findById(req.body.Id);
     BannerData.category = req.body.category;
@@ -516,18 +542,49 @@ exports.viUpdate_data = async function (req, res, next) {
     BannerData.language = req.body.language;
     BannerData.subcategory = req.body.subcategory;
     BannerData.Description = req.body.Description;
-      if (req.file != null) {
-          await unlinkAsync(BannerData.image_user);
-          BannerData.image_user = req.file.path;
-      }
-      if (req.file != null) {
+
+      for (let iv of req.files) {
+
+        if(iv.fieldname == 'image')
+        {
+            await unlinkAsync(BannerData.image_user);
+            BannerData.image_user = iv.path;
+        }
+        else if(iv.fieldname == 'banner_video')
+        {
           await unlinkAsync(BannerData.banner_video);
-          BannerData.banner_video = req.file.path;
+          BannerData.banner_video = iv.path;
+        }
       }
+
+      // if(req.files.length != 0){
+      //     if(req.files[0].fieldname == 'image'){
+      //         await unlinkAsync(BannerData.image_user);
+      //         BannerData.image_user = req.files.path;
+      //     }else{
+      //         await unlinkAsync(BannerData.banner_video);
+      //         BannerData.banner_video = req.files.path;
+      //     }
+
+      //     if(req.files[1].fieldname == 'banner_video'){
+      //         await unlinkAsync(BannerData.banner_video);
+      //         BannerData.banner_video = req.files.path;
+      //     }
+      // }
+
+      // if (req.files.length != 0) {
+      //     await unlinkAsync(BannerData.image_user);
+      //     BannerData.image_user = req.files.path;
+      // }
+      // if (req.files.length != 0) {
+      //     await unlinkAsync(BannerData.banner_video);
+      //     BannerData.banner_video = req.files.path;
+      // }
+
     await video.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
-      data: req.file,
+      data: req.files,
     });
   } catch (error) {
     console.log(error);
