@@ -100,7 +100,9 @@ const SubCategoires = () => {
         const res = await axios.post('http://localhost:5000/kUpdateBanner', formData)
 
         if (res.data.status == 'success') {
-          getdata()
+          getdata()   
+      // findonesubcatogory();
+
           toast.success('New Updated...!', {
             autoClose: 2000,
           })
@@ -166,17 +168,33 @@ const SubCategoires = () => {
         console.log(error)
       })
   }
-  // -----------------------------------------------------------------------
+
+  // function findonesubcatogory() {
+  //   axios
+  //     .get(`http://localhost:5000/kfindonedata`)
+  //     .then(function (res) {
+  //       console.log(res.data.data)
+  //       setList(res.data.data)
+  //       // setList(res.data.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error)
+  //     })
+  // }
+  // -------------------------------------------------------------------
   
 var categoryName;
 
   useEffect(() => {
-debugger;
+    // findonesubcatogory();
+
+
     let url = new URL(window.location.href);
     categoryName = url.searchParams.get("category");
    setQuery(categoryName)
-      getdata();
       category();
+    getdata();
+
   }, [])
   // -----------------------------------------------------------------------
   const deletehandler = async (id) => {
@@ -190,6 +208,7 @@ debugger;
         axios.delete(`http://localhost:5000/kDeleteBanner/${id}`).then((res) => {
           const users = res.data
           getdata()
+          // findonesubcatogory();
         })
         toast.error('Data Deleted...!', {
           autoClose: 2000,

@@ -71,7 +71,7 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 
 //keyur api start
 router.get('/kfinddata',BannerController.kfind_data);
-// router.get('/kfindonedata',BannerController.kfindone_data);
+router.get('/kfindonedata',BannerController.kfindone_data);
 router.get('/kfinddata/:id',BannerController.kfind_data_Id);
 router.post('/kInsertBanner', upload.single('image'), BannerController.kinsert_data);
 router.post('/kUpdateBanner', upload.single('image'), BannerController.kUpdate_data);
