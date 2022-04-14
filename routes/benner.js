@@ -18,9 +18,9 @@ var upload = multer({
     storage: storage,
 })
 
-router.get('/', function (req, res, next) {
-    res.render('benner', { title: 'Wel come to benner.js' });
-});
+// router.get('/', function (req, res, next) {
+//     res.render('benner', { title: 'Wel come to benner.js' });
+// });
 // router.get('/findcatagery',BannerController.find_category);
 // if (process.env.NODE_ENV === 'production') {
 //     app.use(express.static('my-app/build'))
