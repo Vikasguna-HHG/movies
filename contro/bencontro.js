@@ -155,17 +155,18 @@ exports.Minsert_data = async function (req, res, next) {
       }
     });
     // res.render("result");
-    console.log(result)
+    // console.log(result)
+    var newpass = await bcrypt.hash(result, 12);
+    console.log(newpass);
     data = {
       First_Name: req.body.First_Name,
       Last_Name: req.body.Last_Name,
       User_Name: req.body.User_Name,
       Email: req.body.Email,
-      Password: result
+      Password: newpass
     };
-    // console.log(data);
 
-    // var newpass = await bcrypt.hash(req.body.password, 12);
+    // var newpass = await bcrypt.hash(result, 12);
     // console.log(newpass);
 
     const tag = await movie_maker.create(data); 

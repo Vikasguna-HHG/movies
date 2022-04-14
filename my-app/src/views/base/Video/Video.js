@@ -479,13 +479,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               <b>SubCategory</b>
             </CFormLabel>
 
-            <CFormSelect
-              aria-label="Default select example"
-              onChange={(e) => {
-                setsubcategory(e.target.value)
-              }}
-              value={subcategory}
-            >
+            <CFormSelect  aria-label="Default select example" onChange={(e) => {setsubcategory(e.target.value) }} value={subcategory}>
               <option align="center" selected>
                 Select SubCategory
               </option>
