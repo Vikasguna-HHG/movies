@@ -411,6 +411,9 @@ exports.kUpdate_data = async function (req, res, next) {
   }
 };
 
+exports.login = async function(req,res,next){
+  movie_maker.find({User_Name:req.body.User_Name})
+}
 
 
 
