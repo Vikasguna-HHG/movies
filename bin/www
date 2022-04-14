@@ -8,8 +8,19 @@ var app = require('../app');
 var debug = require('debug')('admin:server');
 var http = require('http');
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/Moives");
-console.log("Data Base Create");
+mongoose.connect("mongodb+srv://HHG:HHG@cluster0.f2c5v.mongodb.net/HHG?retryWrites=true&w=majority",{
+    // useNewUrlParser:true,
+    // useCreateIndex:true,
+    // useUnifiedTopology:true,
+    // useFindAndModify:false
+
+
+}).then(()=>{
+  console.log("Data Base Connected");
+}).catch((error)=>
+  {console.log("Data Base not Connected")
+  console.log(error)}
+);
 
 /**
  * Get port from environment and store in Express.

@@ -234,7 +234,7 @@ var categoryName;
       {/*model popup*/}
       <br />
       <br />
-
+    
       <CModal visible={visible} onClose={() => setVisible(false)}>
         <CModalHeader onClose={() => setVisible(false)}>
           <CModalTitle>Sub Category Form</CModalTitle>
@@ -244,7 +244,7 @@ var categoryName;
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
               <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
-                <option align="center" selected >Select Category</option>
+                <option align="center" selected value={category}>Select Category</option>
                 {categry.map((item, i) => (
                   <option key={i}>{item.category}</option>
                 ))}
@@ -268,7 +268,7 @@ var categoryName;
         </CModalBody>
         <CModalFooter>
           {/* <CButton color="secondary" onClick={() => setVisible(false)}>Close </CButton> */}
-          <CButton className="btn1" onClick={submit} id="demo">Save</CButton>
+          <CButton className="btn1" onClick={submit} id="demo">Save</CButton>        
         </CModalFooter>
       </CModal>
       {/*card and search  */}
@@ -332,7 +332,7 @@ var categoryName;
                         <CForm>
                           <div className="mb-3">
                             <CFormLabel htmlFor="exampleFormControlInput1">Category</CFormLabel>
-                            <CFormSelect aria-label="Default select example" onChange={(e) => { setmaintitle(e.target.value) }}>
+                            <CFormSelect aria-label="Default select example" value={category} onChange={(e) => { setmaintitle(e.target.value) }}>
                               <option align="center" selected> Select category</option>
                               {categry.map((item, i) => (
                                 <option key={i}>{item.category}</option>
