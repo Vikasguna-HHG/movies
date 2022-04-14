@@ -2,9 +2,8 @@ var Categoires = require("../Models/Categoires");
 var subcategoires = require("../Models/subcategoires");
 var movie_maker = require("../Models/movie_maker");
 var language = require("../Models/language");
-var video =require("../Models/video");
+var video = require("../Models/video");
 var $ = require("jquery");
-
 
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
@@ -12,7 +11,6 @@ const fs = require("fs");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
-
 
 const bcrypt = require("bcrypt");
 /* login api  */
@@ -37,7 +35,6 @@ const bcrypt = require("bcrypt");
 //     data: newuser,
 //   });
 // });
-
 
 // parth api start
 exports.insert_data = async function (req, res, next) {
@@ -112,15 +109,10 @@ exports.Update_data = async function (req, res, next) {
 
 exports.Minsert_data = async function (req, res, next) {
   try {
-   
     // var otp = Math.random().toString().slice(2, 10);
     // // otp = otp * 10000000;
     // otp = parseInt(otp);
     // console.log(otp);
-
-  
-
-    
 
     var result = "";
     var characters =
@@ -144,9 +136,9 @@ exports.Minsert_data = async function (req, res, next) {
       from: "gunavikas02@gmail.com",
       to: req.body.Email,
       subject: "your password",
-      html: "<h1>Don't share your Password....!!!</h1> <h2>" +result+ "</h2>",
+      html: "<h1>Don't share your Password....!!!</h1> <h2>" + result + "</h2>",
     };
- 
+
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
@@ -163,42 +155,55 @@ exports.Minsert_data = async function (req, res, next) {
       Last_Name: req.body.Last_Name,
       User_Name: req.body.User_Name,
       Email: req.body.Email,
-      Password: newpass
+      Password: newpass,
     };
 
-    // var newpass = await bcrypt.hash(result, 12);
-    // console.log(newpass);
-
-    const tag = await movie_maker.create(data); 
+    const tag = await movie_maker.create(data);
     res.status(201).json({
       data: tag,
       status: "Data insert",
     });
-    
-  } 
-  catch (error) {
+  } catch (error) {
     console.log("not data insert........!");
   }
 };
 
 exports.mlogin = async function (req, res, next) {
-    let { Email, Password } = req.body;
-    const movie_maker = await movie_maker.findOne({ Email });
+  try {
+    const { Email, Password } = req.body;
+    const User = await movie_maker.findOne({ Email });
 
-    const checkpass = await bcrypt.compare(Password, movie_maker.Password);
+    const checkpass = await bcrypt.compare(Password, User.Password);
+    res.send(User);
+    console.log(User);
+
+
+    if(User.Password === Password)
+    {
+      res.status(201).json({
+        status:"sucess"
+      });
+    }
+    else{
+        res.send("password not match")
+    }
+
 
     res.status(200).json({
       status: "success login",
       data: checkpass,
-      
     });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send("invalid email");
+  }
 };
 
 exports.Mfind_data = async function (req, res, next) {
   try {
     const tag = await movie_maker.find();
 
-      res.status(200).json({
+    res.status(200).json({
       status: "find data",
       data: tag,
     });
@@ -329,7 +334,7 @@ exports.vUpdate_data = async function (req, res, next) {
 exports.kinsert_data = async function (req, res, next) {
   try {
     data = {
-      category:req.body.category,
+      category: req.body.category,
       subcategorie: req.body.subcategorie,
       description: req.body.description,
       image_user: req.file.path,
@@ -347,46 +352,41 @@ exports.kinsert_data = async function (req, res, next) {
 
 // exports.find_category = async function (req, res, next)
 // {
- 
+
 // }
 
 exports.kfind_data = async function (req, res, next) {
-  console.log("res : "+req.query.category)
-  console.log("res1 : ",req)
-  if(req.query.category != 'null'){
+  console.log("res : " + req.query.category);
+  console.log("res1 : ", req);
+  if (req.query.category != "null") {
     try {
-    
-      const tag = await subcategoires.find({category:req.query.category});
-       console.log("filter :" + tag)
-       res.status(200).json({
-        status: "find data",
-        data: tag,
-      });
-    } catch (error) {
-      console.log("not find data........!")
-    }
-
-  }
-  else{
-    try {
-      const tag = await subcategoires.find(); 
-
-      // console.log(tag);
-  
+      const tag = await subcategoires.find({ category: req.query.category });
+      console.log("filter :" + tag);
       res.status(200).json({
         status: "find data",
         data: tag,
       });
     } catch (error) {
-      console.log("error :" + error)
+      console.log("not find data........!");
+    }
+  } else {
+    try {
+      const tag = await subcategoires.find();
+
+      // console.log(tag);
+
+      res.status(200).json({
+        status: "find data",
+        data: tag,
+      });
+    } catch (error) {
+      console.log("error :" + error);
       // console.log("not find data........!");
     }
-    
-    
   }
 
   // try {
-    
+
   //       const tag = await subcategoires.find({category:req.query.category});
   //        console.log("filter :" + tag)
   //        res.status(200).json({
@@ -453,9 +453,6 @@ exports.kUpdate_data = async function (req, res, next) {
   }
 };
 
-
-
-
 //video api
 exports.viinsert_data = async function (req, res, next) {
   try {
@@ -467,7 +464,6 @@ exports.viinsert_data = async function (req, res, next) {
       language: req.body.language,
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
-
     };
     const tag = await video.create(data);
 
@@ -476,7 +472,7 @@ exports.viinsert_data = async function (req, res, next) {
       status: "Data insert",
     });
   } catch (error) {
-    res.status(201).json({error})
+    res.status(201).json({ error });
     console.log(error);
     console.log("not data insert........!");
   }
@@ -519,7 +515,6 @@ exports.viDelete_data = async function (req, res, next) {
 };
 
 exports.viUpdate_data = async function (req, res, next) {
-
   try {
     var BannerData = await video.findById(req.body.Id);
     BannerData.category = req.body.category;
@@ -528,43 +523,39 @@ exports.viUpdate_data = async function (req, res, next) {
     BannerData.subcategory = req.body.subcategory;
     BannerData.Description = req.body.Description;
 
-      for (let iv of req.files) {
-
-        if(iv.fieldname == 'image')
-        {
-            await unlinkAsync(BannerData.image_user);
-            BannerData.image_user = iv.path;
-        }
-        else if(iv.fieldname == 'banner_video')
-        {
-          await unlinkAsync(BannerData.banner_video);
-          BannerData.banner_video = iv.path;
-        }
+    for (let iv of req.files) {
+      if (iv.fieldname == "image") {
+        await unlinkAsync(BannerData.image_user);
+        BannerData.image_user = iv.path;
+      } else if (iv.fieldname == "banner_video") {
+        await unlinkAsync(BannerData.banner_video);
+        BannerData.banner_video = iv.path;
       }
+    }
 
-      // if(req.files.length != 0){
-      //     if(req.files[0].fieldname == 'image'){
-      //         await unlinkAsync(BannerData.image_user);
-      //         BannerData.image_user = req.files.path;
-      //     }else{
-      //         await unlinkAsync(BannerData.banner_video);
-      //         BannerData.banner_video = req.files.path;
-      //     }
+    // if(req.files.length != 0){
+    //     if(req.files[0].fieldname == 'image'){
+    //         await unlinkAsync(BannerData.image_user);
+    //         BannerData.image_user = req.files.path;
+    //     }else{
+    //         await unlinkAsync(BannerData.banner_video);
+    //         BannerData.banner_video = req.files.path;
+    //     }
 
-      //     if(req.files[1].fieldname == 'banner_video'){
-      //         await unlinkAsync(BannerData.banner_video);
-      //         BannerData.banner_video = req.files.path;
-      //     }
-      // }
+    //     if(req.files[1].fieldname == 'banner_video'){
+    //         await unlinkAsync(BannerData.banner_video);
+    //         BannerData.banner_video = req.files.path;
+    //     }
+    // }
 
-      // if (req.files.length != 0) {
-      //     await unlinkAsync(BannerData.image_user);
-      //     BannerData.image_user = req.files.path;
-      // }
-      // if (req.files.length != 0) {
-      //     await unlinkAsync(BannerData.banner_video);
-      //     BannerData.banner_video = req.files.path;
-      // }
+    // if (req.files.length != 0) {
+    //     await unlinkAsync(BannerData.image_user);
+    //     BannerData.image_user = req.files.path;
+    // }
+    // if (req.files.length != 0) {
+    //     await unlinkAsync(BannerData.banner_video);
+    //     BannerData.banner_video = req.files.path;
+    // }
 
     await video.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
