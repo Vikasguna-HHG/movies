@@ -14,6 +14,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import {Link} from "react-router-dom";
 import SubCategoires from '../base/subcategoires/subcategoires';
 // import queryString from 'query-string'
+import {env} from '../../environment'
+
 const axios = require('axios')
 toast.configure()
 
@@ -68,7 +70,7 @@ const Category = () => {
       formData.append('Description', Description)
       
       try {
-        const res = await axios.post('http://localhost:5000/vInsertBanner', formData)
+        const res = await axios.post(env.apiURL+'vInsertBanner', formData)
         setList([...list, res.data.data])
         toast.success('New Add...!', {
           autoClose: 2000,
@@ -92,7 +94,7 @@ const Category = () => {
         formData.append('Description', Description)
         formData.append('Id', id)
         try {
-          const res = await axios.post('http://localhost:5000/vUpdateBanner', formData)
+          const res = await axios.post(env.apiURL+'vUpdateBanner', formData)
           if (res.data.status == 'success') {
             getdata()
             toast.success('Updated Data...!', {
@@ -120,7 +122,7 @@ const Category = () => {
   // update data
   const edithandler = async (id) => {
     setVisible1(true)
-    axios.get(`http://localhost:5000/vfinddata/${id}`, { method: 'GET'}).then((result) => 
+    axios.get(env.apiURL+`vfinddata/${id}`, { method: 'GET'}).then((result) => 
     {
         setId(id)
         setcategory(result.data.data.category)
@@ -135,7 +137,7 @@ const Category = () => {
   //find data
   function getdata() {
     axios
-      .get(`http://localhost:5000/vfinddata`)
+      .get(env.apiURL+`vfinddata`)
       .then(function (res) {
         console.log(res.data)
         setList(res.data.data)
@@ -159,7 +161,7 @@ const Category = () => {
         dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:5000/vDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`vDeleteBanner/${id}`).then((res) => {
           const users = res.data
           getdata()
         })
@@ -256,8 +258,8 @@ const Category = () => {
                     <CCard style={{width: '19.5rem',display: 'flex',display: 'inline-block',margin: '5px 1px',borderRadius: '10px',boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
                        <div className="hover01 column">
                           <figure>
-                            <img src={`http://localhost:5000/${item.image_user}`} width="282px" height="200px" key={i}
-                              onClick={() =>openImageViewer('http://localhost:5000/' + item.image_user)}
+                            <img src={env.apiURL+`${item.image_user}`} width="282px" height="200px" key={i}
+                              onClick={() =>openImageViewer(env.apiURL+'' + item.image_user)}
                             />
                           </figure>
                         </div>
@@ -315,7 +317,7 @@ const Category = () => {
                             <CFormInput type="file" onChange={saveFile} id="hello" />
                           </CCol>
                           <CCol>
-                              <img style={{ height: '200px', width: '250px', borderRadius: '6px' }} src={'http://localhost:5000/' + imageval}></img>
+                              <img style={{ height: '200px', width: '250px', borderRadius: '6px' }} src={env.apiURL+'' + imageval}></img>
                           </CCol>
                         </CRow>
                       </div>
@@ -382,8 +384,8 @@ const Category = () => {
                           <CTableDataCell>
                             <div className="hover01 column1">
                               <figure className='figure1'>
-                                <img src={`http://localhost:5000/${item.image_user}`} width="250px" height="150px" key={i}
-                                  onClick={() =>openImageViewer('http://localhost:5000/' + item.image_user)}
+                                <img src={env.apiURL+`${item.image_user}`} width="250px" height="150px" key={i}
+                                  onClick={() =>openImageViewer(env.apiURL+'' + item.image_user)}
                                 />
                               </figure>
                             </div>

@@ -28,6 +28,8 @@ import {
   CRow,
 } from '@coreui/react'
 
+import {env} from '../../environment'
+
 // import { DocsCallout } from 'src/components'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -81,7 +83,7 @@ const Home = () => {
     // if (id === 0) {
    
     //   const formData = new FormData();
-      // axios.post('http://localhost:5000/InsertBanner', {
+      // axios.post(env.apiURL+'InsertBanner', {
       //   First_Name: First_Name,
       //   Last_Name: Last_Name,
       //   image_user: imageval,
@@ -172,7 +174,7 @@ const Home = () => {
       }
 
       try {
-        const res = await axios.post('http://localhost:5000/MInsertBanner', formData)
+        const res = await axios.post(env.apiURL+'MInsertBanner', formData)
         toast.success('data insrted', {
           autoClose: 2000,
         })
@@ -208,7 +210,7 @@ const Home = () => {
 
       try {
         const res = await axios.post(
-          'http://localhost:5000/MUpdateBanner',
+          env.apiURL+'MUpdateBanner',
           formData,
           // body: JSON.stringify(update),
         )
@@ -225,7 +227,7 @@ const Home = () => {
       }
     }
 
-    // await axios.post(`http://localhost:5000/MEmail`)
+    // await axios.post(env.apiURL+`MEmail`)
     
     setId(0)
     setFirst_Name('')
@@ -240,7 +242,7 @@ const Home = () => {
     setVisible(true)
 
     axios
-      .get(`http://localhost:5000/Mfinddata/${id}`, {
+      .get(env.apiURL+`Mfinddata/${id}`, {
         method: 'GET',
         // headers: {
         //   'Accept': 'application/json',
@@ -262,7 +264,7 @@ const Home = () => {
 
   function getdata() {
     axios
-      .get(`http://localhost:5000/Mfinddata`)
+      .get(env.apiURL+`Mfinddata`)
       .then(function (res) {
         console.log(res.data.data)
         setList(res.data.data)
@@ -287,7 +289,7 @@ const Home = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:5000/MDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`MDeleteBanner/${id}`).then((res) => {
           getdata()
         })
         toast.success('data deleted', {

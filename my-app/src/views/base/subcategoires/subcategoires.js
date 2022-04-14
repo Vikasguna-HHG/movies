@@ -17,6 +17,8 @@ import {
   useParams,
   useLocation
 } from "react-router-dom";
+import {env} from '../../../environment'
+
 
 // import zIndex from '@mui/material/styles/zIndex'
 const axios = require('axios')
@@ -74,7 +76,7 @@ const SubCategoires = () => {
       formData.append('category', maintitle)
       formData.append('description', subtitle)
       try {
-        const res = await axios.post('http://localhost:5000/kInsertBanner', formData)
+        const res = await axios.post(env.apiURL+'kInsertBanner', formData)
 
         setList([...list, res.data.data])
         toast.success('New Add...!', {
@@ -97,7 +99,7 @@ const SubCategoires = () => {
       formData.append('category', maintitle)
       formData.append('description', subtitle)
       try {
-        const res = await axios.post('http://localhost:5000/kUpdateBanner', formData)
+        const res = await axios.post(env.apiURL+'kUpdateBanner', formData)
 
         if (res.data.status == 'success') {
           getdata()   
@@ -126,7 +128,7 @@ const SubCategoires = () => {
     debugger;
     setVisible1(true)
     axios
-      .get(`http://localhost:5000/kfinddata/${id}`, {
+      .get(env.apiURL+`kfinddata/${id}`, {
         method: 'GET',
       })
       .then((result) => {
@@ -145,7 +147,7 @@ const SubCategoires = () => {
   // -----------------------------------------------------------------------
   function getdata() {
     axios
-      .get("http://localhost:5000/kfinddata/?category="+categoryName)
+      .get(env.apiURL+"kfinddata/?category="+categoryName)
       .then(function (res) {
         // console.log(res.data);
         setList(res.data.data)
@@ -158,7 +160,7 @@ const SubCategoires = () => {
   // -----------------------------------------------------------------------
   function category() {
     axios
-      .get(`http://localhost:5000/vfinddata`)
+      .get(env.apiURL+`vfinddata`)
       .then(function (res) {
         console.log(res.data.data)
         setcategry(res.data.data)
@@ -171,7 +173,7 @@ const SubCategoires = () => {
 
   // function findonesubcatogory() {
   //   axios
-  //     .get(`http://localhost:5000/kfindonedata`)
+  //     .get(env.apiURL+`kfindonedata`)
   //     .then(function (res) {
   //       console.log(res.data.data)
   //       setList(res.data.data)
@@ -205,7 +207,7 @@ var categoryName;
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:5000/kDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`kDeleteBanner/${id}`).then((res) => {
           const users = res.data
           getdata()
           // findonesubcatogory();
@@ -302,7 +304,7 @@ var categoryName;
                       <div className="hover01 column">
                         <div>
                           <figure>
-                            <img src={`http://localhost:5000/${item.image_user}`} width="282px" height="200px" key={i} onClick={() => openImageViewer('http://localhost:5000/' + item.image_user)} />
+                            <img src={env.apiURL+`${item.image_user}`} width="282px" height="200px" key={i} onClick={() => openImageViewer(env.apiURL+'' + item.image_user)} />
                           </figure>
                           <span>Hover</span>
                         </div>
@@ -355,7 +357,7 @@ var categoryName;
                               <CFormInput type="file" onChange={saveFile} id="hello" />
                             </CCol>
                             <CCol>
-                              <img style={{ height: '200px', width: '250px', borderRadius: '6px' }} src={'http://localhost:5000/' + imageval} ></img>
+                              <img style={{ height: '200px', width: '250px', borderRadius: '6px' }} src={env.apiURL+'' + imageval} ></img>
                             </CCol>
                           </CRow>
                         </div>
@@ -421,7 +423,7 @@ var categoryName;
                           <CTableDataCell >
                             <div className="hover01 column1">
                               <figure className='figure1'>
-                                <img src={`http://localhost:5000/${item.image_user}`} width="250px" height="150px" key={i} onClick={() => openImageViewer('http://localhost:5000/' + item.image_user)} />
+                                <img src={env.apiURL+`${item.image_user}`} width="250px" height="150px" key={i} onClick={() => openImageViewer(env.apiURL+'' + item.image_user)} />
                               </figure>
                             </div>
                             {isViewerOpen && (<ImageViewer src={currentImage} currentIndex={0} disableScroll={false} closeOnClickOutside={true} onClose={setIsViewerOpen} backgroundStyle={{ backgroundColor: '#3A6073', zIndex: '2' }} />)}

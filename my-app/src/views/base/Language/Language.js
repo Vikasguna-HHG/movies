@@ -30,6 +30,8 @@ import {
   CContainer,
   CFormSelect
 } from '@coreui/react'
+import {env} from '../../../environment'
+
 
 // import { DocsCallout } from 'src/components'
 import { toast } from 'react-toastify';
@@ -69,7 +71,7 @@ const Tables = () => {
 
       try {
         const res = await axios.post(
-          "http://localhost:5000/InsertBanner",
+          env.apiURL+"InsertBanner",
           formData
         );
         debugger;
@@ -92,7 +94,7 @@ const Tables = () => {
 
       try {
         const res = await axios.post(
-          "http://localhost:5000/UpdateBanner",
+          env.apiURL+"UpdateBanner",
           formData
           // body: JSON.stringify(update),
         );
@@ -123,7 +125,7 @@ const Tables = () => {
 
   const edithandler = async (id) => {
     setVisible1(true)
-    axios.get(`http://localhost:5000/finddata/${id}`, {
+    axios.get(env.apiURL+`finddata/${id}`, {
       method: 'GET',
       // headers: {
       //   'Accept': 'application/json',
@@ -141,7 +143,7 @@ const Tables = () => {
  
 
   function getdata() {
-    axios.get(`http://localhost:5000/finddata`)
+    axios.get(env.apiURL+`finddata`)
       .then(function (res) {
         console.log(res.data);
         setList(res.data.data);
@@ -165,7 +167,7 @@ const Tables = () => {
       })
       .then((willDelete) => {
         if (willDelete) {
-          axios.delete(`http://localhost:5000/DeleteBanner/${id}`)
+          axios.delete(env.apiURL+`DeleteBanner/${id}`)
             .then(res => {
               const users = res.data;
               getdata();

@@ -13,6 +13,8 @@ import ToggleButton from '@mui/material/ToggleButton'
 import TableViewRoundedIcon from '@mui/icons-material/TableViewRounded'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import { FaHandPointRight } from "react-icons/fa";
+import {env} from '../../../environment'
+
 const axios = require('axios')
 toast.configure()
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
@@ -148,7 +150,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     //   const formData = new FormData()
     //   formData.append('banner_video', banner_video)
     //   try {
-    //     const res = await axios.post('http://localhost:5000/videoInsertBanner', formData)
+    //     const res = await axios.post(env.apiURL+'videoInsertBanner', formData)
     //     debugger
     //     setList([...list, res.data.data])
     //     toast.success('New Add...!', {
@@ -174,7 +176,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('title', title)
 
       // try {
-        await axios.post('http://localhost:5000/viInsertBanner', formData)
+        await axios.post(env.apiURL+'viInsertBanner', formData)
         .then(r => {
           console.log(formData)
           setList([...list, r.data.data])
@@ -208,7 +210,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
       formData.append('Id', id)
       try {
-        const res = await axios.post('http://localhost:5000/viUpdateBanner', formData)
+        const res = await axios.post(env.apiURL+'viUpdateBanner', formData)
         debugger
         if (res.data.status == 'success') {
           getdata()
@@ -241,7 +243,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const edithandler = async (id) => {
     setVisible5(true)
     axios
-      .get(`http://localhost:5000/vifinddata/${id}`, {
+      .get(env.apiURL+`vifinddata/${id}`, {
         method: 'GET',
       })
       .then((result) => {
@@ -267,7 +269,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   // --------------------API FUNCTION------------------------//
   function getdata() {
     axios
-      .get(`http://localhost:5000/vifinddata`)
+      .get(env.apiURL+`vifinddata`)
       .then(function (res) {
         console.log(res.data)
         setList(res.data.data)
@@ -279,7 +281,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function cata_data() {
     axios
-      .get(`http://localhost:5000/vfinddata`)
+      .get(env.apiURL+`vfinddata`)
       .then(function (res) {
         console.log(res.data)
         setcategory1(res.data.data)
@@ -291,7 +293,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function subcata_data() {
     axios
-      .get(`http://localhost:5000/kfindonedata`)
+      .get(env.apiURL+`kfindonedata`)
       .then(function (res) {
         console.log(res.data)
         setsubcategory1(res.data.data)
@@ -303,7 +305,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function Language_Data() {
     axios
-      .get(`http://localhost:5000/finddata`)
+      .get(env.apiURL+`finddata`)
       .then(function (res) {
         console.log(res.data)
         setLanguage1(res.data.data)
@@ -381,7 +383,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(`http://localhost:5000/viDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`viDeleteBanner/${id}`).then((res) => {
           const users = res.data
           getdata()
         })
@@ -869,8 +871,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                           <CTableDataCell  style={{ paddingTop: '10px' ,color:"#FFF" }}>
                             <div className="hover01  column1">
                               <figure className='figure1'>
-                                <img src={`http://localhost:5000/${item.image_user}`} width="250px" height="150px" key={i}
-                                  onClick={() =>openImageViewer('http://localhost:5000/' + item.image_user)}
+                                <img src={env.apiURL+`${item.image_user}`} width="250px" height="150px" key={i}
+                                  onClick={() =>openImageViewer(env.apiURL+'' + item.image_user)}
                                 />
                               </figure>
                             </div>
@@ -880,7 +882,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                               />
                             )}
                           </CTableDataCell>
-                          {/* <CTableDataCell color="success" style={{ paddingTop: "30px" }}><img src={`http://localhost:5000/${item.banner_img}`} width="100px"></img></CTableDataCell> */}
+                          {/* <CTableDataCell color="success" style={{ paddingTop: "30px" }}><img src={env.apiURL+`${item.banner_img}`} width="100px"></img></CTableDataCell> */}
 
                           <CTableDataCell style={{ paddingTop: '30px' }} >
                             <CButton
@@ -969,8 +971,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                     <CCard key={i} style={{width: '19.5rem',display: 'flex',display: 'inline-block',margin: '5px 1px',borderRadius: '10px',boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
                        <div className="hover01 column">
                           <figure>
-                            <img src={`http://localhost:5000/${item.image_user}`} width="282px" height="200px" key={i}
-                              onClick={() =>openImageViewer('http://localhost:5000/' + item.image_user)}
+                            <img src={env.apiURL+`${item.image_user}`} width="282px" height="200px" key={i}
+                              onClick={() =>openImageViewer(env.apiURL+'' + item.image_user)}
                             />
                           </figure>
                         </div>

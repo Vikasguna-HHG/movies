@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var bennerRouter = require('./routes/benner');
 var app = express();
+
 var cors = require('cors');
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use(cors())
