@@ -8,7 +8,12 @@ var app = require('../app');
 var debug = require('debug')('admin:server');
 var http = require('http');
 const mongoose = require('mongoose');
-// mongoose.connect()
+
+// mongodb compass
+// mongoose.connect("mongodb://localhost:27017/Moives");
+// console.log("Data Base Create");
+
+// mongodb Atlas
 mongoose.connect("mongodb+srv://HHG:HHG@cluster0.f2c5v.mongodb.net/HHG?retryWrites=true&w=majority",{
     // useNewUrlParser:true,
     // useCreateIndex:true,
