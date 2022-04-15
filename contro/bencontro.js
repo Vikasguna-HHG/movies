@@ -456,7 +456,7 @@ exports.kUpdate_data = async function (req, res, next) {
 exports.video_login = async function(req,res,next){
   try {
     console.log(req.body.User_Name);
-   const tag = await movie_maker.find()
+   const tag = await movie_maker.find({User_Name:req.body.User_Name})
   //  console.log(tag);
     res.status(200).json({
       status: "find id",
