@@ -4,7 +4,7 @@ var movie_maker = require("../Models/movie_maker");
 var language = require("../Models/language");
 var video = require("../Models/video");
 var $ = require("jquery");
-
+var jwt = require('jsonwebtoken');
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -453,8 +453,43 @@ exports.kUpdate_data = async function (req, res, next) {
   }
 };
 
-exports.login = async function(req,res,next){
-  movie_maker.find({User_Name:req.body.User_Name})
+exports.video_login = async function(req,res,next){
+  try {
+    console.log(req.body.User_Name);
+   const tag = await movie_maker.find({User_Name:req.body.User_Name})
+  //  console.log(tag);
+    res.status(200).json({
+      status: "find id",
+      data: tag,
+    });
+
+  } catch (error) {
+  //  console.log(error) 
+  }
+  // .then(User=>{
+  //   if(User.length < 1)
+  //   {
+  //     return res.status(401).json({
+  //       msg:'user not exits'
+  //     })
+  //   }
+  //   else{
+  //     bcrypt.compare(req.body.Password,User[0].Password,(error,res)=>{
+  //         if(!res){
+  //           return res.status(401).json({
+  //             msg:'password wrong'
+  //           })
+  //         }
+  //         if(res)
+  //         {
+  //             const token =  jwt.sign({
+  //               User_Name:User[0].User_Name,
+
+  //             })
+  //         }
+  //     })
+  //   }
+  // })
 }
 
 
@@ -464,6 +499,7 @@ exports.login = async function(req,res,next){
 exports.viinsert_data = async function (req, res, next) {
   try {
     data = {
+      
       title: req.body.title,
       category: req.body.category,
       subcategory: req.body.subcategory,
