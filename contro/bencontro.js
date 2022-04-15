@@ -122,7 +122,7 @@ exports.Minsert_data = async function (req, res, next) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    // console.log(result);
+    console.log(result);
 
     var transporter = nodemailer.createTransport({
       service: "gmail",
@@ -453,44 +453,45 @@ exports.kUpdate_data = async function (req, res, next) {
   }
 };
 
-exports.video_login = async function(req,res,next){
-  try {
-    console.log(req.body.User_Name);
-   const tag = await movie_maker.find({User_Name:req.body.User_Name})
-  //  console.log(tag);
-    res.status(200).json({
-      status: "find id",
-      data: tag,
-    });
+// exports.video_login = async function(req,res,next){
+//   try {
+//     console.log(req.body.User_Name);
+//    const tag = await movie_maker.find({User_Name:req.body.User_Name})
+//   //  console.log(tag);
+//     res.status(200).json({
+//       status: "find id",
+//       data: tag,
+//     })
+//   .then(User=>{
+//     if(User.length < 1)
+//     {
+//       return res.status(401).json({
+//         msg:'user not exits'
+//       })
+//     }
+//     else{
+//       bcrypt.compare(req.body.Password,User[0].Password,(error,res)=>{
+//           if(!res){
+//             return res.status(401).json({
+//               msg:'password wrong'
+//             })
+//           }
+//           if(res)
+//           {
+//               const token =  jwt.sign({
+//                 User_Name:User[0].User_Name,
 
-  } catch (error) {
-  //  console.log(error) 
-  }
-  // .then(User=>{
-  //   if(User.length < 1)
-  //   {
-  //     return res.status(401).json({
-  //       msg:'user not exits'
-  //     })
-  //   }
-  //   else{
-  //     bcrypt.compare(req.body.Password,User[0].Password,(error,res)=>{
-  //         if(!res){
-  //           return res.status(401).json({
-  //             msg:'password wrong'
-  //           })
-  //         }
-  //         if(res)
-  //         {
-  //             const token =  jwt.sign({
-  //               User_Name:User[0].User_Name,
+//               })
+//           }
+//       })
+//     }
+//   })
+// }
+//   catch (error) {
+//     //  console.log(error) 
+//     }
+// }
 
-  //             })
-  //         }
-  //     })
-  //   }
-  // })
-}
 
 
 
