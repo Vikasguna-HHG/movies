@@ -8,6 +8,8 @@ var jwt = require('jsonwebtoken');
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
+const formidable = require('formidable');
+const { IncomingForm } = require('formidable');
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
@@ -497,7 +499,9 @@ exports.video_login = async function(req,res,next){
 
 //video api
 exports.viinsert_data = async function (req, res, next) {
-  try {
+try {
+const form = new IncomingForm(options);
+
     data = {
       
       title: req.body.title,
@@ -506,7 +510,7 @@ exports.viinsert_data = async function (req, res, next) {
       Description: req.body.Description,
       language: req.body.language,
       image_user: req.files[0].path,
-      banner_video: req.files[1].path,
+      banner_video: req.form.files[1].path,
     };
     const tag = await video.create(data);
 
