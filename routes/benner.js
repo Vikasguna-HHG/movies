@@ -70,6 +70,7 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 router.get('/videologin', BannerController.video_login)
 
 
+
 //keyur api start
 router.get('/kfinddata',BannerController.kfind_data);
 router.get('/kfindonedata',BannerController.kfindone_data);
