@@ -67,10 +67,9 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 // router.post('/viUpdateBanner', upload.single('image'), BannerController.viUpdate_data);
 // router.delete('/viDeleteBanner/:id', upload.single('image'), BannerController.viDelete_data);
 //video api end 
-<<<<<<< HEAD
+
 // router.post('/videologin', BannerController.video_login)
-=======
->>>>>>> c53722b7bb1145ec4cbfeb0ad315d4f647e941ca
+
 
 
 
