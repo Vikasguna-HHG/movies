@@ -174,7 +174,7 @@ const Home = () => {
       }
 
       try {
-        const res = await axios.post(env.apiURL+'MInsertBanner', formData)
+        const res = await axios.post('http://localhost:5000/MInsertBanner', formData)
         toast.success('data insrted', {
           autoClose: 2000,
         })

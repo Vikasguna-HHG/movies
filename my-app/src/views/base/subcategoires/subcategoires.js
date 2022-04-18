@@ -144,7 +144,7 @@ const SubCategoires = () => {
         setsubtitle()
         setImageval()
   }
-  // -----------------------------------------------------------------------
+  // 
   function getdata() {
     axios
       .get(env.apiURL+"kfinddata/?category="+categoryName)
@@ -157,7 +157,7 @@ const SubCategoires = () => {
       })
   }
 
-  // -----------------------------------------------------------------------
+  // ----------------------------------------------
   function category() {
     axios
       .get(env.apiURL+`vfinddata`)
@@ -183,7 +183,7 @@ const SubCategoires = () => {
   //       console.log(error)
   //     })
   // }
-  // -------------------------------------------------------------------
+  
   
 var categoryName;
 

@@ -36,7 +36,7 @@ router.delete('/DeleteBanner/:id', upload.single('image'), BannerController.Dele
 
 // mukunj api start
 
-router.get('/Mlogin',BannerController.Mlogin);
+router.get('./mlogin', BannerController.mlogin)
 
 router.get('/Mfinddata',BannerController.Mfind_data);
 // router.get('/Mfindonedata',BannerController.Mfindone_data);
@@ -67,7 +67,7 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 // router.post('/viUpdateBanner', upload.single('image'), BannerController.viUpdate_data);
 // router.delete('/viDeleteBanner/:id', upload.single('image'), BannerController.viDelete_data);
 //video api end 
-
+// router.get('/videologin', BannerController.video_login)
 
 
 //keyur api start
