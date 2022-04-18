@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -14,22 +13,45 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {env} from '../../../environment'
 
 
 const Login = () => {
+  
+  const navigate = useNavigate();
+  
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
 
-    const submit = async () => {
-    console.log("User_Name,Password",User_Name,Password);
 
-    const result = await fetch(env.apiURL+'Mlogin',{
-      method:'post',
-      body:JSON.stringify({User_Name,Password})
-    })
-  }
+    useEffect(()=> {
+      if(localStorage.getItem('user-info'))
+      {
+        navigate.push('/base/Home');
+      }
+    },[])
+
+
+
+    const submit = async () => {
+      console.log("User_Name,Password",User_Name,Password);
+
+      // debugger;
+      let result = await fetch(env.apiURL+'Mlogin',{
+        method:'POST',
+        body:JSON.stringify({User_Name,Password}),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      result = await result.json()
+      alert(result)
+
+      setUser_Name('');
+      setPassword('');
+    }
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">

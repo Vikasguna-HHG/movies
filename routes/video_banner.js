@@ -15,12 +15,12 @@ const storage = multer.diskStorage({
         if (file.mimetype === 'video/mp4') {
             console.log(file,'ddd');  
             cb(null, './upload/banner_video/')
-          } else if (file.mimetype === ('image/jpeg' || 'image/png' || 'image/jpg')) {
+          } else if (file.mimetype === ('image/jpeg' || 'image/png' ||  'image/jpg')) {
             cb(null, './upload/image/')
           } else {
             cb(null, './upload/image/')
           }
-
+  
     },
     filename: (req, file, callBack) => {
         callBack(null, Date.now() + '-' + file.originalname)
