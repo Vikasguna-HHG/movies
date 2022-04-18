@@ -172,21 +172,34 @@ exports.Minsert_data = async function (req, res, next) {
   }
 };
 
-exports.Mlogin = async function (req, res, next) {
+exports.mlogin = async function (req, res, next) {
   try {
-    const { User_Name, Password } = req.body;
-    const User = await movie_maker.findOne({ User_Name });
+    const { Email, Password } = req.body;
+    const User = await movie_maker.findOne({ Email });
 
     const checkpass = await bcrypt.compare(Password, User.Password);
+    res.send(User);
+    console.log(User);
+
+
+    if(User.Password === Password)
+    {
+      res.status(201).json({
+        status:"sucess"
+      });
+    }
+    else{
+        res.send("password not match")
+    }
+
+
     res.status(200).json({
       status: "success login",
       data: checkpass,
-      
     });
-    console.log(req.body);
   } catch (error) {
     console.log(error);
-    res.status(400).send("invalid username");
+    res.status(400).send("invalid email");
   }
 };
 
@@ -372,7 +385,7 @@ exports.kfind_data = async function (req, res, next) {
       });
     } catch (error) {
       console.log("error :" + error);
-      console.log("not find data........!");
+      // console.log("not find data........!");
     }
   }
 
@@ -393,7 +406,7 @@ exports.kfind_data_Id = async function (req, res, next) {
   try {
     const tag = await subcategoires.findById(req.params.id);
     res.status(200).json({
-      // status: "find id",
+      status: "find id",
       data: tag,
     });
   } catch (error) {
@@ -444,46 +457,44 @@ exports.kUpdate_data = async function (req, res, next) {
   }
 };
 
-// exports.video_login = async function(req,res,next){
-//   try {
-//     console.log(req.body.User_Name);
-//    const tag = await movie_maker.find({User_Name:req.body.User_Name})
-//   //  console.log(tag);
-//     res.status(200).json({
-//       status: "find id",
-//       data: tag,
-//     })
-//   .then(User=>{
-//     if(User.length < 1)
-//     {
-//       return res.status(401).json({
-//         msg:'user not exits'
-        
-//       })
-//       console.log("ok")
-//     }
-//     else{
-//       bcrypt.compare(req.body.Password,User[0].Password,(error,res)=>{
-//           if(!res){
-//             return res.status(401).json({
-//               msg:'password wrong'
-//             })
-//           }
-//           if(res)
-//           {
-//               const token =  jwt.sign({
-//                 User_Name:User[0].User_Name,
+exports.video_login = async function(req,res,next){
+  try {
+    console.log(req.body.User_Name);
+   const tag = await movie_maker.find({User_Name:req.body.User_Name})
+  //  console.log(tag);
+    res.status(200).json({
+      status: "find id",
+      data: tag,
+    })
+  .then(User=>{
+    if(User.length < 1)
+    {
+      return res.status(401).json({
+        msg:'user not exits'
+      })
+    }
+    else{
+      bcrypt.compare(req.body.Password,User[0].Password,(error,res)=>{
+          if(!res){
+            return res.status(401).json({
+              msg:'password wrong'
+            })
+          }
+          if(res)
+          {
+              const token =  jwt.sign({
+                User_Name:User[0].User_Name,
 
-//               })
-//           }
-//       })
-//     }
-//   })
-// }
-//   catch (error) {
-//     //  console.log(error) 
-//     }
-// }
+              })
+          }      
+      })
+    }
+  })
+}
+  catch (error) {
+    //  console.log(error) 
+    }
+}
 
 
 
@@ -492,16 +503,15 @@ exports.kUpdate_data = async function (req, res, next) {
 //video api
 exports.viinsert_data = async function (req, res, next) {
 try {
-const form = new IncomingForm(formidable);
-    data = {
-      
+// const form = new IncomingForm(formidable);                                                    
+   const data = {
       title: req.body.title,
       category: req.body.category,
       subcategory: req.body.subcategory,
       Description: req.body.Description,
       language: req.body.language,
       image_user: req.files[0].path,
-      banner_video: req.form.files[1].path,
+      banner_video: req.files[1].path,
     };
     const tag = await video.create(data);
 
@@ -514,7 +524,7 @@ const form = new IncomingForm(formidable);
     console.log(error);
     console.log("not data insert........!");
   }
-};
+}; 
 
 exports.vifind_data = async function (req, res, next) {
   try {
@@ -555,7 +565,7 @@ exports.viDelete_data = async function (req, res, next) {
 exports.viUpdate_data = async function (req, res, next) {
   try {
     var BannerData = await video.findById(req.body.Id);
-    BannerData.category = req.body.category;
+    BannerData.category = req.body.category;  
     BannerData.title = req.body.title;
     BannerData.language = req.body.language;
     BannerData.subcategory = req.body.subcategory;
