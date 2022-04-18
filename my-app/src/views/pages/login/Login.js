@@ -15,33 +15,20 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import React, { useState } from 'react';
+import {env} from '../../../environment'
+
 
 const Login = () => {
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
 
+    const submit = async () => {
+    console.log("User_Name,Password",User_Name,Password);
 
-
-  const submit = async () => {
-    
-      const formData = new FormData()
-      formData.append('User_Name', User_Name)
-      formData.append('Password', Password)
-      
-      // try {
-      //   const res = await axios.post(env.apiURL+'mlogin', formData)
-      //   // setList([...list, res.data.data])
-      //   toast.success('New Add...!', {
-      //     autoClose: 2000,
-      //   })
-      //   console.log(res)
-      // } 
-      // catch (ex) 
-      // {
-      //   console.log(ex)
-      // }
-      setUser_Name('');
-      setPassword('');
+    const result = await fetch(env.apiURL+'Mlogin',{
+      method:'post',
+      body:JSON.stringify({User_Name,Password})
+    })
   }
 
   return (
@@ -75,11 +62,9 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                      <Link to="/base/Video">
                         <CButton  onClick={submit} className="px-4" style={{backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
                           Login
                         </CButton>
-                      </Link>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
