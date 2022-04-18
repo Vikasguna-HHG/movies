@@ -3,8 +3,7 @@ import './table.css'
 import ImageViewer from 'react-simple-image-viewer'
 import swal from 'sweetalert'
 import { FaHandPointRight } from "react-icons/fa";
-import {
-  CCardTitle, CCardText,  CCard,  CCardBody,  CCardHeader,  CCol,  CTable,  CForm,  CFormLabel,  CFormInput,  CFormTextarea,  CButton,  CTableHead,  CTableRow,  CTableHeaderCell,  CTableBody,  CTableDataCell,  CInputGroup,  CInputGroupText,  CModalBody,  CModalTitle,  CModalHeader,  CModalFooter,  CModal,  CRow,  CFormSelect,} from '@coreui/react'
+import {CCardTitle, CCardText,  CCard,  CCardBody,  CCardHeader,  CCol,  CTable,  CForm,  CFormLabel,  CFormInput,  CFormTextarea,  CButton,  CTableHead,  CTableRow,  CTableHeaderCell,  CTableBody,  CTableDataCell,  CInputGroup,  CInputGroupText,  CModalBody,  CModalTitle,  CModalHeader,  CModalFooter,  CModal,  CRow,  CFormSelect,} from '@coreui/react'
 import TableViewRoundedIcon from '@mui/icons-material/TableViewRounded'
 import ToggleButton from '@mui/material/ToggleButton'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
@@ -43,12 +42,13 @@ const Category = () => {
     setIsViewerOpen(true)
   }, [])
 
+  //image uploding
   const saveFile = (e) => {
     setImageval(e.target.files[0])
   }
 
+  //new add 
   function openhandler() {
-
     setcategory('')
     setDescription('')
     setImageval('')
@@ -57,12 +57,15 @@ const Category = () => {
 
   //submit 
   const submit = async () => {
+    // value black not submit
     if (!category || !Description || !imageval) {
       toast.warning('data Fild...!', {
         autoClose: 2000,
       })
       return
     }
+
+    //insert and update code 
     if (id == 0) {
       const formData = new FormData()
       formData.append('image', imageval)
@@ -85,106 +88,104 @@ const Category = () => {
       setcategory('')
       setDescription('')
       setImageval('')
-      } 
-      else 
-      {
-        const formData = new FormData()
-        formData.append('image', imageval)
-        formData.append('category', category)
-        formData.append('Description', Description)
-        formData.append('Id', id)
-        try {
-          const res = await axios.post(env.apiURL+'vUpdateBanner', formData)
-          if (res.data.status == 'success') {
-            getdata()
-            toast.success('Updated Data...!', {
-              autoClose: 2000,
-            })
-
-            
-          }
-        } catch (ex) {
-          console.log(ex)
-        }
-      }
-
-      setcategory('')
-      setDescription('')
-      setImageval('')
-      setVisible1(false)
-      setId(0)
-  }
-      const pass = async (name) => {
-        
-      }   
-
-
-  // update data
-  const edithandler = async (id) => {
-    setVisible1(true)
-    axios.get(env.apiURL+`vfinddata/${id}`, { method: 'GET'}).then((result) => 
+    } 
+    else 
     {
-        setId(id)
-        setcategory(result.data.data.category)
-        setDescription(result.data.data.Description)
-        setImageval(result.data.data.image_user)
-    })
-     setcategory('')
-      setDescription('')
-      setImageval('')
-  }
-
-  //find data
-  function getdata() {
-    axios
-      .get(env.apiURL+`vfinddata`)
-      .then(function (res) {
-        console.log(res.data)
-        setList(res.data.data)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
-
-  //api calling
-  useEffect(() => {
-    getdata()
-  }, [])
-
-  //delete data
-  const deletehandler = async (id) => {
-    swal({
-        title: 'Are you sure Delete Your Data?',
-        icon: 'warning',
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
-        axios.delete(env.apiURL+`vDeleteBanner/${id}`).then((res) => {
-          const users = res.data
+      const formData = new FormData()
+      formData.append('image', imageval)
+      formData.append('category', category)
+      formData.append('Description', Description)
+      formData.append('Id', id)
+      try {
+        const res = await axios.post(env.apiURL+'vUpdateBanner', formData)
+        if (res.data.status == 'success') {
           getdata()
-        })
-        toast.error('your data deleted...!', {
-          autoClose: 2000,
-        })
-      } 
-      else 
-      {
-        toast.info('Data Safe...!', {
-        autoClose: 2000,
-        })
+          toast.success('Updated Data...!', {
+            autoClose: 2000,
+          })          
+        }
+      } catch (ex) {
+        console.log(ex)
       }
+    }
+    setcategory('')
+    setDescription('')
+    setImageval('')
+    setVisible1(false)
+    setId(0)
+  }
+      
+  const pass = async (name) => {
+        
+  }   
+
+// update data
+const edithandler = async (id) => {
+  setVisible1(true)
+  axios.get(env.apiURL+`vfinddata/${id}`, { method: 'GET'}).then((result) => 
+  {
+      setId(id)
+      setcategory(result.data.data.category)
+      setDescription(result.data.data.Description)
+      setImageval(result.data.data.image_user)
+  })
+   setcategory('')
+    setDescription('')
+    setImageval('')
+}
+
+//find data
+function getdata() {
+  axios
+    .get(env.apiURL+`vfinddata`)
+    .then(function (res) {
+      console.log(res.data)
+      setList(res.data.data)
     })
-  }
-  function table1() {
-    document.getElementById('table1').style.display = 'block'
-    document.getElementById('table2').style.display = 'none'
-  }
-  function table2() {
-    document.getElementById('table1').style.display = 'none'
-    document.getElementById('table2').style.display = 'block'
-  }
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+//api calling
+useEffect(() => {
+  getdata()
+}, [])
+
+//delete data
+const deletehandler = async (id) => {
+  swal({
+      title: 'Are you sure Delete Your Data?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      axios.delete(env.apiURL+`vDeleteBanner/${id}`).then((res) => {
+        const users = res.data
+        getdata()
+      })
+      toast.error('your data deleted...!', {
+        autoClose: 2000,
+      })
+    } 
+    else 
+    {
+      toast.info('Data Safe...!', {
+      autoClose: 2000,
+      })
+    }
+  })
+}
+
+function table1() {
+  document.getElementById('table1').style.display = 'block'
+  document.getElementById('table2').style.display = 'none'
+}
+function table2() {
+  document.getElementById('table1').style.display = 'none'
+  document.getElementById('table2').style.display = 'block'
+}
 
   return (
     <>

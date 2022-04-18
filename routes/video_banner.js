@@ -1,13 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const multer = require('multer');
+// const formidable = require('formidable');
+// const { IncomingForm } = require('formidable');
 var BannerController = require('../contro/bencontro');
 
 // image multer
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: (req, file, cb) => {
 
       console.log(file)
+      // const form = new IncomingForm(formidable);
     
         if (file.mimetype === 'video/mp4') {
             console.log(file,'ddd');  

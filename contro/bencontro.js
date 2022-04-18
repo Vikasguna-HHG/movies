@@ -8,6 +8,8 @@ var jwt = require('jsonwebtoken');
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
+const formidable = require('formidable');
+const { IncomingForm } = require('formidable');
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
@@ -168,34 +170,21 @@ exports.Minsert_data = async function (req, res, next) {
   }
 };
 
-exports.mlogin = async function (req, res, next) {
+exports.Mlogin = async function (req, res, next) {
   try {
-    const { Email, Password } = req.body;
-    const User = await movie_maker.findOne({ Email });
+    const { User_Name, Password } = req.body;
+    const User = await movie_maker.findOne({ User_Name });
 
     const checkpass = await bcrypt.compare(Password, User.Password);
-    res.send(User);
-    console.log(User);
-
-
-    if(User.Password === Password)
-    {
-      res.status(201).json({
-        status:"sucess"
-      });
-    }
-    else{
-        res.send("password not match")
-    }
-
-
     res.status(200).json({
       status: "success login",
       data: checkpass,
+      
     });
+    console.log(req.body);
   } catch (error) {
     console.log(error);
-    res.status(400).send("invalid email");
+    res.status(400).send("invalid username");
   }
 };
 
@@ -500,7 +489,9 @@ exports.kUpdate_data = async function (req, res, next) {
 
 //video api
 exports.viinsert_data = async function (req, res, next) {
-  try {
+try {
+const form = new IncomingForm(options);
+
     data = {
       
       title: req.body.title,
@@ -509,7 +500,7 @@ exports.viinsert_data = async function (req, res, next) {
       Description: req.body.Description,
       language: req.body.language,
       image_user: req.files[0].path,
-      banner_video: req.files[1].path,
+      banner_video: req.form.files[1].path,
     };
     const tag = await video.create(data);
 
