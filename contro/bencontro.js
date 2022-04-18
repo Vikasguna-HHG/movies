@@ -15,6 +15,8 @@ const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
 
 const bcrypt = require("bcrypt");
+const { data } = require("jquery");
+const { time } = require("console");
 /* login api  */
 // router.get("/signup", async function (req, res, next) {
 //   if (req.body.password != req.body.confirmpassword) {
@@ -501,8 +503,7 @@ exports.video_login = async function(req,res,next){
 //video api
 exports.viinsert_data = async function (req, res, next) {
 try {
-const form = new IncomingForm(options);
-
+const form = new IncomingForm(formidable);
     data = {
       
       title: req.body.title,
