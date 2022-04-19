@@ -15,16 +15,17 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import React, { useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-// import { useHistory } from "react-router-dom"
+// import { useNavigate ,Link} from 'react-router-dom';
+import { useHistory,Link } from "react-router-dom"
 
 import {env} from '../../../environment'
+import axios from 'axios';
 
 
 const Login = () => {
   
-  // const History = useHistory();
-  const navigate = useNavigate();
+  const navigate = useHistory();
+  // const navigate = useNavigate();
   
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
@@ -37,25 +38,28 @@ const Login = () => {
         // History.push('/base/Home');
       }
     },[])
+    localStorage.removeItem('user-info')
+    console.log(localStorage.getItem('user-info'));
 
-
-
-    const submit = async () => {
+    const submit = async (e) => {
+      e.preventDefault()
 
       console.log("User_Name,Password",User_Name,Password);
 
-      // debugger;      
         // const result = await fetch(env.apiURL+'Mlogin',{
-        const result = await fetch("http://localhost:5000/Mlogin",{
-        method:'POST',
-        body:JSON.stringify({User_Name,Password}),
-        headers:{
-          'Content-Type': 'application/json'
-        }
-      })
-      result = await result.json()
-      console.log(result);
+        const result = await axios.post("http://localhost:5000/Mlogin",{User_Name,Password}).then((res)=>{
 
+        if(res.data.status){
+          localStorage.setItem('userId',res.data.data._id)
+          localStorage.setItem('userName',res.data.data.First_Name)
+          
+        }else{
+          alert("not valid")
+        }
+        
+        })
+      
+      
     }
 
   return (
@@ -89,9 +93,11 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
+                        <Link to="/base/video">
                         <CButton  onClick={submit} className="px-4" style={{backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
                           Login
                         </CButton>
+                        </Link>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">

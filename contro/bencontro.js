@@ -173,20 +173,27 @@ exports.Minsert_data = async function (req, res, next) {
 };
 
 exports.Mlogin = async function (req, res, next) {
-  try {
     const { User_Name, Password } = req.body;
     const User = await movie_maker.findOne({ User_Name });
+   
+    if(User != null) {
+      const checkpass = await bcrypt.compare(Password, User.Password);
+      if(checkpass){
+        res.status(200).json({
+          status: true,
+          data: User,
+        });
+      }
+    }
+    else
+    {
+      res.status(200).json({
+        status: false,
+        message: "not valid username and password",
+      });
+    }
+    
 
-    const checkpass = await bcrypt.compare(Password, User.Password);
-    res.status(200).json({
-      status: "success login",
-      data: checkpass,
-    });
-    console.log(req.body);
-  } catch (error) {
-    console.log(error);
-    res.status(400).send("invalid username");
-  }
 };
 
 

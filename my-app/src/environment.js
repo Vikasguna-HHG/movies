@@ -1,4 +1,4 @@
 //Node live url
 export const env = {
-    apiURL: 'http://localhost:5000/'    
+    apiURL: 'https://movie-client.herokuapp.com/'    
 };

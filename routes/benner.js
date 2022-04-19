@@ -37,7 +37,7 @@ router.delete('/DeleteBanner/:id', upload.single('image'), BannerController.Dele
 // mukunj api start
 
 
-router.get('/Mlogin',BannerController.Mlogin);
+router.post('/Mlogin',BannerController.Mlogin);
 
 router.get('/Mfinddata',BannerController.Mfind_data);
 // router.get('/Mfindonedata',BannerController.Mfindone_data);
