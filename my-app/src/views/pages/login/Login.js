@@ -45,8 +45,8 @@ const Login = () => {
       console.log("User_Name,Password",User_Name,Password);
 
       // debugger;      
-        const result = await fetch(env.apiURL+'Mlogin',{
-        // const result = await fetch("http://localhost:5000/Mlogin",{
+        // const result = await fetch(env.apiURL+'Mlogin',{
+        const result = await fetch("http://localhost:5000/Mlogin",{
         method:'POST',
         body:JSON.stringify({User_Name,Password}),
         headers:{
