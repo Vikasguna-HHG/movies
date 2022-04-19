@@ -15,16 +15,16 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import React, { useEffect, useState } from 'react';
 
-// import { useNavigate } from 'react-router-dom';
-var reactRouterDom = require("react-router-dom")
-import { useHistory } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
+// import { useHistory } from "react-router-dom"
 
 import {env} from '../../../environment'
 
 
 const Login = () => {
   
-  const History = useHistory();
+  // const History = useHistory();
+  const navigate = useNavigate();
   
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
@@ -33,14 +33,15 @@ const Login = () => {
     useEffect(()=> {
       if(localStorage.getItem('user-info'))
       {
-        // navigate.push('/base/Home');
-        History.push('/base/Home');
+        navigate.push('/base/Home');
+        // History.push('/base/Home');
       }
     },[])
 
 
 
     const submit = async () => {
+
       console.log("User_Name,Password",User_Name,Password);
 
       // debugger;      
@@ -53,10 +54,8 @@ const Login = () => {
         }
       })
       result = await result.json()
-      console.log(result.body);
+      console.log(result);
 
-      setUser_Name('');
-      setPassword('');
     }
 
   return (
