@@ -14,13 +14,17 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
+// import { useNavigate } from 'react-router-dom';
+var reactRouterDom = require("react-router-dom")
+import { useHistory } from "react-router-dom"
+
 import {env} from '../../../environment'
 
 
 const Login = () => {
   
-  const navigate = useNavigate();
+  const History = useHistory();
   
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
@@ -29,7 +33,8 @@ const Login = () => {
     useEffect(()=> {
       if(localStorage.getItem('user-info'))
       {
-        navigate.push('/base/Home');
+        // navigate.push('/base/Home');
+        History.push('/base/Home');
       }
     },[])
 
@@ -38,8 +43,9 @@ const Login = () => {
     const submit = async () => {
       console.log("User_Name,Password",User_Name,Password);
 
-      // debugger;
-      let result = await fetch(env.apiURL+'Mlogin',{
+      // debugger;      
+        const result = await fetch(env.apiURL+'Mlogin',{
+        // const result = await fetch("http://localhost:5000/Mlogin",{
         method:'POST',
         body:JSON.stringify({User_Name,Password}),
         headers:{
@@ -47,7 +53,7 @@ const Login = () => {
         }
       })
       result = await result.json()
-      alert(result)
+      console.log(result.body);
 
       setUser_Name('');
       setPassword('');
