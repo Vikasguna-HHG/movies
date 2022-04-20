@@ -46,7 +46,7 @@ const Login = () => {
         if (res.data.status) {
           localStorage.setItem('userId', res.data.data._id)
           localStorage.setItem('userName', res.data.data.First_Name)
-          navigate('/base/Home',{replace:true})
+          navigate('/base/Video',{replace:true})
 
         } else {
           alert('Not valid passwod')
@@ -58,7 +58,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem('user-info')) {
-      navigate('/base/Home')
+      navigate('/base/Vuideo')
       // History.push('/base/Home');
     }
   }, [])
