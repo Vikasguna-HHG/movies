@@ -106,16 +106,12 @@ const _nav = [
     name: 'Admin user',
     to: '/base/Home',
     icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
-    guard:'auth'
-
   },
   {
     component: CNavItem,
     name: 'Categoires',
     to: '/base/categoires',
     icon: <CIcon icon={cilNoteAdd} customClassName="nav-icon" />,
-    guard:'auth'
-
   },
 
 
@@ -130,16 +126,12 @@ const _nav = [
     name: 'Language',
     to: '/base/Language',
     icon: <CIcon icon={cilLanguage} customClassName="nav-icon" />,
-    guard:'auth'
-
   },
   {
     component: CNavItem,
     name: 'Video',
     to: '/base/Video',
     icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-    guard:'auth'
-
     
   },
   //     {
