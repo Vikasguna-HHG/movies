@@ -1,6 +1,6 @@
 import React, { Component, Suspense, useEffect, useState  } from 'react'
 import Appcontext from './Context'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
 import './App.css'
 import { AppContent } from './components'
@@ -48,19 +48,19 @@ useEffect(()=>{
   handleLoginState()
 
 },[])
-    const name ="hello";
+    const name ="hello -hDr@7L7G";
     return (
       <BrowserRouter>
 
         <Appcontext.Provider value={name}>
         <Suspense fallback={loading}>
-          <Switch>
-            <Route exact path="/" name="Login Page" component={()=><Login />} />
-            <Route exact path="/register" name="Register Page" component={()=><Register />} />
-            <Route exact path="/404" name="Page 404" component={()=><Page404 />} />
-            <Route exact path="/500" name="Page 500" component={()=><Page500 />} />
-            <Route path="*" name="Home" component={()=><DefaultLayout />} />
-          </Switch>
+          <Routes>
+            <Route exact path="/" name="Login Page" element={<Login />} />
+            <Route exact path="/register" name="Register Page" element={<Register />} />
+            <Route exact path="/404" name="Page 404" element={<Page404 />} />
+            <Route exact path="/500" name="Page 500" element={<Page500 />} />
+            <Route path="*" name="Home" element={<DefaultLayout />}/>
+          </Routes>
         </Suspense>
         </Appcontext.Provider>
 
