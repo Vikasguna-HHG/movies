@@ -18,24 +18,19 @@ import React, { useEffect, useState ,useContext} from 'react'
 import Appcontext from 'src/Context'
 
 // import { useNavigate ,Link} from 'react-router-dom';
-import { useHistory, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import { env } from '../../../environment'
 import axios from 'axios'
 
 const Login = () => {
-  const navigate = useHistory()
+  const navigate = useNavigate()
   // const navigate = useNavigate();
 
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
 
-  useEffect(() => {
-    if (localStorage.getItem('user-info')) {
-      navigate.push('/base/Home')
-      // History.push('/base/Home');
-    }
-  }, [])
+ 
   localStorage.removeItem('user-info')
   console.log(localStorage.getItem('user-info'))
 
@@ -44,17 +39,27 @@ const Login = () => {
 
     console.log('User_Name,Password', User_Name, Password)
 
-    // const result = await fetch(env.apiURL+'Mlogin',{
-    const result = await axios.post('http://localhost:5000/Mlogin', { User_Name, Password })
+    await axios.post(env.apiURL+'Mlogin', { User_Name, Password })
       .then((res) => {
         if (res.data.status) {
           localStorage.setItem('userId', res.data.data._id)
           localStorage.setItem('userName', res.data.data.First_Name)
+          navigate('/base/Home',{replace:true})
+
         } else {
           alert('Not valid passwod')
         }
-      })
+    })
+    setUser_Name('')
+    setPassword('')
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('user-info')) {
+      navigate('/base/Home')
+      // History.push('/base/Home');
+    }
+  }, [])
 
     const data = useContext(Appcontext)
   return (
@@ -97,12 +102,8 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <Link to="/base/video">
-                          <CButton
-                            onClick={submit}
-                            className="px-4"
-                            style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' }}
-                          >
+                        <Link to="/home">
+                          <CButton onClick={submit} className="px-4" style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' }}>
                             Login
                           </CButton>
                         </Link>

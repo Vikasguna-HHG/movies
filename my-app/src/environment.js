@@ -1,6 +1,6 @@
 //Node live url
 export const env = {
-    apiURL: 'https://movie-client.herokuapp.com/'    
+    apiURL: 'http://localhost:5000/'    
 };
 // import React,{ useEffect, useState } from 'react'
 //     import { BrowserRouter,Switch, Route, Link} from 'react-router-dom';

@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import {  Route, Switch } from 'react-router-dom'
+import {  Route, Routes } from 'react-router-dom'
 import { CContainer, CSpinner } from '@coreui/react'
 
 // routes config
@@ -10,7 +10,7 @@ const AppContent = () => {
   return (
     <CContainer lg>
       <Suspense fallback={<CSpinner color="primary" />}>
-        <Switch>
+        <Routes>
           {routes.map((route, idx) => {
             return (
               route.element && (
@@ -25,7 +25,7 @@ const AppContent = () => {
             )
           })}
           <Route path="/" component={() => <Login/>} />
-        </Switch>
+        </Routes>
       </Suspense>
     </CContainer>
   )
