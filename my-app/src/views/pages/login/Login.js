@@ -42,17 +42,18 @@ const Login = () => {
   const submit = async (e) => {
     e.preventDefault()
 
-    console.log('User_Name,Password', User_Name, Password)
+    // console.log('User_Name,Password', User_Name, Password)
 
     // const result = await fetch(env.apiURL+'Mlogin',{
     const result = await axios.post('http://localhost:5000/Mlogin', { User_Name, Password })
       .then((res) => {
         if (res.data.status) {
           localStorage.setItem('userId', res.data.data._id)
-          localStorage.setItem('userName', res.data.data.First_Name)
+          localStorage.setItem('userName', res.data.data.User_Name)
         } else {
           alert('Not valid passwod')
         }
+      
       })
   }
 
