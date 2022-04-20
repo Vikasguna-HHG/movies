@@ -70,7 +70,7 @@ export const env = {
 
 //                         <Route path="*"><Home /></Route>
 
-//                     </Switch>
+//                     </Switch> 
 //                 </BrowserRouter>
 //             </AppContext.Provider>
 //         )
