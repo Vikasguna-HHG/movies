@@ -1,7 +1,10 @@
 import React, { Component, Suspense, useEffect, useState  } from 'react'
+import Appcontext from './Context'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './scss/style.scss'
 import './App.css'
+import { AppContent } from './components'
+import Home from './views/Home/Home'
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -45,9 +48,11 @@ useEffect(()=>{
   handleLoginState()
 
 },[])
-
+    const name ="hello";
     return (
       <BrowserRouter>
+
+        <Appcontext.Provider value={name}>
         <Suspense fallback={loading}>
           <Switch>
             <Route exact path="/" name="Login Page" component={()=><Login />} />
@@ -57,6 +62,8 @@ useEffect(()=>{
             <Route path="*" name="Home" component={()=><DefaultLayout />} />
           </Switch>
         </Suspense>
+        </Appcontext.Provider>
+
       </BrowserRouter>
     )
   

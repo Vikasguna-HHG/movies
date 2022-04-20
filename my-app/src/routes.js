@@ -54,8 +54,9 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
+  
   { path: '/', exact: true, name: 'Home' },
-  { path: '/dashboard', name: 'Dashboard', element: ()=><Dashboard/> },
+  { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
@@ -77,7 +78,7 @@ const routes = [
   { path: '/base/subcategoires', name:'subcategoires' , element:SubCategoires},
   { path: '/base/Video', name:'Video' , element:Video},
   { path: '/base/Language', name:'Language' , element:Language},
-  { path: '/base/Home', name: 'Home', element: Home },
+  { path: '/base/Home', name: 'Home', element: Home } ,
   { path: '/base/Categoires', name: 'Tables', element: Categoires },
   { path: '/buttons', name: 'Buttons', element: Buttons, exact: true },
   { path: '/buttons/buttons', name: 'Buttons', element: Buttons },
