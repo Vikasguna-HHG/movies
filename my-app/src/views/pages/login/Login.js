@@ -36,6 +36,7 @@ const Login = () => {
       {
         navigate.push('/base/Home');
         // History.push('/base/Home');
+        // hDr@7L7G
       }
     },[])
     localStorage.removeItem('user-info')
@@ -51,7 +52,7 @@ const Login = () => {
 
         if(res.data.status){
           localStorage.setItem('userId',res.data.data._id)
-          localStorage.setItem('userName',res.data.data.First_Name)
+          localStorage.setItem('userName',res.data.data.User_Name)
           
         }else{
           alert("not valid")
