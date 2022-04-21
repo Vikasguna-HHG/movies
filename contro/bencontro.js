@@ -43,7 +43,7 @@ const { time } = require("console");
 // parth api start
 exports.insert_data = async function (req, res, next) {
   try {
-    data = {
+    const data = {
       language: req.body.language,
     };
     const tag = await language.create(data);
@@ -154,7 +154,7 @@ exports.Minsert_data = async function (req, res, next) {
     // console.log(result)
     var newpass = await bcrypt.hash(result, 12);
     console.log(newpass);
-    data = {
+    const data = {
       First_Name: req.body.First_Name,
       Last_Name: req.body.Last_Name,
       User_Name: req.body.User_Name,

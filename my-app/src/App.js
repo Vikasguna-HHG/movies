@@ -39,7 +39,6 @@ function App(){
       // setUserStatus(true)
     }else{
         // setUserId('')
-        alert("hello")
     }
 }
 

@@ -36,11 +36,10 @@ router.delete('/DeleteBanner/:id', upload.single('image'), BannerController.Dele
 
 // mukunj api start
 
-
+//login api 
 router.post('/Mlogin',BannerController.Mlogin);
 
 router.get('/Mfinddata',BannerController.Mfind_data);
-// router.get('/Mfindonedata',BannerController.Mfindone_data);
 router.get('/Mfinddata/:id',BannerController.Mfind_data_Id);
 router.post('/MInsertBanner', upload.single('image'), BannerController.Minsert_data);
 router.post('/MUpdateBanner', upload.single('image'), BannerController.MUpdate_data);
