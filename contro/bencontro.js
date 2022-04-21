@@ -43,7 +43,7 @@ const { time } = require("console");
 // parth api start
 exports.insert_data = async function (req, res, next) {
   try {
-    data = {
+    const data = {
       language: req.body.language,
     };
     const tag = await language.create(data);
