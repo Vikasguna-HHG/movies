@@ -256,7 +256,7 @@ exports.MUpdate_data = async function (req, res, next) {
 //vikas api start
 exports.vinsert_data = async function (req, res, next) {
   try {
-    data = {
+   const data = {
       category: req.body.category,
       Description: req.body.Description,
       image_user: req.file.path,
@@ -331,7 +331,7 @@ exports.vUpdate_data = async function (req, res, next) {
 
 exports.kinsert_data = async function (req, res, next) {
   try {
-    data = {
+   const data = {
       category: req.body.category,
       subcategorie: req.body.subcategorie,
       description: req.body.description,

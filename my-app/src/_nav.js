@@ -1,6 +1,7 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 import {
+  cilAccountLogout,
   cilBell,
   cilCalculator,
   cilChartPie,
@@ -136,6 +137,14 @@ const _nav = [
     name: 'Video',
     to: '/base/Video',
     icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+    guard:'auth'
+    
+  },
+  {
+    component: CNavItem,
+    name: 'Logout',
+    to: '/',
+    icon: <CIcon  icon={cilAccountLogout} customClassName="nav-icon" />,
     guard:'auth'
     
   },
