@@ -10,6 +10,13 @@ var usersRouter = require('./routes/users');
 var bennerRouter = require('./routes/benner');
 var app = express();
 
+const checkurl = function(req,res,next) 
+{
+  console.log("current route  is", req.originalUrl);
+  next();  
+}
+app.use(checkurl);
+
 var cors = require('cors');
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
 app.use(cors())

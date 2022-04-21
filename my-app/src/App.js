@@ -25,28 +25,28 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 function App(){
 
-  const [User_Name, setUser_Name] = useState('')
-  const [Password, setPassword] = useState('')
+  //   const [User_Name, setUser_Name] = useState('')
+  //   const [Password, setPassword] = useState('')
 
-  function handleLoginState(){
+  //   function handleLoginState(){
 
-    let name = localStorage.getItem('userName');
-    let user = localStorage.getItem('userId');
+  //     let name = localStorage.getItem('userName');
+  //     let user = localStorage.getItem('userId');
 
-    if(user){
-      setUser_Name(user)
-      setPassword(name)
-      // setUserStatus(true)
-    }else{
-        // setUserId('')
-    }
-}
+  //     if(user){
+  //       setUser_Name(user)
+  //       setPassword(name)
+  //       // setUserStatus(true)
+  //     }else{
+  //         // setUserId('')
+  //     }
+  // }
 
-useEffect(()=>{
+  // useEffect(()=>{
 
-  handleLoginState()
+  //   handleLoginState()
 
-},[])
+  // },[])
     const name ="hello001 - hDr@7L7G";
     return (
       <BrowserRouter>
