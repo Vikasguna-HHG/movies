@@ -120,7 +120,7 @@ exports.Minsert_data = async function (req, res, next) {
 
     var result = "";
     var characters =
-      "ABCD34636755EFGH012345IJKLMNOPQRSTUVWXYZ&abcdefghijklmnopqrstuvwxyz6789";
+      "ABCD34636755EFGH012345JKLMNOPQRSTUVWXYZ&abcdefghijkmnopqrstuvwxyz6789";
     var charactersLength = characters.length;
     for (var i = 0; i < 6; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -154,7 +154,7 @@ exports.Minsert_data = async function (req, res, next) {
     // console.log(result)
     var newpass = await bcrypt.hash(result, 12);
     console.log(newpass);
-    data = {
+    const data = {
       First_Name: req.body.First_Name,
       Last_Name: req.body.Last_Name,
       User_Name: req.body.User_Name,
