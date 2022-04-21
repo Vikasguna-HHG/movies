@@ -49,7 +49,7 @@ const Login = () => {
           navigate('/base/Video',{replace:true})
 
         } else {
-          alert('Not valid passwod')
+          alert('Not valid')
         }
     })
     setUser_Name('')
@@ -73,7 +73,8 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm>
-                    <h1>Login - {data}</h1>
+                    <h1>Login</h1>
+                    <p>{data}</p>
                     <br />
                     <CInputGroup className="mb-3">
                       <CInputGroupText>

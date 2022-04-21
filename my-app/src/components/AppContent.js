@@ -19,12 +19,12 @@ const AppContent = () => {
                   path={route.path}
                   exact={route.exact}
                   name={route.name}
-                  component={<route.element />}
+                  element={<route.element />}
                 />
               )
             )
           })}
-          <Route path="/" component={() => <Login/>} />
+          <Route path="/" element={() => <Login/>} />
         </Routes>
       </Suspense>
     </CContainer>

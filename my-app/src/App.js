@@ -48,18 +48,18 @@ useEffect(()=>{
   handleLoginState()
 
 },[])
-    const name ="hello -hDr@7L7G";
+    const name ="hello001 - hDr@7L7G";
     return (
       <BrowserRouter>
 
         <Appcontext.Provider value={name}>
         <Suspense fallback={loading}>
           <Routes>
-            <Route exact path="/" name="Login Page" element={<Login />} />
-            <Route exact path="/register" name="Register Page" element={<Register />} />
-            <Route exact path="/404" name="Page 404" element={<Page404 />} />
-            <Route exact path="/500" name="Page 500" element={<Page500 />} />
-            <Route path="*" name="Home" element={<DefaultLayout />}/>
+            <Route  path="/"         name="Login Page"    element={<Login />} />
+            <Route  path="/register" name="Register Page" element={<Register />} />
+            <Route  path="/404"      name="Page 404"      element={<Page404 />} />
+            <Route  path="/500"      name="Page 500"      element={<Page500 />} />
+            <Route  path="*"         name="Home"          element={<DefaultLayout />} />
           </Routes>
         </Suspense>
         </Appcontext.Provider>
