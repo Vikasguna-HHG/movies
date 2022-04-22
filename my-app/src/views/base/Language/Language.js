@@ -51,7 +51,7 @@ const Tables = () => {
 
   function openhandler() {
     setLanguage('')
-    setVisible1(true)
+    setVisible2(true)
   }
 
   // const update = (e) =>
@@ -96,7 +96,12 @@ const Tables = () => {
       formData.append("Id", id);
 
       try {
-        const res = await axios.post(env.apiURL+"UpdateBanner",formData);
+        const res = await axios.post(
+          env.apiURL+"UpdateBanner",
+          formData
+          // body: JSON.stringify(update),
+        );
+        debugger;
 
         if (res.data.status == "success") {
           getdata('');
@@ -188,7 +193,7 @@ const Tables = () => {
       {/* insert data  */}
       <br /> < br />
       <CModal visible={visible2} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible1(false)}>
+        <CModalHeader onClick={() => setVisible2(false)}>
           <CModalTitle>Language Form</CModalTitle>
         </CModalHeader>
         <CModalBody>          
