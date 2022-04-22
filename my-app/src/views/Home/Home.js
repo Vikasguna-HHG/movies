@@ -53,6 +53,7 @@ const Home = () => {
   const [visible, setVisible] = useState(false)
   const [Email, setEmail] = useState('')
   const [Emailmsg, setEmailmsg] = useState('')
+  // const [visible2, setVisible2] = useState(false)
 
   // const [visible1, setVisible1] = useState(false)
   const [search, setSearch] = useState('')
@@ -65,7 +66,14 @@ const Home = () => {
   // {
 
   // }
-                     
+                  const  open = ()=>{
+                    setFirst_Name('')
+                    setLast_Name('')
+                    setUser_Name('')
+                    setEmail('')
+                    
+                    setVisible(true)
+                     }
 
     // setFirst_Name('');
     // setLast_Name('');
@@ -99,8 +107,7 @@ const Home = () => {
       //   })
     // }
     const submit = async () => {
-      debugger;
-      
+    
       const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
       if(!First_Name || !Last_Name || !User_Name || !Email)
       {
@@ -192,6 +199,8 @@ const Home = () => {
       setEmail('')
       // setImageval('');
       setVisible(false)
+    // setVisible2(false)
+
       // setImageval('');
     } else {
       const formData = new FormData()
@@ -234,10 +243,14 @@ const Home = () => {
     setEmail('')
     // setImageval('');
     setVisible(false)
+    // setVisible2(false)
+
+
   }
     
   const edithandler = async (id) => {
     setVisible(true)
+    // setVisible2(true)
 
     axios
       .get(env.apiURL+`Mfinddata/${id}`, {
@@ -407,7 +420,7 @@ const Home = () => {
               <CButton
                 style={{ marginLeft: '650px', borderRadius: '5px' }}
                 className="btn1"
-                onClick={() => setVisible(!visible)}
+                onClick={() => open()}
               >
                 Add Admin 
               </CButton>

@@ -409,7 +409,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       <br/><br/>
       {/* model 1 :- title/category/Language */}
 
-      <CModal visible={visible1} onClose={() => setVisible1(false)}>
+      <CModal visible={visible1} onClose={() => setVisible(false)}>
         <CModalHeader onClose={() => setVisible1(false)}>
           <CModalTitle>Add Basic Information</CModalTitle>
         </CModalHeader>
