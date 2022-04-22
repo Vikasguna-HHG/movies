@@ -179,8 +179,6 @@ const Home = () => {
           autoClose: 2000,
         })
         
-       
-
         setList([...list, res.data.data])
 
         console.log(res)

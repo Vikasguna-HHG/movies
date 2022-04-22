@@ -36,16 +36,14 @@ const Login = () => {
 
   const submit = async (e) => {
     e.preventDefault()
-
     console.log('User_Name,Password', User_Name, Password)
-
-    
 
     await axios.post(env.apiURL+'Mlogin', { User_Name, Password })
       .then((res) => {
-        if (res.data.status) {
-          localStorage.setItem('userId', res.data.data._id)
-          localStorage.setItem('userName', res.data.data.First_Name)
+        if (res.data.User) {
+          localStorage.setItem('userId', res.data.User._id)
+          localStorage.setItem('userName', res.data.User.First_Name)
+          localStorage.setItem('token', res.data.auth)
           navigate('/base/Video',{replace:true})
 
         } else {

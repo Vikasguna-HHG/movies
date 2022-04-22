@@ -4,7 +4,6 @@ var movie_maker = require("../Models/movie_maker");
 var language = require("../Models/language");
 var video = require("../Models/video");
 var $ = require("jquery");
-var jwt = require("jsonwebtoken");
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -17,45 +16,47 @@ const unlinkAsync = promisify(fs.unlink);
 const bcrypt = require("bcrypt");
 const { data } = require("jquery");
 const { time } = require("console");
-/* login api  */
-// router.get("/signup", async function (req, res, next) {
-//   if (req.body.password != req.body.confirmpassword) {
-//     res.status(200).json({
-//       status: "success",
-//     });
-//   }
+// const { token } = require("morgan");
 
-//   var newpass = await bcrypt.hash(req.body.password, 12);
-//   console.log(newpass);
+//jwt ...
+const jwt = require("jsonwebtoken");
+const jwtkey = "movies-hhg";
 
-//   const newuser = await User.create({
-//     name: req.body.name,
-//     email: req.body.email,
-//     password: newpass,
-//   });
+const verifyToken = (req, res, next) => {
+  let token = req.headers["authorization"];
+  // console.log("call...", token);
 
-//   res.status(200).json({
-//     status: "password not sem... ",
-//     data: newuser,
-//   });
-// });
-
-// parth api start
-exports.insert_data = async function (req, res, next) {
-  try {
-    const data = {
-      language: req.body.language,
-    };
-    const tag = await language.create(data);
-
-    res.status(201).json({
-      data: tag,
-      status: "Data insert",
+  if (token) {
+    token = token.split(" ")[1];
+    jwt.verify(token, jwtkey, (err, valid) => {
+      if (err) {
+        res.status(401).send({ result: "please provide valid token" });
+      } else {
+        res.send({ result: "success"});
+        next()       
+      }
     });
-  } catch (error) {
-    console.log("not data insert........!");
+  } else {
+    res.status(403).send({ result: "please add token with header" });
   }
 };
+
+// parth api start
+exports.insert_data = verifyToken,async function (req, res, next) {
+    try {
+      const data = {
+        language: req.body.language,
+      };
+      const tag = await language.create(data);
+
+      res.status(201).json({
+        data: tag,
+        status: "Data insert",
+      });
+    } catch (error) {
+      console.log("not data insert........!");
+    }
+  };
 
 exports.find_data = async function (req, res, next) {
   try {
@@ -113,11 +114,6 @@ exports.Update_data = async function (req, res, next) {
 
 exports.Minsert_data = async function (req, res, next) {
   try {
-    // var otp = Math.random().toString().slice(2, 10);
-    // // otp = otp * 10000000;
-    // otp = parseInt(otp);
-    // console.log(otp);
-
     var result = "";
     var characters =
       "ABCD34636755EFGH012345JKLMNOPQRSTUVWXYZ&abcdefghijkmnopqrstuvwxyz6789";
@@ -163,39 +159,50 @@ exports.Minsert_data = async function (req, res, next) {
     };
 
     const tag = await movie_maker.create(data);
+
+    // jwt.sign({ tag }, jwtkey, (err, token) => {
+    //   if (err) {
+    //     res.send({ result: "wrong...." });
+    //   }
+    //   res.send({ tag, auth: token });
+
     res.status(201).json({
       data: tag,
       status: "Data insert",
     });
+    // });
   } catch (error) {
     console.log("not data insert........!");
   }
 };
 
 exports.Mlogin = async function (req, res, next) {
-    const { User_Name, Password } = req.body;
-    const User = await movie_maker.findOne({ User_Name });
-   
-    if(User != null) {
-      const checkpass = await bcrypt.compare(Password, User.Password);
-      if(checkpass){
+  const { User_Name, Password } = req.body;
+  const User = await movie_maker.findOne({ User_Name });
+
+  if (User != null) {
+    jwt.sign({ User }, jwtkey, (err, token) => {
+      if (err) {
+        res.send({ result: "wrong...." });
+      }
+      res.send({ User, auth: token });
+
+      const checkpass = bcrypt.compare(Password, User.Password);
+      if (checkpass) {
         res.status(200).json({
           status: true,
           data: User,
         });
       }
-    }
-    else
-    {
-      res.status(200).json({
-        status: false,
-        message: "not valid username and password",
-      });
-    }
-    
-
+    });
+  } else {
+    // res.status(200).json({
+    //   status: false,
+    //   message: "not valid username and password",
+    // });
+    res.send({ status: "true", result: "not valid username and password" });
+  }
 };
-
 
 exports.Mfind_data = async function (req, res, next) {
   try {
@@ -256,7 +263,7 @@ exports.MUpdate_data = async function (req, res, next) {
 //vikas api start
 exports.vinsert_data = async function (req, res, next) {
   try {
-   const data = {
+    const data = {
       category: req.body.category,
       Description: req.body.Description,
       image_user: req.file.path,
@@ -331,7 +338,7 @@ exports.vUpdate_data = async function (req, res, next) {
 
 exports.kinsert_data = async function (req, res, next) {
   try {
-   const data = {
+    const data = {
       category: req.body.category,
       subcategorie: req.body.subcategorie,
       description: req.body.description,
@@ -450,7 +457,6 @@ exports.kUpdate_data = async function (req, res, next) {
     console.log(error);
   }
 };
-
 
 //video api
 exports.viinsert_data = async function (req, res, next) {
