@@ -56,7 +56,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem('user-info')) {
-      navigate('/base/Vuideo')
+      navigate('/base/Video')
       // History.push('/base/Home');
     }
   }, [])
