@@ -49,7 +49,10 @@ const Tables = () => {
   const [visible1, setVisible1] = useState(false)
   const [visible2, setVisible2] = useState(false)
 
-
+  function openhandler() {
+    setLanguage('')
+    setVisible1(true)
+  }
 
   // const update = (e) =>
   // {
@@ -93,12 +96,7 @@ const Tables = () => {
       formData.append("Id", id);
 
       try {
-        const res = await axios.post(
-          env.apiURL+"UpdateBanner",
-          formData
-          // body: JSON.stringify(update),
-        );
-        debugger;
+        const res = await axios.post(env.apiURL+"UpdateBanner",formData);
 
         if (res.data.status == "success") {
           getdata('');
@@ -121,6 +119,9 @@ const Tables = () => {
     setLanguage('');
    
   }
+
+  //new add 
+  
 
 
   const edithandler = async (id) => {
@@ -219,7 +220,7 @@ const Tables = () => {
                 </svg>&nbsp;&nbsp;&nbsp;Search
               </CInputGroupText>
               <CFormInput placeholder="Search"  value={search} onChange={(e) => { setSearch(e.target.value) }} aria-label="Username" aria-describedby="addon-wrapping" />
-              <CButton style={{ marginLeft:"650px",borderRadius:"5px"}} className="btn1" onClick={() => setVisible2(!visible2)}>Add Language</CButton>
+              <CButton style={{ marginLeft:"650px",borderRadius:"5px"}} className="btn1" onClick={() => openhandler()}>Add Language</CButton>
             </CInputGroup>
             <br></br>
 
