@@ -237,8 +237,8 @@ var categoryName;
       <br />
       <br />
     
-      <CModal visible={visible} onClose={() => setVisible(false)}>
-        <CModalHeader onClose={() => setVisible(false)}>
+      <CModal visible={visible} onClose={() => setVisible1(false)}>
+        <CModalHeader onClick={() => setVisible(false)}>
           <CModalTitle>Sub Category Form</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -328,8 +328,8 @@ var categoryName;
                       </CCardBody>
                     </CCard>
                     {/* update model */}
-                    <CModal alignment="center" visible={visible1} onClose={() => setVisible1(false)}>
-                      <CModalHeader><CModalTitle>Update Sub Category Form</CModalTitle></CModalHeader>
+                    <CModal alignment="center" visible={visible1} onClose={() => setVisible(false)}>
+                      <CModalHeader onClick={()=> setVisible1(false)}><CModalTitle>Update Sub Category Form</CModalTitle></CModalHeader>
                       <CModalBody>
                         <CForm>
                           <div className="mb-3">

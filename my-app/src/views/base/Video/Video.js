@@ -410,7 +410,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* model 1 :- title/category/Language */}
 
       <CModal visible={visible1} onClose={() => setVisible5(false)} >
-        <CModalHeader onClose={() => setVisible1(false)}>
+        <CModalHeader onClick={() => setVisible1(false)}>
           <CModalTitle>Add Basic Information</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -472,7 +472,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* sub/image */}
 
       <CModal visible={visible2} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible2(false)}>
+        <CModalHeader onClick={() => setVisible2(true)}>
           <CModalTitle>Add Your Choise</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -514,7 +514,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* video */}
 
       <CModal visible={visible3} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible3(false)}>
+        <CModalHeader onClick={() => setVisible3(true)}>
           <CModalTitle>Add Video</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -543,7 +543,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* description */}
 
       <CModal visible={visible4} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible4(false)}>
+        <CModalHeader onClick={() => setVisible4(false)}>
           <CModalTitle>Fill Final Touch</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -578,7 +578,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* model 1 :- title/category/Language */}
 
       <CModal visible={visible5} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible5(false)}>
+        <CModalHeader onClick={() => setVisible5(false)}>
           <CModalTitle>Update Basic Information</CModalTitle><br></br>
          
          
@@ -587,7 +587,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         <CModalBody>
           <CForm>
             <div className="mb-3">
-              <CButton style={{margin:"5px"}} className='btn1' onClick={update1}  >
+              <CButton style={{margin:"5px"}} className='btn1' onClick={update1}>
                 Step 2
               </CButton>
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update2}>
@@ -651,7 +651,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* sub/image */}
 
       <CModal visible={visible6} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible6(false)}>
+        <CModalHeader onClick={() => setVisible6(false)}>
           <CModalTitle>Update Your Choise</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -708,7 +708,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* video */}
 
       <CModal visible={visible7} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible7(false)}>
+        <CModalHeader onClick={() => setVisible7(false)}>
           <CModalTitle>Update Video</CModalTitle>
         </CModalHeader>
         <CModalBody>
@@ -746,7 +746,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       {/* description */}
 
       <CModal visible={visible8} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible8(false)}>
+        <CModalHeader onClick={() => setVisible8(false)}>
           <CModalTitle>Update Final Touch</CModalTitle>
         </CModalHeader>
         <CModalBody>
