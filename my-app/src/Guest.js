@@ -7,11 +7,11 @@ function Auth(props){
 
     const { login } = useContext(AppContext)
 
-    if(login){
-        return (<Route {...props} />)
+    if(!login){
+        return (<Navigate replace to="/" />)
     }
 
-    return (<Navigate to="/" replace />)
+    return (<Route {...props} />)
 
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useContext, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -17,8 +17,11 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import { logo } from 'src/assets/brand/logo'
+import AppContext from './../Context'
 
 const AppHeader = () => {
+
+  const [_,__,___,handleLogout] = useContext(AppContext)
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
@@ -50,6 +53,11 @@ const AppHeader = () => {
           <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilEnvelopeOpen} size="lg" />
+            </CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink href="#">
+              <button onClick={handleLogout} type="button">Logout</button> 
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
