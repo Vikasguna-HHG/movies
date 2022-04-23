@@ -192,8 +192,8 @@ function table2() {
       <br />
       <br />
       {/* new add data */}
-      <CModal visible={visible} onClose={() => setVisible(false)}>
-          <CModalHeader onClose={() => setVisible(false)}>
+      <CModal visible={visible} onClose={() => setVisible1(false)}>
+          <CModalHeader onClick={() => setVisible(false)}>
             <CModalTitle>Category Form</CModalTitle>
           </CModalHeader>
           <CModalBody>
@@ -295,8 +295,8 @@ function table2() {
                   </CCard>
 
                   {/* update model */}
-                  <CModal alignment="center" visible={visible1} onClose={() => setVisible1(false)}>
-                    <CModalHeader>
+                  <CModal alignment="center" visible={visible1} onClose={() => setVisible(false)}>
+                    <CModalHeader onClick={() => setVisible1(false)}>
                         <CModalTitle>Update Category Form</CModalTitle>
                     </CModalHeader>
                     <CModalBody>

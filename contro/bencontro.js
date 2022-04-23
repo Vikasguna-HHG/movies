@@ -33,7 +33,7 @@ const verifyToken = (req, res, next) => {
         res.status(401).send({ result: "please provide valid token" });
       } else {
         res.send({ result: "success"});
-        next()       
+        // next()       
       }
     });
   } else {
@@ -56,7 +56,7 @@ exports.insert_data = verifyToken,async function (req, res, next) {
     } catch (error) {
       console.log("not data insert........!");
     }
-  };
+};
 
 exports.find_data = async function (req, res, next) {
   try {

@@ -49,7 +49,10 @@ const Tables = () => {
   const [visible1, setVisible1] = useState(false)
   const [visible2, setVisible2] = useState(false)
 
-
+  function openhandler() {
+    setLanguage('')
+    setVisible2(true)
+  }
 
   // const update = (e) =>
   // {
@@ -122,6 +125,9 @@ const Tables = () => {
    
   }
 
+  //new add 
+  
+
 
   const edithandler = async (id) => {
     setVisible1(true)
@@ -187,7 +193,7 @@ const Tables = () => {
       {/* insert data  */}
       <br /> < br />
       <CModal visible={visible2} onClose={() => setVisible1(false)}>
-        <CModalHeader onClose={() => setVisible1(false)}>
+        <CModalHeader onClick={() => setVisible2(false)}>
           <CModalTitle>Language Form</CModalTitle>
         </CModalHeader>
         <CModalBody>          
@@ -219,7 +225,7 @@ const Tables = () => {
                 </svg>&nbsp;&nbsp;&nbsp;Search
               </CInputGroupText>
               <CFormInput placeholder="Search"  value={search} onChange={(e) => { setSearch(e.target.value) }} aria-label="Username" aria-describedby="addon-wrapping" />
-              <CButton style={{ marginLeft:"650px",borderRadius:"5px"}} className="btn1" onClick={() => setVisible2(!visible2)}>Add Language</CButton>
+              <CButton style={{ marginLeft:"650px",borderRadius:"5px"}} className="btn1" onClick={() => openhandler()}>Add Language</CButton>
             </CInputGroup>
             <br></br>
 
