@@ -19,43 +19,61 @@ const { time } = require("console");
 // const { token } = require("morgan");
 
 //jwt ...
-const jwt = require("jsonwebtoken");
-const jwtkey = "movies-hhg";
+// const jwt = require("jsonwebtoken");
+// const jwtkey = "movies-hhg";
 
-const verifyToken = (req, res, next) => {
-  let token = req.headers["authorization"];
-  // console.log("call...", token);
+// const verifyToken = (req, res, next) => {
+//   let token = req.headers["authorization"];
+//   // console.log("call...", token);
 
-  if (token) {
-    token = token.split(" ")[1];
-    jwt.verify(token, jwtkey, (err, valid) => {
-      if (err) {
-        res.status(401).send({ result: "please provide valid token" });
-      } else {
-        res.send({ result: "success"});
-        // next()       
-      }
-    });
-  } else {
-    res.status(403).send({ result: "please add token with header" });
-  }
-};
+//   if (token) {
+//     token = token.split(" ")[1];
+//     jwt.verify(token, jwtkey, (err, valid) => {
+//       if (err) {
+//         res.status(401).send({ result: "please provide valid token" });
+//       } else {
+//         res.send({ result: "success"});
+//         // next()       
+//       }
+//     });
+//   } else {
+//     res.status(403).send({ result: "please add token with header" });
+//   }
+// };
 
 // parth api start
-exports.insert_data = verifyToken,async function (req, res, next) {
-    try {
-      const data = {
-        language: req.body.language,
-      };
-      const tag = await language.create(data);
+// exports.insert_data = verifyToken,async function (req, res, next) {
+//     try {
+//       const data = {
+//         language: req.body.language,
+//       };
+//       const tag = await language.create(data);
 
-      res.status(201).json({
-        data: tag,
-        status: "Data insert",
-      });
-    } catch (error) {
-      console.log("not data insert........!");
-    }
+//       res.status(201).json({
+//         data: tag,
+//         status: "Data insert",
+//       });
+//     } catch (error) {
+//       console.log("not data insert........!");
+//     }
+// };
+
+
+
+exports.insert_data = async function (req, res, next) {
+  try {
+    const data = {
+      language: req.body.language,
+    };
+    const tag = await language.create(data);
+
+    res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
+  } catch (error) {
+    console.log("not data insert........!");
+  }
 };
 
 exports.find_data = async function (req, res, next) {
