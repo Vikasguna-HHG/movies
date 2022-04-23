@@ -15,13 +15,14 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import React, { useEffect, useState ,useContext} from 'react'
 
-import Appcontext from 'src/Context'
+import Appcontext from './../../../Context'
 
 // import { useNavigate ,Link} from 'react-router-dom';
 import { useNavigate, Link } from 'react-router-dom'
 
 import { env } from '../../../environment'
 import axios from 'axios'
+import { AppContent } from 'src/components'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -29,6 +30,7 @@ const Login = () => {
 
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
+  const [_,userId,handleLoginState] = useContext(Appcontext);
 
  
   localStorage.removeItem('user-info')
@@ -44,7 +46,8 @@ const Login = () => {
           localStorage.setItem('userId', res.data.User._id)
           localStorage.setItem('userName', res.data.User.First_Name)
           localStorage.setItem('token', res.data.auth)
-          navigate('/base/Video',{replace:true})
+         
+          window.location.href = window.location.href
 
         } else {
           alert('Not valid')
@@ -55,13 +58,16 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('user-info')) {
-      navigate('/base/Video')
+
+    if(userId) navigate('/base/home')
+
+    // if (localStorage.getItem('user-info')) {
+    //   navigate('/base/Video')
       // History.push('/base/Home');
-    }
+    // }
   }, [])
 
-    const data = useContext(Appcontext)
+    // const data = useContext(Appcontext)
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -72,7 +78,7 @@ const Login = () => {
                 <CCardBody>
                   <CForm>
                     <h1>Login</h1>
-                    <p>{data}</p>
+                    {/* <p>{data}</p> */}
                     <br />
                     <CInputGroup className="mb-3">
                       <CInputGroupText>

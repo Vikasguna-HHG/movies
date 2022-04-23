@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import CIcon from '@coreui/icons-react'
 import {
   cilAccountLogout,
@@ -19,12 +19,14 @@ import {
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
+
+
 const _nav = [
   // {
   //   component: CNavItem,
   //   name: 'Dashboard',
   //   to: '/dashboard',
-  //   icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilSpeedometer} customclassNameName="nav-icon" />,
   //   badge: {
   //     color: 'info',
   //     text: 'NEW',
@@ -38,13 +40,13 @@ const _nav = [
   //   component: CNavItem,
   //   name: 'Colors',
   //   to: '/theme/colors',
-  //   icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilDrop} customclassNameName="nav-icon" />,
   // },
   // {
   //   component: CNavItem,
   //   name: 'Typography',
   //   to: '/theme/typography',
-  //   icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilPencil} customclassNameName="nav-icon" />,
   // },
   // {
   //   component: CNavTitle,
@@ -54,7 +56,7 @@ const _nav = [
   //   component: CNavGroup,
   //   name: 'Base',
   //   to: '/base',
-  //   icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilPuzzle} customclassNameName="nav-icon" />,
   //   items: [
   //     {
   //       component: CNavItem,
@@ -139,16 +141,8 @@ const _nav = [
     icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
     guard:'auth'
     
-  },
-  {
-    component: CNavItem,
-    name: 'Logout',
-    to: '/',
-    icon: <CIcon  icon={cilAccountLogout} customClassName="nav-icon" />,
-    guard:'auth'
-    
-  },
-  //     {
+  }
+  //     {  
   //       component: CNavItem,
   //       name: 'Tooltips',
   //       to: '/base/tooltips',
@@ -159,7 +153,7 @@ const _nav = [
   //   component: CNavGroup,
   //   name: 'Buttons',
   //   to: '/buttons',
-  //   icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilCursor} customclassNameName="nav-icon" />,
   //   items: [
   //     {
   //       component: CNavItem,
@@ -181,7 +175,7 @@ const _nav = [
   // {
   //   component: CNavGroup,
   //   name: 'Forms',
-  //   icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilNotes} customclassNameName="nav-icon" />,
   //   items: [
   //     {
   //       component: CNavItem,
@@ -229,12 +223,12 @@ const _nav = [
   //   component: CNavItem,
   //   name: 'Charts',
   //   to: '/charts',
-  //   icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilChartPie} customclassNameName="nav-icon" />,
   // },
   // {
   //   component: CNavGroup,
   //   name: 'Icons',
-  //   icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilStar} customclassNameName="nav-icon" />,
   //   items: [
   //     {
   //       component: CNavItem,
@@ -260,7 +254,7 @@ const _nav = [
   // {
   //   component: CNavGroup,
   //   name: 'Notifications',
-  //   icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilBell} customclassNameName="nav-icon" />,
   //   items: [
   //     {
   //       component: CNavItem,
@@ -288,7 +282,7 @@ const _nav = [
   //   component: CNavItem,
   //   name: 'Widgets',
   //   to: '/widgets',
-  //   icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilCalculator} customclassNameName="nav-icon" />,
   //   badge: {
   //     color: 'info',
   //     text: 'NEW',
@@ -301,7 +295,7 @@ const _nav = [
   // {
   //   component: CNavGroup,
   //   name: 'Pages',
-  //   icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+  //   icon: <CIcon icon={cilStar} customclassNameName="nav-icon" />,
   //   items: [
   //     {
   //       component: CNavItem,
