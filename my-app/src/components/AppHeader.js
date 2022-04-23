@@ -1,6 +1,7 @@
 import React,{useContext, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { Button ,Form} from 'react-bootstrap';
 import {
   CContainer,
   CHeader,
@@ -39,25 +40,15 @@ const AppHeader = () => {
            <CIcon icon={logo} height={48} alt="Logo" />
          </CHeaderBrand>
         
-        <CHeaderNav style={{marginLeft:"900px"}}>
+         
+        <CHeaderNav style={{marginLeft:"1100px"}}>
+
+
+        
+
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
-            </CNavLink>
-          </CNavItem>
-          <CNavItem>
-            <CNavLink href="#">
-              <button onClick={handleLogout} type="button">Logout</button> 
+              <Button variant="primary" onClick={handleLogout} type="button" >Logout</Button> 
             </CNavLink>
           </CNavItem>
         </CHeaderNav>

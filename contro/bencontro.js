@@ -19,8 +19,8 @@ const { time } = require("console");
 // const { token } = require("morgan");
 
 //jwt ...
-// const jwt = require("jsonwebtoken");
-// const jwtkey = "movies-hhg";
+const jwt = require("jsonwebtoken");
+const jwtkey = "movies-hhg";
 
 // const verifyToken = (req, res, next) => {
 //   let token = req.headers["authorization"];
@@ -481,6 +481,10 @@ exports.viinsert_data = async function (req, res, next) {
   try {
     // const form = new IncomingForm(formidable);
     const data = {
+      method: req.body.method, 
+      rdate:req.body.rdate,
+      edate:req.body.edate,
+      status:req.body.status,
       title: req.body.title,
       category: req.body.category,
       subcategory: req.body.subcategory,
@@ -488,6 +492,7 @@ exports.viinsert_data = async function (req, res, next) {
       language: req.body.language,
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
+      // Trailer_video: req.file[2].part
     };
     const tag = await video.create(data);
 
@@ -495,9 +500,10 @@ exports.viinsert_data = async function (req, res, next) {
       data: tag,
       status: "Data insert",
     });
+    console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
-    console.log(error);
+    // console.log(error);
     console.log("not data insert........!");
   }
 };
@@ -541,6 +547,10 @@ exports.viDelete_data = async function (req, res, next) {
 exports.viUpdate_data = async function (req, res, next) {
   try {
     var BannerData = await video.findById(req.body.Id);
+    BannerData.method= req.body.method, 
+    BannerData.rdate=req.body.rdate,
+    BannerData.edate=req.body.edate,
+    BannerData.status=req.body.status,
     BannerData.category = req.body.category;
     BannerData.title = req.body.title;
     BannerData.language = req.body.language;
@@ -551,7 +561,9 @@ exports.viUpdate_data = async function (req, res, next) {
       if (iv.fieldname == "image") {
         await unlinkAsync(BannerData.image_user);
         BannerData.image_user = iv.path;
-      } else if (iv.fieldname == "banner_video") {
+      } 
+      else 
+      if (iv.fieldname == "banner_video") {
         await unlinkAsync(BannerData.banner_video);
         BannerData.banner_video = iv.path;
       }

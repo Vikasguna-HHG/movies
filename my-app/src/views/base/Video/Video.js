@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import './table.css'
 import ImageViewer from 'react-simple-image-viewer'
 import swal from 'sweetalert'
-import {CCardImage,CCardTitle,CCardText,CCard,CCardBody,CCardHeader,CCol,CTable,CForm,CFormLabel,CFormInput,CFormSelect,CFormTextarea,CButton,CTableHead,CTableRow,CTableHeaderCell,CTableBody,CTableDataCell,CInputGroup,CInputGroupText,CModalBody,CModalTitle,CModalHeader,CModalFooter,CModal,CRow,} from '@coreui/react'
+import {CCardImage,CCardTitle,CCardText,CCard,CCardBody,CFormCheck,CCol,CTable,CForm,CFormLabel,CFormInput,CFormSelect,CFormTextarea,CButton,CTableHead,CTableRow,CTableHeaderCell,CTableBody,CTableDataCell,CInputGroup,CInputGroupText,CModalBody,CModalTitle,CModalHeader,CModalFooter,CModal,CRow,} from '@coreui/react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ImPointRight } from "react-icons/im";
@@ -14,6 +14,7 @@ import TableViewRoundedIcon from '@mui/icons-material/TableViewRounded'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import { FaHandPointRight } from "react-icons/fa";
 import {env} from '../../../environment'
+import { Button ,Form} from 'react-bootstrap';
 
 const axios = require('axios')
 toast.configure()
@@ -23,6 +24,10 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const [visible, setVisible] = useState(false)
   const [id, setId] = useState(0)
   const [title, settitle] = useState('')
+  const [method, setmethod] = useState('')
+  const [rdate, setrdate] = useState('')
+  const [edate, setedate] = useState('')
+  const [status, setstatus] = useState('')
   const [language1, setLanguage1] = useState([])
   const [language, setLanguage] = useState()
   const [category, setcategory] = useState('')
@@ -33,6 +38,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const [imageval, setImageval] = useState('')
   // const [banner_img, setbanner_img] = useState('')
   const [banner_video, setbanner_video] = useState('')
+  // const [Trailer_video, setTrailer_video] = useState('')
   const [list, setList] = useState([])
   const [visible1, setVisible1] = useState(false)
   const [visible2, setVisible2] = useState(false)
@@ -55,10 +61,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       setcategory('')
       setsubcategory('')
       settitle('')
+      setmethod('')
+      setrdate('')
+      setstatus('')
+      setedate('')
       setLanguage('')
       setDescription('')
       setImageval('')
       setbanner_video('')
+      // setTrailer_video('')
       setId(0)
 
       setVisible1(true)
@@ -84,7 +95,10 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const saveFile1 = (e) => {
     console.log(e.target)
     setbanner_video(e.target.files[0])
+    // setTrailer_video(e.target.files[0])
+
   }
+  
   
   
 
@@ -173,7 +187,12 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('subcategory', subcategory)
       formData.append('Description', Description)
       formData.append('banner_video', banner_video)
+      // formData.append('Trailer_video', Trailer_video)
       formData.append('title', title)
+      formData.append('method', method)
+      formData.append('rdate', rdate)
+      formData.append('status', status)
+      formData.append('edate', edate)
 
       // try {
         await axios.post(env.apiURL+'viInsertBanner', formData)
@@ -192,20 +211,30 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       // }
       setVisible4(false)
       settitle('')
+      setmethod('')
+      setrdate('')
+      setstatus('')
+      setedate('')
       setcategory('')
       setsubcategory('')
       setDescription('')
       setImageval('')
       setLanguage('')
       setbanner_video('')
+      // setTrailer_video('')
     } else {
       const formData = new FormData()
       formData.append('title', title)
+      formData.append('method', method)
+      formData.append('rdate', rdate)
+      formData.append('edate', edate)
+      formData.append('status', status)
       formData.append('category', category)
       formData.append('subcategory', subcategory)
       formData.append('image', imageval)
       formData.append('language', language)
        formData.append('banner_video', banner_video)
+      //  formData.append('Trailer_video', Trailer_video)
       formData.append('Description', Description)
 
       formData.append('Id', id)
@@ -231,10 +260,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setcategory('')
     setsubcategory('')
     settitle('')
+    setmethod('')
+    setrdate('')
+    setstatus('')
+    setedate('')
     setLanguage('')
     setDescription('')
     setImageval('')
     setbanner_video('')
+    // setTrailer_video('')
     setId(0)
   }
 
@@ -249,16 +283,20 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       .then((result) => {
         setId(id)
         settitle(result.data.data.title)
+        setmethod(result.data.data.method)
+        setrdate(result.data.data.rdate)
+        setedate(result.data.data.edate)
+        setstatus(result.data.data.status)
         setcategory(result.data.data.category)
         setsubcategory(result.data.data.subcategory)
         setDescription(result.data.data.Description)
         setLanguage(result.data.data.language)
         setImageval(result.data.data.image_user)
         setbanner_video(result.data.data.banner_video)
+        // setTrailer_video(result.data.data.Trailer_video)
 
         //document.getElementById('submit').innerHTML = 'Upadte'
      
-
       })
     //setVisible6(false)
    
@@ -415,7 +453,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CModalHeader>
         <CModalBody>
           <CForm>
-            <div className="mb-3">
+          <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">
                 <b>Title</b>
               </CFormLabel>
@@ -429,6 +467,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 placeholder="Enter title"
               />
             </div>
+            <CFormLabel htmlFor="exampleFormControlInput1">
+              <b>Method</b>
+            </CFormLabel>
+            <CFormSelect aria-label="Default select example" onChange={(e) => { setmethod(e.target.value) }}>
+                <option align="center" selected>Select Method</option>
+                <option value="Free">Free</option>
+                <option value="Paid">Paid</option>
+            </CFormSelect>
+            
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>Language</b>
             </CFormLabel>
@@ -477,10 +524,17 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CModalHeader>
         <CModalBody>
           <CForm>
+          <Form.Group controlId="dob">
+                            <Form.Label>Release Date</Form.Label>
+                            <Form.Control type="date" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
+          </Form.Group> 
+          <Form.Group controlId="dob">
+                            <Form.Label>Expiry Date</Form.Label>
+                            <Form.Control type="date" name="dob"   value={edate}  onChange={(e) => {setedate(e.target.value)}}/>
+          </Form.Group>
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>SubCategory</b>
             </CFormLabel>
-
             <CFormSelect  aria-label="Default select example" onChange={(e) => {setsubcategory(e.target.value) }} value={subcategory}>
               <option align="center" selected>
                 Select SubCategory
@@ -519,9 +573,23 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CModalHeader>
         <CModalBody>
           <CForm>
+          {/* <div className="mb-3">
+              <CFormLabel htmlFor="formFileMultiple">
+                <b>Trailer-video</b>
+              </CFormLabel>
+              <CFormInput
+                type="file"
+                id="formFileMultiple"
+                onChange={saveFile2}
+                accept=".mp4 , video"
+                style={{ maxFileSize: '5' }}
+              />
+            </div> */}
+
+
             <div className="mb-3">
               <CFormLabel htmlFor="formFileMultiple">
-                <b>SELECT-VIDEO</b>
+                <b>Select-Video</b>
               </CFormLabel>
               <CFormInput
                 type="file"
@@ -549,11 +617,10 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         <CModalBody>
           <CForm>
             <div className="mb-3">
-              <CFormLabel htmlFor="exampleFormControlTextarea1">
+              <CFormLabel>
                 <b>Description</b>
               </CFormLabel>
               <CFormTextarea
-                id="exampleFormControlTextarea1"
                 value={Description}
                 onChange={(e) => {
                   setDescription(e.target.value)
@@ -561,6 +628,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 placeholder="Enter Description"
                 rows="3"
               ></CFormTextarea>
+            </div>
+
+
+            <div className="mb-3">
+              <CFormLabel>
+                <b>Status</b>
+              </CFormLabel>
+              <CFormCheck type="radio" name="status" value="status" label="Active" onChange={(e)=>{ setstatus(e.target.value) }}/>
+              <CFormCheck type="radio" name="status" value="status" label="inactive" onChange={(e)=>{ setstatus(e.target.value) }} />
             </div>
           </CForm>
         </CModalBody>
@@ -596,6 +672,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update3}>
                 Step 4
               </CButton><br/><br/>
+
+              <CFormLabel htmlFor="exampleFormControlInput1">
+              <b>Method</b>
+              </CFormLabel>
+              <CFormSelect aria-label="Default select example"  value={method} onChange={(e) => { setmethod(e.target.value) }}>
+                  <option align="center" selected>Select Method</option>
+                  <option value="Free">Free</option>
+                  <option value="Paid">Paid</option>
+              </CFormSelect>
               <CFormLabel htmlFor="exampleFormControlInput1">
                 <b>Title</b>
               </CFormLabel>
@@ -665,6 +750,18 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
             <CButton style={{ margin: "5px" }} className='btn1' onClick={update6}>
               Step 4
             </CButton><br /><br />
+
+          <Form.Group controlId="dob">
+                            <Form.Label>Release Date</Form.Label>
+                            <Form.Control type="date" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
+          </Form.Group> 
+          <Form.Group controlId="dob">
+                            <Form.Label>Expiry Date</Form.Label>
+                            <Form.Control type="date" name="dob"   value={edate}  onChange={(e) => {setedate(e.target.value)}}/>
+          </Form.Group>
+
+
+
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>SubCategory</b>
             </CFormLabel>
@@ -775,6 +872,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 rows="3"
               ></CFormTextarea>
             </div>
+
+
+            <div className="mb-3">
+              <CFormLabel>
+                <b>Status</b>
+              </CFormLabel>
+              <CFormCheck type="radio" name="status" value="Active" label="Active" onChange={(e)=>{ setstatus(e.target.value) }}/>
+              <CFormCheck type="radio" name="status" value="Inactive" label="Inactive" onChange={(e)=>{ setstatus(e.target.value) }} />
+            </div>
           </CForm>
         </CModalBody>
         <CModalFooter>
@@ -829,7 +935,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 Add Video
               </CButton>
             </CInputGroup>
-            <br></br>
+            <br></br> 
             <CTable style={{ textAlign: 'center' }}  hover>
               <CTableHead>
                 <CTableRow style={{backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}>
@@ -839,7 +945,10 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                   <CTableHeaderCell style={{color:"white"}}>SubCategory</CTableHeaderCell>
                   <CTableHeaderCell style={{color:"white"}}>Description</CTableHeaderCell>
                   <CTableHeaderCell style={{color:"white"}}>Language</CTableHeaderCell>
-                  {/* <CTableHeaderCell scope="col">Banner_Image</CTableHeaderCell> */}
+                  <CTableHeaderCell style={{color:"white"}}>Method </CTableHeaderCell>
+                  <CTableHeaderCell style={{color:"white"}}>Release Date</CTableHeaderCell>
+                  <CTableHeaderCell style={{color:"white"}}>Expiry Date</CTableHeaderCell>
+                  <CTableHeaderCell style={{color:"white"}}>status</CTableHeaderCell>
                   <CTableHeaderCell scope="col2" style={{color:"white"}}>image</CTableHeaderCell>
                   <CTableHeaderCell scope="col" style={{color:"white"}}>Action</CTableHeaderCell>
                 </CTableRow>
@@ -868,6 +977,19 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                           <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
                             {item.language}
                           </CTableDataCell>
+                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                            {item.method}
+                          </CTableDataCell> 
+                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                            {item.rdate}
+                          </CTableDataCell>
+                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                            {item.edate}
+                          </CTableDataCell>
+                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                            {item.status}
+                          </CTableDataCell>
+                          
                           <CTableDataCell  style={{ paddingTop: '10px' ,color:"#FFF" }}>
                             <div className="hover01  column1">
                               <figure className='figure1'>
@@ -988,7 +1110,11 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.category}</CCardText>
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.subcategory}</CCardText>
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.language}</CCardText>
-                        <CCardText  className='font'><FaHandPointRight style={{color:"#3A6073"}}/> {item.Description}</CCardText>
+                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.Description}</CCardText>
+                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.method}</CCardText>
+                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.rdate}</CCardText>
+                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.edate}</CCardText>
+                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.status}</CCardText>
                        
 
                         {/* update button */}
