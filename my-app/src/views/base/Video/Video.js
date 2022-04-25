@@ -23,6 +23,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const Video = () => { 
   const [visible, setVisible] = useState(false)
   const [id, setId] = useState(0)
+  const [sid, setsid] = useState('')
   const [title, settitle] = useState('')
   const [method, setmethod] = useState('')
   const [rdate, setrdate] = useState('')
@@ -38,7 +39,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const [imageval, setImageval] = useState('')
   // const [banner_img, setbanner_img] = useState('')
   const [banner_video, setbanner_video] = useState('')
-  // const [Trailer_video, setTrailer_video] = useState('')
+  const [Trailer_video, setTrailer_video] = useState('')
   const [list, setList] = useState([])
   const [visible1, setVisible1] = useState(false)
   const [visible2, setVisible2] = useState(false)
@@ -69,8 +70,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       setDescription('')
       setImageval('')
       setbanner_video('')
-      // setTrailer_video('')
+      setTrailer_video('')
       setId(0)
+      setsid()
 
       setVisible1(true)
     }
@@ -95,10 +97,14 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const saveFile1 = (e) => {
     console.log(e.target)
     setbanner_video(e.target.files[0])
-    // setTrailer_video(e.target.files[0])
 
   }
   
+  const saveFile2 = (e) => {
+    console.log(e.target)
+    setTrailer_video(e.target.files[0])
+
+  }
   
   
 
@@ -187,12 +193,14 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('subcategory', subcategory)
       formData.append('Description', Description)
       formData.append('banner_video', banner_video)
-      // formData.append('Trailer_video', Trailer_video)
+      formData.append('Trailer_video', Trailer_video)
       formData.append('title', title)
       formData.append('method', method)
       formData.append('rdate', rdate)
       formData.append('status', status)
       formData.append('edate', edate)
+      formData.append('sid', sid)
+
 
       // try {
         await axios.post(env.apiURL+'viInsertBanner', formData)
@@ -212,6 +220,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       setVisible4(false)
       settitle('')
       setmethod('')
+      setsid('')
       setrdate('')
       setstatus('')
       setedate('')
@@ -221,7 +230,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       setImageval('')
       setLanguage('')
       setbanner_video('')
-      // setTrailer_video('')
+      setTrailer_video('')
     } else {
       const formData = new FormData()
       formData.append('title', title)
@@ -233,11 +242,11 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('subcategory', subcategory)
       formData.append('image', imageval)
       formData.append('language', language)
-       formData.append('banner_video', banner_video)
-      //  formData.append('Trailer_video', Trailer_video)
+      formData.append('banner_video', banner_video)
+      formData.append('Trailer_video', Trailer_video)
       formData.append('Description', Description)
-
       formData.append('Id', id)
+      formData.append('sid', sid)
       try {
         const res = await axios.post(env.apiURL+'viUpdateBanner', formData)
         debugger
@@ -268,8 +277,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setDescription('')
     setImageval('')
     setbanner_video('')
-    // setTrailer_video('')
+    setTrailer_video('')
     setId(0)
+    setsid('')
   }
 
   // --------------------EDIT DATA--------------------//
@@ -282,6 +292,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       })
       .then((result) => {
         setId(id)
+        setId(result.data.data.sid)
         settitle(result.data.data.title)
         setmethod(result.data.data.method)
         setrdate(result.data.data.rdate)
@@ -293,7 +304,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         setLanguage(result.data.data.language)
         setImageval(result.data.data.image_user)
         setbanner_video(result.data.data.banner_video)
-        // setTrailer_video(result.data.data.Trailer_video)
+        setTrailer_video(result.data.data.Trailer_video)
 
         //document.getElementById('submit').innerHTML = 'Upadte'
      
@@ -573,7 +584,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CModalHeader>
         <CModalBody>
           <CForm>
-          {/* <div className="mb-3">
+          <div className="mb-3">
               <CFormLabel htmlFor="formFileMultiple">
                 <b>Trailer-video</b>
               </CFormLabel>
@@ -584,7 +595,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 accept=".mp4 , video"
                 style={{ maxFileSize: '5' }}
               />
-            </div> */}
+            </div>
 
 
             <div className="mb-3">
@@ -635,8 +646,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               <CFormLabel>
                 <b>Status</b>
               </CFormLabel>
-              <CFormCheck type="radio" name="status" value="status" label="Active" onChange={(e)=>{ setstatus(e.target.value) }}/>
-              <CFormCheck type="radio" name="status" value="status" label="inactive" onChange={(e)=>{ setstatus(e.target.value) }} />
+              <CFormCheck type="radio" name="status" value="Active" label="Active" onChange={(e)=>{ setstatus(e.target.value) }}/>
+              <CFormCheck type="radio" name="status" value="Inactive" label="inactive" onChange={(e)=>{ setstatus(e.target.value) }} />
             </div>
           </CForm>
         </CModalBody>
@@ -820,6 +831,22 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update9}>
                 Step 4
               </CButton><br /><br/>
+
+            <div className="mb-3">
+              <CFormLabel htmlFor="formFileMultiple">
+                <b>Trailer-video</b>
+              </CFormLabel>
+              <CFormInput
+                type="file"
+                id="formFileMultiple"
+                onChange={saveFile2}
+                accept=".mp4 , video"
+                style={{ maxFileSize: '5' }}
+              />
+            </div>
+
+
+
               <CFormLabel htmlFor="formFileMultiple">
                 <b>SELECT-VIDEO</b>
               </CFormLabel>

@@ -481,6 +481,7 @@ exports.viinsert_data = async function (req, res, next) {
   try {
     // const form = new IncomingForm(formidable);
     const data = {
+      sid:  req.body.sid,
       method: req.body.method, 
       rdate:req.body.rdate,
       edate:req.body.edate,
@@ -492,7 +493,7 @@ exports.viinsert_data = async function (req, res, next) {
       language: req.body.language,
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
-      // Trailer_video: req.file[2].part
+      Trailer_video: req.files[2].path
     };
     const tag = await video.create(data);
 
@@ -566,6 +567,11 @@ exports.viUpdate_data = async function (req, res, next) {
       if (iv.fieldname == "banner_video") {
         await unlinkAsync(BannerData.banner_video);
         BannerData.banner_video = iv.path;
+      }
+      else 
+      if (iv.fieldname == "Trailer_video") {
+        await unlinkAsync(BannerData.Trailer_video);
+        BannerData.Trailer_video = iv.path;
       }
     }
 

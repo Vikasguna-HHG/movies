@@ -1,7 +1,15 @@
 const mongoose = require ("mongoose");
 
 const video1 = new mongoose.Schema({
+    sid:
+    {
+        type:String
+    },
     method:
+    {
+        type:String
+    },
+    status:
     {
         type:String
     },
@@ -9,10 +17,6 @@ const video1 = new mongoose.Schema({
     {
         type:String
     },  
-    status:
-    {
-        type:String
-    },
     edate:
     {
         type:String
@@ -37,14 +41,15 @@ const video1 = new mongoose.Schema({
     {
         type:String
     },
-    banner_video:{
-
-        type:String
-    },
     Trailer_video:
     {
         type:String
     },
+    banner_video:{
+
+        type:String
+    },
+    
    
     
    

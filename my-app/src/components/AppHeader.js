@@ -19,7 +19,7 @@ import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import { logo } from 'src/assets/brand/logo'
 import AppContext from './../Context'
-
+import './style.css'
 const AppHeader = () => {
 
   const [_,__,___,handleLogout] = useContext(AppContext)
@@ -48,7 +48,7 @@ const AppHeader = () => {
 
           <CNavItem>
             <CNavLink href="#">
-              <Button variant="primary" onClick={handleLogout} type="button" >Logout</Button> 
+              <Button className="btn1" onClick={handleLogout} type="button" ><b>Logout</b></Button> 
             </CNavLink>
           </CNavItem>
         </CHeaderNav>

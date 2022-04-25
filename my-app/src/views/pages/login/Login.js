@@ -59,7 +59,7 @@ const Login = () => {
 
   useEffect(() => {
 
-    if(userId) navigate('/base/home')
+    if(userId) navigate('/base/Video')
 
     // if (localStorage.getItem('user-info')) {
     //   navigate('/base/Video')
@@ -109,11 +109,11 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <Link to="/home">
+                      
                           <CButton onClick={submit} className="px-4" style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' }}>
                             Login
                           </CButton>
-                        </Link>
+                      
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
