@@ -106,15 +106,15 @@ const _nav = [
    
   {
     component: CNavItem,
-    name: 'Admin user',
-    to: '/base/Home',
-    icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
+    // name: 'Admin user',
+    // to: '/base/Home',
+    // icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Categoires',
-    to: '/base/categoires',
-    icon: <CIcon icon={cilNoteAdd} customClassName="nav-icon" />,
+    // name: 'Categoires',
+    // to: '/base/categoires',
+    // icon: <CIcon icon={cilNoteAdd} customClassName="nav-icon" />,
   },
 
 
@@ -126,9 +126,9 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Language',
-    to: '/base/Language',
-    icon: <CIcon icon={cilLanguage} customClassName="nav-icon" />,
+    // name: 'Language',
+    // to: '/base/Language',
+    // icon: <CIcon icon={cilLanguage} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
