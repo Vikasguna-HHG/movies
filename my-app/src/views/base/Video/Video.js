@@ -423,6 +423,10 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setVisible7(true)
   }
 
+  function step()
+{
+  
+}
   // -----------------------DELETE DATA----------------------------------------------//
   const deletehandler = async (id) => {
     swal({
@@ -674,6 +678,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         <CModalBody>
           <CForm>
             <div className="mb-3">
+              <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+                Step 1
+              </CButton>
               <CButton style={{margin:"5px"}} className='btn1' onClick={update1}>
                 Step 2
               </CButton>
@@ -755,6 +762,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
             <CButton style={{ margin: "5px" }} className='btn1' onClick={update4}>
               Step 1
             </CButton>
+            <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+                Step 2
+              </CButton>
             <CButton style={{ margin: "5px" }} className='btn1' onClick={update5}>
               Step 3
             </CButton>
@@ -828,6 +838,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update8}>
                 Step 2
               </CButton>
+              <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+                Step 3
+              </CButton>
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update9}>
                 Step 4
               </CButton><br /><br/>
@@ -884,6 +897,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               </CButton>
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update12}>
                 Step 3
+              </CButton>
+              <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+                Step 4
               </CButton><br /><br />
               <CFormLabel htmlFor="exampleFormControlTextarea1" >
                 <b>Description</b>
