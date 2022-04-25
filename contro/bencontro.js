@@ -33,7 +33,7 @@ const jwtkey = "movies-hhg";
 //         res.status(401).send({ result: "please provide valid token" });
 //       } else {
 //         res.send({ result: "success"});
-//         // next()       
+//         // next()
 //       }
 //     });
 //   } else {
@@ -57,8 +57,6 @@ const jwtkey = "movies-hhg";
 //       console.log("not data insert........!");
 //     }
 // };
-
-
 
 exports.insert_data = async function (req, res, next) {
   try {
@@ -478,14 +476,18 @@ exports.kUpdate_data = async function (req, res, next) {
 
 //video api
 exports.viinsert_data = async function (req, res, next) {
+  // const sid = Math.random();
+  
+//  const cnt=1; 
+ var sid = 1; 
   try {
     // const form = new IncomingForm(formidable);
     const data = {
-      // sid:  req.body.sid,
-      method: req.body.method, 
-      rdate:req.body.rdate,
-      edate:req.body.edate,
-      status:req.body.status,
+      sid: sid,
+      method: req.body.method,
+      rdate: req.body.rdate,
+      edate: req.body.edate,
+      status: req.body.status,
       title: req.body.title,
       category: req.body.category,
       subcategory: req.body.subcategory,
@@ -493,8 +495,9 @@ exports.viinsert_data = async function (req, res, next) {
       language: req.body.language,
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
-      Trailer_video: req.files[2].path
+      Trailer_video: req.files[2].path,
     };
+    console.log(data);
     const tag = await video.create(data);
 
     res.status(201).json({
@@ -548,11 +551,11 @@ exports.viDelete_data = async function (req, res, next) {
 exports.viUpdate_data = async function (req, res, next) {
   try {
     var BannerData = await video.findById(req.body.Id);
-    BannerData.method= req.body.method, 
-    BannerData.rdate=req.body.rdate,
-    BannerData.edate=req.body.edate,
-    BannerData.status=req.body.status,
-    BannerData.category = req.body.category;
+    (BannerData.method = req.body.method),
+      (BannerData.rdate = req.body.rdate),
+      (BannerData.edate = req.body.edate),
+      (BannerData.status = req.body.status),
+      (BannerData.category = req.body.category);
     BannerData.title = req.body.title;
     BannerData.language = req.body.language;
     BannerData.subcategory = req.body.subcategory;
@@ -562,14 +565,10 @@ exports.viUpdate_data = async function (req, res, next) {
       if (iv.fieldname == "image") {
         await unlinkAsync(BannerData.image_user);
         BannerData.image_user = iv.path;
-      } 
-      else 
-      if (iv.fieldname == "banner_video") {
+      } else if (iv.fieldname == "banner_video") {
         await unlinkAsync(BannerData.banner_video);
         BannerData.banner_video = iv.path;
-      }
-      else 
-      if (iv.fieldname == "Trailer_video") {
+      } else if (iv.fieldname == "Trailer_video") {
         await unlinkAsync(BannerData.Trailer_video);
         BannerData.Trailer_video = iv.path;
       }

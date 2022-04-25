@@ -13,61 +13,51 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import React, { useEffect, useState ,useContext} from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
-import Appcontext from './../../../Context'
-
-// import { useNavigate ,Link} from 'react-router-dom';
+import AppContext from './../../../Context'
 import { useNavigate, Link } from 'react-router-dom'
 
 import { env } from '../../../environment'
 import axios from 'axios'
-import { AppContent } from 'src/components'
 
 const Login = () => {
   const navigate = useNavigate()
-  // const navigate = useNavigate();
-
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
-  const [_,userId,handleLoginState] = useContext(Appcontext);
+  const [_, userId, handleLoginState] = useContext(AppContext)
 
- 
   localStorage.removeItem('user-info')
-  console.log(localStorage.getItem('user-info'))
 
   const submit = async (e) => {
     e.preventDefault()
     console.log('User_Name,Password', User_Name, Password)
 
-    await axios.post(env.apiURL+'Mlogin', { User_Name, Password })
-      .then((res) => {
-        if (res.data.User) {
-          localStorage.setItem('userId', res.data.User._id)
-          localStorage.setItem('userName', res.data.User.User_Name)
-          localStorage.setItem('token', res.data.auth)
-         
-          window.location.href = window.location.href
+    await axios.post(env.apiURL + 'Mlogin', { User_Name, Password }).then((res) => {
+      if (res.data.User) {
+        localStorage.setItem('userId', res.data.User._id)
+        localStorage.setItem('userName', res.data.User.User_Name)
+        localStorage.setItem('token', res.data.auth)
 
-        } else {
-          alert('Not valid')
-        }
+        window.location.href = window.location.href
+      } else {
+        alert('Not valid')
+      }
     })
     setUser_Name('')
     setPassword('')
   }
 
   useEffect(() => {
-
-    if(userId) navigate('/base/Video')
+    if (userId) navigate('/base/Video')
 
     // if (localStorage.getItem('user-info')) {
     //   navigate('/base/Video')
-      // History.push('/base/Home');
+    // History.push('/base/Home');
     // }
   }, [])
 
-    // const data = useContext(Appcontext)
+  // const data = useContext(Appcontext)
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -109,11 +99,13 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                      
-                          <CButton onClick={submit} className="px-4" style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' }}>
-                            Login
-                          </CButton>
-                      
+                        <CButton
+                          onClick={submit}
+                          className="px-4"
+                          style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' }}
+                        >
+                          Login
+                        </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">

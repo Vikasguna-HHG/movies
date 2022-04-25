@@ -27,18 +27,6 @@ const AppContent = () => {
             if(userId){
                return <Route key={idx} path={route.path} exact={route.exact} name={route.name} element={<route.element />} />
             }
-
-            // return (
-            //   route.element && (
-            //     <Route
-            //       key={idx}
-            //       path={route.path}
-            //       exact={route.exact}
-            //       name={route.name}
-            //       element={() => <route.element />}
-            //     />
-            //   )
-            // )
           })}
           {/* <Route path="/" element={() => <Login/>} /> */}
         </Routes>
