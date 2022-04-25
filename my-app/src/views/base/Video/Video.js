@@ -423,7 +423,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setVisible7(true)
   }
 
-  function step()
+   function step()
 {
   
 }
