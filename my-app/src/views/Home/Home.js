@@ -325,7 +325,7 @@ const Home = () => {
     <>
       <br />
       <br />
-      <CModal visible={visible}>
+      <CModal visible={visible}>       
         <CModalHeader onClick={() => setVisible(false)}>
           <CModalTitle>Admin user Form</CModalTitle>
         </CModalHeader>

@@ -327,19 +327,23 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   function update1(){
     setVisible5(false)
     setVisible6(true)
+
+
   }
   function update2() {
     setVisible5(false)
     setVisible7(true)
-
-  } function update3() {
+  } 
+  function update3() {
     setVisible5(false)
     setVisible8(true)
+
 
   }
   function update4() {
     setVisible6(false)
     setVisible5(true)
+
   }
   function update5() {
     setVisible6(false)
@@ -348,30 +352,46 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   } function update6() {
     setVisible6(false)
     setVisible8(true)
+
   }
   function update7() {
     setVisible7(false)
     setVisible5(true)
+
   }
+
+
   function update8() {
     setVisible7(false)
     setVisible6(true)
 
-  } function update9() {
+
+  } 
+  function update9() {
     setVisible7(false)
     setVisible8(true)
+
   }
   function update10() {
     setVisible8(false)
     setVisible5(true)
+
   }
   function update11() {
     setVisible8(false)
     setVisible6(true)
 
+
   } function update12() {
     setVisible8(false)
     setVisible7(true)
+
+  }
+
+  function step(){
+
+    // document.getElementById("step").style.display = "block"
+    // alert("step is already selected");
   }
 
   // -----------------------DELETE DATA----------------------------------------------//
@@ -587,6 +607,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         <CModalBody>
           <CForm>
             <div className="mb-3">
+            <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+                Step 1
+              </CButton>
               <CButton style={{margin:"5px"}} className='btn1' onClick={update1}>
                 Step 2
               </CButton>
@@ -596,6 +619,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update3}>
                 Step 4
               </CButton><br/><br/>
+                {/* <p style={{color:"red",marginTop:"-20px",marginLeft:"6px",display:"none"}} id='step' >Step 1 is alredy selected</p> */}
+
               <CFormLabel htmlFor="exampleFormControlInput1">
                 <b>Title</b>
               </CFormLabel>
@@ -659,12 +684,18 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
             <CButton style={{ margin: "5px" }} className='btn1' onClick={update4}>
               Step 1
             </CButton>
+            <CButton style={{ margin: "5px" }} className='ubtn'  onClick={step}>
+              Step 2
+            </CButton>
             <CButton style={{ margin: "5px" }} className='btn1' onClick={update5}>
               Step 3
             </CButton>
             <CButton style={{ margin: "5px" }} className='btn1' onClick={update6}>
               Step 4
             </CButton><br /><br />
+
+            {/* <p style={{color:"red",marginTop:"-20px",marginLeft:"6px",display:"none"}} id='step' >Step 2 is alredy selected</p> */}
+
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>SubCategory</b>
             </CFormLabel>
@@ -720,9 +751,14 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update8}>
                 Step 2
               </CButton>
+              <CButton style={{ margin: "5px" }} className='ubtn'onClick={step}>
+                Step 3
+              </CButton>
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update9}>
                 Step 4
               </CButton><br /><br/>
+              {/* <p style={{color:"red",marginTop:"-20px",marginLeft:"6px",display:"none"}} id='step' >Step 3 is alredy selected</p> */}
+
               <CFormLabel htmlFor="formFileMultiple">
                 <b>SELECT-VIDEO</b>
               </CFormLabel>
@@ -760,7 +796,13 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               </CButton>
               <CButton style={{ margin: "5px" }} className='btn1' onClick={update12}>
                 Step 3
+              </CButton>
+              <CButton style={{ margin: "5px" }} className='ubtn' onClick={step}>
+                Step 4
               </CButton><br /><br />
+
+              {/* <p style={{color:"red",marginTop:"-20px",marginLeft:"6px",display:"none"}} id='step' >Step 4 is alredy selected</p> */}
+
               <CFormLabel htmlFor="exampleFormControlTextarea1" >
                 <b>Description</b>
               </CFormLabel>
