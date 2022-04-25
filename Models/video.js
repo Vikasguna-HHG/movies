@@ -1,10 +1,6 @@
 const mongoose = require ("mongoose");
 
 const video1 = new mongoose.Schema({
-    sid:
-    {
-        type:String
-    },
     method:
     {
         type:String

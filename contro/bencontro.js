@@ -481,7 +481,7 @@ exports.viinsert_data = async function (req, res, next) {
   try {
     // const form = new IncomingForm(formidable);
     const data = {
-      sid:  req.body.sid,
+      // sid:  req.body.sid,
       method: req.body.method, 
       rdate:req.body.rdate,
       edate:req.body.edate,
@@ -574,30 +574,6 @@ exports.viUpdate_data = async function (req, res, next) {
         BannerData.Trailer_video = iv.path;
       }
     }
-
-    // if(req.files.length != 0){
-    //     if(req.files[0].fieldname == 'image'){
-    //         await unlinkAsync(BannerData.image_user);
-    //         BannerData.image_user = req.files.path;
-    //     }else{
-    //         await unlinkAsync(BannerData.banner_video);
-    //         BannerData.banner_video = req.files.path;
-    //     }
-
-    //     if(req.files[1].fieldname == 'banner_video'){
-    //         await unlinkAsync(BannerData.banner_video);
-    //         BannerData.banner_video = req.files.path;
-    //     }
-    // }
-
-    // if (req.files.length != 0) {
-    //     await unlinkAsync(BannerData.image_user);
-    //     BannerData.image_user = req.files.path;
-    // }
-    // if (req.files.length != 0) {
-    //     await unlinkAsync(BannerData.banner_video);
-    //     BannerData.banner_video = req.files.path;
-    // }
 
     await video.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({

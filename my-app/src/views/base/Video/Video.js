@@ -23,7 +23,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const Video = () => { 
   const [visible, setVisible] = useState(false)
   const [id, setId] = useState(0)
-  const [sid, setsid] = useState('')
+  // const [sid, setsid] = useState('')
   const [title, settitle] = useState('')
   const [method, setmethod] = useState('')
   const [rdate, setrdate] = useState('')
@@ -72,7 +72,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       setbanner_video('')
       setTrailer_video('')
       setId(0)
-      setsid()
+      // setsid()
 
       setVisible1(true)
     }
@@ -199,7 +199,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('rdate', rdate)
       formData.append('status', status)
       formData.append('edate', edate)
-      formData.append('sid', sid)
+      // formData.append('sid', sid)
 
 
       // try {
@@ -220,7 +220,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       setVisible4(false)
       settitle('')
       setmethod('')
-      setsid('')
+      // setsid('')
       setrdate('')
       setstatus('')
       setedate('')
@@ -246,7 +246,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('Trailer_video', Trailer_video)
       formData.append('Description', Description)
       formData.append('Id', id)
-      formData.append('sid', sid)
+      // formData.append('sid', sid)
       try {
         const res = await axios.post(env.apiURL+'viUpdateBanner', formData)
         debugger
@@ -279,7 +279,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setbanner_video('')
     setTrailer_video('')
     setId(0)
-    setsid('')
+    // setsid('')
   }
 
   // --------------------EDIT DATA--------------------//
@@ -292,7 +292,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       })
       .then((result) => {
         setId(id)
-        setId(result.data.data.sid)
+        // setId(result.data.data.sid)
         settitle(result.data.data.title)
         setmethod(result.data.data.method)
         setrdate(result.data.data.rdate)
