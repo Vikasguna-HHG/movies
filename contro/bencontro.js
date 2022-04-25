@@ -22,40 +22,58 @@ const { time } = require("console");
 const jwt = require("jsonwebtoken");
 const jwtkey = "movies-hhg";
 
-const verifyToken = (req, res, next) => {
-  let token = req.headers["authorization"];
-  // console.log("call...", token);
+// const verifyToken = (req, res, next) => {
+//   let token = req.headers["authorization"];
+//   // console.log("call...", token);
 
-  if (token) {
-    token = token.split(" ")[1];
-    jwt.verify(token, jwtkey, (err, valid) => {
-      if (err) {
-        res.status(401).send({ result: "please provide valid token" });
-      } else {
-        res.send({ result: "success"});
-        // next()       
-      }
-    });
-  } else {
-    res.status(403).send({ result: "please add token with header" });
-  }
-};
+//   if (token) {
+//     token = token.split(" ")[1];
+//     jwt.verify(token, jwtkey, (err, valid) => {
+//       if (err) {
+//         res.status(401).send({ result: "please provide valid token" });
+//       } else {
+//         res.send({ result: "success"});
+//         // next()       
+//       }
+//     });
+//   } else {
+//     res.status(403).send({ result: "please add token with header" });
+//   }
+// };
 
 // parth api start
-exports.insert_data = verifyToken,async function (req, res, next) {
-    try {
-      const data = {
-        language: req.body.language,
-      };
-      const tag = await language.create(data);
+// exports.insert_data = verifyToken,async function (req, res, next) {
+//     try {
+//       const data = {
+//         language: req.body.language,
+//       };
+//       const tag = await language.create(data);
 
-      res.status(201).json({
-        data: tag,
-        status: "Data insert",
-      });
-    } catch (error) {
-      console.log("not data insert........!");
-    }
+//       res.status(201).json({
+//         data: tag,
+//         status: "Data insert",
+//       });
+//     } catch (error) {
+//       console.log("not data insert........!");
+//     }
+// };
+
+
+
+exports.insert_data = async function (req, res, next) {
+  try {
+    const data = {
+      language: req.body.language,
+    };
+    const tag = await language.create(data);
+
+    res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
+  } catch (error) {
+    console.log("not data insert........!");
+  }
 };
 
 exports.find_data = async function (req, res, next) {
@@ -463,6 +481,10 @@ exports.viinsert_data = async function (req, res, next) {
   try {
     // const form = new IncomingForm(formidable);
     const data = {
+      method: req.body.method, 
+      rdate:req.body.rdate,
+      edate:req.body.edate,
+      status:req.body.status,
       title: req.body.title,
       category: req.body.category,
       subcategory: req.body.subcategory,
@@ -470,6 +492,7 @@ exports.viinsert_data = async function (req, res, next) {
       language: req.body.language,
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
+      // Trailer_video: req.file[2].part
     };
     const tag = await video.create(data);
 
@@ -477,9 +500,10 @@ exports.viinsert_data = async function (req, res, next) {
       data: tag,
       status: "Data insert",
     });
+    console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
-    console.log(error);
+    // console.log(error);
     console.log("not data insert........!");
   }
 };
@@ -523,6 +547,10 @@ exports.viDelete_data = async function (req, res, next) {
 exports.viUpdate_data = async function (req, res, next) {
   try {
     var BannerData = await video.findById(req.body.Id);
+    BannerData.method= req.body.method, 
+    BannerData.rdate=req.body.rdate,
+    BannerData.edate=req.body.edate,
+    BannerData.status=req.body.status,
     BannerData.category = req.body.category;
     BannerData.title = req.body.title;
     BannerData.language = req.body.language;
@@ -533,7 +561,9 @@ exports.viUpdate_data = async function (req, res, next) {
       if (iv.fieldname == "image") {
         await unlinkAsync(BannerData.image_user);
         BannerData.image_user = iv.path;
-      } else if (iv.fieldname == "banner_video") {
+      } 
+      else 
+      if (iv.fieldname == "banner_video") {
         await unlinkAsync(BannerData.banner_video);
         BannerData.banner_video = iv.path;
       }
