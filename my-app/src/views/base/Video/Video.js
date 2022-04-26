@@ -29,6 +29,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const [rdate, setrdate] = useState('')
   const [edate, setedate] = useState('')
   const [status, setstatus] = useState('')
+  const [banner, setBanner] = useState('')
   const [language1, setLanguage1] = useState([])
   const [language, setLanguage] = useState()
   const [category, setcategory] = useState('')
@@ -65,6 +66,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       setmethod('')
       setrdate('')
       setstatus('')
+      setBanner('')
       setedate('')
       setLanguage('')
       setDescription('')
@@ -198,6 +200,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('method', method)
       formData.append('rdate', rdate)
       formData.append('status', status)
+      formData.append('banner', banner)
       formData.append('edate', edate)
       // formData.append('sid', sid)
 
@@ -223,6 +226,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       // setsid('')
       setrdate('')
       setstatus('')
+      setBanner('')
       setedate('')
       setcategory('')
       setsubcategory('')
@@ -238,6 +242,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('rdate', rdate)
       formData.append('edate', edate)
       formData.append('status', status)
+      formData.append('banner', banner)
       formData.append('category', category)
       formData.append('subcategory', subcategory)
       formData.append('image', imageval)
@@ -272,6 +277,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setmethod('')
     setrdate('')
     setstatus('')
+    setBanner('')
     setedate('')
     setLanguage('')
     setDescription('')
@@ -652,6 +658,18 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               </CFormLabel>
               <CFormCheck type="radio" name="status" value="Active" label="Active" onChange={(e)=>{ setstatus(e.target.value) }}/>
               <CFormCheck type="radio" name="status" value="Inactive" label="inactive" onChange={(e)=>{ setstatus(e.target.value) }} />
+            </div>
+
+
+              
+            </CForm>
+            <CForm>
+            <div className="mb-3">
+              <CFormLabel>
+                <b>Is In Banner</b>
+              </CFormLabel>
+              <CFormCheck type="radio" name="status" value="Yes" label="Yes" onChange={(e)=>{ setBanner(e.target.value) }}/>
+              <CFormCheck type="radio" name="status" value="No" label="No" onChange={(e)=>{ setBanner(e.target.value) }} />
             </div>
           </CForm>
         </CModalBody>

@@ -9,6 +9,10 @@ const video1 = new mongoose.Schema({
     {
         type:String
     },
+    banner:
+    {
+        type:String
+    },
     status:
     {
         type:String

@@ -488,6 +488,7 @@ exports.viinsert_data = async function (req, res, next) {
       rdate: req.body.rdate,
       edate: req.body.edate,
       status: req.body.status,
+      banner: req.body.banner,
       title: req.body.title,
       category: req.body.category,
       subcategory: req.body.subcategory,
@@ -516,6 +517,63 @@ exports.vifind_data = async function (req, res, next) {
   try {
     const tag = await video.find();
 
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    console.log("not find data........!");
+  }
+};
+
+exports.banner_find = async function (req, res, next) {
+  // try {
+    const tag = await video.find(
+      { 
+        banner: 'Yes',
+      }
+    );
+    res.status(200).json({
+      status: "find data",
+      data: tag
+    });
+  // } catch (error) {
+  //   console.log("not find data........!");
+  // }
+};
+
+exports.latest_find = async function (req, res, next) {
+  try {
+ 
+      const tag = await video.find(
+        { 
+      
+          rdate : { 
+            $gt : new Date(new Date().getFullYear(),new Date().getMonth() - 1,new Date().getDate()).toISOString().replace(/T.*/,''),
+            $lt : new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).toISOString().replace(/T.*/,'')
+          },
+        }
+      );
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    console.log("not find data........!");
+  }
+};
+
+exports.Upcoming_find = async function (req, res, next) {
+  try {
+ 
+      const tag = await video.find(
+        { 
+      
+          rdate : { 
+            $gt : new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).toISOString().replace(/T.*/,''),
+          },
+        }
+      );
     res.status(200).json({
       status: "find data",
       data: tag,
@@ -585,12 +643,3 @@ exports.viUpdate_data = async function (req, res, next) {
 };
 
 
-exports.Upcoming = async function(req,res,next){
-  try {
-      var tag = video.find({
-        
-              })
-  } catch (error) {
-    console.log(error)
-  }
-}
