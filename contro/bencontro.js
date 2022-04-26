@@ -479,7 +479,7 @@ exports.viinsert_data = async function (req, res, next) {
   // const sid = Math.random();
   
 //  const cnt=1; 
- var sid = 1; 
+ var sid = 2; 
   try {
     // const form = new IncomingForm(formidable);
     const data = {
