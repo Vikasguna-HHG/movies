@@ -965,7 +965,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       <CCol xs={12} id="table2" >
         <CCard className="mb-4">
           <CCardBody>
-          <p>hy </p>
+          {/* <p>hy </p> */}
          {/* <button onClick={videoplay}>clickme</button> */}
             <CInputGroup className="flex-nowrap ">
               <CInputGroupText color="primary" className='btn1'>
@@ -1062,7 +1062,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                           </CTableDataCell>
                           <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
                             {item.status}
-                             <ReactPlayer url={"http://localhost:5000/" + item.banner_video } height="300px"  width="400px"  controls={true} style={{margin:"20px"}} />
+                             {/* <ReactPlayer url={"http://localhost:5000/" + item.banner_video } height="300px"  width="400px"  controls={true} style={{margin:"20px"}} /> */}
 
                           </CTableDataCell>
                           
