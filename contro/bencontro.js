@@ -583,3 +583,14 @@ exports.viUpdate_data = async function (req, res, next) {
     console.log(error);
   }
 };
+
+
+exports.Upcoming = async function(req,res,next){
+  try {
+      var tag = video.find({
+        
+              })
+  } catch (error) {
+    console.log(error)
+  }
+}
