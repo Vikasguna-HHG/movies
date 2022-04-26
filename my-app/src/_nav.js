@@ -19,24 +19,27 @@ import {
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 import AppContext from './Context'
+import axios from 'axios'
 
 
 // function _nav() {
-//   // const [_,userId] = useContext(AppContext);
-//   const [sid, setsid] = useState('')
+//   const [_,userId] = useContext(AppContext);
+//   console.log(userId);
 
-//   let user = localStorage.getItem('sid')
 
+//     useEffect((res,req) => {
+//       axios.post("http://localhost:5000/mfinddata")
+//             .then(r => {
+//               console.log(res)
+            
+//             })
+//     }, [])
 
 // }
-
-
-
-
 const id ="1";
 
-if (id == '1') {
-var _nav = [
+if (id == '1') { 
+var  _nav = [
           {
             component: CNavItem,
             name: 'Admin user',
@@ -51,9 +54,9 @@ var _nav = [
           },
           {
             component: CNavItem,
-            name: 'SubCategoires',
-            to: '/base/subcategoires',
-            icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+            // name: 'SubCategoires',
+            // to: '/base/subcategoires',
+            // icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
           },
           {
             component: CNavItem,
@@ -71,16 +74,16 @@ var _nav = [
         ]
 } else {
   
- var _nav =  [
+ var _nav =   [
         {
           component: CNavItem,
           name: 'Video',
           to: '/base/Video',
-          icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-          guard: 'auth',
+          icon: <CIcon icon={cilVideo} customClassName="nav-icon" />
         },
       ]
 }
+// }
 export default _nav;
 
 
@@ -115,7 +118,7 @@ export default _nav;
 //     name: 'Video',
 //     to: '/base/Video',
 //     icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-//     guard: 'auth',
+//   
 //   },
 // ]
 // export default _nav;

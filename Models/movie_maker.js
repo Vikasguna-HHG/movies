@@ -4,6 +4,10 @@ const validator = require('validator');
 
 // Mukunj schema start
 const movie_makers1 = new mongoose.Schema({
+    sid:
+    {
+        type:Number
+    },
     First_Name:{
         type:String,
         required:true

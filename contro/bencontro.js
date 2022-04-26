@@ -166,7 +166,11 @@ exports.Minsert_data = async function (req, res, next) {
     // console.log(result)
     var newpass = await bcrypt.hash(result, 12);
     console.log(newpass);
+
+    var sid = 2; 
+    
     const data = {
+      sid: sid,
       First_Name: req.body.First_Name,
       Last_Name: req.body.Last_Name,
       User_Name: req.body.User_Name,
@@ -479,11 +483,10 @@ exports.viinsert_data = async function (req, res, next) {
   // const sid = Math.random();
   
 //  const cnt=1; 
- var sid = 2; 
   try {
     // const form = new IncomingForm(formidable);
     const data = {
-      sid: sid,
+    
       method: req.body.method,
       rdate: req.body.rdate,
       edate: req.body.edate,
