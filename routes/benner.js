@@ -84,7 +84,6 @@ router.post('/kInsertBanner', upload.single('image'), BannerController.kinsert_d
 router.post('/kUpdateBanner', upload.single('image'), BannerController.kUpdate_data);
 router.delete('/kDeleteBanner/:id', upload.single('image'), BannerController.kDelete_data);
 //keyur api end
-<<<<<<< HEAD
 
 router.get('/bannerfind',BannerController.banner_find);
 router.get('/Latest',BannerController.latest_find);
@@ -92,8 +91,3 @@ router.get('/Upcoming',BannerController.Upcoming_find);
 
 
 module.exports = router;
-=======
-module.exports = router;
-
-router.get('/Upcoming',BannerController.Upcoming);
->>>>>>> dc4ec965d1815ba61b62f8b7af0be6b9bb718f49
