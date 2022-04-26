@@ -15,6 +15,9 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import { FaHandPointRight } from "react-icons/fa";
 import {env} from '../../../environment'
 import { Button ,Form} from 'react-bootstrap';
+// import React from 'react'
+import ReactPlayer from 'react-player'
+// import videop from ''
 
 const axios = require('axios')
 toast.configure()
@@ -429,6 +432,11 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setVisible7(true)
   }
 
+    function videoplay(){
+      alert();
+      <video src='https://www.youtube.com/watch?v=c22sPrhLg6M' height="200px"></video>
+
+    }
    function step()
 {
   
@@ -952,10 +960,13 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       </CModal>
 
       {/*Table and search  */}
+     
 
       <CCol xs={12} id="table2" >
         <CCard className="mb-4">
           <CCardBody>
+          <p>hy </p>
+         {/* <button onClick={videoplay}>clickme</button> */}
             <CInputGroup className="flex-nowrap ">
               <CInputGroupText color="primary" className='btn1'>
                 <svg
@@ -970,6 +981,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 </svg>
                 &nbsp;&nbsp;&nbsp;Search
               </CInputGroupText>
+
+              
               <CFormInput
                 placeholder="Search "
                 value={search}
@@ -1049,6 +1062,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                           </CTableDataCell>
                           <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
                             {item.status}
+                             <ReactPlayer url={"http://localhost:5000/" + item.banner_video } height="300px"  width="400px"  controls={true} style={{margin:"20px"}} />
+
                           </CTableDataCell>
                           
                           <CTableDataCell  style={{ paddingTop: '10px' ,color:"#FFF" }}>
