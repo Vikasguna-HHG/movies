@@ -19,6 +19,7 @@ import {
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 import AppContext from './Context'
+import axios from 'axios'
 
 
 // function _nav() {
@@ -26,90 +27,98 @@ import AppContext from './Context'
 //   console.log(userId);
 
 
-// const id ="6267708d1566d6b07cb479b6";
-
-// if (id == userId) {
-//  _nav = [
-//           {
-//             component: CNavItem,
-//             name: 'Admin user',
-//             to: '/base/Home',
-//             icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
-//           },
-//           {
-//             component: CNavItem,
-//             name: 'Categoires',
-//             to: '/base/categoires',
-//             icon: <CIcon icon={cilNoteAdd} customClassName="nav-icon" />,
-//           },
-//           {
-//             component: CNavItem,
-//             name: 'SubCategoires',
-//             to: '/base/subcategoires',
-//             icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-//           },
-//           {
-//             component: CNavItem,
-//             name: 'Language',
-//             to: '/base/Language',
-//             icon: <CIcon icon={cilLanguage} customClassName="nav-icon" />,
-//           },
-//           {
-//             component: CNavItem,
-//             name: 'Video',
-//             to: '/base/Video',
-//             icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+//     useEffect((res,req) => {
+//       axios.post("http://localhost:5000/mfinddata")
+//             .then(r => {
+//               console.log(res)
             
-//           },
-//         ]
-// } else {
+//             })
+//     }, [])
+
+// }
+const id ="1";
+
+if (id == '1') { 
+var  _nav = [
+          {
+            component: CNavItem,
+            name: 'Admin user',
+            to: '/base/Home',
+            icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
+          },
+          {
+            component: CNavItem,
+            name: 'Categoires',
+            to: '/base/categoires',
+            icon: <CIcon icon={cilNoteAdd} customClassName="nav-icon" />,
+          },
+          {
+            component: CNavItem,
+            // name: 'SubCategoires',
+            // to: '/base/subcategoires',
+            // icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+          },
+          {
+            component: CNavItem,
+            name: 'Language',
+            to: '/base/Language',
+            icon: <CIcon icon={cilLanguage} customClassName="nav-icon" />,
+          },
+          {
+            component: CNavItem,
+            name: 'Video',
+            to: '/base/Video',
+            icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+            
+          },
+        ]
+} else {
   
-//   _nav =  [
-//         {
-//           component: CNavItem,
-//           name: 'Video',
-//           to: '/base/Video',
-//           icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-//           guard: 'auth',
-//         },
-//       ]
+ var _nav =   [
+        {
+          component: CNavItem,
+          name: 'Video',
+          to: '/base/Video',
+          icon: <CIcon icon={cilVideo} customClassName="nav-icon" />
+        },
+      ]
+}
 // }
-// }
-// export default _nav;
-
-
-const _nav = [
-  {
-    component: CNavItem,
-    name: 'Admin user',
-    to: '/base/Home',
-    icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Categoires',
-    to: '/base/categoires',
-    icon: <CIcon icon={cilNoteAdd} customClassName="nav-icon" />,
-  },
-
-  {
-    component: CNavItem,
-    // name: 'SubCategoires',
-    // to: '/base/subcategoires',
-    // icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Language',
-    to: '/base/Language',
-    icon: <CIcon icon={cilLanguage} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Video',
-    to: '/base/Video',
-    icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-    guard: 'auth',
-  },
-]
 export default _nav;
+
+
+// const _nav = [
+//   {
+//     component: CNavItem,
+//     name: 'Admin user',
+//     to: '/base/Home',
+//     icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
+//   },
+//   {
+//     component: CNavItem,
+//     name: 'Categoires',
+//     to: '/base/categoires',
+//     icon: <CIcon icon={cilNoteAdd} customClassName="nav-icon" />,
+//   },
+
+//   {
+//     component: CNavItem,
+//     // name: 'SubCategoires',
+//     // to: '/base/subcategoires',
+//     // icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+//   },
+//   {
+//     component: CNavItem,
+//     name: 'Language',
+//     to: '/base/Language',
+//     icon: <CIcon icon={cilLanguage} customClassName="nav-icon" />,
+//   },
+//   {
+//     component: CNavItem,
+//     name: 'Video',
+//     to: '/base/Video',
+//     icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+//   
+//   },
+// ]
+// export default _nav;
