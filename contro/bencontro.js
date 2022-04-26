@@ -479,7 +479,7 @@ exports.viinsert_data = async function (req, res, next) {
   // const sid = Math.random();
   
 //  const cnt=1; 
- var sid = 1; 
+ var sid = 2; 
   try {
     // const form = new IncomingForm(formidable);
     const data = {
@@ -641,3 +641,14 @@ exports.viUpdate_data = async function (req, res, next) {
     console.log(error);
   }
 };
+
+
+exports.Upcoming = async function(req,res,next){
+  try {
+      var tag = video.find({
+        
+              })
+  } catch (error) {
+    console.log(error)
+  }
+}
