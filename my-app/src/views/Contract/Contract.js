@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { CCol, CForm, CCard,CCardTitle, CCardBody,CFormLabel, CFormTextarea, CFormInput, CRow,CButton} from '@coreui/react';
 
-
-
-
 function Contract() {
-  return (
+  const [ Movie_Name     ,setMovie_Name] = useState('')
+  const [ Provider_Name  ,setProvider_Name] = useState('')
+  const [ Provider_Phone ,setProvider_Phone] = useState('')
+  const [ Period         ,setPeriod ] = useState('')
+  const [ Provider_Ratio ,setProvider_Ratio ] = useState('')
+  const [ Paltform_Ratio,setPaltform_Ratio ] = useState('')
+  const [ Fee            ,setFee ] = useState('')
+  const [ Payment_Charge ,setPayment_Charge ] = useState('')
+  const [ Company_Name   ,setCompany_Name ] = useState('')
+  const [ Adress         ,setAdress ] = useState('')
+  const [ CIN            ,setCIN ] = useState('')
+  const [ Director_Name  ,setDirector_Name ] = useState('')
+  const [ DIN            ,setDIN ] = useState('')
+
+
+
+
+    return (
     <div>
     <CCard className="mb-4">
       <CCardBody>
@@ -21,7 +35,7 @@ function Contract() {
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content ( Movie ) Name</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" />
+            <CFormInput type="text" value={Movie_Name}  onChange={(e) => {setMovie_Name(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
@@ -33,13 +47,13 @@ function Contract() {
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Name</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" placeholder='Content Provider Name'/>
+            <CFormInput type="text" placeholder='Content Provider Name' value={Provider_Name} onChange={(e) => {setProvider_Name(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Phone</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" placeholder='Content Provider Phone' />
+            <CFormInput type="text" placeholder='Content Provider Phone' value={Provider_Phone} onChange={(e) => {setProvider_Phone(e.target.value)}}  />
             </CCol>
         </CRow>
         <CRow className="mb-3">
@@ -57,30 +71,30 @@ function Contract() {
         <CRow className="mb-3">
         <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Period (In Months)</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" placeholder='Period (In Months)' />
+            <CFormInput type="number" placeholder='Period (In Months)' value={Period}  onChange={(e) => {setPeriod(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="tel" defaultValue="70"  maxLength="2" />
+            <CFormInput type="number" defaultValue="70"  maxLength="2"  value={Provider_Ratio} onChange={(e) => {setProvider_Ratio(e.target.value)}} />
             </CCol>
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" readOnly defaultValue="30" />
+            <CFormInput type="number" readOnly defaultValue="30" value={Paltform_Ratio}  onChange={(e) => {setPaltform_Ratio(e.target.value)}} />
             </CCol>
       </CRow> 
       <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Viewer Ship Fee in ($)</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="number" defaultValue="1" />
+            <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {setFee(e.target.value)}} />
             <p>( The user for one time viewership of content. )</p>
             </CCol>
        </CRow>
        <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Payment Gateway Charges(in %)</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" defaultValue="6" />
+            <CFormInput type="number" defaultValue="6" value={Payment_Charge} onChange={(e) => {setPayment_Charge(e.target.value)}} />
             </CCol>
         </CRow>
         <hr />
@@ -88,31 +102,31 @@ function Contract() {
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Company Name</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" placeholder='Enter Company Name'/>
+            <CFormInput type="text" placeholder='Enter Company Name'  value={Company_Name} onChange={(e) => {setCompany_Name(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Address</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormTextarea type="textarea" placeholder='Enter Address' />
+            <CFormTextarea type="textarea" placeholder='Enter Address'  value={Adress} onChange={(e) => {setAdress(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>CIN</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" placeholder='Enter CIN'/>
+            <CFormInput type="text" placeholder='Enter CIN'  value={CIN} onChange={(e) => {setCIN(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Director Name</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" placeholder='Enter Director Name'/>
+            <CFormInput type="text" placeholder='Enter Director Name'  value={Director_Name} onChange={(e) => {setDirector_Name(e.target.value)}}/>
             </CCol>
         </CRow>
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>DIN</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" placeholder='Enter DIN'/>
+            <CFormInput type="text" placeholder='Enter DIN'  value={DIN} onChange={(e) => {setDIN(e.target.value)}} />
             </CCol>
         </CRow>
 
