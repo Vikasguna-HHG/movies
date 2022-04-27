@@ -4,6 +4,7 @@ import { env } from 'src/environment';
 import axios from 'axios';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { Ratio } from 'react-bootstrap';
 
 function Contract() {
   const [ Movie_Name     ,setMovie_Name] = useState('')
@@ -21,6 +22,13 @@ function Contract() {
   const [ DIN            ,setDIN ] = useState('')
 
 
+  const Ratio = (e) =>{
+    setFee(e.target.value);
+    // console.log(Provider_Ratio)
+
+    var Paltform = 100-parseInt(Provider_Ratio);
+    setPaltform_Ratio(Paltform);  
+  }
   const Submit = async () => {
 
     if (!Movie_Name || !Provider_Name || !Provider_Phone || !Period || !Provider_Ratio || !Paltform_Ratio || !Fee || !Payment_Charge || !Company_Name || !Adress || !CIN || !Director_Name || !DIN) 
@@ -44,10 +52,9 @@ function Contract() {
     formData.append('Director_Name', Director_Name)
     formData.append('DIN', DIN)
 
-    
     try {
       const res = await axios.post(env.apiURL+'Contract', formData)
-      console.log(res)
+      // console.log(res)
     } 
     catch (ex) 
     {
@@ -118,13 +125,14 @@ function Contract() {
             </CCol>
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio}  onChange={(e) => {setPaltform_Ratio(e.target.value)}} />
+            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio}  />
             </CCol>
+                
       </CRow> 
       <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Viewer Ship Fee in ($)</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {setFee(e.target.value)}} />
+            <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {Ratio(e)}} />
             <p>( The user for one time viewership of content. )</p>
             </CCol>
        </CRow>
