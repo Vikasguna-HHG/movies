@@ -1,33 +1,12 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import CIcon from '@coreui/icons-react'
-import {
-  cilAccountLogout,
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDrop,
-  cilLanguage,
-  cilMovie,
-  cilNoteAdd,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-  cilVideo,
-} from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
-import AppContext from './Context'
-import axios from 'axios'
+import { cilLanguage, cilMovie, cilNoteAdd, cilVideo } from '@coreui/icons'
+import { CNavItem } from '@coreui/react'
 
 var sid = localStorage.getItem('sid')
-
-let nav = []; 
-
-
-if (sid == '1') {
-   nav = [
+let nav = []
+if (sid === '1') {
+  nav = [
     {
       component: CNavItem,
       name: 'Admin user',
@@ -51,20 +30,17 @@ if (sid == '1') {
       name: 'Video',
       to: '/base/Video',
       icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-  
     },
   ]
 } else {
-   nav = [
-    
+  nav = [
     {
       component: CNavItem,
       name: 'Video',
       to: '/base/Video',
       icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-  
     },
   ]
 }
 
-export default nav;
+export default nav
