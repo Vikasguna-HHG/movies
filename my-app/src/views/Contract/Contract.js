@@ -21,7 +21,15 @@ function Contract() {
   const [ DIN            ,setDIN ] = useState('')
 
 
+  //phone number validation
+  const checkInput = (e) => {
+    const onlyDigits = e.target.value.replace(/\D/g, "");
+    setProvider_Phone(onlyDigits);
+  };
+
   const Submit = async () => {
+
+    
 
     if (!Movie_Name || !Provider_Name || !Provider_Phone || !Period || !Provider_Ratio || !Paltform_Ratio || !Fee || !Payment_Charge || !Company_Name || !Adress || !CIN || !Director_Name || !DIN) 
     {
@@ -90,7 +98,7 @@ function Contract() {
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Phone</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="number" placeholder='Content Provider Phone' maxLength="10" value={Provider_Phone} onChange={(e) => {setProvider_Phone(e.target.value)}}  />
+            <CFormInput type="tel" placeholder='Content Provider Phone' maxLength="10" value={Provider_Phone}  onChange={(e) => checkInput(e)}  />
             </CCol>
         </CRow>
         <CRow className="mb-3">
