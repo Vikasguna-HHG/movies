@@ -64,10 +64,8 @@ const routes = [
   { path: '/base/Home', name: 'Home', element: Home } ,
   { path: '/base/Categoires', name: 'Tables', element: Categoires },
 
-
-
-
-
+]
+export default routes
 
 
 
@@ -124,6 +122,4 @@ const routes = [
   // { path: '/notifications/modals', name: 'Modals', element: Modals },
   // { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
   // { path: '/widgets', name: 'Widgets', element: Widgets },
-]
 
-export default routes

@@ -25,7 +25,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
-  const [_, userId, handleLoginState] = useContext(AppContext)
+  const [_, userId,sid, handleLoginState] = useContext(AppContext)
 
   localStorage.removeItem('user-info')
 
@@ -35,6 +35,7 @@ const Login = () => {
 
     await axios.post(env.apiURL + 'Mlogin', { User_Name, Password }).then((res) => {
       if (res.data.User) {
+        localStorage.setItem('sid', res.data.User.sid)
         localStorage.setItem('userId', res.data.User._id)
         localStorage.setItem('userName', res.data.User.User_Name)
         localStorage.setItem('token', res.data.auth)
@@ -49,13 +50,12 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (userId) navigate('/base/Video')
-
-    // if (localStorage.getItem('user-info')) {
-    //   navigate('/base/Video')
-    // History.push('/base/Home');
-    // }
+    if (userId){
+      navigate('/base/Video')
+    } 
   }, [])
+
+
 
   // const data = useContext(Appcontext)
   return (
