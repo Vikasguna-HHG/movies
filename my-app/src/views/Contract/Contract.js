@@ -1,5 +1,7 @@
-import React, { useState} from 'react'
+import React, { useState ,useEffect} from 'react'
 import { CCol, CForm, CCard,CCardTitle, CCardBody,CFormLabel, CFormTextarea, CFormInput, CRow,CButton} from '@coreui/react';
+import { env } from 'src/environment';
+import axios from 'axios';
 
 function Contract() {
   const [ Movie_Name     ,setMovie_Name] = useState('')
@@ -17,6 +19,49 @@ function Contract() {
   const [ DIN            ,setDIN ] = useState('')
 
 
+  const Submit = async () => {
+
+    const formData = new FormData()
+    formData.append('Movie_Name', Movie_Name)
+    formData.append('Provider_Name', Provider_Name)
+    formData.append('Provider_Phone', Provider_Phone)
+    formData.append('Period', Period)
+    formData.append('Provider_Ratio', Provider_Ratio)
+    formData.append('Paltform_Ratio', Paltform_Ratio)
+    formData.append('Fee', Fee)
+    formData.append('Payment_Charge', Payment_Charge)
+    formData.append('Company_Name', Company_Name)
+    formData.append('Adress', Adress)
+    formData.append('CIN', CIN)
+    formData.append('Director_Name', Director_Name)
+    formData.append('DIN', DIN)
+
+    
+    try {
+      const res = await axios.post(env.apiURL+'Contracts', formData)
+      console.log(res)
+    } 
+    catch (ex) 
+    {
+      console.log(ex)
+    }
+  } 
+
+
+//find data
+function getdata() {
+    axios.get(env.apiURL+`Contract`).then(function (res) {
+        console.log(res.data)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+  
+  //api calling
+  useEffect(() => {
+    getdata()
+  }, [])
 
 
     return (
@@ -155,7 +200,7 @@ function Contract() {
 
         <hr/>
 
-        <CButton type="submit" style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' , marginLeft:"1150px"}}>Submit</CButton>
+        <CButton type="submit" onClick={Submit} style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' , marginLeft:"1150px"}}>Submit</CButton>
       </CForm>
 
       </CCardBody>

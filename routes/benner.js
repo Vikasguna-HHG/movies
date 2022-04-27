@@ -45,7 +45,6 @@ router.post('/MInsertBanner', upload.single('image'), BannerController.Minsert_d
 router.post('/MUpdateBanner', upload.single('image'), BannerController.MUpdate_data);
 router.delete('/MDeleteBanner/:id', upload.single('image'), BannerController.MDelete_data);
 
-router.post('/Contract', BannerController.Contract_data);
 
 // mukunj api end
 
@@ -69,13 +68,6 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 // router.delete('/viDeleteBanner/:id', upload.single('image'), BannerController.viDelete_data);
 //video api end 
 
-// router.post('/videologin', BannerController.video_login)
-
-
-
-// router.get('/videologin', BannerController.video_login)
-
-
 
 //keyur api start
 router.get('/kfinddata',BannerController.kfind_data);
@@ -90,6 +82,10 @@ router.get('/bannerfind',BannerController.banner_find);
 router.post('/videofind',BannerController.video_find);
 router.get('/Latest',BannerController.latest_find);
 router.get('/Upcoming',BannerController.Upcoming_find);
+
+// Contract api
+router.post('/Contract', upload.single('image'), BannerController.Contract_data);
+
 
 
 module.exports = router;

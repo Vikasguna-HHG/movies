@@ -666,11 +666,8 @@ exports.viUpdate_data = async function (req, res, next) {
 
 
 exports.Contract_data = async function (req, res, next) {
-  // const sid = Math.random();
-  
-//  const cnt=1; 
+ 
   try {
-    // const form = new IncomingForm(formidable);
     const data = {
     
       Movie_Name: req.body.Movie_Name,
@@ -686,13 +683,11 @@ exports.Contract_data = async function (req, res, next) {
       CIN: req.body.CIN,
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
-    //  i mage_user: req.files[0].path,
-    //   banner_video: req.files[1].path,
-    //   Trailer_video: req.files[2].path,
+  
     };
-    // console.log(data);
     const tag = await Contract.create(data);
-
+    console.log(data);
+    console.log(tag);
     res.status(201).json({
       data: tag,
       status: "Data insert",
@@ -700,7 +695,6 @@ exports.Contract_data = async function (req, res, next) {
     console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
-    // console.log(error);
     console.log("not data insert........!");
   }
 };
