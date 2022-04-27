@@ -2,6 +2,8 @@ import React, { useState ,useEffect} from 'react'
 import { CCol, CForm, CCard,CCardTitle, CCardBody,CFormLabel, CFormTextarea, CFormInput, CRow,CButton} from '@coreui/react';
 import { env } from 'src/environment';
 import axios from 'axios';
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function Contract() {
   const [ Movie_Name     ,setMovie_Name] = useState('')
@@ -21,6 +23,12 @@ function Contract() {
 
   const Submit = async () => {
 
+    if (!Movie_Name || !Provider_Name || !Provider_Phone || !Period || !Provider_Ratio || !Paltform_Ratio || !Fee || !Payment_Charge || !Company_Name || !Adress || !CIN || !Director_Name || !DIN) 
+    {
+        alert('Please Enter Data')
+        return
+    }
+
     const formData = new FormData()
     formData.append('Movie_Name', Movie_Name)
     formData.append('Provider_Name', Provider_Name)
@@ -38,7 +46,7 @@ function Contract() {
 
     
     try {
-      const res = await axios.post(env.apiURL+'Contracts', formData)
+      const res = await axios.post(env.apiURL+'Contract', formData)
       console.log(res)
     } 
     catch (ex) 
@@ -46,22 +54,6 @@ function Contract() {
       console.log(ex)
     }
   } 
-
-
-//find data
-function getdata() {
-    axios.get(env.apiURL+`Contract`).then(function (res) {
-        console.log(res.data)
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-  }
-  
-  //api calling
-  useEffect(() => {
-    getdata()
-  }, [])
 
 
     return (
@@ -98,7 +90,7 @@ function getdata() {
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Phone</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" placeholder='Content Provider Phone' value={Provider_Phone} onChange={(e) => {setProvider_Phone(e.target.value)}}  />
+            <CFormInput type="number" placeholder='Content Provider Phone' maxLength="10" value={Provider_Phone} onChange={(e) => {setProvider_Phone(e.target.value)}}  />
             </CCol>
         </CRow>
         <CRow className="mb-3">
@@ -126,7 +118,7 @@ function getdata() {
             </CCol>
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" readOnly defaultValue="30" value={Paltform_Ratio}  onChange={(e) => {setPaltform_Ratio(e.target.value)}} />
+            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio}  onChange={(e) => {setPaltform_Ratio(e.target.value)}} />
             </CCol>
       </CRow> 
       <CRow className="mb-3">

@@ -686,8 +686,6 @@ exports.Contract_data = async function (req, res, next) {
   
     };
     const tag = await Contract.create(data);
-    console.log(data);
-    console.log(tag);
     res.status(201).json({
       data: tag,
       status: "Data insert",
