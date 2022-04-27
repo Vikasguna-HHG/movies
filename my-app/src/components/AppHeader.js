@@ -22,7 +22,7 @@ import AppContext from './../Context'
 import './style.css'
 const AppHeader = () => {
 
-  const [_,__,___,handleLogout] = useContext(AppContext)
+  const [_,__,___,____,handleLogout] = useContext(AppContext)
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
