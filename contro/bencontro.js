@@ -546,17 +546,21 @@ exports.banner_find = async function (req, res, next) {
 };
 
 exports.video_find = async function (req, res, next) {
-  // try {
-    console.log(req)
-    const tag = await video.findById(req.params.id);
-      console.log(req);
+  try {
+    // console.log(req.body)
+    
+    const tag = await video.findById(req.body.id);
+  
     res.status(200).json({
       status: "find data",
-      data: tag,
+      data: [tag],
     });
-  // } catch (error) {
-  //   console.log("not find data........!");
-  // }
+  } catch (error) {
+    res.status(200).json({
+      status: "find data",
+      data: [],
+    });
+  }
 };
 
 exports.latest_find = async function (req, res, next) {
