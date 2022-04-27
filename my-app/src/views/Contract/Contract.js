@@ -1,5 +1,7 @@
 import React from 'react'
-import { CCol, CForm, CCard,CCardTitle, CCardBody,CFormLabel,  CFormInput, CRow,CButton} from '@coreui/react'
+import { CCol, CForm, CCard,CCardTitle, CCardBody,CFormLabel, CFormTextarea, CFormInput, CRow,CButton} from '@coreui/react';
+
+
 
 
 function Contract() {
@@ -61,11 +63,11 @@ function Contract() {
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" defaultValue="70" />
+            <CFormInput type="tel" defaultValue="70"  maxLength="2" />
             </CCol>
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" defaultValue="30" />
+            <CFormInput type="number" readOnly defaultValue="30" />
             </CCol>
       </CRow> 
       <CRow className="mb-3">
@@ -92,7 +94,7 @@ function Contract() {
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Address</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="textarea" placeholder='Enter Address'/>
+            <CFormTextarea type="textarea" placeholder='Enter Address' />
             </CCol>
         </CRow>
         <CRow className="mb-3">
@@ -118,13 +120,28 @@ function Contract() {
             <CCardTitle><h6>Contract With Client</h6></CCardTitle>
         <hr/>
 
+        <CRow className="mb-3">
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Company Name</h6></CFormLabel>
+            <CCol sm={10} >
+            <CFormInput type="text" readOnly placeholder='HHG Softech Private Limited'/>
+            </CCol>
+        </CRow>
+        <CRow className="mb-3">
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Address</h6></CFormLabel>
+            <CCol sm={10} >
+            <CFormTextarea type="textarea" readOnly placeholder='Surat Gujarat' />
+            </CCol>
+        </CRow>
+        <CRow className="mb-3">
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Director Name</h6></CFormLabel>
+            <CCol sm={10} >
+            <CFormTextarea type="textarea" readOnly placeholder='HHG' />
+            </CCol>
+        </CRow>
 
+        <hr/>
 
-
-
-
-
-        <CButton type="submit" style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' }}>Submit</CButton>
+        <CButton type="submit" style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' , marginLeft:"1150px"}}>Submit</CButton>
       </CForm>
 
       </CCardBody>
