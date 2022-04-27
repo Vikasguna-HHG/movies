@@ -107,14 +107,14 @@
 .font1
 {
 	color: white;
-	max-width: 500px;
+	max-width: 600px;
 	font-size: 16px;
     line-height: 30px;
-    height: 55px;
+    height: 105px;
 	overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp:3;
-    -webkit-box-orient: vertical;
+    -webkit-line-clamp:5;
+    -webkit-box-orient:horizontal;
 	text-align: left;
 
 }
