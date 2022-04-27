@@ -1,6 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilLanguage, cilMovie, cilNoteAdd, cilVideo } from '@coreui/icons'
+import { cilFindInPage, cilLanguage, cilMovie, cilNoteAdd, cilVideo } from '@coreui/icons'
 import { CNavItem } from '@coreui/react'
 
 var sid = localStorage.getItem('sid')
@@ -12,6 +12,12 @@ if (sid === '1') {
       name: 'Admin user',
       to: '/base/Home',
       icon: <CIcon icon={cilMovie} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Contract',
+      to: '/base/Contract',
+      icon: <CIcon icon={cilFindInPage} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
@@ -39,6 +45,12 @@ if (sid === '1') {
       name: 'Video',
       to: '/base/Video',
       icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Contract',
+      to: '/base/Contract',
+      icon: <CIcon icon={cilFindInPage} customClassName="nav-icon" />,
     },
   ]
 }
