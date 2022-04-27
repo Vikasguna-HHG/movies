@@ -58,54 +58,16 @@ const Home = () => {
   // const [visible1, setVisible1] = useState(false)
   const [search, setSearch] = useState('')
   
-  // const saveFile = (e) => {
-    //   setImageval(e.target.files[0]);
-    // }
-    
-    // const update = (e) =>
-  // {
+    const  open = ()=>{
+     setFirst_Name('')
+     setLast_Name('')
+     setUser_Name('')
+     setEmail('')
+     
+     setVisible(true)
+      }
 
-  // }
-                  const  open = ()=>{
-                    setFirst_Name('')
-                    setLast_Name('')
-                    setUser_Name('')
-                    setEmail('')
-                    
-                    setVisible(true)
-                     }
-
-    // setFirst_Name('');
-    // setLast_Name('');
-    //   });
-    //   return;
-
-    // }
-    // setFirst_Name('')
-    // setLast_Name('')
-    // setUser_Name('')
-    // setEmail('')
-    // if(!Email){
-    //   alert("hello")
-    // }
-    // if (id === 0) {
    
-    //   const formData = new FormData();
-      // axios.post(env.apiURL+'InsertBanner', {
-      //   First_Name: First_Name,
-      //   Last_Name: Last_Name,
-      //   image_user: imageval,
-      // })
-      //   .then(function (res) {
-      //     // console.log();
-      //     setList([...list, res.data.data])
-      //     console.log(res);
-
-      //     toast.success("data insrted", {
-      //       autoClose: 2000
-      //     });
-      //   })
-    // }
     const submit = async () => {
     
       const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
@@ -163,12 +125,7 @@ const Home = () => {
         
 
       }
-      // else  if(formData.data.data.Email === Email){
-      //   alert("hello");
-
-      //   // setEmailmsg("Already email existed") 
-      //   // document.getElementById("email").style.border="1px solid red"
-      // }
+   
       else if (Email === "") {
         setEmailmsg("");
         document.getElementById("email").style.border="1px solid red"

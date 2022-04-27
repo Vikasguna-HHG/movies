@@ -23,10 +23,13 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 function App() {
   const [User_Name, setUser_Name] = useState('')
   const [userId, setUserId] = useState('')
+  const [sid, setsid] = useState('')
 
   function handleLogout() {
     localStorage.removeItem('userName')
     localStorage.removeItem('userId')
+    localStorage.removeItem('sid')
+
 
     window.location.href = window.location.href
   }
@@ -34,14 +37,17 @@ function App() {
   function handleLoginState() {
     let name = localStorage.getItem('userName')
     let user = localStorage.getItem('userId')
+    let sid =  localStorage.getItem('sid')
 
     if (user) {
       setUser_Name(name)
       setUserId(user)
+      setsid(sid)
       // setUserStatus(true)
     } else {
       setUser_Name('')
       setUserId('')
+      setsid('')
     }
   }
 
@@ -51,7 +57,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Appcontext.Provider value={[User_Name, userId, handleLoginState, handleLogout]}>
+      <Appcontext.Provider value={[User_Name, userId, sid,handleLoginState, handleLogout]}>
         <Suspense fallback={loading}>
           <Routes>
             <Route path="/" name="Login Page" element={<Login />} />
