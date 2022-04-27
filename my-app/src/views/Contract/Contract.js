@@ -142,9 +142,9 @@ function Contract() {
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Viewer Ship Fee in ($)</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {Ratio(e)}} />
-    <CCol sm={10} >
-            <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {setFee(e.target.value)}} />
-            <p>( The user for one time viewership of content. )</p>
+            {/* <CCol sm={10} >
+            <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {setFee(e.target.value)}} />*/}
+            <p>( The user for one time viewership of content. )</p> 
             </CCol>
        </CRow>
        <CRow className="mb-3">
