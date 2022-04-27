@@ -45,6 +45,7 @@ router.post('/MInsertBanner', upload.single('image'), BannerController.Minsert_d
 router.post('/MUpdateBanner', upload.single('image'), BannerController.MUpdate_data);
 router.delete('/MDeleteBanner/:id', upload.single('image'), BannerController.MDelete_data);
 
+router.post('/Contract', BannerController.Contract_data);
 
 // mukunj api end
 

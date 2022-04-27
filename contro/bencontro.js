@@ -3,6 +3,7 @@ var subcategoires = require("../Models/subcategoires");
 var movie_maker = require("../Models/movie_maker");
 var language = require("../Models/language");
 var video = require("../Models/video");
+var Contract = require("../Models/Contract");
 var $ = require("jquery");
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
@@ -664,3 +665,42 @@ exports.viUpdate_data = async function (req, res, next) {
 };
 
 
+exports.Contract_data = async function (req, res, next) {
+  // const sid = Math.random();
+  
+//  const cnt=1; 
+  try {
+    // const form = new IncomingForm(formidable);
+    const data = {
+    
+      Movie_Name: req.body.Movie_Name,
+      Provider_Name: req.body.Provider_Name,
+      Provider_Phone: req.body.Provider_Phone,
+      Period: req.body.Period,
+      Provider_Ratio: req.body.Provider_Ratio,
+      Paltform_Ratio: req.body.Paltform_Ratio,
+      Fee: req.body.Fee,
+      Payment_Charge: req.body.Payment_Charge,
+      Company_Name: req.body.Company_Name,
+      Adress: req.body.Adress,
+      CIN: req.body.CIN,
+      Director_Name: req.body.Director_Name,
+      DIN: req.body.DIN,
+    //  i mage_user: req.files[0].path,
+    //   banner_video: req.files[1].path,
+    //   Trailer_video: req.files[2].path,
+    };
+    // console.log(data);
+    const tag = await Contract.create(data);
+
+    res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
+    console.log(tag);
+  } catch (error) {
+    res.status(201).json({ error });
+    // console.log(error);
+    console.log("not data insert........!");
+  }
+};
