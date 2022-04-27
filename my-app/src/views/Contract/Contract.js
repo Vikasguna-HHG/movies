@@ -80,66 +80,66 @@ function Contract() {
       <hr/>
       <CForm>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Title Form</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Title Form :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" readOnly placeholder='Master Content Streaming Agreement'/>
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content ( Movie ) Name</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content ( Movie ) Name :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" value={Movie_Name}  onChange={(e) => {setMovie_Name(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Application URL</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Application URL :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" readOnly placeholder='https://client-hhg.netlify.app/'/>
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Name</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Name :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" placeholder='Content Provider Name' value={Provider_Name} onChange={(e) => {setProvider_Name(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Phone</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Phone :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="tel" placeholder='Content Provider Phone' maxLength="10" value={Provider_Phone}  onChange={(e) => checkInput(e)}  />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Platform Email</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Platform Email :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" readOnly placeholder='hhgsoftechteam10@gmail.com'/>
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Platform Phone</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Platform Phone :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" readOnly placeholder='+91 73500****'/>
             </CCol>
         </CRow>
         <CRow className="mb-3">
-        <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Period (In Months)</h6></CFormLabel>
+        <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Period (In Months) :-</h6></CFormLabel>
             <CCol sm={4} >
             <CFormInput type="number" placeholder='Period (In Months)' value={Period}  onChange={(e) => {setPeriod(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Ratio</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Ratio :-</h6></CFormLabel>
             <CCol sm={4} >
             <CFormInput type="number" defaultValue="70"  maxLength="2"  value={Provider_Ratio} onChange={(e) => {setProvider_Ratio(e.target.value)}} />
             </CCol>
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio :-</h6></CFormLabel>
             <CCol sm={4} >
             <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio}  />
             </CCol>
                 
       </CRow> 
       <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Viewer Ship Fee in ($)</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Viewer Ship Fee in ($) :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {Ratio(e)}} />
             {/* <CCol sm={10} >
@@ -148,7 +148,7 @@ function Contract() {
             </CCol>
        </CRow>
        <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Payment Gateway Charges(in %)</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Payment Gateway Charges(in %) :-</h6></CFormLabel>
             <CCol sm={4} >
             <CFormInput type="number" defaultValue="6" value={Payment_Charge} onChange={(e) => {setPayment_Charge(e.target.value)}} />
             </CCol>
@@ -156,31 +156,31 @@ function Contract() {
         <hr />
     
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Company Name</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Company Name :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" placeholder='Enter Company Name'  value={Company_Name} onChange={(e) => {setCompany_Name(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Address</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Address :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormTextarea type="textarea" placeholder='Enter Address'  value={Adress} onChange={(e) => {setAdress(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>CIN</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>CIN :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" placeholder='Enter CIN'  value={CIN} onChange={(e) => {setCIN(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Director Name</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Director Name :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" placeholder='Enter Director Name'  value={Director_Name} onChange={(e) => {setDirector_Name(e.target.value)}}/>
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>DIN</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>DIN :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" placeholder='Enter DIN'  value={DIN} onChange={(e) => {setDIN(e.target.value)}} />
             </CCol>
@@ -191,19 +191,19 @@ function Contract() {
         <hr/>
 
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Company Name</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Company Name :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormInput type="text" readOnly placeholder='HHG Softech Private Limited'/>
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Address</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Address :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormTextarea type="textarea" readOnly placeholder='Surat Gujarat' />
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Director Name</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6> Director Name :-</h6></CFormLabel>
             <CCol sm={10} >
             <CFormTextarea type="textarea" readOnly placeholder='HHG' />
             </CCol>
