@@ -1,10 +1,8 @@
-import React, { Component, Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import Appcontext from './Context'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
 import './App.css'
-import { AppContent } from './components'
-import Home from './views/Home/Home'
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -29,8 +27,7 @@ function App() {
     localStorage.removeItem('userName')
     localStorage.removeItem('userId')
     localStorage.removeItem('sid')
-
-
+    localStorage.removeItem('token')
     window.location.href = window.location.href
   }
 

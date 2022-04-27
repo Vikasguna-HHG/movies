@@ -12,8 +12,11 @@ import { sygnet } from 'src/assets/brand/sygnet'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 import '../'
+import nav from 'src/Nav'
 // sidebar nav config
-import navigation from '../_nav'
+// import Nav from '../_nav'
+
+
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
@@ -35,7 +38,8 @@ const AppSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav style={{backgroundImage:"linear-gradient(to right,#16222A,#3A6073)"}}>
         <SimpleBar className="hello">
-          <AppSidebarNav items={navigation}/>
+          <AppSidebarNav items={nav}  />
+          {/* <AppSidebarNav element={<Nav />} /> */}
         </SimpleBar>
       </CSidebarNav>
       {/* <CSidebarToggler
