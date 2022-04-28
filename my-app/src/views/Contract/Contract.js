@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Ratio } from 'react-bootstrap';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Category from '../Categories/Categoires';
 // import { func } from 'prop-types';
 toast.configure();
 function Contract() {
@@ -84,7 +85,7 @@ function Contract() {
      doc.text(Provider_Phone, 10, 30);
      doc.text(Period, 10, 40);
      doc.text(Provider_Ratio, 10, 50);
-    //  doc.text(Paltform_Ratio, 10, 60);
+     doc.text(Paltform_Ratio, 10, 60);
      doc.text(Fee, 10, 70);
      doc.text(Payment_Charge, 10, 80);
      doc.text(Company_Name, 10, 90);
@@ -95,6 +96,21 @@ function Contract() {
      
      doc.save("a4.pdf"); 
    
+
+
+     setMovie_Name('');
+     setProvider_Name('');
+     setProvider_Phone('');
+     setPeriod('');
+     setProvider_Ratio('');
+     setPaltform_Ratio('');
+     setFee('');
+     setPayment_Charge('');
+     setCompany_Name('');
+     setAdress('');
+     setCIN('');
+     setDirector_Name('');
+     setDIN('');
   } 
 
 
@@ -112,9 +128,9 @@ function Contract() {
             </CCol>
         </CRow>
         <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content ( Movie ) Name</h6></CFormLabel>
+            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content (Movie) Name</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="text" value={Movie_Name}  onChange={(e) => {setMovie_Name(e.target.value)}} />
+            <CFormInput type="text" placeholder='Enter Content (Movie) Name' value={Movie_Name}  onChange={(e) => {setMovie_Name(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
@@ -160,7 +176,7 @@ function Contract() {
             </CCol>
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio}  />
+            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio}  onChange={(e) => {setPaltform_Ratio(e.target.value)}}  />
             </CCol>
                 
       </CRow> 
