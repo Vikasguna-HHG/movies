@@ -10,6 +10,14 @@ var usersRouter = require('./routes/users');
 var bennerRouter = require('./routes/benner');
 var app = express();
 
+
+
+
+
+
+
+
+
 const checkurl = function(req,res,next) 
 {
   console.log("current route  is", req.originalUrl);

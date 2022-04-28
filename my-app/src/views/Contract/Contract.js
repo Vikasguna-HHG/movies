@@ -28,12 +28,9 @@ function Contract() {
     //Provider_Ratio
     const Ratio = (e) =>{
         setFee(e.target.value);
-        // console.log(Provider_Ratio)
-
         var Paltform = 100-parseInt(Provider_Ratio);
-        setPaltform_Ratio(Paltform);  
+        setPaltform_Ratio(Paltform); 
     }
-
 
     //phone number validation
     const checkInput = (e) => {
@@ -41,18 +38,18 @@ function Contract() {
         setProvider_Phone(onlyDigits);
     };
 
-  const Submit = async () => {
+    const Submit = async () => {
 
     if (!Movie_Name || !Provider_Name || !Provider_Phone || !Period || !Provider_Ratio || !Paltform_Ratio || !Fee || !Payment_Charge || !Company_Name || !Adress || !CIN || !Director_Name || !DIN) 
     {
-        // alert('Please Enter Data')
-
         toast.warning('Please Enter Data', {
             autoClose: 2000,
           })
-        // return
-
+        return
     }
+
+    
+    
 
     const formData = new FormData()
     formData.append('Movie_Name', Movie_Name)
@@ -77,6 +74,27 @@ function Contract() {
     {
       console.log(ex)
     }
+
+     //pdf 
+     const { jsPDF } = require("jspdf"); 
+
+     const doc = new jsPDF();
+     doc.text(Movie_Name, 10, 10);
+     doc.text(Provider_Name, 10, 20);
+     doc.text(Provider_Phone, 10, 30);
+     doc.text(Period, 10, 40);
+     doc.text(Provider_Ratio, 10, 50);
+    //  doc.text(Paltform_Ratio, 10, 60);
+     doc.text(Fee, 10, 70);
+     doc.text(Payment_Charge, 10, 80);
+     doc.text(Company_Name, 10, 90);
+     doc.text(Adress, 10, 100);
+     doc.text(CIN, 10, 110);
+     doc.text(Director_Name, 10, 120);
+     doc.text(DIN, 10, 130);
+     
+     doc.save("a4.pdf"); 
+   
   } 
 
 
