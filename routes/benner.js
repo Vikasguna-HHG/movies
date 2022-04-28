@@ -18,6 +18,8 @@ var upload = multer({
     storage: storage,
 })
 
+
+
 // router.get('/', function (req, res, next) {
 //     res.render('benner', { title: 'Wel come to benner.js' });
 // });

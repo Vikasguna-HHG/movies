@@ -26,20 +26,21 @@ function Contract() {
   const [ DIN            ,setDIN ] = useState('')
 
 
-    //Provider_Ratio
-    const Ratio = (e) =>{
-        setFee(e.target.value);
-        var Paltform = 100-parseInt(Provider_Ratio);
-        setPaltform_Ratio(Paltform); 
-    }
+//Provider_Ratio
+const Ratio = (e) =>{
+    setFee(e.target.value);
+    var Paltform = 100-parseInt(Provider_Ratio);
+    setPaltform_Ratio(Paltform); 
+}
 
-    //phone number validation
-    const checkInput = (e) => {
-        const onlyDigits = e.target.value.replace(/\D/g, "");
-        setProvider_Phone(onlyDigits);
-    };
+//phone number validation
+const checkInput = (e) => {
+    const onlyDigits = e.target.value.replace(/\D/g, "");
+    setProvider_Phone(onlyDigits);
+};
 
-    const Submit = async () => {
+//Submit data
+const Submit = async () => {
 
     if (!Movie_Name || !Provider_Name || !Provider_Phone || !Period || !Provider_Ratio || !Paltform_Ratio || !Fee || !Payment_Charge || !Company_Name || !Adress || !CIN || !Director_Name || !DIN) 
     {
@@ -48,9 +49,6 @@ function Contract() {
           })
         return
     }
-
-    
-    
 
     const formData = new FormData()
     formData.append('Movie_Name', Movie_Name)
@@ -80,21 +78,22 @@ function Contract() {
      const { jsPDF } = require("jspdf"); 
 
      const doc = new jsPDF();
-     doc.text(Movie_Name, 10, 10);
-     doc.text(Provider_Name, 10, 20);
-     doc.text(Provider_Phone, 10, 30);
-     doc.text(Period, 10, 40);
-     doc.text(Provider_Ratio, 10, 50);
-     doc.text(Paltform_Ratio, 10, 60);
-     doc.text(Fee, 10, 70);
-     doc.text(Payment_Charge, 10, 80);
-     doc.text(Company_Name, 10, 90);
-     doc.text(Adress, 10, 100);
-     doc.text(CIN, 10, 110);
-     doc.text(Director_Name, 10, 120);
-     doc.text(DIN, 10, 130);
+     doc.text("********************************** Contract ***************************************", 10, 10);
+     doc.text("Movie Name :- " +Movie_Name, 10, 20);
+     doc.text("Provider Name :- " +Provider_Name, 10, 30);
+     doc.text("Provider Phone :- " +Provider_Phone, 10, 40);
+     doc.text("Period :- " +Period, 10, 50);
+     doc.text("Provider Ratio :- " +Provider_Ratio, 10, 60);
+     doc.text("Paltform Ratio :- " +Paltform_Ratio, 10, 70);
+     doc.text("Fee :- " +Fee, 10, 80);
+     doc.text("Payment Charge :- " +Payment_Charge, 10, 90);
+     doc.text("Company Name :- " +Company_Name, 10, 100);
+     doc.text("Adress :- " +Adress, 10, 110);
+     doc.text("CIN :- " +CIN, 10, 120);
+     doc.text("Director Name :- " +Director_Name, 10, 130);
+     doc.text("DIN :- " +DIN, 10, 140);
      
-     doc.save("a4.pdf"); 
+     doc.save("aa4.pdf"); 
    
 
 
@@ -176,7 +175,7 @@ function Contract() {
             </CCol>
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio}  onChange={(e) => {setPaltform_Ratio(e.target.value)}}  />
+            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio} onChange={(e) => {setPaltform_Ratio(e.target.value)}}  />
             </CCol>
                 
       </CRow> 
