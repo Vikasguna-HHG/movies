@@ -4,51 +4,64 @@ const contract = new mongoose.Schema({
   
     Movie_Name:
     {
-        type:String
+        type:String,
+        required:true
     },
     Provider_Name:
     {
-        type:String
+        type:String,
+        required:true
     },
     Provider_Phone:
     {
-        type:Number
+        type:Number,
+        required:true
     },
     Period:
     {
-        type:Number
+        type:Number,
+        required:true
     },  
     Provider_Ratio:
     {
-        type:Number
+        type:Number,
+        required:true
     },
     Paltform_Ratio:
     {
-        type:Number
+        type:Number,
+        required:true
     },
     Fee:{
-        type:String
+        type:String,
+        required:true
     },
     Payment_Charge:{
-        type:String
+        type:String,
+        required:true
     },
     Company_Name:{
-        type:String
+        type:String,
+        required:true
     },
     Adress:{
-        type:String
+        type:String,
+        required:true
     },
     CIN:
     {
-        type:String
+        type:String,
+        required:true
     },
     Director_Name:
     {
-        type:String
+        type:String,
+        required:true
     },
     DIN:{
 
-        type:String
+        type:String,
+        required:true
     }   
    
 })

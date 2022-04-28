@@ -2,10 +2,13 @@ import React, { useState ,useEffect} from 'react'
 import { CCol, CForm, CCard,CCardTitle, CCardBody,CFormLabel, CFormTextarea, CFormInput, CRow,CButton} from '@coreui/react';
 import { env } from 'src/environment';
 import axios from 'axios';
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Ratio } from 'react-bootstrap';
-
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+// import { func } from 'prop-types';
+toast.configure();
 function Contract() {
   const [ Movie_Name     ,setMovie_Name] = useState('')
   const [ Provider_Name  ,setProvider_Name] = useState('')
@@ -33,8 +36,13 @@ function Contract() {
 
     if (!Movie_Name || !Provider_Name || !Provider_Phone || !Period || !Provider_Ratio || !Paltform_Ratio || !Fee || !Payment_Charge || !Company_Name || !Adress || !CIN || !Director_Name || !DIN) 
     {
-        alert('Please Enter Data')
-        return
+        // alert('Please Enter Data')
+
+        toast.warning('Please Enter Data', {
+            autoClose: 2000,
+          })
+        // return
+
     }
 
     const formData = new FormData()
@@ -200,7 +208,7 @@ function Contract() {
 
         <hr/>
 
-        <CButton type="submit" onClick={Submit} style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' , marginLeft:"1150px"}}>Submit</CButton>
+        <CButton  onClick={Submit} style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' , marginLeft:"1150px"}}>Submit</CButton>
       </CForm>
 
       </CCardBody>

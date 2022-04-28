@@ -34,8 +34,8 @@ import {env} from '../../environment'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // import { func } from 'prop-types';
-const axios = require('axios')
 toast.configure()
+const axios = require('axios')
 const Home = () => {
   // const [currentImage, setCurrentImage] = useState(0);
   // const [isViewerOpen, setIsViewerOpen] = useState(false);
