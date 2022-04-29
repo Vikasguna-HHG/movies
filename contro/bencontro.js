@@ -672,20 +672,20 @@ exports.Contract_data = async function (req, res, next) {
     const { jsPDF } = require("jspdf"); 
     
     const doc = new jsPDF();
-    doc.text("*******************************Contract *******************************", 10, 10);
-    doc.text("Movie Name :- "     +req.body.Movie_Name, 10, 20);
-    doc.text("Provider Name :- "  +req.body.Provider_Name, 10, 30);
+    doc.text("******************************* Contract *******************************", 10, 10);
+    doc.text("Movie Name :- "     +req.body.Movie_Name,     10, 20);
+    doc.text("Provider Name :- "  +req.body.Provider_Name,  10, 30);
     doc.text("Provider Phone :- " +req.body.Provider_Phone, 10, 40);
-    doc.text("Period :- "         +req.body.Period, 10, 50);
+    doc.text("Period :- "         +req.body.Period,         10, 50);
     doc.text("Provider Ratio :- " +req.body.Provider_Ratio, 10, 60);
     doc.text("Paltform Ratio :- " +req.body.Paltform_Ratio, 10, 70);
-    doc.text("Fee :- "            +req.body.Fee, 10, 80);
+    doc.text("Fee :- "            +req.body.Fee,            10, 80);
     doc.text("Payment Charge :- " +req.body.Payment_Charge, 10, 90);
-    doc.text("Company Name :- "   +req.body.Company_Name, 10, 100);
-    doc.text("Adress :- "         +req.body.Adress, 10, 110);
-    doc.text("CIN :- "            +req.body.CIN, 10, 120);
-    doc.text("Director Name :- "  +req.body.Director_Name, 10, 130);
-    doc.text("DIN :- "            +req.body.DIN, 10, 140);
+    doc.text("Company Name :- "   +req.body.Company_Name,   10, 100);
+    doc.text("Adress :- "         +req.body.Adress,         10, 110);
+    doc.text("CIN :- "            +req.body.CIN,            10, 120);
+    doc.text("Director Name :- "  +req.body.Director_Name,  10, 130);
+    doc.text("DIN :- "            +req.body.DIN,            10, 140);
     
     var name = "Contact pdf-"+Date.now()
     var pdf = `upload/pdf/${name}.pdf`
