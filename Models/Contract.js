@@ -62,6 +62,9 @@ const contract = new mongoose.Schema({
 
         type:String,
         required:true
+    },
+    Contract_pdf:{
+        type:String
     }   
    
 })

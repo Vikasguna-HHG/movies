@@ -669,6 +669,27 @@ exports.viUpdate_data = async function (req, res, next) {
 exports.Contract_data = async function (req, res, next) {
  
   try {
+    const { jsPDF } = require("jspdf"); 
+    
+    const doc = new jsPDF();
+    doc.text("*******************************Contract *******************************", 10, 10);
+    doc.text("Movie Name :- "     +req.body.Movie_Name, 10, 20);
+    doc.text("Provider Name :- "  +req.body.Provider_Name, 10, 30);
+    doc.text("Provider Phone :- " +req.body.Provider_Phone, 10, 40);
+    doc.text("Period :- "         +req.body.Period, 10, 50);
+    doc.text("Provider Ratio :- " +req.body.Provider_Ratio, 10, 60);
+    doc.text("Paltform Ratio :- " +req.body.Paltform_Ratio, 10, 70);
+    doc.text("Fee :- "            +req.body.Fee, 10, 80);
+    doc.text("Payment Charge :- " +req.body.Payment_Charge, 10, 90);
+    doc.text("Company Name :- "   +req.body.Company_Name, 10, 100);
+    doc.text("Adress :- "         +req.body.Adress, 10, 110);
+    doc.text("CIN :- "            +req.body.CIN, 10, 120);
+    doc.text("Director Name :- "  +req.body.Director_Name, 10, 130);
+    doc.text("DIN :- "            +req.body.DIN, 10, 140);
+    
+    var name = "Contact pdf-"+Date.now()
+    var pdf = `upload/pdf/${name}.pdf`
+    doc.save(pdf); 
     const data = {
     
       Movie_Name: req.body.Movie_Name,
@@ -684,30 +705,11 @@ exports.Contract_data = async function (req, res, next) {
       CIN: req.body.CIN,
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
+      Contract_pdf:pdf
   };
 
   //pdf 
-const { jsPDF } = require("jspdf"); 
-
-const doc = new jsPDF();
-doc.text("******************************* Welcome To Contract *******************************", 10, 10);
-doc.text("Movie Name :- "     +data.Movie_Name, 10, 20);
-doc.text("Provider Name :- "  +data.Provider_Name, 10, 30);
-doc.text("Provider Phone :- " +data.Provider_Phone, 10, 40);
-doc.text("Period :- "         +data.Period, 10, 50);
-doc.text("Provider Ratio :- " +data.Provider_Ratio, 10, 60);
-doc.text("Paltform Ratio :- " +data.Paltform_Ratio, 10, 70);
-doc.text("Fee :- "            +data.Fee, 10, 80);
-doc.text("Payment Charge :- " +data.Payment_Charge, 10, 90);
-doc.text("Company Name :- "   +data.Company_Name, 10, 100);
-doc.text("Adress :- "         +data.Adress, 10, 110);
-doc.text("CIN :- "            +data.CIN, 10, 120);
-doc.text("Director Name :- "  +data.Director_Name, 10, 130);
-doc.text("DIN :- "            +data.DIN, 10, 140);
-
-var name = Math.random()
-
-doc.save(`upload/pdf/${name}.pdf`); 
+// console.log(pdf)
 
 
 
@@ -716,7 +718,7 @@ doc.save(`upload/pdf/${name}.pdf`);
       data: tag,
       status: "Data insert",
     });
-    console.log(tag);
+    // console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
     console.log("not data insert........!");
