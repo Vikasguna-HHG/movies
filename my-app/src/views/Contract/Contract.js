@@ -84,25 +84,22 @@ const Submit = async () => {
 
      const doc = new jsPDF();
      doc.text("********************************** Contract ***************************************", 10, 10);
-     doc.text("Movie Name :- "     +Movie_Name, 10, 20);
-     doc.text("Provider Name :- "  +Provider_Name, 10, 30);
-     doc.text("Provider Phone :- " +Provider_Phone, 10, 40);
-     doc.text("Period :- "         +Period, 10, 50);
-     doc.text("Provider Ratio :- " +Provider_Ratio, 10, 60);
-     doc.text("Paltform Ratio :- " +Paltform_Ratio, 10, 70);
-     doc.text("Fee :- "            +Fee, 10, 80);
-     doc.text("Payment Charge :- " +Payment_Charge, 10, 90);
-     doc.text("Company Name :- "   +Company_Name, 10, 100);
-     doc.text("Adress :- "         +Adress, 10, 110);
-     doc.text("CIN :- "            +CIN, 10, 120);
-     doc.text("Director Name :- "  +Director_Name, 10, 130);
-     doc.text("DIN :- "            +DIN, 10, 140);
+     doc.text("Movie Name :- "     +Movie_Name,         10, 20);
+     doc.text("Provider Name :- "  +Provider_Name,      10, 30);
+     doc.text("Provider Phone :- " +Provider_Phone,     10, 40);
+     doc.text("Period :- "         +Period,             10, 50);
+     doc.text("Provider Ratio :- " +Provider_Ratio,     10, 60);
+     doc.text("Paltform Ratio :- " +Paltform_Ratio,     10, 70);
+     doc.text("Fee :- "            +Fee,                10, 80);
+     doc.text("Payment Charge :- " +Payment_Charge,     10, 90);
+     doc.text("Company Name :- "   +Company_Name,       10, 100);
+     doc.text("Adress :- "         +Adress,             10, 110);
+     doc.text("CIN :- "            +CIN,                10, 120);
+     doc.text("Director Name :- "  +Director_Name,      10, 130);
+     doc.text("DIN :- "            +DIN,                10, 140);
      
-     var name = Math.random()
-
+     var name = "Contact pdf-"+Date.now()
      doc.save(`${name}.pdf`); 
-   
-
 
      setMovie_Name('');
      setProvider_Name('');
