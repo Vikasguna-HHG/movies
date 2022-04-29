@@ -96,11 +96,8 @@ const Submit = async () => {
      doc.text("Director Name :- "  +Director_Name, 10, 130);
      doc.text("DIN :- "            +DIN, 10, 140);
      
-     var name = Math.random()
-
+     var name = "Contact pdf-"+Date.now()
      doc.save(`${name}.pdf`); 
-   
-
 
      setMovie_Name('');
      setProvider_Name('');
