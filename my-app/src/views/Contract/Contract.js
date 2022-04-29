@@ -93,7 +93,7 @@ function Contract() {
       setDirector_Name('')
       setDIN('')
       // <Pdf/>
-      navigate('/base/pdf')
+      navigate('/base/Pdf')
     }
 
     const formData = new FormData()
