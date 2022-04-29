@@ -686,28 +686,28 @@ exports.Contract_data = async function (req, res, next) {
       DIN: req.body.DIN,
   };
 
-  //pdf 
-const { jsPDF } = require("jspdf"); 
+    //pdf generator
+    const { jsPDF } = require("jspdf"); 
 
-const doc = new jsPDF();
-doc.text("******************************* Welcome To Contract *******************************", 10, 10);
-doc.text("Movie Name :- "     +data.Movie_Name, 10, 20);
-doc.text("Provider Name :- "  +data.Provider_Name, 10, 30);
-doc.text("Provider Phone :- " +data.Provider_Phone, 10, 40);
-doc.text("Period :- "         +data.Period, 10, 50);
-doc.text("Provider Ratio :- " +data.Provider_Ratio, 10, 60);
-doc.text("Paltform Ratio :- " +data.Paltform_Ratio, 10, 70);
-doc.text("Fee :- "            +data.Fee, 10, 80);
-doc.text("Payment Charge :- " +data.Payment_Charge, 10, 90);
-doc.text("Company Name :- "   +data.Company_Name, 10, 100);
-doc.text("Adress :- "         +data.Adress, 10, 110);
-doc.text("CIN :- "            +data.CIN, 10, 120);
-doc.text("Director Name :- "  +data.Director_Name, 10, 130);
-doc.text("DIN :- "            +data.DIN, 10, 140);
+    const doc = new jsPDF();
+    doc.text("********************************** Contract *********************************", 10, 10);
+    doc.text("Movie Name :- "     +data.Movie_Name, 10, 20);
+    doc.text("Provider Name :- "  +data.Provider_Name, 10, 30);
+    doc.text("Provider Phone :- " +data.Provider_Phone, 10, 40);
+    doc.text("Period :- "         +data.Period, 10, 50);
+    doc.text("Provider Ratio :- " +data.Provider_Ratio, 10, 60);
+    doc.text("Paltform Ratio :- " +data.Paltform_Ratio, 10, 70);
+    doc.text("Fee :- "            +data.Fee, 10, 80);
+    doc.text("Payment Charge :- " +data.Payment_Charge, 10, 90);
+    doc.text("Company Name :- "   +data.Company_Name, 10, 100);
+    doc.text("Adress :- "         +data.Adress, 10, 110);
+    doc.text("CIN :- "            +data.CIN, 10, 120);
+    doc.text("Director Name :- "  +data.Director_Name, 10, 130);
+    doc.text("DIN :- "            +data.DIN, 10, 140);
 
-var name = Math.random()
+    var name = Math.random()
 
-doc.save(`upload/pdf/${name}.pdf`); 
+    doc.save(`upload/pdf/${name}.pdf`); 
 
 
 
