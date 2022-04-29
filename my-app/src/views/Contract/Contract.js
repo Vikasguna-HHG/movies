@@ -15,7 +15,7 @@ function Contract() {
   const [ Provider_Name  ,setProvider_Name] = useState('')
   const [ Provider_Phone ,setProvider_Phone] = useState('')
   const [ Period         ,setPeriod ] = useState('')
-  const [ Provider_Ratio ,setProvider_Ratio ] = useState('')
+  const [ Provider_Ratio ,setProviderRatio ] = useState('')
   const [ Paltform_Ratio,setPaltform_Ratio ] = useState('')
   const [ Fee            ,setFee ] = useState('')
   const [ Payment_Charge ,setPayment_Charge ] = useState('')
@@ -28,9 +28,11 @@ function Contract() {
 
 //Provider_Ratio
 const Ratio = (e) =>{
-    setFee(e.target.value);
-    var Paltform = 100-parseInt(Provider_Ratio);
-    setPaltform_Ratio(Paltform); 
+    if((100 - parseInt(e.target.value)) < 0) return false;   
+
+    setProviderRatio(e.target.value) 
+    var Paltform = 100 - parseInt(e.target.value);
+    setPaltform_Ratio(isNaN(Paltform) ? 0 : Paltform); 
 }
 
 //phone number validation
@@ -38,6 +40,7 @@ const checkInput = (e) => {
     const onlyDigits = e.target.value.replace(/\D/g, "");
     setProvider_Phone(onlyDigits);
 };
+
 
 //Submit data
 const Submit = async () => {
@@ -74,26 +77,26 @@ const Submit = async () => {
       console.log(ex)
     }
 
-     //pdf 
-     const { jsPDF } = require("jspdf"); 
+    //  pdf 
+    //  const { jsPDF } = require("jspdf"); 
 
-     const doc = new jsPDF();
-     doc.text("********************************** Contract ***************************************", 10, 10);
-     doc.text("Movie Name :- " +Movie_Name, 10, 20);
-     doc.text("Provider Name :- " +Provider_Name, 10, 30);
-     doc.text("Provider Phone :- " +Provider_Phone, 10, 40);
-     doc.text("Period :- " +Period, 10, 50);
-     doc.text("Provider Ratio :- " +Provider_Ratio, 10, 60);
-     doc.text("Paltform Ratio :- " +Paltform_Ratio, 10, 70);
-     doc.text("Fee :- " +Fee, 10, 80);
-     doc.text("Payment Charge :- " +Payment_Charge, 10, 90);
-     doc.text("Company Name :- " +Company_Name, 10, 100);
-     doc.text("Adress :- " +Adress, 10, 110);
-     doc.text("CIN :- " +CIN, 10, 120);
-     doc.text("Director Name :- " +Director_Name, 10, 130);
-     doc.text("DIN :- " +DIN, 10, 140);
+    //  const doc = new jsPDF();
+    //  doc.text("********************************** Contract ***************************************", 10, 10);
+    //  doc.text("Movie Name :- "     +Movie_Name, 10, 20);
+    //  doc.text("Provider Name :- "  +Provider_Name, 10, 30);
+    //  doc.text("Provider Phone :- " +Provider_Phone, 10, 40);
+    //  doc.text("Period :- "         +Period, 10, 50);
+    //  doc.text("Provider Ratio :- " +Provider_Ratio, 10, 60);
+    //  doc.text("Paltform Ratio :- " +Paltform_Ratio, 10, 70);
+    //  doc.text("Fee :- "            +Fee, 10, 80);
+    //  doc.text("Payment Charge :- " +Payment_Charge, 10, 90);
+    //  doc.text("Company Name :- "   +Company_Name, 10, 100);
+    //  doc.text("Adress :- "         +Adress, 10, 110);
+    //  doc.text("CIN :- "            +CIN, 10, 120);
+    //  doc.text("Director Name :- "  +Director_Name, 10, 130);
+    //  doc.text("DIN :- "            +DIN, 10, 140);
      
-     doc.save("aa4.pdf"); 
+    //  doc.save("aa4.pdf"); 
    
 
 
@@ -101,11 +104,11 @@ const Submit = async () => {
      setProvider_Name('');
      setProvider_Phone('');
      setPeriod('');
-     setProvider_Ratio('');
+     setProviderRatio('');
      setPaltform_Ratio('');
      setFee('');
      setPayment_Charge('');
-     setCompany_Name('');
+     setCompany_Name('');   
      setAdress('');
      setCIN('');
      setDirector_Name('');
@@ -165,24 +168,24 @@ const Submit = async () => {
         <CRow className="mb-3">
         <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Period (In Months)</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" placeholder='Period (In Months)' value={Period}  onChange={(e) => {setPeriod(e.target.value)}} />
+            <CFormInput type="text" placeholder='Period (In Months)' value={Period}  onChange={(e) => {setPeriod(e.target.value)}} />
             </CCol>
         </CRow>
         <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Content Provider Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number" defaultValue="70"  maxLength="2"  value={Provider_Ratio} onChange={(e) => {setProvider_Ratio(e.target.value)}} />
+            <CFormInput type="number" value={Provider_Ratio} onChange={Ratio} id="num" />
             </CCol>
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Paltform Ratio</h6></CFormLabel>
             <CCol sm={4} >
-            <CFormInput type="number"  defaultValue="30" value={Paltform_Ratio} onChange={(e) => {setPaltform_Ratio(e.target.value)}}  />
-            </CCol>
+            <CFormInput type="text" readOnly value={Paltform_Ratio} />
+            </CCol> 
                 
       </CRow> 
       <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label"><h6>Viewer Ship Fee in ($)</h6></CFormLabel>
             <CCol sm={10} >
-            <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {Ratio(e)}} />
+            <CFormInput type="number" defaultValue="1" value={Fee} onChange={(e) => {setFee(e.target.value);}} />
             <p>( The user for one time viewership of content. )</p>
             </CCol>
        </CRow>
@@ -226,7 +229,7 @@ const Submit = async () => {
         </CRow>
 
         <hr/>
-            <CCardTitle><h6>Contract With Client</h6></CCardTitle>
+            <CCardTitle><b>Contract With Client</b></CCardTitle>
         <hr/>
 
         <CRow className="mb-3">
