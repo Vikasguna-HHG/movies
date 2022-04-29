@@ -12,7 +12,13 @@ var app = express();
 
 
 
-
+const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 
 
@@ -24,9 +30,9 @@ const checkurl = function(req,res,next)
 }
 app.use(checkurl);
 
-var cors = require('cors');
+// var cors = require('cors');
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
-app.use(cors())
+// app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
