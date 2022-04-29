@@ -667,7 +667,7 @@ exports.viUpdate_data = async function (req, res, next) {
 
 exports.Contract_find_data = async function (req, res, next) {
   try {
-    const tag = await Contract.findsort({"Contract_pdf": -1}).limit(1)
+    const tag = await Contract.find().limit(1).sort({$natural:-1})
 
     res.status(200).json({
       status: "find data",
