@@ -17,7 +17,7 @@ export default function Pdf() {
           })
       }
     
-      useEffect(() => {
+      useEffect(() => { 
         getdata()
       }, [])
   return (
