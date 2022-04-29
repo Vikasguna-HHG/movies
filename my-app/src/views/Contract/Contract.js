@@ -8,6 +8,8 @@ import { Ratio } from 'react-bootstrap';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Category from '../Categories/Categoires';
+import Pdf from '../Pdf/Pdf';
+import { Link } from 'react-router-dom';
 // import { func } from 'prop-types';
 toast.configure();
 function Contract() {
@@ -115,6 +117,8 @@ const Submit = async () => {
      setCIN('');
      setDirector_Name('');
      setDIN('');
+
+    //  <Pdf/>         
   } 
 
 
@@ -253,9 +257,10 @@ const Submit = async () => {
             </CCol>
         </CRow>
 
-        <hr/>
-
-        <CButton  onClick={Submit} style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' , marginLeft:"1150px"}}>Submit</CButton>
+        {/* <hr/> */}
+        {/* <Link to='/base/Pdf'> */}
+            <CButton  onClick={Submit} style={{ backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)' , marginLeft:"1150px"}}>Submit</CButton>
+        {/* </Link> */}
       </CForm>
 
       </CCardBody>
