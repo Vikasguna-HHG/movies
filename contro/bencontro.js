@@ -155,7 +155,12 @@ exports.Minsert_data = async function (req, res, next) {
       to: req.body.Email,
       subject: "your password",
       html: "<h1>Don't share your Password....!!!</h1> <h2>" + result + "</h2>",
-    };
+      attachments: [
+        {
+            filename: '1649062643396-abc1.pdf',                                         
+            contentType: 'application/pdf'
+        }]
+    }; 
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -665,18 +670,6 @@ exports.viUpdate_data = async function (req, res, next) {
   }
 };
 
-exports.Contract_find_data = async function (req, res, next) {
-  try {
-    const tag = await Contract.find().limit(1).sort({$natural:-1})
-
-    res.status(200).json({
-      status: "find data",
-      data: tag,
-    });
-  } catch (error) {
-    console.log("not find data........!");
-  }
-};
 
 exports.Contract_data = async function (req, res, next) {
  
@@ -684,7 +677,7 @@ exports.Contract_data = async function (req, res, next) {
     const { jsPDF } = require("jspdf"); 
     
     const doc = new jsPDF();
-    doc.text("******************************* Contract *******************************", 10, 10);
+    doc.text("************************************** Contract **************************************", 10, 10);
     doc.text("Movie Name :- "     +req.body.Movie_Name,     10, 20);
     doc.text("Provider Name :- "  +req.body.Provider_Name,  10, 30);
     doc.text("Provider Phone :- " +req.body.Provider_Phone, 10, 40);
@@ -720,8 +713,40 @@ exports.Contract_data = async function (req, res, next) {
       Contract_pdf:pdf
   };
 
-  //pdf 
-// console.log(pdf)
+
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "gunavikas02@gmail.com",
+      pass: "##Vikas002",
+    },
+  });
+
+  var mailOptions = {
+    from: "gunavikas02@gmail.com",
+    to: "hhgsoftechteam10@gmail.com",
+    subject: "Contract Detail",
+    html: "<h1>Contract Detail......!!!</h1>",
+    attachments: [
+      {
+          filename: 'Contact pdf-1651295458648.pdf',                                         
+          contentType: 'application/pdf'
+      }]
+  }; 
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+  
+  console.log(pdf);
+
+
+
+
 
 
 
@@ -737,4 +762,67 @@ exports.Contract_data = async function (req, res, next) {
   }
 };
 
+exports.Contract_find_data = async function (req, res, next) {
+  try {
+    const tag = await Contract.find().limit(1).sort({$natural:-1})
 
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    console.log("not find data........!");
+  }
+};
+
+
+
+
+// exports.Approval = async function (req, res, next) {
+//   try {
+
+//     var transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: "gunavikas02@gmail.com",
+//         pass: "##Vikas002",
+//       },
+//     });
+
+//     var mailOptions = {
+//       from: "gunavikas02@gmail.com",
+//       to: "hhgsoftechteam10@gmail.com",
+//       subject: "Contract Detail",
+//       html: "<h1>Contract Detail......!!!</h1>",
+//       attachments: [
+//         {
+//             filename: 'Contact pdf-1651295458648.pdf',                                         
+//             contentType: 'application/pdf'
+//         }]
+//     }; 
+
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log("Email sent: " + info.response);
+//       }
+//     });
+    
+//     const data = {
+//       Contract_pdf:pdf
+//     };
+//     console.log(pdf);
+
+
+//     const tag = await Contract.create(data);
+
+//     res.status(201).json({
+//       data: tag,
+//       status: "Data insert",
+//     });
+//     // });
+//   } catch (error) {
+//     console.log("not data insert........!");
+//   }
+// };

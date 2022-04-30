@@ -89,6 +89,6 @@ router.get('/Upcoming',BannerController.Upcoming_find);
 router.post('/Contract',upload.single('image'), BannerController.Contract_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
 
-
+// router.post('/Approval',upload.single('image'),BannerController.Approval)
 
 module.exports = router;
