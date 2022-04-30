@@ -718,34 +718,34 @@ exports.Contract_data = async function (req, res, next) {
       Contract_pdf: pdf,
     };
 
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "gunavikas02@gmail.com",
-        pass: "##Vikas002",
-      },
-    });
+    // var transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: "gunavikas02@gmail.com",
+    //     pass: "##Vikas002",
+    //   },
+    // });
 
-    var mailOptions = {
-      from: "gunavikas02@gmail.com",
-      to: "hhgsoftechteam10@gmail.com",
-      subject: "Contract Detail",
-      html: "<h1>Contract Detail......!!!</h1>",
-      attachments: [
-        {
-          filename: "Contact pdf-1651295458648.pdf",
-          contentType: "application/pdf",
-        },
-      ],
-    };
+    // var mailOptions = {
+    //   from: "gunavikas02@gmail.com",
+    //   to: "hhgsoftechteam10@gmail.com",
+    //   subject: "Contract Detail",
+    //   html: "<h1>Contract Detail......!!!</h1>",
+    //   attachments: [
+    //     {
+    //       filename: "Contact pdf-1651295458648.pdf",
+    //       contentType: "application/pdf",
+    //     },
+    //   ],
+    // };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
+    // transporter.sendMail(mailOptions, function (error, info) {
+    //   if (error) {
+    //     console.log(error);
+    //   } else {
+    //     console.log("Email sent: " + info.response);
+    //   }
+    // });
 
     console.log(pdf);
 
@@ -771,6 +771,20 @@ exports.Contract_find_data = async function (req, res, next) {
     });
   } catch (error) {
     console.log("not find data........!");
+  }
+};
+
+exports.Status_data = async function (req, res, next) {
+  try {
+    var BannerData = await Contract.findById(req.body.Id);
+    BannerData.Status = req.body.Status;
+    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
+    res.status(201).json({
+      status: "success",
+      data: tag,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
 
