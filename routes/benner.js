@@ -61,6 +61,9 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 
 
 
+
+
+
 //video api start
 // router.get('/vifinddata',BannerController.vifind_data);
 // router.get('/vifinddata/:id',BannerController.vifind_data_Id);
