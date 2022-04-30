@@ -88,6 +88,8 @@ router.get('/Upcoming',BannerController.Upcoming_find);
 // Contract api
 router.post('/Contract',upload.single('image'), BannerController.Contract_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
+router.post('/Contract_update_data', upload.single('image'), BannerController.Status_data);  
+
 
 // router.post('/Approval',upload.single('image'),BannerController.Approval)
 

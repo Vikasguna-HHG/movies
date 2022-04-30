@@ -710,39 +710,40 @@ exports.Contract_data = async function (req, res, next) {
       CIN: req.body.CIN,
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
-      Contract_pdf:pdf
+      Contract_pdf:pdf,
+      Status:0
   };
 
 
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "gunavikas02@gmail.com",
-      pass: "##Vikas002",
-    },
-  });
+  // var transporter = nodemailer.createTransport({
+  //   service: "gmail",
+  //   auth: {
+  //     user: "gunavikas02@gmail.com",
+  //     pass: "##Vikas002",
+  //   },
+  // });
 
-  var mailOptions = {
-    from: "gunavikas02@gmail.com",
-    to: "hhgsoftechteam10@gmail.com",
-    subject: "Contract Detail",
-    html: "<h1>Contract Detail......!!!</h1>",
-    attachments: [
-      {
-          filename: 'Contact pdf-1651295458648.pdf',                                         
-          contentType: 'application/pdf'
-      }]
-  }; 
+  // var mailOptions = {
+  //   from: "gunavikas02@gmail.com",
+  //   to: "hhgsoftechteam10@gmail.com",
+  //   subject: "Contract Detail",
+  //   html: "<h1>Contract Detail......!!!</h1>",
+  //   attachments: [
+  //     {
+  //         filename: 'Contact pdf-1651295458648.pdf',                                         
+  //         contentType: 'application/pdf'
+  //     }]
+  // }; 
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
+  // transporter.sendMail(mailOptions, function (error, info) {
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     console.log("Email sent: " + info.response);
+  //   }
+  // });
   
-  console.log(pdf);
+  // console.log(pdf); 
 
 
 
@@ -775,7 +776,20 @@ exports.Contract_find_data = async function (req, res, next) {
   }
 };
 
-
+exports.Status_data = async function (req, res, next) {
+  try {
+    var BannerData = await Contract.findById(req.body.Id);
+    console.log(req.body.Status);
+    BannerData.Status = req.body.Status;
+   var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
+    res.status(201).json({
+      status: "success",
+      data: tag,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 // exports.Approval = async function (req, res, next) {
