@@ -17,66 +17,67 @@ const unlinkAsync = promisify(fs.unlink);
 const bcrypt = require("bcrypt");
 const { data } = require("jquery");
 const { time } = require("console");
-// const { token } = require("morgan");
+const { token } = require("morgan");
+const { match } = require("assert");
+
 
 //jwt ...
 const jwt = require("jsonwebtoken");
-const { match } = require("assert");
 const jwtkey = "movies-hhg";
 
-// const verifyToken = (req, res, next) => {
-//   let token = req.headers["authorization"];
-//   // console.log("call...", token);
+const verifyToken = (req, res, next) => {
+  let token = req.headers["authorization"];
+  // console.log("call...", token);
 
-//   if (token) {
-//     token = token.split(" ")[1];
-//     jwt.verify(token, jwtkey, (err, valid) => {
-//       if (err) {
-//         res.status(401).send({ result: "please provide valid token" });
-//       } else {
-//         res.send({ result: "success"});
-//         // next()
-//       }
-//     });
-//   } else {
-//     res.status(403).send({ result: "please add token with header" });
-//   }
-// };
-
-// parth api start
-// exports.insert_data = verifyToken,async function (req, res, next) {
-//     try {
-//       const data = {
-//         language: req.body.language,
-//       };
-//       const tag = await language.create(data);
-
-//       res.status(201).json({
-//         data: tag,
-//         status: "Data insert",
-//       });
-//     } catch (error) {
-//       console.log("not data insert........!");
-//     }
-// };
-
-exports.insert_data = async function (req, res, next) {
-  try {
-    const data = {
-      language: req.body.language,
-    };
-    const tag = await language.create(data);
-
-    res.status(201).json({
-      data: tag,
-      status: "Data insert",
+  if (token) {
+    token = token.split(" ")[1];
+    jwt.verify(token, jwtkey, (err, valid) => {
+      if (err) {
+        res.status(401).send({ result: "please provide valid token" });
+      } else {
+        res.send({ result: "success"});
+        next()
+      }
     });
-  } catch (error) {
-    console.log("not data insert........!");
+  } else {
+    res.status(403).send({ result: "please add token with header" });
   }
 };
 
-exports.find_data = async function (req, res, next) {
+// parth api start
+exports.insert_data = verifyToken, async function (req, res, next) {
+    try {
+      const data = {
+        language: req.body.language,
+      };
+      const tag = await language.create(data);
+
+      res.status(201).json({
+        data: tag,
+        status: "Data insert",
+      });
+    } catch (error) {
+      console.log("not data insert........!");
+    }
+};
+
+// exports.insert_data = async function (req, res, next) {
+//   try {
+//     const data = {
+//       language: req.body.language,
+//     };
+//     const tag = await language.create(data);
+
+//     res.status(201).json({
+//       data: tag,
+//       status: "Data insert",
+//     });
+//   } catch (error) {
+//     console.log("not data insert........!");
+//   }
+// };
+
+exports.find_data = verifyToken, async function (req, res, next) {
   try {
     const tag = await language.find();
 
@@ -224,11 +225,11 @@ exports.Mlogin = async function (req, res, next) {
       }
     });
   } else {
-    // res.status(200).json({
-    //   status: false,
-    //   message: "not valid username and password",
-    // });
-    res.send({ status: "true", result: "not valid username and password" });
+    res.status(200).json({
+      status: false,
+      message: "not valid username and password",
+    });
+    // res.send({ status: "true", result: "not valid username and password" });
   }
 };
 
@@ -788,50 +789,3 @@ exports.Status_data = async function (req, res, next) {
   }
 };
 
-// exports.Approval = async function (req, res, next) {
-//   try {
-
-//     var transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       auth: {
-//         user: "gunavikas02@gmail.com",
-//         pass: "##Vikas002",
-//       },
-//     });
-
-//     var mailOptions = {
-//       from: "gunavikas02@gmail.com",
-//       to: "hhgsoftechteam10@gmail.com",
-//       subject: "Contract Detail",
-//       html: "<h1>Contract Detail......!!!</h1>",
-//       attachments: [
-//         {
-//             filename: 'Contact pdf-1651295458648.pdf',
-//             contentType: 'application/pdf'
-//         }]
-//     };
-
-//     transporter.sendMail(mailOptions, function (error, info) {
-//       if (error) {
-//         console.log(error);
-//       } else {
-//         console.log("Email sent: " + info.response);
-//       }
-//     });
-
-//     const data = {
-//       Contract_pdf:pdf
-//     };
-//     console.log(pdf);
-
-//     const tag = await Contract.create(data);
-
-//     res.status(201).json({
-//       data: tag,
-//       status: "Data insert",
-//     });
-//     // });
-//   } catch (error) {
-//     console.log("not data insert........!");
-//   }
-// };

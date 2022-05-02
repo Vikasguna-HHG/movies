@@ -18,16 +18,7 @@ var upload = multer({
     storage: storage,
 })
 
-
-
-// router.get('/', function (req, res, next) {
-//     res.render('benner', { title: 'Wel come to benner.js' });
-// });
-
-// router.get('/findcatagery',BannerController.find_category);
-// if (process.env.NODE_ENV === 'production') {
-//     app.use(express.static('my-app/build'))
-// }   
+ 
 
 router.get('/finddata',BannerController.find_data);
 router.get('/finddata/:id',BannerController.find_data_Id);
@@ -94,6 +85,5 @@ router.get('/Contract_find_data',BannerController.Contract_find_data)
 router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
 
 
-// router.post('/Approval',upload.single('image'),BannerController.Approval)
 
 module.exports = router;

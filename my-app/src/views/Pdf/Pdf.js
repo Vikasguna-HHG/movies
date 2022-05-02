@@ -68,7 +68,7 @@ export default function Pdf() {
           {list.map((item, i) => {
             return (
               <>
-                <iframe
+                <iframe 
                   key={i}
                   src={env.apiURL + `${item.Contract_pdf}`}
                   width="100%"
@@ -78,7 +78,7 @@ export default function Pdf() {
                 <CButton
                   onClick={() => Reject(item._id)}
                   style={{
-                    backgroundImage: 'linear-gradient(3)60deg,#16222A,#3A6073',
+                    backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)',
                     marginLeft: '1000px',
                   }}
                 >
@@ -89,7 +89,7 @@ export default function Pdf() {
                   style={{
                     backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)',
                     marginLeft: '1100px',
-                    marginTop: '-60px',
+                    marginTop: '-65px',
                   }}
                 >
                   Approval
