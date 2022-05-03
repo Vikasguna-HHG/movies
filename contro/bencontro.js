@@ -17,67 +17,66 @@ const unlinkAsync = promisify(fs.unlink);
 const bcrypt = require("bcrypt");
 const { data } = require("jquery");
 const { time } = require("console");
-const { token } = require("morgan");
-const { match } = require("assert");
-
+// const { token } = require("morgan");
 
 //jwt ...
 const jwt = require("jsonwebtoken");
+const { match } = require("assert");
 const jwtkey = "movies-hhg";
 
-const verifyToken = (req, res, next) => {
-  let token = req.headers["authorization"];
-  // console.log("call...", token);
+// const verifyToken = (req, res, next) => {
+//   let token = req.headers["authorization"];
+//   // console.log("call...", token);
 
-  if (token) {
-    token = token.split(" ")[1];
-    jwt.verify(token, jwtkey, (err, valid) => {
-      if (err) {
-        res.status(401).send({ result: "please provide valid token" });
-      } else {
-        res.send({ result: "success"});
-        next()
-      }
-    });
-  } else {
-    res.status(403).send({ result: "please add token with header" });
-  }
-};
-
-// parth api start
-exports.insert_data = verifyToken, async function (req, res, next) {
-    try {
-      const data = {
-        language: req.body.language,
-      };
-      const tag = await language.create(data);
-
-      res.status(201).json({
-        data: tag,
-        status: "Data insert",
-      });
-    } catch (error) {
-      console.log("not data insert........!");
-    }
-};
-
-// exports.insert_data = async function (req, res, next) {
-//   try {
-//     const data = {
-//       language: req.body.language,
-//     };
-//     const tag = await language.create(data);
-
-//     res.status(201).json({
-//       data: tag,
-//       status: "Data insert",
+//   if (token) {
+//     token = token.split(" ")[1];
+//     jwt.verify(token, jwtkey, (err, valid) => {
+//       if (err) {
+//         res.status(401).send({ result: "please provide valid token" });
+//       } else {
+//         res.send({ result: "success"});
+//         // next()
+//       }
 //     });
-//   } catch (error) {
-//     console.log("not data insert........!");
+//   } else {
+//     res.status(403).send({ result: "please add token with header" });
 //   }
 // };
 
-exports.find_data = verifyToken, async function (req, res, next) {
+// parth api start
+// exports.insert_data = verifyToken,async function (req, res, next) {
+//     try {
+//       const data = {
+//         language: req.body.language,
+//       };
+//       const tag = await language.create(data);
+
+//       res.status(201).json({
+//         data: tag,
+//         status: "Data insert",
+//       });
+//     } catch (error) {
+//       console.log("not data insert........!");
+//     }
+// };
+
+exports.insert_data = async function (req, res, next) {
+  try {
+    const data = {
+      language: req.body.language,
+    };
+    const tag = await language.create(data);
+
+    res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
+  } catch (error) {
+    console.log("not data insert........!");
+  }
+};
+
+exports.find_data = async function (req, res, next) {
   try {
     const tag = await language.find();
 
@@ -156,12 +155,6 @@ exports.Minsert_data = async function (req, res, next) {
       to: req.body.Email,
       subject: "your password",
       html: "<h1>Don't share your Password....!!!</h1> <h2>" + result + "</h2>",
-      attachments: [
-        {
-          filename: "1649062643396-abc1.pdf",
-          contentType: "application/pdf",
-        },
-      ],
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -176,8 +169,8 @@ exports.Minsert_data = async function (req, res, next) {
     var newpass = await bcrypt.hash(result, 12);
     console.log(newpass);
 
-    var sid = 2;
-
+    var sid = 2; 
+    
     const data = {
       sid: sid,
       First_Name: req.body.First_Name,
@@ -225,11 +218,11 @@ exports.Mlogin = async function (req, res, next) {
       }
     });
   } else {
-    res.status(200).json({
-      status: false,
-      message: "not valid username and password",
-    });
-    // res.send({ status: "true", result: "not valid username and password" });
+    // res.status(200).json({
+    //   status: false,
+    //   message: "not valid username and password",
+    // });
+    res.send({ status: "true", result: "not valid username and password" });
   }
 };
 
@@ -490,11 +483,12 @@ exports.kUpdate_data = async function (req, res, next) {
 //video api
 exports.viinsert_data = async function (req, res, next) {
   // const sid = Math.random();
-
-  //  const cnt=1;
+  
+//  const cnt=1; 
   try {
     // const form = new IncomingForm(formidable);
     const data = {
+    
       method: req.body.method,
       rdate: req.body.rdate,
       edate: req.body.edate,
@@ -539,13 +533,15 @@ exports.vifind_data = async function (req, res, next) {
 
 exports.banner_find = async function (req, res, next) {
   // try {
-  const tag = await video.find({
-    banner: "Yes",
-  });
-  res.status(200).json({
-    status: "find data",
-    data: tag,
-  });
+    const tag = await video.find(
+      { 
+        banner: 'Yes',
+      }
+    );
+    res.status(200).json({
+      status: "find data",
+      data: tag
+    });
   // } catch (error) {
   //   console.log("not find data........!");
   // }
@@ -554,9 +550,9 @@ exports.banner_find = async function (req, res, next) {
 exports.video_find = async function (req, res, next) {
   try {
     // console.log(req.body)
-
+    
     const tag = await video.findById(req.body.id);
-
+  
     res.status(200).json({
       status: "find data",
       data: [tag],
@@ -571,24 +567,16 @@ exports.video_find = async function (req, res, next) {
 
 exports.latest_find = async function (req, res, next) {
   try {
-    const tag = await video.find({
-      rdate: {
-        $gt: new Date(
-          new Date().getFullYear(),
-          new Date().getMonth() - 1,
-          new Date().getDate()
-        )
-          .toISOString()
-          .replace(/T.*/, ""),
-        $lt: new Date(
-          new Date().getFullYear(),
-          new Date().getMonth(),
-          new Date().getDate()
-        )
-          .toISOString()
-          .replace(/T.*/, ""),
-      },
-    });
+ 
+      const tag = await video.find(
+        { 
+      
+          rdate : { 
+            $gt : new Date(new Date().getFullYear(),new Date().getMonth() - 1,new Date().getDate()).toISOString().replace(/T.*/,''),
+            $lt : new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).toISOString().replace(/T.*/,'')
+          },
+        }
+      );
     res.status(200).json({
       status: "find data",
       data: tag,
@@ -600,17 +588,15 @@ exports.latest_find = async function (req, res, next) {
 
 exports.Upcoming_find = async function (req, res, next) {
   try {
-    const tag = await video.find({
-      rdate: {
-        $gt: new Date(
-          new Date().getFullYear(),
-          new Date().getMonth(),
-          new Date().getDate()
-        )
-          .toISOString()
-          .replace(/T.*/, ""),
-      },
-    });
+ 
+      const tag = await video.find(
+        { 
+      
+          rdate : { 
+            $gt : new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).toISOString().replace(/T.*/,''),
+          },
+        }
+      );
     res.status(200).json({
       status: "find data",
       data: tag,
@@ -679,30 +665,45 @@ exports.viUpdate_data = async function (req, res, next) {
   }
 };
 
-exports.Contract_data = async function (req, res, next) {
+exports.Contract_find_data = async function (req, res, next) {
   try {
-    const { jsPDF } = require("jspdf");
+    const tag = await Contract.find().limit(1).sort({$natural:-1})
 
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    console.log("not find contract data........!");
+  }
+};
+
+exports.Contract_data = async function (req, res, next) {
+ 
+  try {
+    const { jsPDF } = require("jspdf"); 
+    
     const doc = new jsPDF();
-    doc.text("************************************** Contract **************************************",10,10);
-    doc.text("Movie Name :- " + req.body.Movie_Name, 10, 20);
-    doc.text("Provider Name :- " + req.body.Provider_Name, 10, 30);
-    doc.text("Provider Phone :- " + req.body.Provider_Phone, 10, 40);
-    doc.text("Period :- " + req.body.Period, 10, 50);
-    doc.text("Provider Ratio :- " + req.body.Provider_Ratio, 10, 60);
-    doc.text("Paltform Ratio :- " + req.body.Paltform_Ratio, 10, 70);
-    doc.text("Fee :- " + req.body.Fee, 10, 80);
-    doc.text("Payment Charge :- " + req.body.Payment_Charge, 10, 90);
-    doc.text("Company Name :- " + req.body.Company_Name, 10, 100);
-    doc.text("Adress :- " + req.body.Adress, 10, 110);
-    doc.text("CIN :- " + req.body.CIN, 10, 120);
-    doc.text("Director Name :- " + req.body.Director_Name, 10, 130);
-    doc.text("DIN :- " + req.body.DIN, 10, 140);
-
-    var name = "Contact pdf-" + Date.now();
-    var pdf = `upload/pdf/${name}.pdf`;
-    doc.save(pdf);
+    doc.text("******************************* Contract *******************************", 10, 10);
+    doc.text("Movie Name :- "     +req.body.Movie_Name,     10, 20);
+    doc.text("Provider Name :- "  +req.body.Provider_Name,  10, 30);
+    doc.text("Provider Phone :- " +req.body.Provider_Phone, 10, 40);
+    doc.text("Period :- "         +req.body.Period,         10, 50);
+    doc.text("Provider Ratio :- " +req.body.Provider_Ratio+"%", 10, 60);
+    doc.text("Paltform Ratio :- " +req.body.Paltform_Ratio+"%", 10, 70);
+    doc.text("Fee :- "            +req.body.Fee+"$",            10, 80);
+    doc.text("Payment Charge :- " +req.body.Payment_Charge+"%", 10, 90);
+    doc.text("Company Name :- "   +req.body.Company_Name,   10, 100);
+    doc.text("Adress :- "         +req.body.Adress,         10, 110);
+    doc.text("CIN :- "            +req.body.CIN,            10, 120);
+    doc.text("Director Name :- "  +req.body.Director_Name,  10, 130);
+    doc.text("DIN :- "            +req.body.DIN,            10, 140);
+    
+    var name = "Contact pdf-"+Date.now()
+    var pdf = `upload/pdf/${name}.pdf`
+    doc.save(pdf); 
     const data = {
+    
       Movie_Name: req.body.Movie_Name,
       Provider_Name: req.body.Provider_Name,
       Provider_Phone: req.body.Provider_Phone,
@@ -716,39 +717,8 @@ exports.Contract_data = async function (req, res, next) {
       CIN: req.body.CIN,
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
-      Contract_pdf: pdf,
-    };
-
-    // var transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   auth: {
-    //     user: "gunavikas02@gmail.com",
-    //     pass: "##Vikas002",
-    //   },
-    // });
-
-    // var mailOptions = {
-    //   from: "gunavikas02@gmail.com",
-    //   to: "hhgsoftechteam10@gmail.com",
-    //   subject: "Contract Detail",
-    //   html: "<h1>Contract Detail......!!!</h1>",
-    //   attachments: [
-    //     {
-    //       filename: "Contact pdf-1651295458648.pdf",
-    //       contentType: "application/pdf",
-    //     },
-    //   ],
-    // };
-
-    // transporter.sendMail(mailOptions, function (error, info) {
-    //   if (error) {
-    //     console.log(error);
-    //   } else {
-    //     console.log("Email sent: " + info.response);
-    //   }
-    // });
-
-    console.log(pdf);
+      Contract_pdf:pdf
+  };
 
     const tag = await Contract.create(data);
     res.status(201).json({
@@ -758,34 +728,8 @@ exports.Contract_data = async function (req, res, next) {
     // console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
-    console.log("not data insert........!");
+    console.log("not data data insert........!");
   }
 };
 
-exports.Contract_find_data = async function (req, res, next) {
-  try {
-    const tag = await Contract.find().limit(1).sort({ $natural: -1 });
-
-    res.status(200).json({
-      status: "find data",
-      data: tag,
-    });
-  } catch (error) {
-    console.log("not find data........!");
-  }
-};
-
-exports.Status_data = async function (req, res, next) {
-  try {
-    var BannerData = await Contract.findById(req.body.Id);
-    BannerData.Status = req.body.Status;
-    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
-    res.status(201).json({
-      status: "success",
-      data: tag,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 

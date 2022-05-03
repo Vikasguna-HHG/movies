@@ -156,8 +156,10 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     //setVisible8(true)
   }
 
+  // const timezoneOffset = (new Date()).getTimezoneOffset();
 
-  // --------------------ONSUBMIT--------------------//
+  // console.log(timezoneOffset);
+  // --------------------ONSUBMIT--------------------//        
 
   const submit = async () => {
     
@@ -176,7 +178,6 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     //   formData.append('banner_video', banner_video)
     //   try {
     //     const res = await axios.post(env.apiURL+'videoInsertBanner', formData)
-    //     debugger
     //     setList([...list, res.data.data])
     //     toast.success('New Add...!', {
     //       autoClose: 2000,
