@@ -33,11 +33,11 @@ const contract = new mongoose.Schema({
         required:true
     },
     Fee:{
-        type:String,
+        type:Number,
         required:true
     },
     Payment_Charge:{
-        type:String,
+        type:Number,
         required:true
     },
     Company_Name:{
@@ -65,6 +65,10 @@ const contract = new mongoose.Schema({
     },
     Contract_pdf:{
         type:String
+    },
+    Status:
+    {
+        type:Number
     }   
    
 })

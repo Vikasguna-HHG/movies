@@ -17,7 +17,7 @@ const routes = [
   { path: '/base/Language', name: 'Language', element: Language },
   { path: '/base/Home', name: 'Home', element: Home },
   { path: '/base/Contract', name: 'Contract', element: Contract },
-  { path: '/base/pdf', name: 'pdf', element: Pdf },
+  { path: '/base/Pdf', name: 'Pdf', element: Pdf },
   { path: '/base/Categoires', name: 'Categoires', element: Categoires },
 ]
 export default routes

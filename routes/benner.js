@@ -18,16 +18,7 @@ var upload = multer({
     storage: storage,
 })
 
-
-
-// router.get('/', function (req, res, next) {
-//     res.render('benner', { title: 'Wel come to benner.js' });
-// });
-
-// router.get('/findcatagery',BannerController.find_category);
-// if (process.env.NODE_ENV === 'production') {
-//     app.use(express.static('my-app/build'))
-// }   
+ 
 
 router.get('/finddata',BannerController.find_data);
 router.get('/finddata/:id',BannerController.find_data_Id);
@@ -61,6 +52,9 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 
 
 
+
+
+
 //video api start
 // router.get('/vifinddata',BannerController.vifind_data);
 // router.get('/vifinddata/:id',BannerController.vifind_data_Id);
@@ -88,6 +82,7 @@ router.get('/Upcoming',BannerController.Upcoming_find);
 // Contract api
 router.post('/Contract',upload.single('image'), BannerController.Contract_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
+router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
 
 
 

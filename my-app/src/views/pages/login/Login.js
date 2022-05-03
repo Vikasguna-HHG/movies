@@ -32,9 +32,9 @@ const Login = () => {
   const submit = async (e) => {
     e.preventDefault()
     console.log('User_Name,Password', User_Name, Password)
-
+    debugger
     await axios.post(env.apiURL + 'Mlogin', { User_Name, Password }).then((res) => {
-      if (res.data.User) {
+      if (res) {
         localStorage.setItem('sid', res.data.User.sid)
         localStorage.setItem('userId', res.data.User._id)
         localStorage.setItem('userName', res.data.User.User_Name)

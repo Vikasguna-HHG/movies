@@ -93,7 +93,7 @@ function Contract() {
       setDirector_Name('')
       setDIN('')
       // <Pdf/>
-      navigate('/base/pdf')
+      navigate('/base/Pdf')
     }
 
     const formData = new FormData()
@@ -112,16 +112,13 @@ function Contract() {
     formData.append('DIN', DIN)
 
     try {
-      const res = await axios.post(env.apiURL + 'Contract',
-       formData,
+      const res = await axios.post(env.apiURL + 'Contract',formData,
         
-        toast.success('data inserted', {
-         autoClose: 2000,}
+        // toast.success('data inserted', {
+        //  autoClose: 2000,}
         
-        )
+        // )
       )
-      // console.log(res)
-      //   navigate('/base/pdf')
     } catch (ex) {
       console.log(ex)
     }
@@ -410,8 +407,7 @@ function Contract() {
               </CCol>
             </CRow>
 
-            {/* <hr/> */}
-            {/* <Link to='/base/Pdf'> */}
+           <hr/>
             <CButton
               onClick={Submit}
               style={{
@@ -421,7 +417,6 @@ function Contract() {
             >
               Submit
             </CButton>
-            {/* </Link> */}
           </CForm>
         </CCardBody>
       </CCard>
