@@ -8,7 +8,7 @@ const multer = require('multer')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Wel come to Node Js server' });
+  res.render('index', { title: 'welcome index' });
 });
 
 

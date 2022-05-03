@@ -674,7 +674,7 @@ exports.Contract_find_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find data........!");
+    console.log("not find contract data........!");
   }
 };
 
@@ -689,10 +689,10 @@ exports.Contract_data = async function (req, res, next) {
     doc.text("Provider Name :- "  +req.body.Provider_Name,  10, 30);
     doc.text("Provider Phone :- " +req.body.Provider_Phone, 10, 40);
     doc.text("Period :- "         +req.body.Period,         10, 50);
-    doc.text("Provider Ratio :- " +req.body.Provider_Ratio, 10, 60);
-    doc.text("Paltform Ratio :- " +req.body.Paltform_Ratio, 10, 70);
-    doc.text("Fee :- "            +req.body.Fee,            10, 80);
-    doc.text("Payment Charge :- " +req.body.Payment_Charge, 10, 90);
+    doc.text("Provider Ratio :- " +req.body.Provider_Ratio+"%", 10, 60);
+    doc.text("Paltform Ratio :- " +req.body.Paltform_Ratio+"%", 10, 70);
+    doc.text("Fee :- "            +req.body.Fee+"$",            10, 80);
+    doc.text("Payment Charge :- " +req.body.Payment_Charge+"%", 10, 90);
     doc.text("Company Name :- "   +req.body.Company_Name,   10, 100);
     doc.text("Adress :- "         +req.body.Adress,         10, 110);
     doc.text("CIN :- "            +req.body.CIN,            10, 120);
@@ -720,11 +720,6 @@ exports.Contract_data = async function (req, res, next) {
       Contract_pdf:pdf
   };
 
-  //pdf 
-// console.log(pdf)
-
-
-
     const tag = await Contract.create(data);
     res.status(201).json({
       data: tag,
@@ -733,7 +728,7 @@ exports.Contract_data = async function (req, res, next) {
     // console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
-    console.log("not data insert........!");
+    console.log("not data data insert........!");
   }
 };
 
