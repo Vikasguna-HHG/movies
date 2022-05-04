@@ -207,7 +207,9 @@ var categoryName;
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(env.apiURL+`kDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`kDeleteBanner/${id}`,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      }).then((res) => {
           const users = res.data
           getdata()
           // findonesubcatogory();
