@@ -21,31 +21,8 @@ const { token } = require("morgan");
 const { match } = require("assert");
 
 
-//jwt ...
-const jwt = require("jsonwebtoken");
-const jwtkey = "movies-hhg";
-
-const verifyToken = (req, res, next) => {
-  let token = req.headers["authorization"];
-  // console.log("call...", token);
-
-  if (token) {
-    token = token.split(" ")[1];
-    jwt.verify(token, jwtkey, (err, valid) => {
-      if (err) {
-        res.status(401).send({ result: "please provide valid token" });
-      } else {
-        res.send({ result: "success"});
-        next()
-      }
-    });
-  } else {
-    res.status(403).send({ result: "please add token with header" });
-  }
-};
-
 // parth api start
-exports.insert_data = verifyToken, async function (req, res, next) {
+exports.insert_data = async function (req, res, next) {
     try {
       const data = {
         language: req.body.language,
@@ -53,7 +30,7 @@ exports.insert_data = verifyToken, async function (req, res, next) {
       const tag = await language.create(data);
 
       res.status(201).json({
-        data: tag,
+        data: tag,  
         status: "Data insert",
       });
     } catch (error) {
@@ -61,7 +38,7 @@ exports.insert_data = verifyToken, async function (req, res, next) {
     }
 };
 
-// exports.insert_data = async function (req, res, next) {
+// exports.insert_data =  async function (req, res, next) {
 //   try {
 //     const data = {
 //       language: req.body.language,
@@ -77,7 +54,7 @@ exports.insert_data = verifyToken, async function (req, res, next) {
 //   }
 // };
 
-exports.find_data = verifyToken, async function (req, res, next) {
+exports.find_data = async function (req, res, next) {
   try {
     const tag = await language.find();
 
@@ -90,7 +67,7 @@ exports.find_data = verifyToken, async function (req, res, next) {
   }
 };
 
-exports.find_data_Id = async function (req, res, next) {
+exports.find_data_Id =  async function (req, res, next) {
   try {
     const tag = await language.findById(req.params.id);
     res.status(200).json({
@@ -102,7 +79,7 @@ exports.find_data_Id = async function (req, res, next) {
   }
 };
 
-exports.Delete_data = async function (req, res, next) {
+exports.Delete_data =  async function (req, res, next) {
   try {
     await language.findByIdAndDelete(req.params.id);
     res.status(204).json({
@@ -113,7 +90,7 @@ exports.Delete_data = async function (req, res, next) {
   }
 };
 
-exports.Update_data = async function (req, res, next) {
+exports.Update_data =  async function (req, res, next) {
   try {
     var BannerData = await language.findById(req.body.Id);
     BannerData.language = req.body.language;
@@ -194,12 +171,18 @@ exports.Minsert_data = async function (req, res, next) {
     //     res.send({ result: "wrong...." });
     //   }
     //   res.send({ tag, auth: token });
+    jwt.sign({ tag }, jwtkey, (err, token) => {
+      if (err) {
+        res.send({ result: "wrong...." });
+      }
+      res.send({ tag, auth: token });
 
-    res.status(201).json({
-      data: tag,
-      status: "Data insert",
-    });
+    // res.send(201).json({ 
+    //   data: tag,
+    //   auth: token ,
+    //   status: "Data insert",
     // });
+    });
   } catch (error) {
     console.log("not data insert........!");
   }
@@ -225,15 +208,15 @@ exports.Mlogin = async function (req, res, next) {
       }
     });
   } else {
-    res.status(200).json({
-      status: false,
-      message: "not valid username and password",
-    });
-    // res.send({ status: "true", result: "not valid username and password" });
+    // res.status(200).json({
+    //   status: false,
+    //   message: "not valid username and password",
+    // });
+    res.send({ status: "false", result: "not valid username and password" });
   }
 };
 
-exports.Mfind_data = async function (req, res, next) {
+exports.Mfind_data =  async function (req, res, next) {
   try {
     const tag = await movie_maker.find();
 
@@ -246,7 +229,7 @@ exports.Mfind_data = async function (req, res, next) {
   }
 };
 
-exports.Mfind_data_Id = async function (req, res, next) {
+exports.Mfind_data_Id =  async function (req, res, next) {
   try {
     const tag = await movie_maker.findById(req.params.id);
     res.status(200).json({
@@ -258,7 +241,7 @@ exports.Mfind_data_Id = async function (req, res, next) {
   }
 };
 
-exports.MDelete_data = async function (req, res, next) {
+exports.MDelete_data =  async function (req, res, next) {
   try {
     await movie_maker.findByIdAndDelete(req.params.id);
     res.status(204).json({
@@ -269,7 +252,7 @@ exports.MDelete_data = async function (req, res, next) {
   }
 };
 
-exports.MUpdate_data = async function (req, res, next) {
+exports.MUpdate_data =  async function (req, res, next) {
   try {
     var BannerData = await movie_maker.findById(req.body.Id);
     (BannerData.First_Name = req.body.First_Name),
@@ -290,7 +273,7 @@ exports.MUpdate_data = async function (req, res, next) {
 // mukunj API end
 
 //vikas api start
-exports.vinsert_data = async function (req, res, next) {
+exports.vinsert_data =  async function (req, res, next) {
   try {
     const data = {
       category: req.body.category,
@@ -308,7 +291,7 @@ exports.vinsert_data = async function (req, res, next) {
   }
 };
 
-exports.vfind_data = async function (req, res, next) {
+exports.vfind_data =  async function (req, res, next) {
   try {
     const tag = await Categoires.find();
 
@@ -321,7 +304,7 @@ exports.vfind_data = async function (req, res, next) {
   }
 };
 
-exports.vfind_data_Id = async function (req, res, next) {
+exports.vfind_data_Id =  async function (req, res, next) {
   try {
     const tag = await Categoires.findById(req.params.id);
     res.status(200).json({
@@ -333,7 +316,7 @@ exports.vfind_data_Id = async function (req, res, next) {
   }
 };
 
-exports.vDelete_data = async function (req, res, next) {
+exports.vDelete_data =  async function (req, res, next) {
   try {
     await Categoires.findByIdAndDelete(req.params.id);
     res.status(204).json({
@@ -344,7 +327,7 @@ exports.vDelete_data = async function (req, res, next) {
   }
 };
 
-exports.vUpdate_data = async function (req, res, next) {
+exports.vUpdate_data =  async function (req, res, next) {
   try {
     var BannerData = await Categoires.findById(req.body.Id);
     BannerData.category = req.body.category;
@@ -365,7 +348,7 @@ exports.vUpdate_data = async function (req, res, next) {
 
 //keyur api start
 
-exports.kinsert_data = async function (req, res, next) {
+exports.kinsert_data =  async function (req, res, next) {
   try {
     const data = {
       category: req.body.category,
@@ -384,12 +367,12 @@ exports.kinsert_data = async function (req, res, next) {
   }
 };
 
-// exports.find_category = async function (req, res, next)
+// exports.find_category =  async function (req, res, next)
 // {
 
 // }
 
-exports.kfind_data = async function (req, res, next) {
+exports.kfind_data =  async function (req, res, next) {
   console.log("res : " + req.query.category);
   console.log("res1 : ", req);
   if (req.query.category != "null") {
@@ -432,7 +415,7 @@ exports.kfind_data = async function (req, res, next) {
   //     }
 };
 
-exports.kfind_data_Id = async function (req, res, next) {
+exports.kfind_data_Id =  async function (req, res, next) {
   try {
     const tag = await subcategoires.findById(req.params.id);
     res.status(200).json({
@@ -444,7 +427,7 @@ exports.kfind_data_Id = async function (req, res, next) {
   }
 };
 
-exports.kfindone_data = async function (req, res, next) {
+exports.kfindone_data =  async function (req, res, next) {
   try {
     const tag = await subcategoires.find();
     res.status(200).json({
@@ -456,7 +439,7 @@ exports.kfindone_data = async function (req, res, next) {
   }
 };
 
-exports.kDelete_data = async function (req, res, next) {
+exports.kDelete_data =  async function (req, res, next) {
   try {
     await subcategoires.findByIdAndDelete(req.params.id);
     res.status(204).json({
@@ -467,7 +450,7 @@ exports.kDelete_data = async function (req, res, next) {
   }
 };
 
-exports.kUpdate_data = async function (req, res, next) {
+exports.kUpdate_data =  async function (req, res, next) {
   try {
     var BannerData = await subcategoires.findById(req.body.Id);
     BannerData.category = req.body.category;
@@ -488,7 +471,7 @@ exports.kUpdate_data = async function (req, res, next) {
 };
 
 //video api
-exports.viinsert_data = async function (req, res, next) {
+exports.viinsert_data =  async function (req, res, next) {
   // const sid = Math.random();
 
   //  const cnt=1;
@@ -524,7 +507,7 @@ exports.viinsert_data = async function (req, res, next) {
   }
 };
 
-exports.vifind_data = async function (req, res, next) {
+exports.vifind_data =  async function (req, res, next) {
   try {
     const tag = await video.find();
 
@@ -537,7 +520,7 @@ exports.vifind_data = async function (req, res, next) {
   }
 };
 
-exports.banner_find = async function (req, res, next) {
+exports.banner_find =  async function (req, res, next) {
   // try {
   const tag = await video.find({
     banner: "Yes",
@@ -551,7 +534,7 @@ exports.banner_find = async function (req, res, next) {
   // }
 };
 
-exports.video_find = async function (req, res, next) {
+exports.video_find =  async function (req, res, next) {
   try {
     // console.log(req.body)
 
@@ -569,7 +552,7 @@ exports.video_find = async function (req, res, next) {
   }
 };
 
-exports.latest_find = async function (req, res, next) {
+exports.latest_find =  async function (req, res, next) {
   try {
     const tag = await video.find({
       rdate: {
@@ -598,7 +581,7 @@ exports.latest_find = async function (req, res, next) {
   }
 };
 
-exports.Upcoming_find = async function (req, res, next) {
+exports.Upcoming_find =  async function (req, res, next) {
   try {
     const tag = await video.find({
       rdate: {
@@ -620,7 +603,7 @@ exports.Upcoming_find = async function (req, res, next) {
   }
 };
 
-exports.vifind_data_Id = async function (req, res, next) {
+exports.vifind_data_Id =  async function (req, res, next) {
   try {
     const tag = await video.findById(req.params.id);
     res.status(200).json({
@@ -632,7 +615,7 @@ exports.vifind_data_Id = async function (req, res, next) {
   }
 };
 
-exports.viDelete_data = async function (req, res, next) {
+exports.viDelete_data =  async function (req, res, next) {
   try {
     await video.findByIdAndDelete(req.params.id);
     res.status(204).json({
@@ -643,7 +626,7 @@ exports.viDelete_data = async function (req, res, next) {
   }
 };
 
-exports.viUpdate_data = async function (req, res, next) {
+exports.viUpdate_data =  async function (req, res, next) {
   try {
     var BannerData = await video.findById(req.body.Id);
     (BannerData.method = req.body.method),
@@ -679,7 +662,7 @@ exports.viUpdate_data = async function (req, res, next) {
   }
 };
 
-exports.Contract_data = async function (req, res, next) {
+exports.Contract_data =  async function (req, res, next) {
   try {
     const { jsPDF } = require("jspdf");
 
@@ -762,7 +745,7 @@ exports.Contract_data = async function (req, res, next) {
   }
 };
 
-exports.Contract_find_data = async function (req, res, next) {
+exports.Contract_find_data =  async function (req, res, next) {
   try {
     const tag = await Contract.find().limit(1).sort({ $natural: -1 });
 
@@ -775,7 +758,7 @@ exports.Contract_find_data = async function (req, res, next) {
   }
 };
 
-exports.Status_data = async function (req, res, next) {
+exports.Status_data =  async function (req, res, next) {
   try {
     var BannerData = await Contract.findById(req.body.Id);
     BannerData.Status = req.body.Status;
@@ -789,3 +772,50 @@ exports.Status_data = async function (req, res, next) {
   }
 };
 
+// exports.Approval =  async function (req, res, next) {
+//   try {
+
+//     var transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: "gunavikas02@gmail.com",
+//         pass: "##Vikas002",
+//       },
+//     });
+
+//     var mailOptions = {
+//       from: "gunavikas02@gmail.com",
+//       to: "hhgsoftechteam10@gmail.com",
+//       subject: "Contract Detail",
+//       html: "<h1>Contract Detail......!!!</h1>",
+//       attachments: [
+//         {
+//             filename: 'Contact pdf-1651295458648.pdf',
+//             contentType: 'application/pdf'
+//         }]
+//     };
+
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log("Email sent: " + info.response);
+//       }
+//     });
+
+//     const data = {
+//       Contract_pdf:pdf
+//     };
+//     console.log(pdf);
+
+//     const tag = await Contract.create(data);
+
+//     res.status(201).json({
+//       data: tag,
+//       status: "Data insert",
+//     });
+//     // });
+//   } catch (error) {
+//     console.log("not data insert........!");
+//   }
+// };
