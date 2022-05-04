@@ -62,7 +62,7 @@ const SubCategoires = () => {
   }
 
   // -----------------------------------------------------------------------
-  const submit = async () => {
+  const submit = async (e) => {
     if (!maintitle || !subcat || !subtitle || !imageval) {
       toast.warning('data Fild...!', {
         autoClose: 2000,
@@ -130,6 +130,7 @@ const SubCategoires = () => {
   // -----------------------------------------------------------------------
   const edithandler = async (id) => {
     debugger;
+    
     setVisible1(true)
     axios
       .get(env.apiURL+`kfinddata/${id}`, {
@@ -146,12 +147,14 @@ const SubCategoires = () => {
         setmaintitle(result.data.data.category)
         setsubtitle(result.data.data.description)
         setImageval(result.data.data.image_user)
+     
+
       })
 
-        setsubcat()
-        setmaintitle()
-        setsubtitle()
-        setImageval()
+        setsubcat('')
+        setmaintitle('')
+        setsubtitle('')
+        setImageval('')
   }
   // 
   function getdata() {
