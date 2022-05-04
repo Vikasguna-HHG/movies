@@ -75,12 +75,13 @@ router.delete('/kDeleteBanner/:id', upload.single('image'), BannerController.kDe
 //keyur api end
 
 router.get('/bannerfind',BannerController.banner_find);
-router.post('/videofind',BannerController.video_find);
+// router.post('/videofind',BannerController.video_find);
 router.get('/Latest',BannerController.latest_find);
 router.get('/Upcoming',BannerController.Upcoming_find);
 
 // Contract api
 router.post('/Contract',upload.single('image'), BannerController.Contract_data);
+router.get('/demo/:id',BannerController.demo_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
 router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
 

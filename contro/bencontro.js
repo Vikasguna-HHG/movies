@@ -5,6 +5,7 @@ var language = require("../Models/language");
 var video = require("../Models/video");
 var Contract = require("../Models/Contract");
 var $ = require("jquery");
+
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
@@ -547,22 +548,52 @@ exports.banner_find = async function (req, res, next) {
   // }
 };
 
-exports.video_find = async function (req, res, next) {
-  try {
+// exports.video_find = async function (req, res, next) {
+//   try {
+//     // console.log(req.body)
+    
+//     const tag = await video.findById(req.body.id);
+  
+//     res.status(200).json({
+//       status: "find data",
+//       data: [tag],
+//     });
+//   } catch (error) {
+//     res.status(200).json({
+//       status: "find data",
+//       data: [],
+//     });
+//   }
+// };
+
+exports.demo_data = async function (req, res, next) {
+  // try {
     // console.log(req.body)
     
-    const tag = await video.findById(req.body.id);
+    const tag = await video.findById(req.params.id);
+    var filePath = tag.banner_video
+    console.log(tag);
+    var a = fs.statSync(filePath);
+
+    res.writeHead(200, {
+        'Content-Type': 'video/mp4',
+        'Content-Length': a.size,
+        'Accept-Ranges': 'bytes',
+    });
+
+    var readStream = fs.createReadStream(filePath);
+    readStream.pipe(res);
   
-    res.status(200).json({
-      status: "find data",
-      data: [tag],
-    });
-  } catch (error) {
-    res.status(200).json({
-      status: "find data",
-      data: [],
-    });
-  }
+    // res.status(200).json({
+    //   status: "find data",
+    //   data: [tag],
+    // });
+  // } catch (error) {
+  //   res.status(200).json({
+  //     status: "find data",
+  //     data: [],
+  //   });
+  // }
 };
 
 exports.latest_find = async function (req, res, next) {
@@ -729,6 +760,19 @@ exports.Contract_data = async function (req, res, next) {
   } catch (error) {
     res.status(201).json({ error });
     console.log("not data data insert........!");
+  }
+};
+exports.Status_data = async function (req, res, next) {
+  try {
+    var BannerData = await Contract.findById(req.body.Id);
+    BannerData.Status = req.body.Status;
+    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
+    res.status(201).json({
+      status: "success",
+      data: tag,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
 
