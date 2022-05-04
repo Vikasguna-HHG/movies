@@ -16,6 +16,7 @@
     "file-system": "^2.2.2",
     "firebase": "^9.6.10",
     "formidable": "^2.0.1",
+    "fs": "^0.0.1-security",
     "http-errors": "~1.6.3",
     "jquery": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
