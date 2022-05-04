@@ -54,11 +54,11 @@ router.delete('/DeleteBanner/:id',verifyToken, upload.single('image'), BannerCon
 //login api 
 router.post('/Mlogin',BannerController.Mlogin);
 
-router.get('/Mfinddata',BannerController.Mfind_data);
-router.get('/Mfinddata/:id',BannerController.Mfind_data_Id);
-router.post('/MInsertBanner', upload.single('image'), BannerController.Minsert_data);
-router.post('/MUpdateBanner', upload.single('image'), BannerController.MUpdate_data);
-router.delete('/MDeleteBanner/:id', upload.single('image'), BannerController.MDelete_data);
+router.get('/Mfinddata',verifyToken,BannerController.Mfind_data);
+router.get('/Mfinddata/:id',verifyToken,BannerController.Mfind_data_Id);
+router.post('/MInsertBanner',verifyToken, upload.single('image'), BannerController.Minsert_data);
+router.post('/MUpdateBanner', verifyToken,upload.single('image'), BannerController.MUpdate_data);
+router.delete('/MDeleteBanner/:id',verifyToken, upload.single('image'), BannerController.MDelete_data);
 
 
 // mukunj api end

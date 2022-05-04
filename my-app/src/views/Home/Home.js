@@ -138,7 +138,10 @@ const Home = () => {
       }
 
       try {
-        const res = await axios.post(env.apiURL+'MInsertBanner', formData)
+        const res = await axios.post(env.apiURL+'MInsertBanner', formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+
+        })
         toast.success('data insrted', {
           autoClose: 2000,
         })
@@ -175,7 +178,10 @@ const Home = () => {
       try {
         const res = await axios.post(
           env.apiURL+'MUpdateBanner',
-          formData,
+          formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+
+          }
           // body: JSON.stringify(update),
         )
         debugger
@@ -212,6 +218,10 @@ const Home = () => {
     axios
       .get(env.apiURL+`Mfinddata/${id}`, {
         method: 'GET',
+        
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+  
+          
         // headers: {
         //   'Accept': 'application/json',
         //   'Content-Type': 'application/json'
@@ -232,7 +242,10 @@ const Home = () => {
 
   function getdata() {
     axios
-      .get(env.apiURL+`Mfinddata`)
+      .get(env.apiURL+`Mfinddata`,{
+      headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+
+      })
       .then(function (res) {
         console.log(res.data.data)
         setList(res.data.data)
@@ -257,7 +270,13 @@ const Home = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(env.apiURL+`MDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`MDeleteBanner/${id}`,{
+          
+            headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      
+            
+        }
+        ).then((res) => {
           getdata()
         })
         toast.success('data deleted', {
