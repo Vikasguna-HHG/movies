@@ -64,10 +64,10 @@ router.delete('/MDeleteBanner/:id', upload.single('image'), BannerController.MDe
 // mukunj api end
 
 //vikas api start
-router.get('/vfinddata',BannerController.vfind_data);
-router.get('/vfinddata/:id',BannerController.vfind_data_Id);
-router.post('/vInsertBanner', upload.single('image'), BannerController.vinsert_data);
-router.post('/vUpdateBanner', upload.single('image'), BannerController.vUpdate_data);
+router.get('/vfinddata',verifyToken,BannerController.vfind_data);
+router.get('/vfinddata/:id',verifyToken,BannerController.vfind_data_Id);
+router.post('/vInsertBanner',verifyToken, upload.single('image'), BannerController.vinsert_data);
+router.post('/vUpdateBanner',verifyToken, upload.single('image'), BannerController.vUpdate_data);
 router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDelete_data);
 
 //vikas api end 

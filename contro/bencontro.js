@@ -19,7 +19,9 @@ const { data } = require("jquery");
 const { time } = require("console");
 const { token } = require("morgan");
 const { match } = require("assert");
-
+//jwt ...
+const jwt = require("jsonwebtoken");
+const jwtkey = "movies-hhg";
 
 // parth api start
 exports.insert_data = async function (req, res, next) {
@@ -38,21 +40,6 @@ exports.insert_data = async function (req, res, next) {
     }
 };
 
-// exports.insert_data =  async function (req, res, next) {
-//   try {
-//     const data = {
-//       language: req.body.language,
-//     };
-//     const tag = await language.create(data);
-
-//     res.status(201).json({
-//       data: tag,
-//       status: "Data insert",
-//     });
-//   } catch (error) {
-//     console.log("not data insert........!");
-//   }
-// };
 
 exports.find_data = async function (req, res, next) {
   try {
