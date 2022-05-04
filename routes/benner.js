@@ -54,7 +54,7 @@ router.delete('/DeleteBanner/:id',verifyToken, upload.single('image'), BannerCon
 //login api 
 router.post('/Mlogin',BannerController.Mlogin);
 
-router.get('/Mfinddata',verifyToken,BannerController.Mfind_data);
+router.get('/Mfinddata',BannerController.Mfind_data);
 router.get('/Mfinddata/:id',BannerController.Mfind_data_Id);
 router.post('/MInsertBanner', upload.single('image'), BannerController.Minsert_data);
 router.post('/MUpdateBanner', upload.single('image'), BannerController.MUpdate_data);
@@ -68,7 +68,7 @@ router.get('/vfinddata',verifyToken,BannerController.vfind_data);
 router.get('/vfinddata/:id',verifyToken,BannerController.vfind_data_Id);
 router.post('/vInsertBanner',verifyToken, upload.single('image'), BannerController.vinsert_data);
 router.post('/vUpdateBanner',verifyToken, upload.single('image'), BannerController.vUpdate_data);
-router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDelete_data);
+router.delete('/vDeleteBanner/:id', verifyToken,upload.single('image'), BannerController.vDelete_data);
 
 //vikas api end 
 
