@@ -41,7 +41,7 @@ const verifyToken = (req, res, next) => {
   }
 };
  
-
+//parth
 router.get('/finddata',verifyToken,BannerController.find_data);
 router.get('/finddata/:id',verifyToken,BannerController.find_data_Id);
 router.post('/InsertBanner',verifyToken, upload.single('image'), BannerController.insert_data);
@@ -49,18 +49,15 @@ router.post('/UpdateBanner',verifyToken, upload.single('image'), BannerControlle
 router.delete('/DeleteBanner/:id',verifyToken, upload.single('image'), BannerController.Delete_data);
 
 
-// mukunj api start
-
 //login api 
 router.post('/Mlogin',BannerController.Mlogin);
 
+// mukunj api start
 router.get('/Mfinddata',verifyToken,BannerController.Mfind_data);
 router.get('/Mfinddata/:id',verifyToken,BannerController.Mfind_data_Id);
-router.post('/MInsertBanner',verifyToken, upload.single('image'), BannerController.Minsert_data);
+router.post('/MInsertBanner',upload.single('image'), BannerController.Minsert_data);
 router.post('/MUpdateBanner', verifyToken,upload.single('image'), BannerController.MUpdate_data);
 router.delete('/MDeleteBanner/:id',verifyToken, upload.single('image'), BannerController.MDelete_data);
-
-
 // mukunj api end
 
 //vikas api start
@@ -69,23 +66,7 @@ router.get('/vfinddata/:id',verifyToken,BannerController.vfind_data_Id);
 router.post('/vInsertBanner',verifyToken, upload.single('image'), BannerController.vinsert_data);
 router.post('/vUpdateBanner',verifyToken, upload.single('image'), BannerController.vUpdate_data);
 router.delete('/vDeleteBanner/:id', verifyToken,upload.single('image'), BannerController.vDelete_data);
-
 //vikas api end 
-
-
-
-
-
-
-//video api start
-// router.get('/vifinddata',BannerController.vifind_data);
-// router.get('/vifinddata/:id',BannerController.vifind_data_Id);
-// router.post('/viInsertBanner', upload.any(), BannerController.viinsert_data);
-// router.post('/viInsertBanner', upload1.single('banner_video'), BannerController.viinsert_data);
-// router.post('/viUpdateBanner', upload.single('image'), BannerController.viUpdate_data);
-// router.delete('/viDeleteBanner/:id', upload.single('image'), BannerController.viDelete_data);
-//video api end 
-
 
 //keyur api start
 router.get('/kfinddata',verifyToken,BannerController.kfind_data);

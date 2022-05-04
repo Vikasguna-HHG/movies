@@ -76,7 +76,9 @@ const SubCategoires = () => {
       formData.append('category', maintitle)
       formData.append('description', subtitle)
       try {
-        const res = await axios.post(env.apiURL+'kInsertBanner', formData)
+        const res = await axios.post(env.apiURL+'kInsertBanner', formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
 
         setList([...list, res.data.data])
         toast.success('New Add...!', {
@@ -99,7 +101,9 @@ const SubCategoires = () => {
       formData.append('category', maintitle)
       formData.append('description', subtitle)
       try {
-        const res = await axios.post(env.apiURL+'kUpdateBanner', formData)
+        const res = await axios.post(env.apiURL+'kUpdateBanner', formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
 
         if (res.data.status == 'success') {
           getdata()   
@@ -130,6 +134,11 @@ const SubCategoires = () => {
     axios
       .get(env.apiURL+`kfinddata/${id}`, {
         method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+        }
       })
       .then((result) => {
         setId(id)
@@ -147,7 +156,9 @@ const SubCategoires = () => {
   // 
   function getdata() {
     axios
-      .get(env.apiURL+"kfinddata/?category="+categoryName)
+      .get(env.apiURL+"kfinddata/?category="+categoryName,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         // console.log(res.data);
         setList(res.data.data)
@@ -160,7 +171,9 @@ const SubCategoires = () => {
   // ----------------------------------------------
   function category() {
     axios
-      .get(env.apiURL+`vfinddata`)
+      .get(env.apiURL+`vfinddata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         console.log(res.data.data)
         setcategry(res.data.data)
@@ -171,30 +184,14 @@ const SubCategoires = () => {
       })
   }
 
-  // function findonesubcatogory() {
-  //   axios
-  //     .get(env.apiURL+`kfindonedata`)
-  //     .then(function (res) {
-  //       console.log(res.data.data)
-  //       setList(res.data.data)
-  //       // setList(res.data.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
-  // }
-  
   
 var categoryName;
 
   useEffect(() => {
-    // findonesubcatogory();
-
-
     let url = new URL(window.location.href);
     categoryName = url.searchParams.get("category");
-   setQuery(categoryName)
-      category();
+    setQuery(categoryName)
+    category();
     getdata();
 
   }, [])
