@@ -18,13 +18,35 @@ var upload = multer({
     storage: storage,
 })
 
+
+//jwt ...
+const jwt = require("jsonwebtoken");
+const jwtkey = "movies-hhg";
+
+const verifyToken = (req, res, next) => {
+  let token = req.headers["authorization"];
+  // console.log("call...", token);
+
+  if (token) {
+    token = token.split(" ")[1];
+    jwt.verify(token, jwtkey, (err, valid) => {
+      if (err) {
+        res.status(401).send({ result: "please provide valid token" });
+      } else {
+        next()
+      }
+    });
+  } else {
+    res.status(403).send({ result: "please add token with header" });
+  }
+};
  
 
-router.get('/finddata',BannerController.find_data);
-router.get('/finddata/:id',BannerController.find_data_Id);
-router.post('/InsertBanner', upload.single('image'), BannerController.insert_data);
-router.post('/UpdateBanner', upload.single('image'), BannerController.Update_data);
-router.delete('/DeleteBanner/:id', upload.single('image'), BannerController.Delete_data);
+router.get('/finddata',verifyToken,BannerController.find_data);
+router.get('/finddata/:id',verifyToken,BannerController.find_data_Id);
+router.post('/InsertBanner',verifyToken, upload.single('image'), BannerController.insert_data);
+router.post('/UpdateBanner',verifyToken, upload.single('image'), BannerController.Update_data);
+router.delete('/DeleteBanner/:id',verifyToken, upload.single('image'), BannerController.Delete_data);
 
 
 // mukunj api start
@@ -42,11 +64,11 @@ router.delete('/MDeleteBanner/:id', upload.single('image'), BannerController.MDe
 // mukunj api end
 
 //vikas api start
-router.get('/vfinddata',BannerController.vfind_data);
-router.get('/vfinddata/:id',BannerController.vfind_data_Id);
-router.post('/vInsertBanner', upload.single('image'), BannerController.vinsert_data);
-router.post('/vUpdateBanner', upload.single('image'), BannerController.vUpdate_data);
-router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDelete_data);
+router.get('/vfinddata',verifyToken,BannerController.vfind_data);
+router.get('/vfinddata/:id',verifyToken,BannerController.vfind_data_Id);
+router.post('/vInsertBanner',verifyToken, upload.single('image'), BannerController.vinsert_data);
+router.post('/vUpdateBanner',verifyToken, upload.single('image'), BannerController.vUpdate_data);
+router.delete('/vDeleteBanner/:id', verifyToken,upload.single('image'), BannerController.vDelete_data);
 
 //vikas api end 
 
@@ -66,12 +88,12 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 
 
 //keyur api start
-router.get('/kfinddata',BannerController.kfind_data);
-router.get('/kfindonedata',BannerController.kfindone_data);
-router.get('/kfinddata/:id',BannerController.kfind_data_Id);
-router.post('/kInsertBanner', upload.single('image'), BannerController.kinsert_data);
-router.post('/kUpdateBanner', upload.single('image'), BannerController.kUpdate_data);
-router.delete('/kDeleteBanner/:id', upload.single('image'), BannerController.kDelete_data);
+router.get('/kfinddata',verifyToken,BannerController.kfind_data);
+router.get('/kfindonedata',verifyToken,BannerController.kfindone_data);
+router.get('/kfinddata/:id',verifyToken,BannerController.kfind_data_Id);
+router.post('/kInsertBanner',verifyToken, upload.single('image'), BannerController.kinsert_data);
+router.post('/kUpdateBanner',verifyToken, upload.single('image'), BannerController.kUpdate_data);
+router.delete('/kDeleteBanner/:id', verifyToken,upload.single('image'), BannerController.kDelete_data);
 //keyur api end
 
 router.get('/bannerfind',BannerController.banner_find);

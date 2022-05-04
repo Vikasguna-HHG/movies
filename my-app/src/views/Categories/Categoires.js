@@ -73,7 +73,9 @@ const Category = () => {
       formData.append('Description', Description)
       
       try {
-        const res = await axios.post(env.apiURL+'vInsertBanner', formData)
+        const res = await axios.post(env.apiURL+'vInsertBanner', formData ,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
         setList([...list, res.data.data])
         toast.success('New Add...!', {
           autoClose: 2000,
@@ -97,7 +99,9 @@ const Category = () => {
       formData.append('Description', Description)
       formData.append('Id', id)
       try {
-        const res = await axios.post(env.apiURL+'vUpdateBanner', formData)
+        const res = await axios.post(env.apiURL+'vUpdateBanner', formData , {
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
         if (res.data.status == 'success') {
           getdata()
           toast.success('Updated Data...!', {
@@ -122,7 +126,14 @@ const Category = () => {
 // update data
 const edithandler = async (id) => {
   setVisible1(true)
-  axios.get(env.apiURL+`vfinddata/${id}`, { method: 'GET'}).then((result) => 
+  axios.get(env.apiURL+`vfinddata/${id}`, 
+  { method: 'GET',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    "Authorization" : `Bearer ${localStorage.getItem('token')}`
+  }
+}).then((result) => 
   {
       setId(id)
       setcategory(result.data.data.category)
@@ -136,8 +147,11 @@ const edithandler = async (id) => {
 
 //find data
 function getdata() {
+ 
   axios
-    .get(env.apiURL+`vfinddata`)
+    .get(env.apiURL+`vfinddata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
     .then(function (res) {
       console.log(res.data)
       setList(res.data.data)
@@ -161,7 +175,9 @@ const deletehandler = async (id) => {
       dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      axios.delete(env.apiURL+`vDeleteBanner/${id}`).then((res) => {
+      axios.delete(env.apiURL+`vDeleteBanner/${id}`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      }).then((res) => {
         const users = res.data
         getdata()
       })

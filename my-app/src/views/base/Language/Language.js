@@ -75,7 +75,11 @@ const Tables = () => {
       try {
         const res = await axios.post(
           env.apiURL+"InsertBanner",
-          formData
+          formData,{
+            headers:{
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+  
+            }}
         );
         debugger;
 
@@ -97,11 +101,15 @@ const Tables = () => {
 
       try {
         const res = await axios.post(
-          env.apiURL+"UpdateBanner",
-          formData
+          env.apiURL+"UpdateBanner",formData,{
+          headers:{
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`
+
+          }}
+
           // body: JSON.stringify(update),
         );
-        debugger;
+        
 
         if (res.data.status == "success") {
           getdata('');
@@ -131,12 +139,13 @@ const Tables = () => {
 
   const edithandler = async (id) => {
     setVisible1(true)
-    axios.get(env.apiURL+`finddata/${id}`, {
+    axios.get(env.apiURL+`finddata/${id}`, { 
       method: 'GET',
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json'
-      // },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`
+      },
 
     }).then((result) => {
 
@@ -149,10 +158,12 @@ const Tables = () => {
  
 
   function getdata() {
-    axios.get(env.apiURL+`finddata`)
+    axios.get(env.apiURL+`finddata`,{
+      headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         console.log(res.data);
-        setList(res.data.data);
+        setList(res.data.data); 
       })
       .catch(function (error) {
         console.log(error);
@@ -173,7 +184,9 @@ const Tables = () => {
       })
       .then((willDelete) => {
         if (willDelete) {
-          axios.delete(env.apiURL+`DeleteBanner/${id}`)
+          axios.delete(env.apiURL+`DeleteBanner/${id}`,{
+            headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+          })
             .then(res => {
               const users = res.data;
               getdata();
@@ -239,7 +252,7 @@ const Tables = () => {
               </CTableHead>
               <CTableBody>
                 {
-                  list.filter(data => data.language.match(new RegExp(search, "i"))).reverse().map((item, i) => {
+                  list.reverse().map((item, i) => {
                     return (<>
                       <CTableRow key={i} style={{backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)'}}>
                         <CTableDataCell  style={{ paddingTop: "20px",color:"white" }}>{i + 1}</CTableDataCell>
