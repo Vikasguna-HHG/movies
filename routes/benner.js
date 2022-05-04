@@ -88,12 +88,12 @@ router.delete('/vDeleteBanner/:id', upload.single('image'), BannerController.vDe
 
 
 //keyur api start
-router.get('/kfinddata',BannerController.kfind_data);
-router.get('/kfindonedata',BannerController.kfindone_data);
-router.get('/kfinddata/:id',BannerController.kfind_data_Id);
-router.post('/kInsertBanner', upload.single('image'), BannerController.kinsert_data);
-router.post('/kUpdateBanner', upload.single('image'), BannerController.kUpdate_data);
-router.delete('/kDeleteBanner/:id', upload.single('image'), BannerController.kDelete_data);
+router.get('/kfinddata',verifyToken,BannerController.kfind_data);
+router.get('/kfindonedata',verifyToken,BannerController.kfindone_data);
+router.get('/kfinddata/:id',verifyToken,BannerController.kfind_data_Id);
+router.post('/kInsertBanner',verifyToken, upload.single('image'), BannerController.kinsert_data);
+router.post('/kUpdateBanner',verifyToken, upload.single('image'), BannerController.kUpdate_data);
+router.delete('/kDeleteBanner/:id', verifyToken,upload.single('image'), BannerController.kDelete_data);
 //keyur api end
 
 router.get('/bannerfind',BannerController.banner_find);
