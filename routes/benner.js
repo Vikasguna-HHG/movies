@@ -43,10 +43,10 @@ const verifyToken = (req, res, next) => {
  
 
 router.get('/finddata',verifyToken,BannerController.find_data);
-router.get('/finddata/:id',BannerController.find_data_Id);
-router.post('/InsertBanner', upload.single('image'), BannerController.insert_data);
-router.post('/UpdateBanner', upload.single('image'), BannerController.Update_data);
-router.delete('/DeleteBanner/:id', upload.single('image'), BannerController.Delete_data);
+router.get('/finddata/:id',verifyToken,BannerController.find_data_Id);
+router.post('/InsertBanner',verifyToken, upload.single('image'), BannerController.insert_data);
+router.post('/UpdateBanner',verifyToken, upload.single('image'), BannerController.Update_data);
+router.delete('/DeleteBanner/:id',verifyToken, upload.single('image'), BannerController.Delete_data);
 
 
 // mukunj api start
@@ -54,7 +54,7 @@ router.delete('/DeleteBanner/:id', upload.single('image'), BannerController.Dele
 //login api 
 router.post('/Mlogin',BannerController.Mlogin);
 
-router.get('/Mfinddata',BannerController.Mfind_data);
+router.get('/Mfinddata',verifyToken,BannerController.Mfind_data);
 router.get('/Mfinddata/:id',BannerController.Mfind_data_Id);
 router.post('/MInsertBanner', upload.single('image'), BannerController.Minsert_data);
 router.post('/MUpdateBanner', upload.single('image'), BannerController.MUpdate_data);
