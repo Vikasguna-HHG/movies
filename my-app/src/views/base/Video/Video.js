@@ -223,7 +223,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
 
       // try {
-        await axios.post(env.apiURL+'viInsertBanner', formData)
+        await axios.post(env.apiURL+'viInsertBanner', formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
         .then(r => {
           console.log(formData)
           setList([...list, r.data.data])
@@ -270,7 +272,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('Id', id)
       // formData.append('sid', sid)
       try {
-        const res = await axios.post(env.apiURL+'viUpdateBanner', formData)
+        const res = await axios.post(env.apiURL+'viUpdateBanner', formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
         debugger
         if (res.data.status == 'success') {
           getdata()
@@ -312,6 +316,11 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     axios
       .get(env.apiURL+`vifinddata/${id}`, {
         method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+        }
       })
       .then((result) => {
         setId(id)
@@ -341,7 +350,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   // --------------------API FUNCTION------------------------//
   function getdata() {
     axios
-      .get(env.apiURL+`vifinddata`)
+      .get(env.apiURL+`vifinddata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
       .then(function (res) {
         console.log(res.data)
         setList(res.data.data)
@@ -353,7 +364,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function cata_data() {
     axios
-      .get(env.apiURL+`vfinddata`)
+      .get(env.apiURL+`vfinddata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         console.log(res.data)
         setcategory1(res.data.data)
@@ -365,7 +378,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function subcata_data() {
     axios
-      .get(env.apiURL+`kfindonedata`)
+      .get(env.apiURL+`kfindonedata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         console.log(res.data)
         setsubcategory1(res.data.data)
@@ -377,7 +392,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function Language_Data() {
     axios
-      .get(env.apiURL+`finddata`)
+      .get(env.apiURL+`finddata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         console.log(res.data)
         setLanguage1(res.data.data)
@@ -464,7 +481,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(env.apiURL+`viDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`viDeleteBanner/${id}`,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      }).then((res) => {
           const users = res.data
           getdata()
         })

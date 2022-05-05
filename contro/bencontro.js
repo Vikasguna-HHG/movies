@@ -4,6 +4,7 @@ var movie_maker = require("../Models/movie_maker");
 var language = require("../Models/language");
 var video = require("../Models/video");
 var Contract = require("../Models/Contract");
+var User = require("../Models/User")
 var $ = require("jquery");
 
 // var banner_schema = require("../Models/banner_video");
@@ -484,12 +485,30 @@ exports.kUpdate_data = async function (req, res, next) {
 //video api
 exports.viinsert_data = async function (req, res, next) {
   // const sid = Math.random();
+//   var result = ""
+//   var char = Date.now()
   
+// var charactersLength = char.length;
+// for (var i = 0; i < 12; i++) {
+//   result += char.charAt(Math.floor(Math.random() * charactersLength));
+// }
+
+// var video_id = await bcrypt.hash(result, 12);
+// var result = "";
+// var characters =
+//   "abcdefghijklmnopqrstuvwxyz";
+// var charactersLength = characters.length;
+// for (var i = 0; i < 6; i++) {
+//   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+// }
+// var video_id = result + Date.now();
+// var newpass = await bcrypt.hash(video_id, 12);
+
 //  const cnt=1; 
   try {
     // const form = new IncomingForm(formidable);
     const data = {
-    
+      // v_id : video_id,
       method: req.body.method,
       rdate: req.body.rdate,
       edate: req.body.edate,
@@ -505,6 +524,7 @@ exports.viinsert_data = async function (req, res, next) {
       Trailer_video: req.files[2].path,
     };
     console.log(data);
+    console.log(data.v_id);
     const tag = await video.create(data);
 
     res.status(201).json({
@@ -531,6 +551,8 @@ exports.vifind_data = async function (req, res, next) {
     console.log("not find data........!");
   }
 };
+
+
 
 exports.banner_find = async function (req, res, next) {
   // try {
@@ -776,4 +798,36 @@ exports.Status_data = async function (req, res, next) {
   }
 };
 
+
+exports.User_data = async function (req, res, next) {
+  try {
+    var result = "";
+var characters =
+  "abcdefghijklmnopqrstuvwxyz";
+var charactersLength = characters.length;
+for (var i = 0; i < 6; i++) {
+  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+}
+var v_id = result + Date.now();
+    var newpass = await bcrypt.hash(req.body.Password, 12);
+
+
+    const data = {
+      video_id : v_id,
+      User_Name:req.body.User_Name,
+      Email:req.body.Email,
+      Password:newpass,
+
+    }
+    const tag = await User.create(data);
+
+    res.status(201).json({
+      status: "create data",
+      data: tag,
+    });
+  } catch (error) {
+    // console.log(data);
+    console.log("not find data........!");
+  }
+};
 
