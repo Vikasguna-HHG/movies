@@ -95,11 +95,11 @@ const SubCategoires = () => {
       setImageval('')
     } else {
       const formData = new FormData()
-      formData.append('Id', id)
       formData.append('image', imageval)
       formData.append('subcategorie', subcat)
       formData.append('category', maintitle)
       formData.append('description', subtitle)
+      formData.append('Id', id)
       try {
         const res = await axios.post(env.apiURL+'kUpdateBanner', formData,{
           headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
@@ -120,16 +120,17 @@ const SubCategoires = () => {
 
       }
     }
-    setId(0)
     setmaintitle('')
     setsubcat('')
     setsubtitle('')
     setImageval('')
     setVisible1(false)
+    setId(0)
+
   }
   // -----------------------------------------------------------------------
   const edithandler = async (id) => {
-    debugger;
+    // debugger;
     
     setVisible1(true)
     axios
@@ -163,7 +164,7 @@ const SubCategoires = () => {
         headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
     })
       .then(function (res) {
-        // console.log(res.data);
+        console.log(res.data);
         setList(res.data.data)
       })
       .catch(function (error) {
