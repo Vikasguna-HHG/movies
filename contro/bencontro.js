@@ -6,6 +6,7 @@ var video = require("../Models/video");
 var Contract = require("../Models/Contract");
 var User = require("../Models/User")
 var $ = require("jquery");
+var moment = require("moment");
 
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
@@ -74,7 +75,11 @@ exports.insert_data = async function (req, res, next) {
       status: "Data insert",
     });
   } catch (error) {
-    console.log("not data insert........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not  insert",
+    });
+    // console.log("not data insert........!");
   }
 };
 
@@ -87,7 +92,11 @@ exports.find_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insert",
+    });
+    // console.log("not find data........!");
   }
 };
 
@@ -99,7 +108,11 @@ exports.find_data_Id = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("Data not find by id........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find by id",
+    });
+    // console.log("Data not find by id........!");
   }
 };
 
@@ -110,7 +123,11 @@ exports.Delete_data = async function (req, res, next) {
       status: "delete",
     });
   } catch (error) {
-    console.log("Data not delete........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not delete",
+    });
+    // console.log("Data not delete........!");
   }
 };
 
@@ -124,7 +141,7 @@ exports.Update_data = async function (req, res, next) {
       data: req.file,
     });
   } catch (error) {
-    console.log(error);
+   
   }
 };
 
@@ -142,7 +159,7 @@ exports.Minsert_data = async function (req, res, next) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    console.log(result);
+    // console.log(result);
 
     var transporter = nodemailer.createTransport({
       service: "gmail",
@@ -161,7 +178,7 @@ exports.Minsert_data = async function (req, res, next) {
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
-        console.log(error);
+        // console.log(error);
       } else {
         console.log("Email sent: " + info.response);
       }
@@ -169,7 +186,7 @@ exports.Minsert_data = async function (req, res, next) {
     // res.render("result");
     // console.log(result)
     var newpass = await bcrypt.hash(result, 12);
-    console.log(newpass);
+    // console.log(newpass);
 
     var sid = 2; 
     
@@ -196,7 +213,10 @@ exports.Minsert_data = async function (req, res, next) {
     });
     // });
   } catch (error) {
-    console.log("not data insert........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insert",
+    });
   }
 };
 
@@ -237,7 +257,10 @@ exports.Mfind_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find",
+    });
   }
 };
 
@@ -249,7 +272,10 @@ exports.Mfind_data_Id = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("Data not find by id........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not finf by id",
+    });
   }
 };
 
@@ -260,7 +286,10 @@ exports.MDelete_data = async function (req, res, next) {
       status: "delete",
     });
   } catch (error) {
-    console.log("Data not delete........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not delete",
+    });
   }
 };
 
@@ -278,7 +307,7 @@ exports.MUpdate_data = async function (req, res, next) {
       data: req.file,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -299,7 +328,10 @@ exports.vinsert_data = async function (req, res, next) {
       status: "Data insert",
     });
   } catch (error) {
-    console.log("not data insert........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insert",
+    });
   }
 };
 
@@ -312,7 +344,10 @@ exports.vfind_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find",
+    });
   }
 };
 
@@ -324,7 +359,10 @@ exports.vfind_data_Id = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("Data not find by id........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find by  id",
+    });
   }
 };
 
@@ -335,7 +373,10 @@ exports.vDelete_data = async function (req, res, next) {
       status: "delete",
     });
   } catch (error) {
-    console.log("Data not delete........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not delete",
+    });
   }
 };
 
@@ -354,7 +395,7 @@ exports.vUpdate_data = async function (req, res, next) {
       data: req.file,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -385,18 +426,21 @@ exports.kinsert_data = async function (req, res, next) {
 // }
 
 exports.kfind_data = async function (req, res, next) {
-  console.log("res : " + req.query.category);
-  console.log("res1 : ", req);
+  // console.log("res : " + req.query.category);
+  // console.log("res1 : ", req);
   if (req.query.category != "null") {
     try {
       const tag = await subcategoires.find({ category: req.query.category });
-      console.log("filter :" + tag);
+      // console.log("filter :" + tag);
       res.status(200).json({
         status: "find data",
         data: tag,
       });
     } catch (error) {
-      console.log("not find data........!");
+      res.status(201).json({
+        // data: tag,
+        status: "Data not find",
+      });
     }
   } else {
     try {
@@ -409,7 +453,7 @@ exports.kfind_data = async function (req, res, next) {
         data: tag,
       });
     } catch (error) {
-      console.log("error :" + error);
+      // console.log("error :" + error);
       // console.log("not find data........!");
     }
   }
@@ -435,7 +479,10 @@ exports.kfind_data_Id = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("Data not find by id........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find by id",
+    });
   }
 };
 
@@ -447,7 +494,10 @@ exports.kfindone_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("Data not find by id........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find by id",
+    });
   }
 };
 
@@ -458,7 +508,10 @@ exports.kDelete_data = async function (req, res, next) {
       status: "delete",
     });
   } catch (error) {
-    console.log("Data not delete........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not delete",
+    });
   }
 };
 
@@ -478,7 +531,7 @@ exports.kUpdate_data = async function (req, res, next) {
       data: req.file,
     });
   } catch (error) {
-    console.log(error);
+
   }
 };
 
@@ -505,8 +558,29 @@ exports.viinsert_data = async function (req, res, next) {
 // var newpass = await bcrypt.hash(video_id, 12);
 
 //  const cnt=1; 
+
+
+//   // setrdate(e.target.value)
+//  let date = new Date(Date.UTC(2021, 5, 28, 3, 0, 0));
+//  console.log('Date in India: ' + date);
+//  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });   
+//  let usDate = formatter.format(date);
+//  console.log('Date in USA: ' + usDate);
+
+// const changeTimezone = (e) => { 
+  // setrdate(e.target.value)
+ 
+//  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });   
+//  let usDate = formatter.format(date);
+//  console.log('Date in USA: ' + usDate);
+// }
   try {
-    // const form = new IncomingForm(formidable);
+    res.status(201).json({
+      dd:moment(req.body.rdate).utc(),
+      date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
+    });
+
+  
     const data = {
       // v_id : video_id,
       method: req.body.method,
@@ -523,8 +597,7 @@ exports.viinsert_data = async function (req, res, next) {
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
     };
-    console.log(data);
-    console.log(data.v_id);
+  
     const tag = await video.create(data);
 
     res.status(201).json({
@@ -535,7 +608,10 @@ exports.viinsert_data = async function (req, res, next) {
   } catch (error) {
     res.status(201).json({ error });
     // console.log(error);
-    console.log("not data insert........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insret",
+    });
   }
 };
 
@@ -548,7 +624,10 @@ exports.vifind_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find ",
+    });
   }
 };
 
@@ -594,7 +673,7 @@ exports.demo_data = async function (req, res, next) {
     
     const tag = await video.findById(req.params.id);
     var filePath = tag.banner_video
-    console.log(tag);
+
     var a = fs.statSync(filePath);
 
     res.writeHead(200, {
@@ -635,7 +714,10 @@ exports.latest_find = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find ",
+    });
   }
 };
 
@@ -655,7 +737,10 @@ exports.Upcoming_find = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find ",
+    });
   }
 };
 
@@ -667,7 +752,10 @@ exports.vifind_data_Id = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("Data not find by id........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find by id",
+    });
   }
 };
 
@@ -678,7 +766,10 @@ exports.viDelete_data = async function (req, res, next) {
       status: "delete",
     });
   } catch (error) {
-    console.log("Data not delete........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not delete",
+    });
   }
 };
 
@@ -714,7 +805,7 @@ exports.viUpdate_data = async function (req, res, next) {
       data: req.files,
     });
   } catch (error) {
-    console.log(error);
+    
   }
 };
 
@@ -727,7 +818,10 @@ exports.Contract_find_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log("not find contract data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not find ",
+    });
   }
 };
 
@@ -781,7 +875,10 @@ exports.Contract_data = async function (req, res, next) {
     // console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
-    console.log("not data data insert........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insert",
+    });
   }
 };
 exports.Status_data = async function (req, res, next) {
@@ -794,7 +891,7 @@ exports.Status_data = async function (req, res, next) {
       data: tag,
     });
   } catch (error) {
-    console.log(error);
+    
   }
 };
 
@@ -827,7 +924,10 @@ var v_id = result + Date.now();
     });
   } catch (error) {
     // console.log(data);
-    console.log("not find data........!");
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insert",
+    });
   }
 };
 

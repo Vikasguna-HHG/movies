@@ -172,17 +172,6 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       return
     }
     
-    const dateToTime = date => date.toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric'
-    });
-    
-    const dateString = "2019-05-05T10:30:00Z";
-    const userOffset = new Date().getTimezoneOffset()*60*1000;
-    const localDate = new Date(dateString);
-    const utcDate = new Date(localDate.getTime() + userOffset);
-    
-    console.log(`${dateToTime(utcDate)} (${dateToTime(localDate)} Your Time)`)
 
 
     // if(id == 0)
@@ -588,7 +577,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           <CForm>
           <Form.Group controlId="dob">
                             <Form.Label>Release Date</Form.Label>
-                            <Form.Control type="date" name="dob"   value={rtimezone}  onChange={(e) => {setrtimezone(e.target.value)}}/>
+                            <Form.Control type="date" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
                              {/* value={this.state.timezone} onChange={this.onSelect}
                            {Timezones.map((timezone) => <option value={timezone.value}>{timezone.name}</option>)} */}
 
