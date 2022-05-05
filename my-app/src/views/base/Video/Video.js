@@ -30,6 +30,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const [title, settitle] = useState('')
   const [method, setmethod] = useState('')
   const [rdate, setrdate] = useState('')
+  const [rtimezone, setrtimezone] = useState('')
   const [edate, setedate] = useState('')
   const [status, setstatus] = useState('')
   const [banner, setBanner] = useState('')
@@ -170,6 +171,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       })
       return
     }
+    
 
 
     // if(id == 0)
@@ -576,6 +578,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           <Form.Group controlId="dob">
                             <Form.Label>Release Date</Form.Label>
                             <Form.Control type="date" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
+                             {/* value={this.state.timezone} onChange={this.onSelect}
+                           {Timezones.map((timezone) => <option value={timezone.value}>{timezone.name}</option>)} */}
+
           </Form.Group> 
           <Form.Group controlId="dob">
                             <Form.Label>Expiry Date</Form.Label>

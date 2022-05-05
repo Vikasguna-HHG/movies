@@ -6,6 +6,9 @@ const video1 = new mongoose.Schema({
     {
         type:String
     },
+    v_id:{
+        type:String
+    },
     banner:
     {
         type:String
@@ -50,6 +53,7 @@ const video1 = new mongoose.Schema({
 
         type:String
     },
+
     
    
     
