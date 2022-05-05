@@ -62,7 +62,7 @@ const SubCategoires = () => {
   }
 
   // -----------------------------------------------------------------------
-  const submit = async () => {
+  const submit = async (e) => {
     if (!maintitle || !subcat || !subtitle || !imageval) {
       toast.warning('data Fild...!', {
         autoClose: 2000,
@@ -76,7 +76,9 @@ const SubCategoires = () => {
       formData.append('category', maintitle)
       formData.append('description', subtitle)
       try {
-        const res = await axios.post(env.apiURL+'kInsertBanner', formData)
+        const res = await axios.post(env.apiURL+'kInsertBanner', formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
 
         setList([...list, res.data.data])
         toast.success('New Add...!', {
@@ -99,7 +101,9 @@ const SubCategoires = () => {
       formData.append('category', maintitle)
       formData.append('description', subtitle)
       try {
-        const res = await axios.post(env.apiURL+'kUpdateBanner', formData)
+        const res = await axios.post(env.apiURL+'kUpdateBanner', formData,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      })
 
         if (res.data.status == 'success') {
           getdata()   
@@ -126,10 +130,16 @@ const SubCategoires = () => {
   // -----------------------------------------------------------------------
   const edithandler = async (id) => {
     debugger;
+    
     setVisible1(true)
     axios
       .get(env.apiURL+`kfinddata/${id}`, {
         method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          "Authorization" : `Bearer ${localStorage.getItem('token')}`
+        }
       })
       .then((result) => {
         setId(id)
@@ -137,17 +147,21 @@ const SubCategoires = () => {
         setmaintitle(result.data.data.category)
         setsubtitle(result.data.data.description)
         setImageval(result.data.data.image_user)
+     
+
       })
 
-        setsubcat()
-        setmaintitle()
-        setsubtitle()
-        setImageval()
+        setsubcat('')
+        setmaintitle('')
+        setsubtitle('')
+        setImageval('')
   }
   // 
   function getdata() {
     axios
-      .get(env.apiURL+"kfinddata/?category="+categoryName)
+      .get(env.apiURL+"kfinddata/?category="+categoryName,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         // console.log(res.data);
         setList(res.data.data)
@@ -160,7 +174,9 @@ const SubCategoires = () => {
   // ----------------------------------------------
   function category() {
     axios
-      .get(env.apiURL+`vfinddata`)
+      .get(env.apiURL+`vfinddata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+    })
       .then(function (res) {
         console.log(res.data.data)
         setcategry(res.data.data)
@@ -171,30 +187,14 @@ const SubCategoires = () => {
       })
   }
 
-  // function findonesubcatogory() {
-  //   axios
-  //     .get(env.apiURL+`kfindonedata`)
-  //     .then(function (res) {
-  //       console.log(res.data.data)
-  //       setList(res.data.data)
-  //       // setList(res.data.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
-  // }
-  
   
 var categoryName;
 
   useEffect(() => {
-    // findonesubcatogory();
-
-
     let url = new URL(window.location.href);
     categoryName = url.searchParams.get("category");
-   setQuery(categoryName)
-      category();
+    setQuery(categoryName)
+    category();
     getdata();
 
   }, [])
@@ -207,7 +207,9 @@ var categoryName;
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(env.apiURL+`kDeleteBanner/${id}`).then((res) => {
+        axios.delete(env.apiURL+`kDeleteBanner/${id}`,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      }).then((res) => {
           const users = res.data
           getdata()
           // findonesubcatogory();

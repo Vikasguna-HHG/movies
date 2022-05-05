@@ -137,11 +137,10 @@ const Home = () => {
         document.getElementById("email").style.border="1px solid red"
       }
 
-      try {
-        const res = await axios.post(env.apiURL+'MInsertBanner', formData,{
-          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
 
-        })
+      
+      try {
+        const res = await axios.post(env.apiURL+'MInsertBanner', formData)
         toast.success('data insrted', {
           autoClose: 2000,
         })
