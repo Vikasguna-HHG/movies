@@ -31,13 +31,13 @@ const verifyToken = (req, res, next) => {
     token = token.split(" ")[1];
     jwt.verify(token, jwtkey, (err, valid) => {
       if (err) {
-        res.status(401).send({ result: "please provide valid token" });
+        res.status(401).send({ result: "401 Unauthorized" });
       } else {
         next()
       }
     });
   } else {
-    res.status(403).send({ result: "please add token with header" });
+    res.status(403).send({ result: "403 Forbidden" });
   }
 };
  
