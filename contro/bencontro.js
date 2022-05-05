@@ -575,16 +575,16 @@ exports.viinsert_data = async function (req, res, next) {
 //  console.log('Date in USA: ' + usDate);
 // }
   try {
-    res.status(201).json({
-      dd:moment(req.body.rdate).utc(),
-      date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
-    });
+    // res.status(201).json({
+      var time = moment(req.body.rdate).utc().format('YYYY-MM-DD dddd HH:mm:ss a')
+      // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
+    // });
 
   
     const data = {
       // v_id : video_id,
       method: req.body.method,
-      rdate: req.body.rdate,
+      rdate: time,
       edate: req.body.edate,
       status: req.body.status,
       banner: req.body.banner,

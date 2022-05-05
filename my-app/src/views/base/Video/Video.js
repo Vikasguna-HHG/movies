@@ -577,7 +577,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           <CForm>
           <Form.Group controlId="dob">
                             <Form.Label>Release Date</Form.Label>
-                            <Form.Control type="date" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
+                            <Form.Control type="datetime-local" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
                              {/* value={this.state.timezone} onChange={this.onSelect}
                            {Timezones.map((timezone) => <option value={timezone.value}>{timezone.name}</option>)} */}
 
