@@ -7,26 +7,53 @@ var Contract = require("../Models/Contract");
 var User = require("../Models/User")
 var $ = require("jquery");
 var moment = require("moment");
-
+const MongoClient = require ('mongodb').MongoClient
+const express = require('express')
+const app = express();
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
 const fs = require("fs");
 const formidable = require("formidable");
-const { IncomingForm } = require("formidable");
+// const { IncomingForm } = require("formidable");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
 
 const bcrypt = require("bcrypt");
-const { data } = require("jquery");
-const { time } = require("console");
+// const { data } = require("jquery");
+// const { time } = require("console");
 // const { token } = require("morgan");
 
 //jwt ...
 const jwt = require("jsonwebtoken");
-const { match } = require("assert");
+// const { match } = require("assert");
 const jwtkey = "movies-hhg";
+const url = "mongodb+srv://HHG:HHG@cluster0.f2c5v.mongodb.net/HHG?retryWrites=true&w=majority";
 
+exports.get_join_data = async function (req, res, next) {
+  
+  MongoClient.connect(url,async (err,db)=>{
+    if(err) throw err ;
+    const dbo = db.db('HHG')
+
+    const dd = await movie_maker.aggregate([
+      {
+          $lookup:{
+            from:'contracts',
+            localField:'_id',
+            foreignField:'u_id',
+            as:'school'
+          }
+      }
+    ])
+    
+    res.status(200).send({
+      data:dd
+    })
+
+  })
+
+}
 // const verifyToken = (req, res, next) => {
 //   let token = req.headers["authorization"];
 //   // console.log("call...", token);
@@ -864,7 +891,8 @@ exports.Contract_data = async function (req, res, next) {
       CIN: req.body.CIN,
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
-      Contract_pdf:pdf
+      Contract_pdf:pdf,
+      u_id:"6267c45c38b6f784ff71757d"
   };
 
     const tag = await Contract.create(data);
