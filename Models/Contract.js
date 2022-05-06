@@ -69,6 +69,10 @@ const contract = new mongoose.Schema({
     Status:
     {
         type:Number
+    },
+    u_id:
+    {
+        type:String
     }   
    
 })

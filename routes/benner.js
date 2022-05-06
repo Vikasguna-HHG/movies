@@ -40,7 +40,9 @@ const verifyToken = (req, res, next) => {
     res.status(403).send({ result: "403 Forbidden" });
   }
 };
- 
+
+router.get('/getjoindata',BannerController.get_join_data);
+
 //parth
 router.get('/finddata',verifyToken,BannerController.find_data);
 router.get('/finddata/:id',verifyToken,BannerController.find_data_Id);
