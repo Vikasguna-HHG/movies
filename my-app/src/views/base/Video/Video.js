@@ -1070,7 +1070,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                           <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
                             {item.subcategory}
                           </CTableDataCell>
-                          <CTableDataCell  className='font1' style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                          <CTableDataCell className='font'  style={{ paddingTop: '30px' ,color:"#FFF",height:"170px" }}>
                             {item.Description}
                           </CTableDataCell>
                           <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}> 

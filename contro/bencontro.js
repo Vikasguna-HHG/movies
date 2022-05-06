@@ -157,18 +157,18 @@ exports.Minsert_data = async function (req, res, next) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    // console.log(result);
+    console.log(result);
 
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "gunavikas02@gmail.com",
-        pass: "##Vikas002",
+        user: "hhgsoftechteam10@gmail.com",
+        pass: "@Surat.1234",
       },
     });
 
     var mailOptions = {
-      from: "gunavikas02@gmail.com",
+      from: "hhgsoftechteam10@gmail.com",
       to: req.body.Email,
       subject: "your password",
       html: "<h1>Don't share your Password....!!!</h1> <h2>" + result + "</h2>",
@@ -197,6 +197,7 @@ exports.Minsert_data = async function (req, res, next) {
       Password: newpass,
     };
 
+    console.log(data.Password);
     const tag = await movie_maker.create(data);
 
     // jwt.sign({ tag }, jwtkey, (err, token) => {
