@@ -4,7 +4,7 @@ var movie_maker = require("../Models/movie_maker");
 var language = require("../Models/language");
 var video = require("../Models/video");
 var Contract = require("../Models/Contract");
-var User = require("../Models/User")
+var User = require("../Models/User");
 var $ = require("jquery");
 var moment = require("moment");
 
@@ -140,9 +140,7 @@ exports.Update_data = async function (req, res, next) {
       status: "success",
       data: req.file,
     });
-  } catch (error) {
-   
-  }
+  } catch (error) {}
 };
 
 // parth api end
@@ -188,8 +186,8 @@ exports.Minsert_data = async function (req, res, next) {
     var newpass = await bcrypt.hash(result, 12);
     // console.log(newpass);
 
-    var sid = 2; 
-    
+    var sid = 2;
+
     const data = {
       sid: sid,
       First_Name: req.body.First_Name,
@@ -530,57 +528,55 @@ exports.kUpdate_data = async function (req, res, next) {
       status: "success",
       data: req.file,
     });
-  } catch (error) {
-
-  }
+  } catch (error) {}
 };
 
 //video api
 exports.viinsert_data = async function (req, res, next) {
   // const sid = Math.random();
-//   var result = ""
-//   var char = Date.now()
-  
-// var charactersLength = char.length;
-// for (var i = 0; i < 12; i++) {
-//   result += char.charAt(Math.floor(Math.random() * charactersLength));
-// }
+  //   var result = ""
+  //   var char = Date.now()
 
-// var video_id = await bcrypt.hash(result, 12);
-// var result = "";
-// var characters =
-//   "abcdefghijklmnopqrstuvwxyz";
-// var charactersLength = characters.length;
-// for (var i = 0; i < 6; i++) {
-//   result += characters.charAt(Math.floor(Math.random() * charactersLength));
-// }
-// var video_id = result + Date.now();
-// var newpass = await bcrypt.hash(video_id, 12);
+  // var charactersLength = char.length;
+  // for (var i = 0; i < 12; i++) {
+  //   result += char.charAt(Math.floor(Math.random() * charactersLength));
+  // }
 
-//  const cnt=1; 
+  // var video_id = await bcrypt.hash(result, 12);
+  // var result = "";
+  // var characters =
+  //   "abcdefghijklmnopqrstuvwxyz";
+  // var charactersLength = characters.length;
+  // for (var i = 0; i < 6; i++) {
+  //   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  // }
+  // var video_id = result + Date.now();
+  // var newpass = await bcrypt.hash(video_id, 12);
 
+  //  const cnt=1;
 
-//   // setrdate(e.target.value)
-//  let date = new Date(Date.UTC(2021, 5, 28, 3, 0, 0));
-//  console.log('Date in India: ' + date);
-//  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });   
-//  let usDate = formatter.format(date);
-//  console.log('Date in USA: ' + usDate);
+  //   // setrdate(e.target.value)
+  //  let date = new Date(Date.UTC(2021, 5, 28, 3, 0, 0));
+  //  console.log('Date in India: ' + date);
+  //  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });
+  //  let usDate = formatter.format(date);
+  //  console.log('Date in USA: ' + usDate);
 
-// const changeTimezone = (e) => { 
+  // const changeTimezone = (e) => {
   // setrdate(e.target.value)
- 
-//  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });   
-//  let usDate = formatter.format(date);
-//  console.log('Date in USA: ' + usDate);
-// }
+
+  //  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });
+  //  let usDate = formatter.format(date);
+  //  console.log('Date in USA: ' + usDate);
+  // }
   try {
     // res.status(201).json({
-      var time = moment(req.body.rdate).utc().format('YYYY-MM-DD dddd HH:mm:ss a')
-      // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
+    var time = moment(req.body.rdate)
+      .utc()
+      .format("YYYY-MM-DD dddd HH:mm:ss a");
+    // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
     // });
 
-  
     const data = {
       // v_id : video_id,
       method: req.body.method,
@@ -597,7 +593,7 @@ exports.viinsert_data = async function (req, res, next) {
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
     };
-  
+
     const tag = await video.create(data);
 
     res.status(201).json({
@@ -631,19 +627,15 @@ exports.vifind_data = async function (req, res, next) {
   }
 };
 
-
-
 exports.banner_find = async function (req, res, next) {
   // try {
-    const tag = await video.find(
-      { 
-        banner: 'Yes',
-      }
-    );
-    res.status(200).json({
-      status: "find data",
-      data: tag
-    });
+  const tag = await video.find({
+    banner: "Yes",
+  });
+  res.status(200).json({
+    status: "find data",
+    data: tag,
+  });
   // } catch (error) {
   //   console.log("not find data........!");
   // }
@@ -652,9 +644,9 @@ exports.banner_find = async function (req, res, next) {
 // exports.video_find = async function (req, res, next) {
 //   try {
 //     // console.log(req.body)
-    
+
 //     const tag = await video.findById(req.body.id);
-  
+
 //     res.status(200).json({
 //       status: "find data",
 //       data: [tag],
@@ -669,26 +661,26 @@ exports.banner_find = async function (req, res, next) {
 
 exports.demo_data = async function (req, res, next) {
   // try {
-    // console.log(req.body)
-    
-    const tag = await video.findById(req.params.id);
-    var filePath = tag.banner_video
+  // console.log(req.body)
 
-    var a = fs.statSync(filePath);
+  const tag = await video.findById(req.params.id);
+  var filePath = tag.banner_video;
 
-    res.writeHead(200, {
-        'Content-Type': 'video/mp4',
-        'Content-Length': a.size,
-        'Accept-Ranges': 'bytes',
-    });
+  var a = fs.statSync(filePath);
 
-    var readStream = fs.createReadStream(filePath);
-    readStream.pipe(res);
-  
-    // res.status(200).json({
-    //   status: "find data",
-    //   data: [tag],
-    // });
+  res.writeHead(200, {
+    "Content-Type": "video/mp4",
+    "Content-Length": a.size,
+    "Accept-Ranges": "bytes",
+  });
+
+  var readStream = fs.createReadStream(filePath);
+  readStream.pipe(res);
+
+  // res.status(200).json({
+  //   status: "find data",
+  //   data: [tag],
+  // });
   // } catch (error) {
   //   res.status(200).json({
   //     status: "find data",
@@ -699,16 +691,24 @@ exports.demo_data = async function (req, res, next) {
 
 exports.latest_find = async function (req, res, next) {
   try {
- 
-      const tag = await video.find(
-        { 
-      
-          rdate : { 
-            $gt : new Date(new Date().getFullYear(),new Date().getMonth() - 1,new Date().getDate()).toISOString().replace(/T.*/,''),
-            $lt : new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).toISOString().replace(/T.*/,'')
-          },
-        }
-      );
+    const tag = await video.find({
+      rdate: {
+        $gt: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth() - 1,
+          new Date().getDate()
+        )
+          .toISOString()
+          .replace(/T.*/, ""),
+        $lt: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate()
+        )
+          .toISOString()
+          .replace(/T.*/, ""),
+      },
+    });
     res.status(200).json({
       status: "find data",
       data: tag,
@@ -723,15 +723,17 @@ exports.latest_find = async function (req, res, next) {
 
 exports.Upcoming_find = async function (req, res, next) {
   try {
- 
-      const tag = await video.find(
-        { 
-      
-          rdate : { 
-            $gt : new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).toISOString().replace(/T.*/,''),
-          },
-        }
-      );
+    const tag = await video.find({
+      rdate: {
+        $gt: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate()
+        )
+          .toISOString()
+          .replace(/T.*/, ""),
+      },
+    });
     res.status(200).json({
       status: "find data",
       data: tag,
@@ -780,11 +782,11 @@ exports.viUpdate_data = async function (req, res, next) {
       (BannerData.rdate = req.body.rdate),
       (BannerData.edate = req.body.edate),
       (BannerData.status = req.body.status),
-      (BannerData.category = req.body.category);
-    BannerData.title = req.body.title;
-    BannerData.language = req.body.language;
-    BannerData.subcategory = req.body.subcategory;
-    BannerData.Description = req.body.Description;
+      (BannerData.category = req.body.category),
+      (BannerData.title = req.body.title),
+      (BannerData.language = req.body.language),
+      (BannerData.subcategory = req.body.subcategory),
+      (BannerData.Description = req.body.Description);
 
     for (let iv of req.files) {
       if (iv.fieldname == "image") {
@@ -804,14 +806,12 @@ exports.viUpdate_data = async function (req, res, next) {
       status: "success",
       data: req.files,
     });
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 };
 
 exports.Contract_find_data = async function (req, res, next) {
   try {
-    const tag = await Contract.find().limit(1).sort({$natural:-1})
+    const tag = await Contract.find().limit(1).sort({ $natural: -1 });
 
     res.status(200).json({
       status: "find data",
@@ -826,31 +826,33 @@ exports.Contract_find_data = async function (req, res, next) {
 };
 
 exports.Contract_data = async function (req, res, next) {
- 
   try {
-    const { jsPDF } = require("jspdf"); 
-    
+    const { jsPDF } = require("jspdf");
+
     const doc = new jsPDF();
-    doc.text("******************************* Contract *******************************", 10, 10);
-    doc.text("Movie Name :- "     +req.body.Movie_Name,     10, 20);
-    doc.text("Provider Name :- "  +req.body.Provider_Name,  10, 30);
-    doc.text("Provider Phone :- " +req.body.Provider_Phone, 10, 40);
-    doc.text("Period :- "         +req.body.Period,         10, 50);
-    doc.text("Provider Ratio :- " +req.body.Provider_Ratio+"%", 10, 60);
-    doc.text("Paltform Ratio :- " +req.body.Paltform_Ratio+"%", 10, 70);
-    doc.text("Fee :- "            +req.body.Fee+"$",            10, 80);
-    doc.text("Payment Charge :- " +req.body.Payment_Charge+"%", 10, 90);
-    doc.text("Company Name :- "   +req.body.Company_Name,   10, 100);
-    doc.text("Adress :- "         +req.body.Adress,         10, 110);
-    doc.text("CIN :- "            +req.body.CIN,            10, 120);
-    doc.text("Director Name :- "  +req.body.Director_Name,  10, 130);
-    doc.text("DIN :- "            +req.body.DIN,            10, 140);
-    
-    var name = "Contact pdf-"+Date.now()
-    var pdf = `upload/pdf/${name}.pdf`
-    doc.save(pdf); 
+    doc.text(
+      "******************************* Contract *******************************",
+      10,
+      10
+    );
+    doc.text("Movie Name :- " + req.body.Movie_Name, 10, 20);
+    doc.text("Provider Name :- " + req.body.Provider_Name, 10, 30);
+    doc.text("Provider Phone :- " + req.body.Provider_Phone, 10, 40);
+    doc.text("Period :- " + req.body.Period, 10, 50);
+    doc.text("Provider Ratio :- " + req.body.Provider_Ratio + "%", 10, 60);
+    doc.text("Paltform Ratio :- " + req.body.Paltform_Ratio + "%", 10, 70);
+    doc.text("Fee :- " + req.body.Fee + "$", 10, 80);
+    doc.text("Payment Charge :- " + req.body.Payment_Charge + "%", 10, 90);
+    doc.text("Company Name :- " + req.body.Company_Name, 10, 100);
+    doc.text("Adress :- " + req.body.Adress, 10, 110);
+    doc.text("CIN :- " + req.body.CIN, 10, 120);
+    doc.text("Director Name :- " + req.body.Director_Name, 10, 130);
+    doc.text("DIN :- " + req.body.DIN, 10, 140);
+
+    var name = "Contact pdf-" + Date.now();
+    var pdf = `upload/pdf/${name}.pdf`;
+    doc.save(pdf);
     const data = {
-    
       Movie_Name: req.body.Movie_Name,
       Provider_Name: req.body.Provider_Name,
       Provider_Phone: req.body.Provider_Phone,
@@ -864,8 +866,8 @@ exports.Contract_data = async function (req, res, next) {
       CIN: req.body.CIN,
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
-      Contract_pdf:pdf
-  };
+      Contract_pdf: pdf,
+    };
 
     const tag = await Contract.create(data);
     res.status(201).json({
@@ -886,36 +888,67 @@ exports.Status_data = async function (req, res, next) {
     var BannerData = await Contract.findById(req.body.Id);
     BannerData.Status = req.body.Status;
     var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
+
+    if (req.body.Status == 2) {
+            var transporter = nodemailer.createTransport({
+              service: "gmail",
+              auth: {
+                user: "hhgsoftechteam10@gmail.com",
+                pass: "@Surat1234",
+              },
+            });
+
+            var mailOptions = {
+              from: "hhgsoftechteam10@gmail.com",
+              to: "hhgsoftechteam10@gmail.com",
+              subject: "Contract Detail",
+              html: "<h1>Contract Detail......!!!</h1>",
+              attachments: [
+                {
+                  filename: "Contact pdf-1651295458648.pdf",
+                  contentType: "application/pdf",
+                },
+              ],
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log("Email sent: " + info.response);
+              }
+            });
+
+            console.log("Email Send....!");
+
+    } else {
+          console.log("Email Not Send....!");
+    }
+
     res.status(201).json({
       status: "success",
       data: tag,
     });
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 };
-
 
 exports.User_data = async function (req, res, next) {
   try {
     var result = "";
-var characters =
-  "abcdefghijklmnopqrstuvwxyz";
-var charactersLength = characters.length;
-for (var i = 0; i < 6; i++) {
-  result += characters.charAt(Math.floor(Math.random() * charactersLength));
-}
-var v_id = result + Date.now();
+    var characters = "abcdefghijklmnopqrstuvwxyz";
+    var charactersLength = characters.length;
+    for (var i = 0; i < 6; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    var v_id = result + Date.now();
     var newpass = await bcrypt.hash(req.body.Password, 12);
 
-
     const data = {
-      video_id : v_id,
-      User_Name:req.body.User_Name,
-      Email:req.body.Email,
-      Password:newpass,
-
-    }
+      video_id: v_id,
+      User_Name: req.body.User_Name,
+      Email: req.body.Email,
+      Password: newpass,
+    };
     const tag = await User.create(data);
 
     res.status(201).json({
@@ -930,4 +963,3 @@ var v_id = result + Date.now();
     });
   }
 };
-

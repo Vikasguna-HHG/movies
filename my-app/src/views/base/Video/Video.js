@@ -1211,7 +1211,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.category}</CCardText>
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.subcategory}</CCardText>
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.language}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.Description}</CCardText>
+                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}} className='font'  /> {item.Description}</CCardText>
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.method}</CCardText>
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.rdate}</CCardText>
                         <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.edate}</CCardText>
