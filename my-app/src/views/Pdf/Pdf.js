@@ -6,7 +6,6 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom'
 
-
 toast.configure()
 export default function Pdf() {
   const [list, setList] = useState([])
@@ -50,7 +49,6 @@ export default function Pdf() {
       console.log(ex)
     }
     navigate('/base/Contract')
-
   }
 
   useEffect(() => {
@@ -68,7 +66,7 @@ export default function Pdf() {
           {list.map((item, i) => {
             return (
               <>
-                <iframe 
+                <iframe
                   key={i}
                   src={env.apiURL + `${item.Contract_pdf}`}
                   width="100%"
