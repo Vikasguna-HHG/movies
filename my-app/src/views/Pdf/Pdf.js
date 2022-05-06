@@ -37,6 +37,7 @@ export default function Pdf() {
       console.log(ex)
     }
   }
+  
   const Reject = async (id) => {
     var Status = '3'
     const formData = new FormData()

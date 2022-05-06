@@ -222,6 +222,7 @@ exports.Minsert_data = async function (req, res, next) {
 exports.Mlogin = async function (req, res, next) {
   const { User_Name, Password } = req.body;
   const User = await movie_maker.findOne({ User_Name });
+  console.log(User);
 
   if (User != null) {
     jwt.sign({ User }, jwtkey, (err, token) => {
@@ -243,7 +244,7 @@ exports.Mlogin = async function (req, res, next) {
     //   status: false,
     //   message: "not valid username and password",
     // });
-    res.send({ status: "true", result: "not valid username and password" });
+    res.send({ status: "flase", result: "not valid username and password" });
   }
 };
 
@@ -884,6 +885,7 @@ exports.Contract_data = async function (req, res, next) {
     });
   }
 };
+
 exports.Status_data = async function (req, res, next) {
   try {
     var BannerData = await Contract.findById(req.body.Id);
@@ -942,13 +944,13 @@ exports.User_data = async function (req, res, next) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     var v_id = result + Date.now();
-    var newpass = await bcrypt.hash(req.body.Password, 12);
+    // var newpass = await bcrypt.hash(req.body.Password, 12);
 
     const data = {
       video_id: v_id,
       User_Name: req.body.User_Name,
       Email: req.body.Email,
-      Password: newpass,
+      Password: req.body.Password,
     };
     const tag = await User.create(data);
 
@@ -962,5 +964,33 @@ exports.User_data = async function (req, res, next) {
       // data: tag,
       status: "Data not insert",
     });
+  }
+};
+
+
+
+
+exports.client_login = async function (req, res, next) {
+  const { User_Name, Password } = req.body;
+  const User1 = await User.findOne({ User_Name,Password });
+console.log(User1);
+  if (User1 != null) {
+    jwt.sign({ User1 }, jwtkey, (err, token) => {
+      if (err) {
+        res.send({ result: "wrong...." });
+      }
+      res.send({ User1, auth: token });
+
+      const checkpass = bcrypt.compare(Password, User1.Password);
+      if (checkpass) {
+        res.status(200).json({
+          status: true,
+          data: User1,
+        });
+      }
+    });
+  } else {
+
+    res.send({ status: "false", result: "not valid username and password" });
   }
 };
