@@ -28,7 +28,7 @@ import {
   CRow,
 } from '@coreui/react'
 
-import {env} from '../../environment'
+import { env } from '../../environment'
 
 // import { DocsCallout } from 'src/components'
 import { toast } from 'react-toastify'
@@ -57,108 +57,79 @@ const Home = () => {
 
   // const [visible1, setVisible1] = useState(false)
   const [search, setSearch] = useState('')
-  
-    const  open = ()=>{
-     setFirst_Name('')
-     setLast_Name('')
-     setUser_Name('')
-     setEmail('')
-     
-     setVisible(true)
-      }
 
-   
-    const submit = async () => {
-    
-      const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-      if(!First_Name || !Last_Name || !User_Name || !Email)
-      {
-        toast.warning('please fil data', {
-          autoClose: 1000,
-        })
-      }
-    
-    if (id === 0 ) {
-   
+  const open = () => {
+    setFirst_Name('')
+    setLast_Name('')
+    setUser_Name('')
+    setEmail('')
 
+    setVisible(true)
+  }
+
+  const submit = async () => {
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g
+    if (!First_Name || !Last_Name || !User_Name || !Email) {
+      toast.warning('please fil data', {
+        autoClose: 1000,
+      })
+    }
+
+    if (id === 0) {
       const formData = new FormData()
       // formData.append("image", imageval);
-      if(!First_Name)
-      {
-        document.getElementById("First_Name").style.border="1px solid red"
-        
-      }
-      else{
+      if (!First_Name) {
+        document.getElementById('First_Name').style.border = '1px solid red'
+      } else {
         formData.append('First_Name', First_Name)
-        document.getElementById("First_Name").style.border="1px solid black"
-
-
-
+        document.getElementById('First_Name').style.border = '1px solid black'
       }
-      if(!Last_Name)
-      {
-        document.getElementById("Last_Name").style.border="1px solid red"
+      if (!Last_Name) {
+        document.getElementById('Last_Name').style.border = '1px solid red'
         // toast.warning('please fil data', {
         //   autoClose: 1000,
         // })
-      }
-      else{
+      } else {
         formData.append('Last_Name', Last_Name)
-        document.getElementById("Last_Name").style.border="1px solid black"
-
-
+        document.getElementById('Last_Name').style.border = '1px solid black'
       }
-      if(!User_Name)
-      {
-        document.getElementById("User_Name").style.border="1px solid red"
-        
+      if (!User_Name) {
+        document.getElementById('User_Name').style.border = '1px solid red'
+      } else {
+        formData.append('User_Name', User_Name)
+        document.getElementById('User_Name').style.border = '1px solid black'
       }
-      else{
-      formData.append('User_Name', User_Name)
-      document.getElementById("User_Name").style.border="1px solid black"
-
-
-      }
-      if(regEx.test(Email)){
-      formData.append('Email', Email)
-      document.getElementById("email").style.border="1px solid black"
-        
-
-      }
-   
-      else if (Email === "") {
-        setEmailmsg("");
-        document.getElementById("email").style.border="1px solid red"
-
-      }
-      
-      else{
-        setEmailmsg("please enter valid email ");
-        document.getElementById("email").style.border="1px solid red"
+      if (regEx.test(Email)) {
+        formData.append('Email', Email)
+        document.getElementById('email').style.border = '1px solid black'
+      } else if (Email === '') {
+        setEmailmsg('')
+        document.getElementById('email').style.border = '1px solid red'
+      } else {
+        setEmailmsg('please enter valid email ')
+        document.getElementById('email').style.border = '1px solid red'
       }
 
-
-      
       try {
-        const res = await axios.post(env.apiURL+'MInsertBanner', formData)
+        const res = await axios.post(env.apiURL + 'MInsertBanner', formData)
         toast.success('data insrted', {
           autoClose: 2000,
         })
-        
+
         setList([...list, res.data.data])
 
         console.log(res)
       } catch (ex) {
         console.log(ex)
       }
-   
+
       setFirst_Name('')
       setLast_Name('')
       setUser_Name('')
       setEmail('')
       // setImageval('');
       setVisible(false)
-    // setVisible2(false)
+      // setVisible2(false)
 
       // setImageval('');
     } else {
@@ -167,20 +138,19 @@ const Home = () => {
       formData.append('First_Name', First_Name)
       formData.append('Last_Name', Last_Name)
       formData.append('User_Name', User_Name)
-      if(regEx.test(Email)){
+      if (regEx.test(Email)) {
         formData.append('Email', Email)
-  
-        }
+      }
 
       formData.append('Id', id)
 
       try {
         const res = await axios.post(
-          env.apiURL+'MUpdateBanner',
-          formData,{
-          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-
-          }
+          env.apiURL + 'MUpdateBanner',
+          formData,
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+          },
           // body: JSON.stringify(update),
         )
         debugger
@@ -197,7 +167,7 @@ const Home = () => {
     }
 
     // await axios.post(env.apiURL+`MEmail`)
-    
+
     setId(0)
     setFirst_Name('')
     setLast_Name('')
@@ -206,21 +176,18 @@ const Home = () => {
     // setImageval('');
     setVisible(false)
     // setVisible2(false)
-
-
   }
-    
+
   const edithandler = async (id) => {
     setVisible(true)
     // setVisible2(true)
 
     axios
-      .get(env.apiURL+`Mfinddata/${id}`, {
+      .get(env.apiURL + `Mfinddata/${id}`, {
         method: 'GET',
-        
-          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-  
-          
+
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+
         // headers: {
         //   'Accept': 'application/json',
         //   'Content-Type': 'application/json'
@@ -241,9 +208,8 @@ const Home = () => {
 
   function getdata() {
     axios
-      .get(env.apiURL+`Mfinddata`,{
-      headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-
+      .get(env.apiURL + `Mfinddata`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(function (res) {
         console.log(res.data.data)
@@ -269,15 +235,13 @@ const Home = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(env.apiURL+`MDeleteBanner/${id}`,{
-          
-            headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-      
-            
-        }
-        ).then((res) => {
-          getdata()
-        })
+        axios
+          .delete(env.apiURL + `MDeleteBanner/${id}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+          })
+          .then((res) => {
+            getdata()
+          })
         toast.success('data deleted', {
           autoClose: 2000,
         })
@@ -294,13 +258,12 @@ const Home = () => {
   //   settext1(g);
   //   document.getElementById('text').style.width="500px";
 
-
   // }
   return (
     <>
       <br />
       <br />
-      <CModal visible={visible}>       
+      <CModal visible={visible}>
         <CModalHeader onClick={() => setVisible(false)}>
           <CModalTitle>Admin user Form</CModalTitle>
         </CModalHeader>
@@ -322,7 +285,7 @@ const Home = () => {
               <CFormLabel htmlFor="exampleFormControlTextarea1">Last Name</CFormLabel>
               <CFormInput
                 type="text"
-                id='Last_Name'
+                id="Last_Name"
                 value={Last_Name}
                 onChange={(e) => {
                   setLast_Name(e.target.value)
@@ -335,7 +298,7 @@ const Home = () => {
               <CFormLabel htmlFor="exampleFormControlTextarea1">User Name</CFormLabel>
               <CFormInput
                 type="text"
-                id='User_Name'
+                id="User_Name"
                 value={User_Name}
                 onChange={(e) => {
                   setUser_Name(e.target.value)
@@ -348,7 +311,7 @@ const Home = () => {
               <CFormLabel htmlFor="exampleFormControlInput1">Email</CFormLabel>
               <CFormInput
                 type="email"
-                id='email'
+                id="email"
                 value={Email}
                 onChange={(e) => {
                   setEmail(e.target.value)
@@ -397,7 +360,7 @@ const Home = () => {
                 className="btn1"
                 onClick={() => open()}
               >
-                Add Admin 
+                Add Admin
               </CButton>
             </CInputGroup>
             <br></br>
@@ -494,7 +457,6 @@ const Home = () => {
       </CCol>
       {/* edit data */}
 
-
       {/* <table border="1" width="50%">
         <tr>
           <td><input  type="text" id='text' style={{width:{text1}}} onChange={(e)=> buton(e)}></input></td>
@@ -507,5 +469,5 @@ const Home = () => {
       </table> */}
     </>
   )
-                }
+}
 export default Home
