@@ -927,42 +927,53 @@ exports.Status_data = async function (req, res, next) {
   } catch (error) {}
 };
 
+// 
 exports.User_data = async function (req, res, next) {
-  try {
-    var result = "";
-    var characters = "abcdefghijklmnopqrstuvwxyz";
-    var charactersLength = characters.length;
-    for (var i = 0; i < 6; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    var v_id = result + Date.now();
+  // try {
+    // var result = "";
+    // var characters = "abcdefghijklmnopqrstuvwxyz";
+    // var charactersLength = characters.length;
+    // for (var i = 0; i < 6; i++) {
+    //   result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    // }
+    // var v_id = result + Date.now();
     // var newpass = await bcrypt.hash(req.body.Password, 12);
 
-    const data = {
-      video_id: v_id,
-      User_Name: req.body.User_Name,
-      Email: req.body.Email,
-      Password: req.body.Password,
-    };
-    const tag = await User.create(data);
+    const allemail = await User.findOne({Email:res.Email});
+    // console.log(allemail);
+    res.status(201).json({
+          data: allemail,
+          status: "Data not insert",
+        });
+  //   const data = {
+  //     video_id: v_id,
+  //     User_Name: req.body.User_Name,
+  //     Email: req.body.Email,
+  //     Password: req.body.Password,
+  //   };
+  //     const tag = await User.create(data);
+  //     res.status(201).json({
+  //       status: "create data",
+  //       data: tag,
+  //     });
+ 
+  // } catch (error) {
+  //   // console.log(data);
+  //   res.status(201).json({
+  //     data: tag,
+  //     status: "Data not insert",
+  //   });
+  // }
 
-    res.status(201).json({
-      status: "create data",
-      data: tag,
-    });
-  } catch (error) {
-    // console.log(data);
-    res.status(201).json({
-      // data: tag,
-      status: "Data not insert",
-    });
-  }
-};
+
+
+}
 
 exports.client_login = async function (req, res, next) {
   const { User_Name, Password } = req.body;
   const User1 = await User.findOne({ User_Name, Password });
-  console.log(User1);
+  // console.log(User1);
+  
   if (User1 != null) {
     jwt.sign({ User1 }, jwtkey, (err, token) => {
       if (err) {
