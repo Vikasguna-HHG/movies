@@ -7,11 +7,7 @@ const user = new mongoose.Schema({
     },
     Email:{
         type:String,
-        // index: {
-        //     unique: true,
-        // },
-        // required:true,
-        // trim: true,
+      
         
     },
     Password:{
