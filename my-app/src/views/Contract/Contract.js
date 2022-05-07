@@ -110,18 +110,19 @@ function Contract() {
     formData.append('CIN', CIN)
     formData.append('Director_Name', Director_Name)
     formData.append('DIN', DIN)
+    // formData.append('u_id', u_id)
 
-    try {
       const res = await axios.post(env.apiURL + 'Contract',formData,
+      {headers:{
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+        "User_Id": localStorage.getItem('userId')
+          }}
         
         // toast.success('data inserted', {
         //  autoClose: 2000,}
         
         // )
       )
-    } catch (ex) {
-      console.log(ex)
-    }
 
   }
 

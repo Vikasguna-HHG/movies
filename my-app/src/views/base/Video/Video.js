@@ -2,19 +2,47 @@ import React, { useState, useEffect, useCallback } from 'react'
 import './table.css'
 import ImageViewer from 'react-simple-image-viewer'
 import swal from 'sweetalert'
-import {CCardImage,CCardTitle,CCardText,CCard,CCardBody,CFormCheck,CCol,CTable,CForm,CFormLabel,CFormInput,CFormSelect,CFormTextarea,CButton,CTableHead,CTableRow,CTableHeaderCell,CTableBody,CTableDataCell,CInputGroup,CInputGroupText,CModalBody,CModalTitle,CModalHeader,CModalFooter,CModal,CRow,} from '@coreui/react'
+import {
+  CCardImage,
+  CCardTitle,
+  CCardText,
+  CCard,
+  CCardBody,
+  CFormCheck,
+  CCol,
+  CTable,
+  CForm,
+  CFormLabel,
+  CFormInput,
+  CFormSelect,
+  CFormTextarea,
+  CButton,
+  CTableHead,
+  CTableRow,
+  CTableHeaderCell,
+  CTableBody,
+  CTableDataCell,
+  CInputGroup,
+  CInputGroupText,
+  CModalBody,
+  CModalTitle,
+  CModalHeader,
+  CModalFooter,
+  CModal,
+  CRow,
+} from '@coreui/react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { ImPointRight } from "react-icons/im";
+import { ImPointRight } from 'react-icons/im'
 import { SubTitle } from 'chart.js'
 import SubCategoires from '../subcategoires/subcategoires'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import ToggleButton from '@mui/material/ToggleButton'
 import TableViewRoundedIcon from '@mui/icons-material/TableViewRounded'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
-import { FaHandPointRight } from "react-icons/fa";
-import {env} from '../../../environment'
-import { Button ,Form} from 'react-bootstrap';
+import { FaHandPointRight } from 'react-icons/fa'
+import { env } from '../../../environment'
+import { Button, Form } from 'react-bootstrap'
 // import React from 'react'
 import ReactPlayer from 'react-player'
 // import videop from ''
@@ -23,7 +51,7 @@ const axios = require('axios')
 toast.configure()
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
-  const Video = () => { 
+const Video = () => {
   const [visible, setVisible] = useState(false)
   const [id, setId] = useState(0)
   // const [sid, setsid] = useState('')
@@ -59,29 +87,27 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const [currentImage, setCurrentImage] = useState(0)
   const [isViewerOpen, setIsViewerOpen] = useState(false)
 
+  const [alignment, setAlignment] = React.useState('left')
 
-    const [alignment, setAlignment] = React.useState('left')
+  function Openpopup() {
+    setcategory('')
+    setsubcategory('')
+    settitle('')
+    setmethod('')
+    setrdate('')
+    setstatus('')
+    setBanner('')
+    setedate('')
+    setLanguage('')
+    setDescription('')
+    setImageval('')
+    setbanner_video('')
+    setTrailer_video('')
+    setId(0)
+    // setsid()
 
-
-    function Openpopup() {
-      setcategory('')
-      setsubcategory('')
-      settitle('')
-      setmethod('')
-      setrdate('')
-      setstatus('')
-      setBanner('')
-      setedate('')
-      setLanguage('')
-      setDescription('')
-      setImageval('')
-      setbanner_video('')
-      setTrailer_video('')
-      setId(0)
-      // setsid()
-
-      setVisible1(true)
-    }
+    setVisible1(true)
+  }
 
   //toggle button
   const handleAlignment = (event, newAlignment) => {
@@ -93,7 +119,6 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     setIsViewerOpen(true)
   }, [])
 
-
   // -------------------PRINT IMAGE------------------//
   const saveFile = (e) => {
     console.log(e)
@@ -103,29 +128,22 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const saveFile1 = (e) => {
     console.log(e.target)
     setbanner_video(e.target.files[0])
-
   }
-  
+
   const saveFile2 = (e) => {
     console.log(e.target)
     setTrailer_video(e.target.files[0])
-
   }
-  
-  
 
   // ------------------NEXT BUTTOON------------------//
 
   function model1() {
-  
-    
     if (!title || !category || !language) {
       toast.warning('data Fild...!', {
         autoClose: 2000,
       })
       return
     }
-
 
     setVisible1(false)
     setVisible2(true)
@@ -160,19 +178,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   // const timezoneOffset = (new Date()).getTimezoneOffset();
 
   // console.log(timezoneOffset);
-  // --------------------ONSUBMIT--------------------//        
+  // --------------------ONSUBMIT--------------------//
 
   const submit = async () => {
-    
-
     if (!Description) {
       toast.warning('data Fild...!', {
         autoClose: 2000,
       })
       return
     }
-    
-
 
     // if(id == 0)
     // {
@@ -190,7 +204,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     //   }
     // }
 
-// -----------------INSERT DATA--------------//
+    // -----------------INSERT DATA--------------//
 
     if (id == 0) {
       debugger
@@ -210,21 +224,24 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('edate', edate)
       // formData.append('sid', sid)
 
-
       // try {
-        await axios.post(env.apiURL+'viInsertBanner', formData,{
-          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-      })
-        .then(r => {
+      await axios
+        .post(env.apiURL + 'viInsertBanner', formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            userId: localStorage.getItem('userId'),
+          },
+        })
+        .then((r) => {
           console.log(formData)
           setList([...list, r.data.data])
         })
-        debugger
-        
-        toast.success('New Add...!', {
-          autoClose: 2000,
-        })
-        // console.log(res)
+      debugger
+
+      toast.success('New Add...!', {
+        autoClose: 2000,
+      })
+      // console.log(res)
       // } catch (ex) {
       //   console.log(ex)
       // }
@@ -261,18 +278,16 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       formData.append('Id', id)
       // formData.append('sid', sid)
       try {
-        const res = await axios.post(env.apiURL+'viUpdateBanner', formData,{
-          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-      })
+        const res = await axios.post(env.apiURL + 'viUpdateBanner', formData, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
         debugger
         if (res.data.status == 'success') {
           getdata()
           toast.success('Data Updated...!', {
             autoClose: 2000,
           })
-        
         }
-       
       } catch (ex) {
         console.log(ex)
       }
@@ -303,13 +318,13 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   const edithandler = async (id) => {
     setVisible5(true)
     axios
-      .get(env.apiURL+`vifinddata/${id}`, {
+      .get(env.apiURL + `vifinddata/${id}`, {
         method: 'GET',
         headers: {
-          'Accept': 'application/json',
+          Accept: 'application/json',
           'Content-Type': 'application/json',
-          "Authorization" : `Bearer ${localStorage.getItem('token')}`
-        }
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
       })
       .then((result) => {
         setId(id)
@@ -328,19 +343,15 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         setTrailer_video(result.data.data.Trailer_video)
 
         //document.getElementById('submit').innerHTML = 'Upadte'
-     
       })
     //setVisible6(false)
-   
-   
   }
-
 
   // --------------------API FUNCTION------------------------//
   function getdata() {
     axios
-      .get(env.apiURL+`vifinddata`,{
-        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      .get(env.apiURL + `vifinddata`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(function (res) {
         console.log(res.data)
@@ -353,9 +364,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function cata_data() {
     axios
-      .get(env.apiURL+`vfinddata`,{
-        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-    })
+      .get(env.apiURL + `vfinddata`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
       .then(function (res) {
         console.log(res.data)
         setcategory1(res.data.data)
@@ -367,9 +378,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function subcata_data() {
     axios
-      .get(env.apiURL+`kfindonedata`,{
-        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-    })
+      .get(env.apiURL + `kfindonedata`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
       .then(function (res) {
         console.log(res.data)
         setsubcategory1(res.data.data)
@@ -381,9 +392,9 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   function Language_Data() {
     axios
-      .get(env.apiURL+`finddata`,{
-        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-    })
+      .get(env.apiURL + `finddata`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
       .then(function (res) {
         console.log(res.data)
         setLanguage1(res.data.data)
@@ -401,19 +412,17 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
     cata_data()
   }, [])
 
-
-  function update1(){
+  function update1() {
     setVisible5(false)
     setVisible6(true)
   }
   function update2() {
     setVisible5(false)
     setVisible7(true)
-
-  } function update3() {
+  }
+  function update3() {
     setVisible5(false)
     setVisible8(true)
-
   }
   function update4() {
     setVisible6(false)
@@ -422,8 +431,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   function update5() {
     setVisible6(false)
     setVisible7(true)
-
-  } function update6() {
+  }
+  function update6() {
     setVisible6(false)
     setVisible8(true)
   }
@@ -434,8 +443,8 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   function update8() {
     setVisible7(false)
     setVisible6(true)
-
-  } function update9() {
+  }
+  function update9() {
     setVisible7(false)
     setVisible8(true)
   }
@@ -446,21 +455,17 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
   function update11() {
     setVisible8(false)
     setVisible6(true)
-
-  } function update12() {
+  }
+  function update12() {
     setVisible8(false)
     setVisible7(true)
   }
 
-    function videoplay(){
-      alert();
-      <video src='https://www.youtube.com/watch?v=c22sPrhLg6M' height="200px"></video>
-
-    }
-   function step()
-{
-  
-}
+  function videoplay() {
+    alert()
+    ;<video src="https://www.youtube.com/watch?v=c22sPrhLg6M" height="200px"></video>
+  }
+  function step() {}
   // -----------------------DELETE DATA----------------------------------------------//
   const deletehandler = async (id) => {
     swal({
@@ -470,19 +475,20 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        axios.delete(env.apiURL+`viDeleteBanner/${id}`,{
-          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
-      }).then((res) => {
-          const users = res.data
-          getdata()
-        })
+        axios
+          .delete(env.apiURL + `viDeleteBanner/${id}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+          })
+          .then((res) => {
+            const users = res.data
+            getdata()
+          })
         toast.error('Data Delete...!', {
           autoClose: 2000,
         })
       }
     })
   }
-
 
   function table1() {
     document.getElementById('table1').style.display = 'block'
@@ -495,16 +501,17 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
   return (
     <>
-      <br/><br/>
+      <br />
+      <br />
       {/* model 1 :- title/category/Language */}
 
-      <CModal visible={visible1} onClose={() => setVisible5(false)} >
+      <CModal visible={visible1} onClose={() => setVisible5(false)}>
         <CModalHeader onClick={() => setVisible1(false)}>
           <CModalTitle>Add Basic Information</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CForm>
-          <div className="mb-3">
+            <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">
                 <b>Title</b>
               </CFormLabel>
@@ -521,22 +528,30 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>Method</b>
             </CFormLabel>
-            <CFormSelect aria-label="Default select example" onChange={(e) => { setmethod(e.target.value) }}>
-                <option align="center" selected>Select Method</option>
-                <option value="Free">Free</option>
-                <option value="Paid">Paid</option>
+            <CFormSelect
+              aria-label="Default select example"
+              onChange={(e) => {
+                setmethod(e.target.value)
+              }}
+            >
+              <option align="center" selected>
+                Select Method
+              </option>
+              <option value="Free">Free</option>
+              <option value="Paid">Paid</option>
             </CFormSelect>
-            
+
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>Language</b>
             </CFormLabel>
             <CFormSelect
               aria-label="Default select example"
-              onChange={(e) => { setLanguage(e.target.value) }}
-            
+              onChange={(e) => {
+                setLanguage(e.target.value)
+              }}
             >
               <option align="center" selected>
-               Select Language
+                Select Language
               </option>
               {language1.map((item, i) => (
                 <option key={i}>{item.language}</option>
@@ -561,7 +576,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           </CForm>
         </CModalBody>
         <CModalFooter>
-          <CButton className='btn1' onClick={model1}>
+          <CButton className="btn1" onClick={model1}>
             Next
           </CButton>
         </CModalFooter>
@@ -575,21 +590,40 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CModalHeader>
         <CModalBody>
           <CForm>
-          <Form.Group controlId="dob">
-                            <Form.Label>Release Date</Form.Label>
-                            <Form.Control type="datetime-local" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
-                             {/* value={this.state.timezone} onChange={this.onSelect}
+            <Form.Group controlId="dob">
+              <Form.Label>Release Date</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                name="dob"
+                value={rdate}
+                onChange={(e) => {
+                  setrdate(e.target.value)
+                }}
+              />
+              {/* value={this.state.timezone} onChange={this.onSelect}
                            {Timezones.map((timezone) => <option value={timezone.value}>{timezone.name}</option>)} */}
-
-          </Form.Group> 
-          <Form.Group controlId="dob">
-                            <Form.Label>Expiry Date</Form.Label>
-                            <Form.Control type="date" name="dob"   value={edate}  onChange={(e) => {setedate(e.target.value)}}/>
-          </Form.Group>
+            </Form.Group>
+            <Form.Group controlId="dob">
+              <Form.Label>Expiry Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="dob"
+                value={edate}
+                onChange={(e) => {
+                  setedate(e.target.value)
+                }}
+              />
+            </Form.Group>
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>SubCategory</b>
             </CFormLabel>
-            <CFormSelect  aria-label="Default select example" onChange={(e) => {setsubcategory(e.target.value) }} value={subcategory}>
+            <CFormSelect
+              aria-label="Default select example"
+              onChange={(e) => {
+                setsubcategory(e.target.value)
+              }}
+              value={subcategory}
+            >
               <option align="center" selected>
                 Select SubCategory
               </option>
@@ -613,7 +647,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           </CForm>
         </CModalBody>
         <CModalFooter>
-          <CButton  className='btn1' onClick={model2}>
+          <CButton className="btn1" onClick={model2}>
             Next
           </CButton>
         </CModalFooter>
@@ -627,7 +661,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CModalHeader>
         <CModalBody>
           <CForm>
-          <div className="mb-3">
+            <div className="mb-3">
               <CFormLabel htmlFor="formFileMultiple">
                 <b>Trailer-video</b>
               </CFormLabel>
@@ -639,7 +673,6 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 style={{ maxFileSize: '5' }}
               />
             </div>
-
 
             <div className="mb-3">
               <CFormLabel htmlFor="formFileMultiple">
@@ -656,7 +689,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           </CForm>
         </CModalBody>
         <CModalFooter>
-          <CButton  className='btn1' onClick={model3}>
+          <CButton className="btn1" onClick={model3}>
             Next
           </CButton>
         </CModalFooter>
@@ -684,71 +717,106 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               ></CFormTextarea>
             </div>
 
-
             <div className="mb-3">
               <CFormLabel>
                 <b>Status</b>
               </CFormLabel>
-              <CFormCheck type="radio" name="status" value="Active" label="Active" onChange={(e)=>{ setstatus(e.target.value) }}/>
-              <CFormCheck type="radio" name="status" value="Inactive" label="inactive" onChange={(e)=>{ setstatus(e.target.value) }} />
+              <CFormCheck
+                type="radio"
+                name="status"
+                value="Active"
+                label="Active"
+                onChange={(e) => {
+                  setstatus(e.target.value)
+                }}
+              />
+              <CFormCheck
+                type="radio"
+                name="status"
+                value="Inactive"
+                label="inactive"
+                onChange={(e) => {
+                  setstatus(e.target.value)
+                }}
+              />
             </div>
-
-
-              
-            </CForm>
-            <CForm>
+          </CForm>
+          <CForm>
             <div className="mb-3">
               <CFormLabel>
                 <b>Is In Banner</b>
               </CFormLabel>
-              <CFormCheck type="radio" name="status" value="Yes" label="Yes" onChange={(e)=>{ setBanner(e.target.value) }}/>
-              <CFormCheck type="radio" name="status" value="No" label="No" onChange={(e)=>{ setBanner(e.target.value) }} />
+              <CFormCheck
+                type="radio"
+                name="status"
+                value="Yes"
+                label="Yes"
+                onChange={(e) => {
+                  setBanner(e.target.value)
+                }}
+              />
+              <CFormCheck
+                type="radio"
+                name="status"
+                value="No"
+                label="No"
+                onChange={(e) => {
+                  setBanner(e.target.value)
+                }}
+              />
             </div>
           </CForm>
         </CModalBody>
         <CModalFooter>
-          <CButton className='btn1' id='submit' onClick={submit}>
-              Submit
+          <CButton className="btn1" id="submit" onClick={submit}>
+            Submit
           </CButton>
         </CModalFooter>
       </CModal>
 
-
-    {/*update model*/}
-
+      {/*update model*/}
 
       {/* model 1 :- title/category/Language */}
 
       <CModal visible={visible5} onClose={() => setVisible1(false)}>
         <CModalHeader onClick={() => setVisible5(false)}>
-          <CModalTitle>Update Basic Information</CModalTitle><br></br>
-         
-         
+          <CModalTitle>Update Basic Information</CModalTitle>
+          <br></br>
         </CModalHeader>
-      
+
         <CModalBody>
           <CForm>
             <div className="mb-3">
-              <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+              <CButton style={{ margin: '5px' }} className="ubtn" onClick={step}>
                 Step 1
               </CButton>
-              <CButton style={{margin:"5px"}} className='btn1' onClick={update1}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update1}>
                 Step 2
               </CButton>
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update2}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update2}>
                 Step 3
               </CButton>
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update3}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update3}>
                 Step 4
-              </CButton><br/><br/>
+              </CButton>
+              <br />
+              <br />
 
               <CFormLabel htmlFor="exampleFormControlInput1">
-              <b>Method</b>
+                <b>Method</b>
               </CFormLabel>
-              <CFormSelect aria-label="Default select example"  value={method} onChange={(e) => { setmethod(e.target.value) }}>
-                  <option align="center" selected>Select Method</option>
-                  <option value="Free">Free</option>
-                  <option value="Paid">Paid</option>
+              <CFormSelect
+                aria-label="Default select example"
+                value={method}
+                onChange={(e) => {
+                  setmethod(e.target.value)
+                }}
+              >
+                <option align="center" selected>
+                  Select Method
+                </option>
+                <option value="Free">Free</option>
+                <option value="Paid">Paid</option>
               </CFormSelect>
               <CFormLabel htmlFor="exampleFormControlInput1">
                 <b>Title</b>
@@ -768,13 +836,12 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
             </CFormLabel>
             <CFormSelect
               aria-label="Default select example"
-              onChange={(e) => { setLanguage(e.target.value) }}
+              onChange={(e) => {
+                setLanguage(e.target.value)
+              }}
               value={language}
             >
-           
-              <option align="center" >
-                Update Language
-              </option>
+              <option align="center">Update Language</option>
               {language1.map((item, i) => (
                 <option key={i}>{item.language}</option>
               ))}
@@ -782,7 +849,13 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>Category</b>
             </CFormLabel>
-            <CFormSelect  aria-label="Default select example" onChange={(e) => {setcategory(e.target.value)}} value={category} >
+            <CFormSelect
+              aria-label="Default select example"
+              onChange={(e) => {
+                setcategory(e.target.value)
+              }}
+              value={category}
+            >
               <option align="center" selected>
                 Update Category
               </option>
@@ -796,7 +869,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           {/*<CButton className='btn1' onClick={model1}>*/}
           {/*  Next*/}
           {/*</CButton>*/}
-          <CButton className='btn1' onClick={submit}>
+          <CButton className="btn1" onClick={submit}>
             Update
           </CButton>
         </CModalFooter>
@@ -810,29 +883,43 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CModalHeader>
         <CModalBody>
           <CForm>
-            <CButton style={{ margin: "5px" }} className='btn1' onClick={update4}>
+            <CButton style={{ margin: '5px' }} className="btn1" onClick={update4}>
               Step 1
             </CButton>
-            <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
-                Step 2
-              </CButton>
-            <CButton style={{ margin: "5px" }} className='btn1' onClick={update5}>
+            <CButton style={{ margin: '5px' }} className="ubtn" onClick={step}>
+              Step 2
+            </CButton>
+            <CButton style={{ margin: '5px' }} className="btn1" onClick={update5}>
               Step 3
             </CButton>
-            <CButton style={{ margin: "5px" }} className='btn1' onClick={update6}>
+            <CButton style={{ margin: '5px' }} className="btn1" onClick={update6}>
               Step 4
-            </CButton><br /><br />
+            </CButton>
+            <br />
+            <br />
 
-          <Form.Group controlId="dob">
-                            <Form.Label>Release Date</Form.Label>
-                            <Form.Control type="date" name="dob"   value={rdate}  onChange={(e) => {setrdate(e.target.value)}}/>
-          </Form.Group> 
-          <Form.Group controlId="dob">
-                            <Form.Label>Expiry Date</Form.Label>
-                            <Form.Control type="date" name="dob"   value={edate}  onChange={(e) => {setedate(e.target.value)}}/>
-          </Form.Group>
-
-
+            <Form.Group controlId="dob">
+              <Form.Label>Release Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="dob"
+                value={rdate}
+                onChange={(e) => {
+                  setrdate(e.target.value)
+                }}
+              />
+            </Form.Group>
+            <Form.Group controlId="dob">
+              <Form.Label>Expiry Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="dob"
+                value={edate}
+                onChange={(e) => {
+                  setedate(e.target.value)
+                }}
+              />
+            </Form.Group>
 
             <CFormLabel htmlFor="exampleFormControlInput1">
               <b>SubCategory</b>
@@ -868,7 +955,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           </CForm>
         </CModalBody>
         <CModalFooter>
-          <CButton className='btn1' onClick={submit}>
+          <CButton className="btn1" onClick={submit}>
             Update
           </CButton>
         </CModalFooter>
@@ -883,33 +970,33 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         <CModalBody>
           <CForm>
             <div className="mb-3">
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update7}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update7}>
                 Step 1
               </CButton>
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update8}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update8}>
                 Step 2
               </CButton>
-              <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+              <CButton style={{ margin: '5px' }} className="ubtn" onClick={step}>
                 Step 3
               </CButton>
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update9}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update9}>
                 Step 4
-              </CButton><br /><br/>
+              </CButton>
+              <br />
+              <br />
 
-            <div className="mb-3">
-              <CFormLabel htmlFor="formFileMultiple">
-                <b>Trailer-video</b>
-              </CFormLabel>
-              <CFormInput
-                type="file"
-                id="formFileMultiple"
-                onChange={saveFile2}
-                accept=".mp4 , video"
-                style={{ maxFileSize: '5' }}
-              />
-            </div>
-
-
+              <div className="mb-3">
+                <CFormLabel htmlFor="formFileMultiple">
+                  <b>Trailer-video</b>
+                </CFormLabel>
+                <CFormInput
+                  type="file"
+                  id="formFileMultiple"
+                  onChange={saveFile2}
+                  accept=".mp4 , video"
+                  style={{ maxFileSize: '5' }}
+                />
+              </div>
 
               <CFormLabel htmlFor="formFileMultiple">
                 <b>SELECT-VIDEO</b>
@@ -925,7 +1012,7 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
           </CForm>
         </CModalBody>
         <CModalFooter>
-          <CButton className='btn1' onClick={submit}>
+          <CButton className="btn1" onClick={submit}>
             Update
           </CButton>
         </CModalFooter>
@@ -940,19 +1027,21 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         <CModalBody>
           <CForm>
             <div className="mb-3">
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update10}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update10}>
                 Step 1
               </CButton>
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update11}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update11}>
                 Step 2
               </CButton>
-              <CButton style={{ margin: "5px" }} className='btn1' onClick={update12}>
+              <CButton style={{ margin: '5px' }} className="btn1" onClick={update12}>
                 Step 3
               </CButton>
-              <CButton style={{margin:"5px"}} className='ubtn' onClick={step}>
+              <CButton style={{ margin: '5px' }} className="ubtn" onClick={step}>
                 Step 4
-              </CButton><br /><br />
-              <CFormLabel htmlFor="exampleFormControlTextarea1" >
+              </CButton>
+              <br />
+              <br />
+              <CFormLabel htmlFor="exampleFormControlTextarea1">
                 <b>Description</b>
               </CFormLabel>
               <CFormTextarea
@@ -967,33 +1056,47 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
               ></CFormTextarea>
             </div>
 
-
             <div className="mb-3">
               <CFormLabel>
                 <b>Status</b>
               </CFormLabel>
-              <CFormCheck type="radio" name="status" value="Active" label="Active" onChange={(e)=>{ setstatus(e.target.value) }}/>
-              <CFormCheck type="radio" name="status" value="Inactive" label="Inactive" onChange={(e)=>{ setstatus(e.target.value) }} />
+              <CFormCheck
+                type="radio"
+                name="status"
+                value="Active"
+                label="Active"
+                onChange={(e) => {
+                  setstatus(e.target.value)
+                }}
+              />
+              <CFormCheck
+                type="radio"
+                name="status"
+                value="Inactive"
+                label="Inactive"
+                onChange={(e) => {
+                  setstatus(e.target.value)
+                }}
+              />
             </div>
           </CForm>
         </CModalBody>
         <CModalFooter>
-          <CButton className='btn1' id='submit' onClick={submit}>
+          <CButton className="btn1" id="submit" onClick={submit}>
             Update
           </CButton>
         </CModalFooter>
       </CModal>
 
       {/*Table and search  */}
-     
 
-      <CCol xs={12} id="table2" >
+      <CCol xs={12} id="table2">
         <CCard className="mb-4">
           <CCardBody>
-          {/* <p>hy </p> */}
-         {/* <button onClick={videoplay}>clickme</button> */}
+            {/* <p>hy </p> */}
+            {/* <button onClick={videoplay}>clickme</button> */}
             <CInputGroup className="flex-nowrap ">
-              <CInputGroupText color="primary" className='btn1'>
+              <CInputGroupText color="primary" className="btn1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -1007,7 +1110,6 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 &nbsp;&nbsp;&nbsp;Search
               </CInputGroupText>
 
-              
               <CFormInput
                 placeholder="Search "
                 value={search}
@@ -1018,96 +1120,129 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
                 aria-describedby="addon-wrapping"
               />
 
+              <ToggleButtonGroup
+                style={{ marginLeft: '400px', width: '100px', height: '40px' }}
+                value={alignment}
+                exclusive
+                onChange={handleAlignment}
+                aria-label="text alignment"
+              >
+                <ToggleButton value="center" aria-label="left aligned" onClick={table1}>
+                  <TableViewRoundedIcon />
+                </ToggleButton>
+                <ToggleButton value="left" aria-label="centered" onClick={table2}>
+                  <FormatListNumberedIcon />
+                </ToggleButton>
+              </ToggleButtonGroup>
 
-              <ToggleButtonGroup style={{ marginLeft: '400px', width: '100px', height: '40px' }} value={alignment} exclusive onChange={handleAlignment} aria-label="text alignment">
-                    <ToggleButton value="center" aria-label="left aligned" onClick={table1}>
-                      <TableViewRoundedIcon />
-                    </ToggleButton>
-                    <ToggleButton value="left" aria-label="centered" onClick={table2}>
-                      <FormatListNumberedIcon />
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-
-              <CButton style={{ marginLeft: '50px',borderRadius:"5px"}} className="btn1" 
+              <CButton
+                style={{ marginLeft: '50px', borderRadius: '5px' }}
+                className="btn1"
                 onClick={() => Openpopup()}
               >
                 Add Video
               </CButton>
             </CInputGroup>
-            <br></br> 
-            <CTable style={{ textAlign: 'center' }}  hover>
+            <br></br>
+            <CTable style={{ textAlign: 'center' }} hover>
               <CTableHead>
-                <CTableRow style={{backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}>
-                  <CTableHeaderCell style={{color:"white"}}>No</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Title</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Category</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>SubCategory</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Description</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Language</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Method </CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Release Date</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>Expiry Date</CTableHeaderCell>
-                  <CTableHeaderCell style={{color:"white"}}>status</CTableHeaderCell>
-                  <CTableHeaderCell scope="col2" style={{color:"white"}}>image</CTableHeaderCell>
-                  <CTableHeaderCell scope="col" style={{color:"white"}}>Action</CTableHeaderCell>
+                <CTableRow style={{ backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}>
+                  <CTableHeaderCell style={{ color: 'white' }}>No</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Title</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Category</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>SubCategory</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Description</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Language</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Method </CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Release Date</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Expiry Date</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>status</CTableHeaderCell>
+                  <CTableHeaderCell scope="col2" style={{ color: 'white' }}>
+                    image
+                  </CTableHeaderCell>
+                  <CTableHeaderCell scope="col" style={{ color: 'white' }}>
+                    Action
+                  </CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
-                {
-                  list.filter((data) => data.title.match(new RegExp(search, 'i'))).reverse().map((item, i) => {
+                {list
+                  .filter((data) => data.title.match(new RegExp(search, 'i')))
+                  .reverse()
+                  .map((item, i) => {
                     return (
                       <>
-                        <CTableRow key={i}  style={{backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }} >
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF"}}>
+                        <CTableRow
+                          key={i}
+                          style={{ backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}
+                        >
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {i + 1}
                           </CTableDataCell>
-                          <CTableDataCell style={{ paddingTop: '30px' ,color:"#FFF"}}>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {item.title}
                           </CTableDataCell>
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF",textTransform:"capitalize"   }}>
+                          <CTableDataCell
+                            style={{
+                              paddingTop: '30px',
+                              color: '#FFF',
+                              textTransform: 'capitalize',
+                            }}
+                          >
                             {item.category}
                           </CTableDataCell>
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {item.subcategory}
                           </CTableDataCell>
-                          <CTableDataCell className='font'  style={{ paddingTop: '30px' ,color:"#FFF",height:"170px" }}>
+                          <CTableDataCell
+                            className="font"
+                            style={{ paddingTop: '30px', color: '#FFF', height: '170px' }}
+                          >
                             {item.Description}
                           </CTableDataCell>
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}> 
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {item.language}
                           </CTableDataCell>
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {item.method}
-                          </CTableDataCell> 
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                          </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {item.rdate}
                           </CTableDataCell>
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {item.edate}
                           </CTableDataCell>
-                          <CTableDataCell  style={{ paddingTop: '30px' ,color:"#FFF" }}>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                             {item.status}
-                             {/* <ReactPlayer url={"http://localhost:5000/" + item.banner_video } height="300px"  width="400px"  controls={true} style={{margin:"20px"}} /> */}
-
+                            {/* <ReactPlayer url={"http://localhost:5000/" + item.banner_video } height="300px"  width="400px"  controls={true} style={{margin:"20px"}} /> */}
                           </CTableDataCell>
-                          
-                          <CTableDataCell  style={{ paddingTop: '10px' ,color:"#FFF" }}>
+
+                          <CTableDataCell style={{ paddingTop: '10px', color: '#FFF' }}>
                             <div className="hover01  column1">
-                              <figure className='figure1'>
-                                <img src={env.apiURL+`${item.image_user}`} width="250px" height="150px" key={i}
-                                  onClick={() =>openImageViewer(env.apiURL+'' + item.image_user)}
+                              <figure className="figure1">
+                                <img
+                                  src={env.apiURL + `${item.image_user}`}
+                                  width="250px"
+                                  height="150px"
+                                  key={i}
+                                  onClick={() => openImageViewer(env.apiURL + '' + item.image_user)}
                                 />
                               </figure>
                             </div>
                             {isViewerOpen && (
-                              <ImageViewer src={currentImage} currentIndex={0} disableScroll={false} closeOnClickOutside={true} onClose={setIsViewerOpen}
-                                backgroundStyle={{backgroundColor: '#3A6073',zIndex: '2'}}
+                              <ImageViewer
+                                src={currentImage}
+                                currentIndex={0}
+                                disableScroll={false}
+                                closeOnClickOutside={true}
+                                onClose={setIsViewerOpen}
+                                backgroundStyle={{ backgroundColor: '#3A6073', zIndex: '2' }}
                               />
                             )}
                           </CTableDataCell>
                           {/* <CTableDataCell color="success" style={{ paddingTop: "30px" }}><img src={env.apiURL+`${item.banner_img}`} width="100px"></img></CTableDataCell> */}
 
-                          <CTableDataCell style={{ paddingTop: '30px' }} >
+                          <CTableDataCell style={{ paddingTop: '30px' }}>
                             <CButton
                               color="success"
                               variant="outline"
@@ -1158,83 +1293,181 @@ const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
         </CCard>
       </CCol>
 
-
-
       {/* card forment */}
-      <CCol xs={12} id="table1"  style={{display: "none"}}>
+      <CCol xs={12} id="table1" style={{ display: 'none' }}>
         <CCard className="mb-4">
           <CCardBody>
             <CInputGroup className="flex-nowrap">
-                  <CInputGroupText className="btn1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
-                    &nbsp;&nbsp;&nbsp;Search
-                  </CInputGroupText>
-                  <CFormInput placeholder="Search" value={search} onChange={(e) => {setSearch(e.target.value)}} aria-label="Username" aria-describedby="addon-wrapping" />
+              <CInputGroupText className="btn1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-search"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                &nbsp;&nbsp;&nbsp;Search
+              </CInputGroupText>
+              <CFormInput
+                placeholder="Search"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value)
+                }}
+                aria-label="Username"
+                aria-describedby="addon-wrapping"
+              />
 
-                  {/* toggle button  */}
-                  <ToggleButtonGroup style={{ marginLeft: '400px', width: '100px', height: '40px' }} value={alignment} exclusive onChange={handleAlignment} aria-label="text alignment">
-                    <ToggleButton value="center" aria-label="left aligned" onClick={table1}>
-                      <TableViewRoundedIcon />
-                    </ToggleButton>
-                    <ToggleButton value="left" aria-label="centered" onClick={table2}>
-                      <FormatListNumberedIcon />
-                    </ToggleButton>
-                  </ToggleButtonGroup>
+              {/* toggle button  */}
+              <ToggleButtonGroup
+                style={{ marginLeft: '400px', width: '100px', height: '40px' }}
+                value={alignment}
+                exclusive
+                onChange={handleAlignment}
+                aria-label="text alignment"
+              >
+                <ToggleButton value="center" aria-label="left aligned" onClick={table1}>
+                  <TableViewRoundedIcon />
+                </ToggleButton>
+                <ToggleButton value="left" aria-label="centered" onClick={table2}>
+                  <FormatListNumberedIcon />
+                </ToggleButton>
+              </ToggleButtonGroup>
 
-
-                  <CButton style={{ marginLeft: '50px',borderRadius:"5px"}} className="btn1"  onClick={() => setVisible1(true)}>
-                    Add Video
-                  </CButton>
-
+              <CButton
+                style={{ marginLeft: '50px', borderRadius: '5px' }}
+                className="btn1"
+                onClick={() => setVisible1(true)}
+              >
+                Add Video
+              </CButton>
             </CInputGroup>
             <br></br>
-            {list.filter((data) => data.title.match(new RegExp(search, 'i'))).reverse().map((item, i) => {
+            {list
+              .filter((data) => data.title.match(new RegExp(search, 'i')))
+              .reverse()
+              .map((item, i) => {
                 return (
                   <>
-                    <CCard key={i} style={{width: '19.5rem',display: 'flex',display: 'inline-block',margin: '5px 1px',borderRadius: '10px',boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)'}}>
-                       <div className="hover01 column">
-                          <figure>
-                            <img src={env.apiURL+`${item.image_user}`} width="282px" height="200px" key={i}
-                              onClick={() =>openImageViewer(env.apiURL+'' + item.image_user)}
-                            />
-                          </figure>
-                        </div>
-                        {isViewerOpen && (
-                          <ImageViewer src={currentImage} currentIndex={0} disableScroll={false} closeOnClickOutside={true} onClose={setIsViewerOpen}
-                              backgroundStyle={{backgroundColor: '#3A6073',zIndex: '2',backgroundSize: 'cover'}}
+                    <CCard
+                      key={i}
+                      style={{
+                        width: '19.5rem',
+                        display: 'flex',
+                        display: 'inline-block',
+                        margin: '5px 1px',
+                        borderRadius: '10px',
+                        boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+                        backgroundImage: 'linear-gradient(360deg,#16222A,#3A6073)',
+                      }}
+                    >
+                      <div className="hover01 column">
+                        <figure>
+                          <img
+                            src={env.apiURL + `${item.image_user}`}
+                            width="282px"
+                            height="200px"
+                            key={i}
+                            onClick={() => openImageViewer(env.apiURL + '' + item.image_user)}
                           />
-                        )}
+                        </figure>
+                      </div>
+                      {isViewerOpen && (
+                        <ImageViewer
+                          src={currentImage}
+                          currentIndex={0}
+                          disableScroll={false}
+                          closeOnClickOutside={true}
+                          onClose={setIsViewerOpen}
+                          backgroundStyle={{
+                            backgroundColor: '#3A6073',
+                            zIndex: '2',
+                            backgroundSize: 'cover',
+                          }}
+                        />
+                      )}
                       <CCardBody>
-                        <CCardTitle style={{ color: 'white' , textAlign:"center" ,backgroundColor:"#3A6073",textTransform:"capitalize" }}>
+                        <CCardTitle
+                          style={{
+                            color: 'white',
+                            textAlign: 'center',
+                            backgroundColor: '#3A6073',
+                            textTransform: 'capitalize',
+                          }}
+                        >
                           <b>{item.title}</b>
                         </CCardTitle>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.category}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.subcategory}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.language}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}} className='font'  /> {item.Description}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.method}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.rdate}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.edate}</CCardText>
-                        <CCardText  style={{ color: 'white' }}><FaHandPointRight style={{color:"#3A6073"}}/> {item.status}</CCardText>
-                       
-
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.category}
+                        </CCardText>
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.subcategory}
+                        </CCardText>
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.language}
+                        </CCardText>
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} className="font" />{' '}
+                          {item.Description}
+                        </CCardText>
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.method}
+                        </CCardText>
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.rdate}
+                        </CCardText>
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.edate}
+                        </CCardText>
+                        <CCardText style={{ color: 'white' }}>
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.status}
+                        </CCardText>
                         {/* update button */}
-                        <CButton  variant="outline" value="Update" color='success' onClick={() => edithandler(item._id)}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16"  height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" /><path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        <CButton
+                          variant="outline"
+                          value="Update"
+                          color="success"
+                          onClick={() => edithandler(item._id)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-pencil-square"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path
+                              fillRule="evenodd"
+                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                            />
                           </svg>
                         </CButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        
                         {/* delete button */}
-                        <CButton color="danger"  variant="outline" value="delete" onClick={() => deletehandler(item._id)}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16" >
+                        <CButton
+                          color="danger"
+                          variant="outline"
+                          value="delete"
+                          onClick={() => deletehandler(item._id)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-trash3"
+                            viewBox="0 0 16 16"
+                          >
                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                           </svg>
                         </CButton>
-                    </CCardBody>
-                  </CCard>
-
+                      </CCardBody>
+                    </CCard>
                   </>
                 )
               })}

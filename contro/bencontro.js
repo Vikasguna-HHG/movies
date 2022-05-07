@@ -26,6 +26,7 @@ const bcrypt = require("bcrypt");
 
 //jwt ...
 const jwt = require("jsonwebtoken");
+// const { data, data } = require("jquery");
 // const { match } = require("assert");
 const jwtkey = "movies-hhg";
 const url = "mongodb+srv://HHG:HHG@cluster0.f2c5v.mongodb.net/HHG?retryWrites=true&w=majority";
@@ -607,7 +608,7 @@ exports.viinsert_data = async function (req, res, next) {
       // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
     // });
 
-  
+  // console.log(req.headers.userid);
     const data = {
       // v_id : video_id,
       method: req.body.method,
@@ -623,6 +624,8 @@ exports.viinsert_data = async function (req, res, next) {
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
+      User_id:req.headers.userid
+
     };
   
     const tag = await video.create(data);
@@ -856,7 +859,6 @@ exports.Contract_data = async function (req, res, next) {
  
   try {
     const { jsPDF } = require("jspdf"); 
-    
     const doc = new jsPDF();
     doc.text("******************************* Contract *******************************", 10, 10);
     doc.text("Movie Name :- "     +req.body.Movie_Name,     10, 20);
@@ -872,7 +874,8 @@ exports.Contract_data = async function (req, res, next) {
     doc.text("CIN :- "            +req.body.CIN,            10, 120);
     doc.text("Director Name :- "  +req.body.Director_Name,  10, 130);
     doc.text("DIN :- "            +req.body.DIN,            10, 140);
-    
+    doc.text("User_Id :- "         +req.headers.User_Id,     10, 150);
+  
     var name = "Contact pdf-"+Date.now()
     var pdf = `upload/pdf/${name}.pdf`
     doc.save(pdf); 
@@ -892,15 +895,15 @@ exports.Contract_data = async function (req, res, next) {
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
       Contract_pdf:pdf,
-      u_id:"6267c45c38b6f784ff71757d"
+      User_Id:req.headers.User_Id
   };
 
     const tag = await Contract.create(data);
     res.status(201).json({
       data: tag,
       status: "Data insert",
+
     });
-    // console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
     res.status(201).json({
