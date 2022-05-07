@@ -149,7 +149,7 @@ exports.Minsert_data = async function (req, res, next) {
       service: "gmail",
       auth: {
         user: "hhgsoftechteam10@gmail.com",
-        pass: "@Surat.1234",
+        pass: "@Surat1234",
       },
     });
 
