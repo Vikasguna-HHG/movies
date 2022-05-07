@@ -1,4 +1,6 @@
 const mongoose = require ("mongoose");
+var Schema = mongoose.Schema;
+ var ObjectId = Schema.ObjectId;
 
 const contract = new mongoose.Schema({
   
@@ -72,8 +74,10 @@ const contract = new mongoose.Schema({
     },
     User_Id:
     {
-        // type:String
-        categoryId:ObjectId
+        
+        categoryId  : ObjectId,
+        title       : String,
+        sortIndex   : String
     }   
    
 })
