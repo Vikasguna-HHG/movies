@@ -69,6 +69,13 @@ const Home = () => {
      setVisible(true)
       }
 
+
+      //phone number validation
+  const checkInput = (e) => {
+    const onlyDigits = e.target.value.replace(/\D/g, '')
+    setMobile_no(onlyDigits)
+  }
+
    
     const submit = async () => {
     
@@ -364,13 +371,12 @@ const Home = () => {
             <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlTextarea1">Mobile no</CFormLabel>
               <CFormInput
-                type="Number"
+                type="tel"
                 id='Mobile_no'
                 value={Mobile_no}
-                onChange={(e) => {
-                  setMobile_no(e.target.value)
-                }}
-                placeholder="Enter Username"
+                onChange={(e) => checkInput(e)}
+                maxLength="10"
+                placeholder="Content Provider Phone"
                 rows="3"
               ></CFormInput>
             </div>
