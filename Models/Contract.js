@@ -72,7 +72,8 @@ const contract = new mongoose.Schema({
     },
     User_Id:
     {
-        type:String
+        // type:String
+        categoryId:ObjectId
     }   
    
 })

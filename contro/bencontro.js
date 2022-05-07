@@ -16,7 +16,8 @@ const { IncomingForm } = require("formidable");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
-
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb+srv://HHG:HHG@cluster0.f2c5v.mongodb.net/HHG?retryWrites=true&w=majority"
 const bcrypt = require("bcrypt");
 const { data } = require("jquery");
 const { time } = require("console");
@@ -37,7 +38,7 @@ exports.get_join_data = async function (req, res, next) {
         $lookup: {
           from: "contracts",
           localField: "_id",
-          foreignField: "u_id",
+          foreignField: "User_Id",
           as: "school",
         },
       },
@@ -838,10 +839,13 @@ exports.Contract_data = async function (req, res, next) {
     doc.text("CIN :- " + req.body.CIN, 10, 120);
     doc.text("Director Name :- " + req.body.Director_Name, 10, 130);
     doc.text("DIN :- " + req.body.DIN, 10, 140);
+    doc.text("User_Id :- " + req.headers.user_id, 10, 150);
+
 
     var name = "Contact pdf-" + Date.now();
     var pdf = `upload/pdf/${name}.pdf`;
     doc.save(pdf);
+    console.log(req)
     const data = {
       Movie_Name: req.body.Movie_Name,
       Provider_Name: req.body.Provider_Name,
@@ -857,6 +861,7 @@ exports.Contract_data = async function (req, res, next) {
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
       Contract_pdf: pdf,
+      User_Id:req.headers.user_id
     };
 
     const tag = await Contract.create(data);
