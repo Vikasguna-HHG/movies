@@ -95,5 +95,6 @@ router.post('/Contract_update_data',upload.single('image'), BannerController.Sta
 
 
 router.post('/User',upload.single('image'),BannerController.User_data);
+router.post('/login',upload.single('image'),BannerController.client_login);
 
 module.exports = router;
