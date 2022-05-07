@@ -10,7 +10,7 @@ const user = new mongoose.Schema({
         // index: {
         //     unique: true,
         // },
-        // required:true,
+        required:true,
         // trim: true,
         
     },
