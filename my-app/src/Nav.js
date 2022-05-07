@@ -1,7 +1,8 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilFindInPage, cilLanguage, cilMovie, cilNoteAdd, cilVideo } from '@coreui/icons'
+import { cilActionRedo, cilFindInPage, cilFunctions, cilLanguage, cilMovie, cilNoteAdd, cilShareAll, cilVideo } from '@coreui/icons'
 import { CNavItem } from '@coreui/react'
+import { ChildFriendlyTwoTone } from '@mui/icons-material'
 
 var sid = localStorage.getItem('sid')
 let nav = []
@@ -18,6 +19,12 @@ if (sid === '1') {
       name: 'Contract',
       to: '/base/Contract',
       icon: <CIcon icon={cilFindInPage} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'View_Contract',
+      to: '/base/View_Contract',
+      icon: <CIcon icon={cilShareAll} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
