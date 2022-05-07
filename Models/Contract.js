@@ -70,7 +70,7 @@ const contract = new mongoose.Schema({
     {
         type:Number
     },
-    u_id:
+    User_Id:
     {
         type:String
     }   

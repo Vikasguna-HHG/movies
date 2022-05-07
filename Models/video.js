@@ -53,6 +53,10 @@ const video1 = new mongoose.Schema({
 
         type:String
     },
+    User_id:{
+
+        type:Object
+    }
 
     
    

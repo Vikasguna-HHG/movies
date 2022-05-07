@@ -85,7 +85,7 @@ router.get('/Latest',verifyToken,BannerController.latest_find);
 router.get('/Upcoming',verifyToken,BannerController.Upcoming_find);
 
 // Contract api
-router.post('/Contract',upload.single('image'), BannerController.Contract_data);
+router.post('/Contract',verifyToken,upload.single('image'), BannerController.Contract_data);
 router.get('/demo/:id',BannerController.demo_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
 router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
