@@ -28,29 +28,26 @@ const { match } = require("assert");
 const jwtkey = "movies-hhg";
 
 exports.get_join_data = async function (req, res, next) {
-  
-  MongoClient.connect(url,async (err,db)=>{
-    if(err) throw err ;
-    const dbo = db.db('HHG')
+  MongoClient.connect(url, async (err, db) => {
+    if (err) throw err;
+    const dbo = db.db("HHG");
 
     const dd = await movie_maker.aggregate([
       {
-          $lookup:{
-            from:'contracts',
-            localField:'_id',
-            foreignField:'u_id',
-            as:'school'
-          }
-      }
-    ])
-    
+        $lookup: {
+          from: "contracts",
+          localField: "_id",
+          foreignField: "u_id",
+          as: "school",
+        },
+      },
+    ]);
+
     res.status(200).send({
-      data:dd
-    })
-
-  })
-
-}
+      data: dd,
+    });
+  });
+};
 
 exports.insert_data = async function (req, res, next) {
   try {
@@ -882,39 +879,38 @@ exports.Status_data = async function (req, res, next) {
     var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
 
     if (req.body.Status == 2) {
-            var transporter = nodemailer.createTransport({
-              service: "gmail",
-              auth: {
-                user: "hhgsoftechteam10@gmail.com",
-                pass: "@Surat1234",
-              },
-            });
+      var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "hhgsoftechteam10@gmail.com",
+          pass: "@Surat1234",
+        },
+      });
 
-            var mailOptions = {
-              from: "hhgsoftechteam10@gmail.com",
-              to: "hhgsoftechteam10@gmail.com",
-              subject: "Contract Detail",
-              html: "<h1>Contract Detail......!!!</h1>",
-              attachments: [
-                {
-                  filename: "Contact pdf-1651295458648.pdf",
-                  contentType: "application/pdf",
-                },
-              ],
-            };
+      var mailOptions = {
+        from: "hhgsoftechteam10@gmail.com",
+        to: "hhgsoftechteam10@gmail.com",
+        subject: "Contract Detail",
+        html: "<h1>Contract Detail......!!!</h1>",
+        attachments: [
+          {
+            filename: "Contact pdf-1651295458648.pdf",
+            contentType: "application/pdf",
+          },
+        ],
+      };
 
-            transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                console.log(error);
-              } else {
-                console.log("Email sent: " + info.response);
-              }
-            });
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
 
-            console.log("Email Send....!");
-
+      console.log("Email Send....!");
     } else {
-          console.log("Email Not Send....!");
+      console.log("Email Not Send....!");
     }
 
     res.status(201).json({
@@ -956,13 +952,10 @@ exports.User_data = async function (req, res, next) {
   }
 };
 
-
-
-
 exports.client_login = async function (req, res, next) {
   const { User_Name, Password } = req.body;
-  const User1 = await User.findOne({ User_Name,Password });
-console.log(User1);
+  const User1 = await User.findOne({ User_Name, Password });
+  console.log(User1);
   if (User1 != null) {
     jwt.sign({ User1 }, jwtkey, (err, token) => {
       if (err) {
@@ -979,7 +972,6 @@ console.log(User1);
       }
     });
   } else {
-
     res.send({ status: "false", result: "not valid username and password" });
   }
 };
