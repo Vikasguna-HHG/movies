@@ -49,6 +49,7 @@ const Home = () => {
   const [First_Name, setFirst_Name] = useState('')
   const [Last_Name, setLast_Name] = useState('')
   const [User_Name, setUser_Name] = useState('')
+  const [Mobile_no,setMobile_no] = useState('')
   const [list, setList] = useState([])
   const [visible, setVisible] = useState(false)
   const [Email, setEmail] = useState('')
@@ -62,6 +63,7 @@ const Home = () => {
      setFirst_Name('')
      setLast_Name('')
      setUser_Name('')
+     setMobile_no('')
      setEmail('')
      
      setVisible(true)
@@ -71,7 +73,7 @@ const Home = () => {
     const submit = async () => {
     
       const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
-      if(!First_Name || !Last_Name || !User_Name || !Email)
+      if(!First_Name || !Last_Name || !User_Name || !Mobile_no || !Email)
       {
         toast.warning('please fil data', {
           autoClose: 1000,
@@ -119,6 +121,17 @@ const Home = () => {
 
 
       }
+      if(!Mobile_no)
+      {
+        document.getElementById("Mobile_no").style.border="1px solid red"
+        
+      }
+      else{
+      formData.append('Mobile_no', Mobile_no)
+      document.getElementById("Mobile_no").style.border="1px solid black"
+
+
+      }
       if(regEx.test(Email)){
       formData.append('Email', Email)
       document.getElementById("email").style.border="1px solid black"
@@ -155,6 +168,7 @@ const Home = () => {
       setFirst_Name('')
       setLast_Name('')
       setUser_Name('')
+      setMobile_no('')
       setEmail('')
       // setImageval('');
       setVisible(false)
@@ -167,6 +181,7 @@ const Home = () => {
       formData.append('First_Name', First_Name)
       formData.append('Last_Name', Last_Name)
       formData.append('User_Name', User_Name)
+      formData.append('Mobile_no', Mobile_no)
       if(regEx.test(Email)){
         formData.append('Email', Email)
   
@@ -202,6 +217,7 @@ const Home = () => {
     setFirst_Name('')
     setLast_Name('')
     setUser_Name('')
+    setMobile_no('')
     setEmail('')
     // setImageval('');
     setVisible(false)
@@ -231,6 +247,7 @@ const Home = () => {
         setFirst_Name(result.data.data.First_Name)
         setLast_Name(result.data.data.Last_Name)
         setUser_Name(result.data.data.User_Name)
+        setMobile_no(result.data.data.Mobile_no)
         setEmail(result.data.data.Email)
 
         // setImageval(result.data.data.image_user)
@@ -345,6 +362,19 @@ const Home = () => {
               ></CFormInput>
             </div>
             <div className="mb-3">
+              <CFormLabel htmlFor="exampleFormControlTextarea1">Mobile no</CFormLabel>
+              <CFormInput
+                type="Number"
+                id='Mobile_no'
+                value={Mobile_no}
+                onChange={(e) => {
+                  setMobile_no(e.target.value)
+                }}
+                placeholder="Enter Username"
+                rows="3"
+              ></CFormInput>
+            </div>
+            <div className="mb-3">
               <CFormLabel htmlFor="exampleFormControlInput1">Email</CFormLabel>
               <CFormInput
                 type="email"
@@ -411,6 +441,7 @@ const Home = () => {
                   <CTableHeaderCell style={{ color: 'white' }}>First_Name</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Last_Name</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>User_Name</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Mobile_no</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Email</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Action</CTableHeaderCell>
                 </CTableRow>
@@ -437,6 +468,9 @@ const Home = () => {
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '20px', color: 'white' }}>
                             {item.User_Name}
+                          </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '20px', color: 'white' }}>
+                            {item.Mobile_no}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '20px', color: 'white' }}>
                             {item.Email}

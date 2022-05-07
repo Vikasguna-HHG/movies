@@ -179,6 +179,7 @@ exports.Minsert_data = async function (req, res, next) {
       First_Name: req.body.First_Name,
       Last_Name: req.body.Last_Name,
       User_Name: req.body.User_Name,
+      Mobile_no: req.body.Mobile_no,
       Email: req.body.Email,
       Password: newpass,
     };
@@ -285,7 +286,8 @@ exports.MUpdate_data = async function (req, res, next) {
     (BannerData.First_Name = req.body.First_Name),
       (BannerData.Last_Name = req.body.Last_Name),
       (BannerData.User_Name = req.body.User_Name),
-      (BannerData.Email = req.body.Email);
+      (BannerData.Mobile_no = req.body.Mobile_no),
+     (BannerData.Email = req.body.Email);
 
     await movie_maker.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({

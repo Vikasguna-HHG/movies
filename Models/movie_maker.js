@@ -24,6 +24,11 @@ const movie_makers1 = new mongoose.Schema({
         required:true
         
     },
+    Mobile_no:{
+        type:String,
+        unique:true,
+        required:true
+    },
     Email:
     {
         type:String,
