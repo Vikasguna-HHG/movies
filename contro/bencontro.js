@@ -16,8 +16,9 @@ const { IncomingForm } = require("formidable");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
 // import validator from 'validator';
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://HHG:HHG@cluster0.f2c5v.mongodb.net/HHG?retryWrites=true&w=majority"
+var MongoClient = require("mongodb").MongoClient;
+var url =
+  "mongodb+srv://HHG:HHG@cluster0.f2c5v.mongodb.net/HHG?retryWrites=true&w=majority";
 const bcrypt = require("bcrypt");
 const { data } = require("jquery");
 const { time } = require("console");
@@ -186,13 +187,15 @@ exports.Minsert_data = async function (req, res, next) {
     };
 
     console.log(data.Password);
-    const tag = await movie_maker.create(data);
-
-    // jwt.sign({ tag }, jwtkey, (err, token) => {
+    // jwt.sign({ data }, jwtkey, (err, token) => {
     //   if (err) {
     //     res.send({ result: "wrong...." });
     //   }
-    //   res.send({ tag, auth: token });
+    //   res.send({ data, auth: token });
+    // });
+    const tag = await movie_maker.create(data);
+
+ 
 
     res.status(201).json({
       data: tag,
@@ -288,7 +291,7 @@ exports.MUpdate_data = async function (req, res, next) {
       (BannerData.Last_Name = req.body.Last_Name),
       (BannerData.User_Name = req.body.User_Name),
       (BannerData.Mobile_no = req.body.Mobile_no),
-     (BannerData.Email = req.body.Email);
+      (BannerData.Email = req.body.Email);
 
     await movie_maker.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
@@ -583,6 +586,7 @@ exports.viinsert_data = async function (req, res, next) {
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
+      User_id: req.headers.user_id,
     };
 
     const tag = await video.create(data);
@@ -841,11 +845,10 @@ exports.Contract_data = async function (req, res, next) {
     doc.text("DIN :- " + req.body.DIN, 10, 140);
     doc.text("User_Id :- " + req.headers.user_id, 10, 150);
 
-
     var name = "Contact pdf-" + Date.now();
     var pdf = `upload/pdf/${name}.pdf`;
     doc.save(pdf);
-    console.log(req)
+    console.log(req);
     const data = {
       Movie_Name: req.body.Movie_Name,
       Provider_Name: req.body.Provider_Name,
@@ -861,7 +864,7 @@ exports.Contract_data = async function (req, res, next) {
       Director_Name: req.body.Director_Name,
       DIN: req.body.DIN,
       Contract_pdf: pdf,
-      User_Id:req.headers.user_id
+      User_Id: req.headers.user_id,
     };
 
     const tag = await Contract.create(data);
@@ -927,45 +930,50 @@ exports.Status_data = async function (req, res, next) {
   } catch (error) {}
 };
 
-// 
+//
 exports.User_data = async function (req, res, next) {
   // try {
 
-    const allemail = await User.findOne({Email:req.body.Email});
+  const allemail = await User.findOne({ Email: req.body.Email });
 
-    if(allemail && allemail.Email)
-    {
-      res.status(201).json({
-        status: false,
-        message: "Email Already Exists",
-      });
-    }
-    else
-    {
-      let newpass = await bcrypt.hash(req.body.Password, 12);
+  if (allemail && allemail.Email) {
+    res.status(201).json({
+      status: false,
+      message: "Email Already Exists",
+    });
+  } else {
+    let newpass = await bcrypt.hash(req.body.Password, 12);
 
-      const data = {
-        User_Name: req.body.User_Name,
-        Email: req.body.Email,
-        Password: newpass,
-      };
+    const data = {
+      User_Name: req.body.User_Name,
+      Email: req.body.Email,
+      Password: newpass,
+    };
 
-      const tag = await User.create(data);
+    jwt.sign({ data }, jwtkey, (err, token) => {
+      if (err) {
+        res.send({ result: "wrong...." });
+      }
+      res.send({ data, auth: token });
+   
 
-      res.status(201).send({
-        status: true,
-        data: tag,
-      });
+    const tag =  User.create(data);
 
-    }
+    res.status(201).send({
+      status: true,
+      data: tag,
+    });
 
-}
+  });
+  
+  }
+};
 
 exports.client_login = async function (req, res, next) {
   const { User_Name, Password } = req.body;
   const User1 = await User.findOne({ User_Name, Password });
   // console.log(User1);
-  
+
   if (User1 != null) {
     jwt.sign({ User1 }, jwtkey, (err, token) => {
       if (err) {
