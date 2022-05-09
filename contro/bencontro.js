@@ -930,42 +930,34 @@ exports.Status_data = async function (req, res, next) {
 // 
 exports.User_data = async function (req, res, next) {
   // try {
-    // var result = "";
-    // var characters = "abcdefghijklmnopqrstuvwxyz";
-    // var charactersLength = characters.length;
-    // for (var i = 0; i < 6; i++) {
-    //   result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    // }
-    // var v_id = result + Date.now();
-    // var newpass = await bcrypt.hash(req.body.Password, 12);
 
-    const allemail = await User.findOne({Email:res.Email});
-    // console.log(allemail);
-    res.status(201).json({
-          data: allemail,
-          status: "Data not insert",
-        });
-  //   const data = {
-  //     video_id: v_id,
-  //     User_Name: req.body.User_Name,
-  //     Email: req.body.Email,
-  //     Password: req.body.Password,
-  //   };
-  //     const tag = await User.create(data);
-  //     res.status(201).json({
-  //       status: "create data",
-  //       data: tag,
-  //     });
- 
-  // } catch (error) {
-  //   // console.log(data);
-  //   res.status(201).json({
-  //     data: tag,
-  //     status: "Data not insert",
-  //   });
-  // }
+    const allemail = await User.findOne({Email:req.body.Email});
 
+    if(allemail && allemail.Email)
+    {
+      res.status(201).json({
+        status: false,
+        message: "Email Already Exists",
+      });
+    }
+    else
+    {
+      let newpass = await bcrypt.hash(req.body.Password, 12);
 
+      const data = {
+        User_Name: req.body.User_Name,
+        Email: req.body.Email,
+        Password: newpass,
+      };
+
+      const tag = await User.create(data);
+
+      res.status(201).send({
+        status: true,
+        data: tag,
+      });
+
+    }
 
 }
 
