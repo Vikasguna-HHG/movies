@@ -78,7 +78,7 @@ const Home = () => {
 
    
     const submit = async () => {
-    
+    // console.log(Mobile_no.length)
       const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
       if(!First_Name || !Last_Name || !User_Name || !Mobile_no || !Email)
       {
@@ -133,12 +133,11 @@ const Home = () => {
         document.getElementById("Mobile_no").style.border="1px solid red"
         
       }
-      else{
-      formData.append('Mobile_no', Mobile_no)
-      document.getElementById("Mobile_no").style.border="1px solid black"
-
-
+      else if(Mobile_no || Mobile_no.length == 10){
+        formData.append('Mobile_no', Mobile_no)
+        document.getElementById("Mobile_no").style.border="1px solid black"
       }
+      
       if(regEx.test(Email)){
       formData.append('Email', Email)
       document.getElementById("email").style.border="1px solid black"
