@@ -280,6 +280,8 @@ const Video = () => {
       try {
         const res = await axios.post(env.apiURL + 'viUpdateBanner', formData, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+          "User_Id": localStorage.getItem('userId')
+
         })
         debugger
         if (res.data.status == 'success') {
