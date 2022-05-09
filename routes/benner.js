@@ -94,12 +94,7 @@ router.post('/Contract_update_data',upload.single('image'), BannerController.Sta
 
 
 
-<<<<<<< HEAD
 router.post('/User',upload.single('image'),BannerController.User_data);
-=======
-router.post('/User',upload.single(),BannerController.User_data);
-// router.post('/Userfind',upload.single('image'),BannerController.User_find);
->>>>>>> ad8c913603522223e3db44acfd2208cbd6352483
 router.post('/login',upload.single('image'),BannerController.client_login);
 // router.post('/Userfind',upload.single('image'),BannerController.User_find);
 // router.post('/Register',upload.single('image'),BannerController.Register_data);
