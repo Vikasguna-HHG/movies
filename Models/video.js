@@ -1,5 +1,9 @@
 const mongoose = require ("mongoose");
 var Schema = mongoose.Schema;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3e00d0d520c233e0844121b5cfb5b35f87f5e3d
 const video1 = new mongoose.Schema({
   
     method:
@@ -53,10 +57,17 @@ const video1 = new mongoose.Schema({
 
         type:String
     },
+<<<<<<< HEAD
     User_id:{
 
         type: Schema.ObjectId
     }
+=======
+    User_Id:
+    {
+        type: Schema.ObjectId
+    }   
+>>>>>>> b3e00d0d520c233e0844121b5cfb5b35f87f5e3d
 
     
    

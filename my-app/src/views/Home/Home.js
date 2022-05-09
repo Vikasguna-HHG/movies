@@ -128,17 +128,20 @@ const Home = () => {
 
 
       }
+<<<<<<< HEAD
       if(!Mobile_no )
+=======
+      if(!Mobile_no)
+>>>>>>> b3e00d0d520c233e0844121b5cfb5b35f87f5e3d
       {
         document.getElementById("Mobile_no").style.border="1px solid red"
         
       }
-      else{
-      formData.append('Mobile_no', Mobile_no)
-      document.getElementById("Mobile_no").style.border="1px solid black"
-
-
+      else if(Mobile_no || Mobile_no.length == 10){
+        formData.append('Mobile_no', Mobile_no)
+        document.getElementById("Mobile_no").style.border="1px solid black"
       }
+      
       if(regEx.test(Email)){
       formData.append('Email', Email)
       document.getElementById("email").style.border="1px solid black"

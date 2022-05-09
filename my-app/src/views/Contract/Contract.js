@@ -113,7 +113,8 @@ function Contract() {
     // formData.append('u_id', u_id)
 
       const res = await axios.post(env.apiURL + 'Contract',formData,
-      {headers:{
+      {
+        headers:{
         "Authorization" : `Bearer ${localStorage.getItem('token')}`,
         "User_Id": localStorage.getItem('userId')
           }}
