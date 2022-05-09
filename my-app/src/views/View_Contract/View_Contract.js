@@ -1,4 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
+
+
+
+import {env} from '../../environment'
+
 
 import {
   CCard,
@@ -11,12 +16,30 @@ import {
   CTableHeaderCell,
   CTableBody,
 } from '@coreui/react'
+const axios = require('axios')
 function View_Contract() {
 
 
 const [list, setList] = useState([])
 // const [list, setList] = useState([])
+function getdata() {
+  axios
+    .get(env.apiURL+`getjoindata`,{
+    headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
 
+    })
+    .then(function (res) {
+      console.log(res.data.data)
+      setList(res.data.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
+useEffect(() => {
+  getdata()
+}, [])
 
   return (
     <div>
@@ -44,8 +67,13 @@ const [list, setList] = useState([])
                       <>
                         <CTableRow key={i} style={{ backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {i + 1} </CTableDataCell>
-                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {item.title} </CTableDataCell>
-                         
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {item.User_Name} </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {item.Email} </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {item.Mobile_no} </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {item.school.length} </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {item.school.length} </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}> {item.school.length} </CTableDataCell>
+                          
                         </CTableRow>
                       </>
                     )
