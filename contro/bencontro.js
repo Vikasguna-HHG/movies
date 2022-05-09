@@ -588,21 +588,17 @@ exports.viinsert_data = async function (req, res, next) {
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
-<<<<<<< HEAD
       User_id:req.headers.userid
-=======
-      User_Id:req.headers.userid
->>>>>>> b3e00d0d520c233e0844121b5cfb5b35f87f5e3d
     };
     console.log(req);
 
     const tag = await video.create(data);
-// console.log(req);
+
     res.status(201).json({
       data: tag,
       status: "Data insert",
     });
-    
+    console.log(tag);
   } catch (error) {
     res.status(201).json({ error });
     // console.log(error);
@@ -958,7 +954,7 @@ exports.User_data = async function (req, res, next) {
       const data = {
         User_Name: req.body.User_Name,
         Email: req.body.Email,
-        Password:newpass,
+        Password: newpass,
       };
 
       const tag = await User.create(data);
@@ -971,23 +967,6 @@ exports.User_data = async function (req, res, next) {
     }
 
 }
-
-
-// exports.User_find = async function (req, res, next) {
-//   try {
-//     const tag = await User.findOne({Email:req.body.Email});
-// console.log(tag);
-//     res.status(200).json({
-//       status: "find data",
-//       data: tag,
-//     });
-//   } catch (error) {
-//     res.status(201).json({
-//       // data: tag,
-//       status: "Data not find",
-//     });
-//   }
-// };
 
 exports.client_login = async function (req, res, next) {
   const { User_Name, Password } = req.body;
