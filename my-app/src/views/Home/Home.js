@@ -128,17 +128,16 @@ const Home = () => {
 
 
       }
-      if(!Mobile_no || Mobile_no.length == 10)
+      if(!Mobile_no)
       {
         document.getElementById("Mobile_no").style.border="1px solid red"
         
       }
-      else{
-      formData.append('Mobile_no', Mobile_no)
-      document.getElementById("Mobile_no").style.border="1px solid black"
-
-
+      else if(Mobile_no || Mobile_no.length == 10){
+        formData.append('Mobile_no', Mobile_no)
+        document.getElementById("Mobile_no").style.border="1px solid black"
       }
+      
       if(regEx.test(Email)){
       formData.append('Email', Email)
       document.getElementById("email").style.border="1px solid black"
