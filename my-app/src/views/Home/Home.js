@@ -128,7 +128,7 @@ const Home = () => {
 
 
       }
-      if(!Mobile_no || Mobile_no.length == 10)
+      if(!Mobile_no )
       {
         document.getElementById("Mobile_no").style.border="1px solid red"
         

@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-
+var Schema = mongoose.Schema;
 const video1 = new mongoose.Schema({
   
     method:
@@ -55,7 +55,7 @@ const video1 = new mongoose.Schema({
     },
     User_id:{
 
-        type:Object
+        type: Schema.ObjectId
     }
 
     

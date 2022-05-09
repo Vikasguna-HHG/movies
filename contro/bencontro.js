@@ -36,16 +36,22 @@ exports.get_join_data = async function (req, res, next) {
     const dd = await movie_maker.aggregate([
       {
         $lookup: {
-          from: "contracts",
+          from: "videos",
           localField: "_id",
-          foreignField: "User_Id",
+          foreignField: "User_id",
           as: "school",
         },
+     
       },
+  
+  
     ]);
+   
+
+    
 
     res.status(200).send({
-      data: dd,
+      data: dd
     });
   });
 };
@@ -567,7 +573,6 @@ exports.viinsert_data = async function (req, res, next) {
       .format("YYYY-MM-DD dddd HH:mm:ss a");
     // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
     // });
-
     const data = {
       // v_id : video_id,
       method: req.body.method,
@@ -583,7 +588,9 @@ exports.viinsert_data = async function (req, res, next) {
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
+      User_id:req.headers.userid
     };
+    console.log(req);
 
     const tag = await video.create(data);
 
@@ -952,7 +959,7 @@ exports.User_data = async function (req, res, next) {
 
       const tag = await User.create(data);
 
-      res.status(201).send({
+      res.status(201).json({
         status: true,
         data: tag,
       });
