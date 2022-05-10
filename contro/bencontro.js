@@ -594,7 +594,7 @@ exports.viinsert_data = async function (req, res, next) {
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
-      User_id: req.headers.user_id,
+      User_Id: req.headers.userid,
     };
 
     const tag = await video.create(data);
