@@ -57,9 +57,9 @@ router.post('/Mlogin',BannerController.Mlogin);
 // mukunj api start
 router.get('/Mfinddata',verifyToken,BannerController.Mfind_data);
 router.get('/Mfinddata/:id',verifyToken,BannerController.Mfind_data_Id);
-router.post('/MInsertBanner',upload.single(), BannerController.Minsert_data);
-router.post('/MUpdateBanner', verifyToken,upload.single(), BannerController.MUpdate_data);
-router.delete('/MDeleteBanner/:id',verifyToken, upload.single(), BannerController.MDelete_data);
+router.post('/MInsertBanner',upload.single('image'), BannerController.Minsert_data);
+router.post('/MUpdateBanner', verifyToken,upload.single('image'), BannerController.MUpdate_data);
+router.delete('/MDeleteBanner/:id',verifyToken, upload.single('image'), BannerController.MDelete_data);
 // mukunj api end
 
 //vikas api start
@@ -88,15 +88,15 @@ router.get('/Upcoming',verifyToken,BannerController.Upcoming_find);
 router.post('/Contract',verifyToken,upload.single('image'), BannerController.Contract_data);
 router.get('/demo/:id',BannerController.demo_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
-router.post('/Contract_update_data',upload.single(), BannerController.Status_data);  
+router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
 // router.get('/demo/:id',BannerController.demo_data);
 
 
 
 
-router.post('/User',upload.single(),BannerController.User_data);
-// router.get('/Userfind',upload.single(),BannerController.User_find);
-router.post('/login',upload.single(),BannerController.client_login);
+router.post('/User',upload.single('image'),BannerController.User_data);
+router.post('/login',upload.single('image'),BannerController.client_login);
+// router.post('/Userfind',upload.single('image'),BannerController.User_find);
 // router.post('/Register',upload.single('image'),BannerController.Register_data);
 
 module.exports = router;
