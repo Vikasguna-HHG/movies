@@ -40,9 +40,17 @@ exports.get_join_data = async function (req, res, next) {
           from: "contracts",
           localField: "_id",
           foreignField: "User_Id",
-          as: "school",
+          as: "contract",
         },
       },
+      {
+        $lookup: {
+          from: "videos",
+          localField: "_id",
+          foreignField: "User_Id",
+          as: "videos",
+        },
+      }
     ]);
 
     res.status(200).send({
@@ -950,17 +958,16 @@ exports.User_data = async function (req, res, next) {
       Password: newpass,
     };
 
-    jwt.sign({ data }, jwtkey, (err, token) => {
+    jwt.sign({ data }, jwtkey, async (err, token) => {
       if (err) {
         res.send({ result: "wrong...." });
       }
-      res.send({ data, auth: token });
    
-
-    const tag =  User.create(data);
+    const tag =  await User.create(data);
 
     res.status(201).send({
       status: true,
+      auth: token,
       data: tag,
     });
 
@@ -971,25 +978,32 @@ exports.User_data = async function (req, res, next) {
 
 exports.client_login = async function (req, res, next) {
   const { User_Name, Password } = req.body;
-  const User1 = await User.findOne({ User_Name, Password });
+  const User1 = await User.findOne({ User_Name });
   // console.log(User1);
 
-  if (User1 != null) {
-    jwt.sign({ User1 }, jwtkey, (err, token) => {
-      if (err) {
-        res.send({ result: "wrong...." });
-      }
-      res.send({ User1, auth: token });
+  if (User1) {
 
-      const checkpass = bcrypt.compare(Password, User1.Password);
+    jwt.sign({ User1 }, jwtkey, async (err, token) => {
+      if (err) {
+        res.send({ status: false, message: "not valid username and password" });
+      }
+
+      const checkpass = await bcrypt.compare(Password, User1.Password);
+
       if (checkpass) {
         res.status(200).json({
           status: true,
           data: User1,
+          auth: token,
+          message:"1"
         });
+      }else{
+        res.send({ status: false, message: "not valid username and password" });
       }
+
     });
+
   } else {
-    res.send({ status: "false", result: "not valid username and password" });
+    res.send({ status: false, message: "not valid username and password" });
   }
 };

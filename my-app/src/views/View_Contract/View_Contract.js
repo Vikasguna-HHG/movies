@@ -84,15 +84,15 @@ function View_Contract() {
                         </CTableDataCell>
                         <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                           {' '}
-                          {item.school.length}{' '}
+                          {item.contract.length}{' '}
                         </CTableDataCell>
                         <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                           {' '}
-                          {item.school.length}{' '}
+                          {item.contract.length}{' '}
                         </CTableDataCell>
                         <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                           {' '}
-                          {item.school.length}{' '}
+                          {item.contract.length}{' '}
                         </CTableDataCell>
                         <button type="button" style={{backgroundColor:"white"}} className="btn btn-primary position-relative">
                           Inbox
