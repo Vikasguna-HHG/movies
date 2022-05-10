@@ -53,7 +53,7 @@ const video1 = new mongoose.Schema({
 
         type:String
     },
-    User_id:{
+    User_Id:{
 
         type: Schema.ObjectId
     }
