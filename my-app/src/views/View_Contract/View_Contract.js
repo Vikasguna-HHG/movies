@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-
 import { env } from '../../environment'
+import { Link } from 'react-router-dom'
+// import Data from './Data'
+
 
 import {
   CCard,
@@ -12,11 +14,30 @@ import {
   CTableRow,
   CTableHeaderCell,
   CTableBody,
-  CButton,
+  
+
+  // CButton,
 } from '@coreui/react'
 const axios = require('axios')
-function View_Contract() {
+function View_Contract () {
   const [list, setList] = useState([])
+  const [Visible , setVisible] = useState()
+
+// setVisible(false)
+// document.getElementById('hello').style.display = "none"
+
+  function Action(contract){
+    console.log(contract) 
+    // alert("hy");
+
+setVisible(true)
+
+// document.getElementById('myModal').style.display = "none"
+
+
+
+
+  }
   // const [list, setList] = useState([])
   function getdata() {
     axios
@@ -24,21 +45,21 @@ function View_Contract() {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       .then(function (res) {
-        console.log(res.data.data)
+        // console.log(res.data.data)
         setList(res.data.data)
       })
       .catch(function (error) {
         // console.log(error)
       })
   }
-
+    
   useEffect(() => {
     getdata()
   }, [])
 
   return (
-    <div>
-      <br />
+    <>
+    
       <br />
       <CCol xs={12} id="table2">
         <CCard className="mb-4">
@@ -62,7 +83,7 @@ function View_Contract() {
                 {list.map((item, i) => {
                   return (
                     <>
-                      <CTableRow
+                      <CTableRow 
                         key={i}
                         style={{ backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}
                       >
@@ -84,33 +105,44 @@ function View_Contract() {
                         </CTableDataCell>
                         <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                           {' '}
-                          {item.contract.length}{' '}
+                          {item.videos.length}{' '}
                         </CTableDataCell>
                         <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                           {' '}
-                          {item.contract.length}{' '}
+                          {/* {item.contract.length}{' '} */}
                         </CTableDataCell>
                         <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
                           {' '}
-                          {item.contract.length}{' '}
+                          {/* {item.contract.length}{' '} */}
                         </CTableDataCell>
-                        <button type="button" style={{backgroundColor:"white"}} className="btn btn-primary position-relative">
-                          Inbox
+                        <button type="button"  style={{backgroundColor:"white"}} className="btn btn-primary position-relative">
+                         Action Contract
+                         <div className="text-center">
+                      	</div>
+                        
                           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            99+
+                          {item.contract.length}
                             <span className="visually-hidden">unread messages</span>
                           </span>
+                         
+
                         </button>
                       </CTableRow>
+                      
                     </>
                   )
+
                 })}
+
               </CTableBody>
             </CTable>
           </CCardBody>
         </CCard>
       </CCol>
-    </div>
+      
+
+    
+    </>
   )
 }
 
