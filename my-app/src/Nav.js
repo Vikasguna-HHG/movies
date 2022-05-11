@@ -44,6 +44,12 @@ if (sid === '1') {
       to: '/base/Video',
       icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
     },
+    {
+      component: CNavItem,
+      name: 'wizard',
+      to: '/base/wizard',
+      icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+    },
   ]
 } else {
   nav = [

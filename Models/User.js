@@ -22,6 +22,9 @@ const user = new mongoose.Schema({
     video_id:{
         type:String,
     },
+    Mobile_No:{
+        type:String,
+    }
 })
 const User = new mongoose.model("User",user);
 module.exports = User;
