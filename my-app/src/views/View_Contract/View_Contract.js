@@ -14,9 +14,8 @@ import {
   CTableRow,
   CTableHeaderCell,
   CTableBody,
-  
 
-  // CButton,
+  CButton,
 } from '@coreui/react'
 const axios = require('axios')
 function View_Contract () {
@@ -115,18 +114,20 @@ setVisible(true)
                           {' '}
                           {/* {item.contract.length}{' '} */}
                         </CTableDataCell>
-                        <button type="button"  style={{backgroundColor:"white"}} className="btn btn-primary position-relative">
-                         Action Contract
-                         <div className="text-center">
-                      	</div>
-                        
-                          <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                          {item.contract.length}
-                            <span className="visually-hidden">unread messages</span>
-                          </span>
-                         
+                        <CTableDataCell style={{ paddingTop: '20px', color: '#FFF' }}>
+                            <CButton onClick={Action} style={{backgroundColor:"white",color:"black"}} className="btn btn-primary position-relative">
+                            Action Contract
+                            <div className="text-center">
+                            </div>
+                            
+                              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                              {item.contract.length}
+                                <span className="visually-hidden">unread messages</span>
+                              </span>
+                            
 
-                        </button>
+                            </CButton>
+                        </CTableDataCell>
                       </CTableRow>
                       
                     </>
