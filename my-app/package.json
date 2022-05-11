@@ -60,6 +60,7 @@
     "react-router-dom": "^6.3.0",
     "react-simple-image-viewer": "^1.2.1",
     "react-toastify": "^8.2.0",
+    "react-wizard-form": "^2.1.1",
     "redux": "4.1.2",
     "simplebar-react": "^2.3.6",
     "styled-components": "^5.3.5",

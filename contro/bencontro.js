@@ -32,7 +32,6 @@ const jwtkey = "movies-hhg";
 exports.get_join_data = async function (req, res, next) {
   MongoClient.connect(url, async (err, db) => {
     if (err) throw err;
-    const dbo = db.db("HHG");
 
     const dd = await movie_maker.aggregate([
       {
