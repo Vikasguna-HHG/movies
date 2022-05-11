@@ -45,6 +45,7 @@ import { env } from '../../../environment'
 import { Button, Form } from 'react-bootstrap'
 // import React from 'react'
 import ReactPlayer from 'react-player'
+import { Link } from 'react-router-dom'
 // import videop from ''
 
 const axios = require('axios')
@@ -313,12 +314,15 @@ const Video = () => {
     setTrailer_video('')
     setId(0)
     // setsid('')
+  
+  
+    setVisible1(false)
   }
 
   // --------------------EDIT DATA--------------------//
 
   const edithandler = async (id) => {
-    setVisible5(true)
+    setVisible1(true)
     axios
       .get(env.apiURL + `vifinddata/${id}`, {
         method: 'GET',
@@ -505,282 +509,200 @@ const Video = () => {
     <>
       <br />
       <br />
-      {/* model 1 :- title/category/Language */}
+      {/* insert data  */}
+      <CModal className="w3-modal-content w3-animate-zoom" size="lg" visible={visible1} onClose={() => setVisible1(false)}>
+      <CModalHeader>
+        <CModalTitle><b>Add Video</b></CModalTitle>
+      </CModalHeader>
+      <CModalBody>
+      <CForm>
+            <CCard className="mb-4">
+            <CCardBody>
+            <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Title</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormInput type="text"  placeholder="Enter Title" value={title} onChange={(e) => {settitle(e.target.value) }} />
+                </CCol>
+              </CRow>
 
-      <CModal visible={visible1} onClose={() => setVisible5(false)}>
-        <CModalHeader onClick={() => setVisible1(false)}>
-          <CModalTitle>Add Basic Information</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CForm>
-            <div className="mb-3">
-              <CFormLabel htmlFor="exampleFormControlInput1">
-                <b>Title</b>
-              </CFormLabel>
-              <CFormInput
-                type="text"
-                id="exampleFormControlInput1"
-                value={title}
-                onChange={(e) => {
-                  settitle(e.target.value)
-                }}
-                placeholder="Enter title"
-              />
-            </div>
-            <CFormLabel htmlFor="exampleFormControlInput1">
-              <b>Method</b>
-            </CFormLabel>
-            <CFormSelect
-              aria-label="Default select example"
-              onChange={(e) => {
-                setmethod(e.target.value)
-              }}
-            >
-              <option align="center" selected>
-                Select Method
-              </option>
-              <option value="Free">Free</option>
-              <option value="Paid">Paid</option>
-            </CFormSelect>
+              <CRow className="mb-3">
+                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                    <h6>Method</h6>
+                  </CFormLabel>
+                <CCol sm={10}>
+                  <CFormSelect  value={method} onChange={(e) => {setmethod(e.target.value)}}>
+                    <option align="center" selected>
+                        Select Method
+                    </option>
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                  </CFormSelect>
+                </CCol>
+              </CRow>
 
-            <CFormLabel htmlFor="exampleFormControlInput1">
-              <b>Language</b>
-            </CFormLabel>
-            <CFormSelect
-              aria-label="Default select example"
-              onChange={(e) => {
-                setLanguage(e.target.value)
-              }}
-            >
-              <option align="center" selected>
-                Select Language
-              </option>
-              {language1.map((item, i) => (
-                <option key={i}>{item.language}</option>
-              ))}
-            </CFormSelect>
-            <CFormLabel htmlFor="exampleFormControlInput1">
-              <b>Category</b>
-            </CFormLabel>
-            <CFormSelect
-              aria-label="Default select example"
-              onChange={(e) => {
-                setcategory(e.target.value)
-              }}
-            >
-              <option align="center" selected>
-                Select Category
-              </option>
-              {category1.map((item, i) => (
-                <option key={i}>{item.category}</option>
-              ))}
-            </CFormSelect>
-          </CForm>
-        </CModalBody>
-        <CModalFooter>
-          <CButton className="btn1" onClick={model1}>
-            Next
-          </CButton>
-        </CModalFooter>
-      </CModal>
 
-      {/* sub/image */}
 
-      <CModal visible={visible2} onClose={() => setVisible1(false)}>
-        <CModalHeader onClick={() => setVisible2(true)}>
-          <CModalTitle>Add Your Choise</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CForm>
-            <Form.Group controlId="dob">
-              <Form.Label>Release Date</Form.Label>
-              <Form.Control
-                type="datetime-local"
-                name="dob"
-                value={rdate}
-                onChange={(e) => {
-                  setrdate(e.target.value)
-                }}
-              />
-              {/* value={this.state.timezone} onChange={this.onSelect}
-                           {Timezones.map((timezone) => <option value={timezone.value}>{timezone.name}</option>)} */}
-            </Form.Group>
-            <Form.Group controlId="dob">
-              <Form.Label>Expiry Date</Form.Label>
-              <Form.Control
-                type="date"
-                name="dob"
-                value={edate}
-                onChange={(e) => {
-                  setedate(e.target.value)
-                }}
-              />
-            </Form.Group>
-            <CFormLabel htmlFor="exampleFormControlInput1">
-              <b>SubCategory</b>
-            </CFormLabel>
-            <CFormSelect
-              aria-label="Default select example"
-              onChange={(e) => {
-                setsubcategory(e.target.value)
-              }}
-              value={subcategory}
-            >
-              <option align="center" selected>
-                Select SubCategory
-              </option>
-              {subcategory1.map((item, i) => (
-                <option key={i}>{item.subcategorie}</option>
-              ))}
-            </CFormSelect>
 
-            <div className="mb-3">
-              <CFormLabel htmlFor="formFileMultiple">
-                <b>SELECT-IMAGE</b>
-              </CFormLabel>
-              <CFormInput
-                type="file"
-                id="formFileMultiple"
-                onChange={saveFile}
-                accept=".jpg, .jpeg, .png"
-                style={{ maxFileSize: '5' }}
-              />
-            </div>
-          </CForm>
-        </CModalBody>
-        <CModalFooter>
-          <CButton className="btn1" onClick={model2}>
-            Next
-          </CButton>
-        </CModalFooter>
-      </CModal>
+              <CRow className="mb-3">
+                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                    <h6>Language</h6>
+                  </CFormLabel>
+                <CCol sm={10}>
+                  <CFormSelect  value={language} onChange={(e) => {setLanguage(e.target.value)}}>
+                    <option align="center" selected>
+                      Select Language
+                    </option>
+                    {language1.map((item, i) => (
+                      <option key={i}>{item.language}</option>
+                    ))}
+                  </CFormSelect>
+                </CCol>
+              </CRow>
 
-      {/* video */}
 
-      <CModal visible={visible3} onClose={() => setVisible1(false)}>
-        <CModalHeader onClick={() => setVisible3(true)}>
-          <CModalTitle>Add Video</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CForm>
-            <div className="mb-3">
-              <CFormLabel htmlFor="formFileMultiple">
-                <b>Trailer-video</b>
-              </CFormLabel>
-              <CFormInput
-                type="file"
-                id="formFileMultiple"
-                onChange={saveFile2}
-                accept=".mp4 , video"
-                style={{ maxFileSize: '5' }}
-              />
-            </div>
 
-            <div className="mb-3">
-              <CFormLabel htmlFor="formFileMultiple">
-                <b>Select-Video</b>
-              </CFormLabel>
-              <CFormInput
-                type="file"
-                id="formFileMultiple"
-                onChange={saveFile1}
-                accept=".mp4 , video"
-                style={{ maxFileSize: '5' }}
-              />
-            </div>
-          </CForm>
-        </CModalBody>
-        <CModalFooter>
-          <CButton className="btn1" onClick={model3}>
-            Next
-          </CButton>
-        </CModalFooter>
-      </CModal>
+              <CRow className="mb-3">
+                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                    <h6>Category</h6>
+                  </CFormLabel>
+                <CCol sm={10}>
+                  <CFormSelect  value={category} onChange={(e) => {setcategory(e.target.value)}}>
+                    <option align="center" selected>
+                      Select Category
+                    </option>
+                    {category1.map((item, i) => (
+                      <option key={i}>{item.category}</option>
+                    ))}   
+                  </CFormSelect>
+                </CCol>
+              </CRow>       
 
-      {/* description */}
 
-      <CModal visible={visible4} onClose={() => setVisible1(false)}>
-        <CModalHeader onClick={() => setVisible4(false)}>
-          <CModalTitle>Fill Final Touch</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CForm>
-            <div className="mb-3">
-              <CFormLabel>
-                <b>Description</b>
-              </CFormLabel>
-              <CFormTextarea
-                value={Description}
-                onChange={(e) => {
-                  setDescription(e.target.value)
-                }}
-                placeholder="Enter Description"
-                rows="3"
-              ></CFormTextarea>
-            </div>
+              <CRow className="mb-3">
+                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                    <h6>SubCategory</h6>
+                  </CFormLabel>
+                <CCol sm={10}>
+                  <CFormSelect  value={subcategory} onChange={(e) => {setsubcategory(e.target.value)}}>
+                    <option align="center" selected>
+                      Select SubCategory
+                    </option>
+                    {subcategory1.map((item, i) => (
+                        <option key={i}>{item.subcategorie}</option>
+                      ))}  
+                  </CFormSelect>
+                </CCol>
+              </CRow>   
 
-            <div className="mb-3">
-              <CFormLabel>
-                <b>Status</b>
-              </CFormLabel>
-              <CFormCheck
-                type="radio"
-                name="status"
-                value="Active"
-                label="Active"
-                onChange={(e) => {
-                  setstatus(e.target.value)
-                }}
-              />
-              <CFormCheck
-                type="radio"
-                name="status"
-                value="Inactive"
-                label="inactive"
-                onChange={(e) => {
-                  setstatus(e.target.value)
-                }}
-              />
-            </div>
-          </CForm>
-          <CForm>
-            <div className="mb-3">
-              <CFormLabel>
-                <b>Is In Banner</b>
-              </CFormLabel>
-              <CFormCheck
-                type="radio"
-                name="status"
-                value="Yes"
-                label="Yes"
-                onChange={(e) => {
-                  setBanner(e.target.value)
-                }}
-              />
-              <CFormCheck
-                type="radio"
-                name="status"
-                value="No"
-                label="No"
-                onChange={(e) => {
-                  setBanner(e.target.value)
-                }}
-              />
-            </div>
-          </CForm>
-        </CModalBody>
-        <CModalFooter>
-          <CButton className="btn1" id="submit" onClick={submit}>
-            Submit
-          </CButton>
-        </CModalFooter>
-      </CModal>
+
+
+              <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Release Date</h6>
+                </CFormLabel>
+                <CCol sm={4}>
+                  <CFormInput type="date" value={rdate} onChange={(e) => {setrdate(e.target.value)}} id="num" />
+                </CCol>
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Expiry Date</h6>
+                </CFormLabel>
+                <CCol sm={4}>
+                  <CFormInput type="date" value={edate} onChange={(e) => {setedate(e.target.value)}} />
+                </CCol>
+              </CRow>
+
+
+              <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Status</h6>
+                </CFormLabel>
+                <CCol sm={4}>
+                  <CFormCheck type="radio"  name="status" value="Active" label="Active" onChange={(e) => {setstatus(e.target.value)}}  />
+                  <CFormCheck type="radio"  name="status" value="Inactive" label="Inactive" onChange={(e) => {setstatus(e.target.value)}}  />
+                </CCol>
+                
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Is In Banner</h6>
+                </CFormLabel>
+                <CCol sm={4}>
+                  <CFormCheck type="radio"  name="banner" value="Yes" label="Yes" onChange={(e) => {setBanner(e.target.value)}}  />
+                  <CFormCheck type="radio"  name="banner" value="No" label="No" onChange={(e) => {setBanner(e.target.value)}}  />
+                </CCol>
+              </CRow>
+
+
+              <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>SELECT-IMAGE</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormInput type="file"   onChange={saveFile}  accept=".jpg, .jpeg, .png"/>
+                </CCol>
+              </CRow>        
+
+
+
+              <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Trailer-video</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormInput type="file" onChange={saveFile2}  accept=".mp4 , video" />
+                </CCol>
+              </CRow> 
+
+
+              <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>SELECT-Video</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormInput type="file" onChange={saveFile1}  accept=".mp4 , video"/>
+                </CCol>
+              </CRow> 
+
+
+
+
+              <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6> Description</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormTextarea
+                    type="textarea"
+                    placeholder="Enter Description"
+                    value={Description}
+                    onChange={(e) => {
+                      setDescription(e.target.value)
+                    }}
+                  />
+                </CCol>
+              </CRow>
+
+              <CModalFooter>
+                <CButton className="btn1" id="submit" onClick={submit}>
+                  Save
+                </CButton>
+              </CModalFooter>
+            </CCardBody>
+            </CCard>
+            </CForm>
+
+
+      </CModalBody>
+    </CModal>
+
+
+
 
       {/*update model*/}
 
       {/* model 1 :- title/category/Language */}
 
-      <CModal visible={visible5} onClose={() => setVisible1(false)}>
+      <CModal  visible={visible5} onClose={() => setVisible1(false)}>
         <CModalHeader onClick={() => setVisible5(false)}>
           <CModalTitle>Update Basic Information</CModalTitle>
           <br></br>
@@ -1136,6 +1058,11 @@ const Video = () => {
                   <FormatListNumberedIcon />
                 </ToggleButton>
               </ToggleButtonGroup>
+
+              {/* <Link to="/base/Video">
+                <CButton  style={{ marginLeft: '50px', borderRadius: '5px' }}  className="btn1"  >  Add Video </CButton>
+                
+              </Link> */}
 
               <CButton
                 style={{ marginLeft: '50px', borderRadius: '5px' }}
