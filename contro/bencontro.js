@@ -1015,6 +1015,7 @@ exports.User_data = async function (req, res, next) {
       Mobile_No:req.body.Mobile_No,
       Email: req.body.Email,
       Password: newpass,
+      Mobile_No:req.body.Mobile_No
     };
 
     jwt.sign({ data }, jwtkey, async (err, token) => {
