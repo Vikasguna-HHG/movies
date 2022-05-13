@@ -18,9 +18,6 @@ const user = new mongoose.Schema({
 
     },
 
-    video_id:{
-        type:String,
-    },
     Mobile_No:{
         type:String,
     }
