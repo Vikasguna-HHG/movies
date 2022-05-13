@@ -31,8 +31,6 @@ import {
 } from '@coreui/react'
 import { Container, Form, Row, Col } from 'react-bootstrap';
 
-
-
 const FirstComponent = () => {
   const [Title, setTitle] = useState('')
   const [Rating, setRating] = useState('')
