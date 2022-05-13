@@ -5,6 +5,10 @@ const user = new mongoose.Schema({
         type:String,
         require:true
     },
+    Mobile_No:{
+        type:Number,
+        require:true
+    },
     Email:{
         type:String,
         // index: {
@@ -19,9 +23,7 @@ const user = new mongoose.Schema({
         require:true
 
     },
-    video_id:{
-        type:String,
-    },
+    
 })
 const User = new mongoose.model("User",user);
 module.exports = User;

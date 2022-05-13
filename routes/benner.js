@@ -42,7 +42,9 @@ const verifyToken = (req, res, next) => {
 };
 
 router.get('/getjoindata',BannerController.get_join_data);
+router.get('/findCountry',BannerController.findCountry);
 
+router.get('/getlocation', BannerController.getlocation)
 //parth
 router.get('/finddata',verifyToken,BannerController.find_data);
 router.get('/finddata/:id',verifyToken,BannerController.find_data_Id);
