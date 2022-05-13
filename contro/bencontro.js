@@ -35,9 +35,7 @@ const { match } = require("assert");
 const jwtkey = "movies-hhg";
 
 exports.findCountry = async function (req, res, next) {
-
-
-  try {
+try {
     const tag = await Country.find();
 
     res.status(200).json({
@@ -666,10 +664,8 @@ try {
   });
   console.log(tag);
 } catch (error) {
-  // res.status(201).json({ error });
-  // console.log(error);
-  res.status(201).json({
-    // data: tag,
+
+  res.status(403).json({
     status: "Data not insret",
   });
 }

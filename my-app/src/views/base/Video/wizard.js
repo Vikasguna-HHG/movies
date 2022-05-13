@@ -1,37 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './wizard.css'
 import {env} from '../../../environment'
 import {
   CCardImage,
   CCardTitle,
-  CCardText,
   CCard,
   CCardBody, 
   CFormCheck,
   CCol,
-  CTable,
-  CForm,
   CFormLabel,
   CFormInput,
   CFormSelect,
   CFormTextarea,
-  CButton,
-  CTableHead,
-  CTableRow,
-  CTableHeaderCell,
-  CTableBody,
-  CTableDataCell,
-  CInputGroup,
-  CInputGroupText,
-  CModalBody,
-  CModalTitle,
-  CModalHeader,
-  CModalFooter,
-  CModal,
   CRow,
 } from '@coreui/react'
 import { Container, Form, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
+// import axios from 'axios';
+
+const axios = require('axios')
 
 
 const FirstComponent = () => {
@@ -43,6 +29,7 @@ const FirstComponent = () => {
   const [Trailer_time, setTrailer_time] = useState()
   const [Video_time, setVideo_time] = useState('')
   const [Country, setCountry] = useState('')
+  const [Country1, setCountry1] = useState([])
   const [Cast, setCast] = useState('')
   const [Publish, setPublish] = useState('')
 
@@ -60,7 +47,8 @@ const FirstComponent = () => {
       formData.append('Cast', Cast)
       formData.append('Publish', Publish)
       console.log(formData);
- 
+      
+      
 
 
       await axios.post(env.apiURL + 'viInsertBanner',formData,
@@ -72,8 +60,40 @@ const FirstComponent = () => {
     })
   }
 
+
+  // const getCountry = () => {
+  //   axios
+  //     .get(env.apiURL + `findCountry`)
+  //     .then(function (res) {
+  //       console.log(res.data)
+  //       setCountry1(res.data.country)
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error)
+  //     })
+  // }
+
+
+  useEffect(() => {
+    // getCountry();
+  
+      axios
+        .get(env.apiURL + `findCountry`)
+        .then(function (res) {
+          console.log(res.data)
+          setCountry1(res.data.data)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    
+  }, [])
+
   return (
   <>
+  
+<CCard style={{width:"100%",height:"690px"}}>
+      <CCardBody>
  
       <Container>
         <h5 style={{fontSize:"11px"}}>Note: *filds required. Please fill and click next</h5>
@@ -104,14 +124,14 @@ const FirstComponent = () => {
                 <CFormLabel htmlFor="inputEmail3" className="col-sm-6 col-form-label" >
                   <h6>Trailer Duration*(HH:MM:SS)</h6>
                 </CFormLabel>
-                <CFormInput type="text"  value={Trailer_time} onChange={(e) => {setTrailer_time(e.target.value) }}   />
+                <CFormInput type="time"  value={Trailer_time} onChange={(e) => {setTrailer_time(e.target.value) }}   />
             </Col>   
 
             <Col>
                 <CFormLabel htmlFor="inputEmail3" className="col-sm-6 col-form-label" >
                   <h6>Main Video Duration*(HH:MM:SS)</h6>
                 </CFormLabel>
-                <CFormInput type="text"  value={Video_time} onChange={(e) => {setVideo_time(e.target.value) }}/>
+                <CFormInput type="time"  value={Video_time} onChange={(e) => {setVideo_time(e.target.value) }}/>
                
             </Col>
           </Row>
@@ -157,11 +177,11 @@ const FirstComponent = () => {
                
                 <Row  style={{paddingTop:"5px"}}>
                   <Col xl="2" >
-                  <CFormCheck type="radio"  name="Countries" value="Include" label="Yes" onChange={(e) => {setCountry(e.target.value)}}  />                  
+                  <CFormCheck type="radio"  name="Countries" value="Include" label="Include" onChange={(e) => {setCountry(e.target.value)}}  />                  
                   </Col>
                 
                   <Col xl="2">
-                  <CFormCheck type="radio"  name="Countries" value="Exclude" label="No" onChange={(e) => {setCountry(e.target.value)}}  />
+                  <CFormCheck type="radio"  name="Countries" value="Exclude" label="Exclude" onChange={(e) => {setCountry(e.target.value)}}  />
                   
                   </Col>
                   <Col xl="12">
@@ -169,9 +189,23 @@ const FirstComponent = () => {
                   </Col>
 
                   <Col xl="6 ">
-                  <CFormInput type="text"  value={Country} onChange={(e) => {setCountry(e.target.value) }}   />
+                  <CFormInput type="text"  value={Country} onChange={(e) => {setCountry(e.target.value) }}    />
                   </Col>
                   
+                  <CFormSelect  value={Country} onChange={(e) => {setCountry(e.target.value)}} > 
+                    <option align="center" >
+                      Select Country
+                    </option>
+                    {
+                       Country1.map((item, i) => {
+                      return(
+                                 <option key={i}>{item.country}</option>
+                             )
+                    
+                         })
+                    }   
+                  </CFormSelect>
+
                 </Row>           
             </Col>
 
@@ -208,6 +242,8 @@ const FirstComponent = () => {
         </Form>
         <button   onClick={Submit}>submit</button>
       </Container>
+    </CCardBody>
+  </CCard>
       </>
 )}
                  
