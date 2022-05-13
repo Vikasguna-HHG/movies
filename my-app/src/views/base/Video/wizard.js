@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './wizard.css'
+import {env} from '../../../environment'
 import {
   CCardImage,
   CCardTitle,
@@ -30,6 +31,8 @@ import {
   CRow,
 } from '@coreui/react'
 import { Container, Form, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
+
 
 const FirstComponent = () => {
   const [Title, setTitle] = useState('')
@@ -40,12 +43,39 @@ const FirstComponent = () => {
   const [Trailer_time, setTrailer_time] = useState()
   const [Video_time, setVideo_time] = useState('')
   const [Country, setCountry] = useState('')
-  const [Banner, setBanner] = useState('')
   const [Cast, setCast] = useState('')
+  const [Publish, setPublish] = useState('')
+
+
+    const Submit = async () => {
+      const formData = new FormData()
+      formData.append('Title', Title)
+      formData.append('Rating', Rating)
+      formData.append('Age', Age)
+      formData.append('Discription', Discription)
+      formData.append('Contract', Contract)
+      formData.append('Trailer_time', Trailer_time)
+      formData.append('Video_time', Video_time)
+      formData.append('Country', Country)
+      formData.append('Cast', Cast)
+      formData.append('Publish', Publish)
+      console.log(formData);
+ 
+
+
+      await axios.post(env.apiURL + 'viInsertBanner',formData,
+      {
+        headers:{
+        "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+        "User_Id": localStorage.getItem('userId')
+      }
+    })
+  }
+
   return (
   <>
  
-      <Container style={{marginTop:"480px"}}>
+      <Container>
         <h5 style={{fontSize:"11px"}}>Note: *filds required. Please fill and click next</h5>
         <Form>
           <Row>
@@ -127,15 +157,15 @@ const FirstComponent = () => {
                
                 <Row  style={{paddingTop:"5px"}}>
                   <Col xl="2" >
-                  <CFormCheck type="radio"  name="banner" value="Yes" label="Yes" onChange={(e) => {setCountry(e.target.value)}}  />                  
+                  <CFormCheck type="radio"  name="Countries" value="Include" label="Yes" onChange={(e) => {setCountry(e.target.value)}}  />                  
                   </Col>
                 
                   <Col xl="2">
-                  <CFormCheck type="radio"  name="banner" value="No" label="No" onChange={(e) => {setCountry(e.target.value)}}  />
+                  <CFormCheck type="radio"  name="Countries" value="Exclude" label="No" onChange={(e) => {setCountry(e.target.value)}}  />
                   
                   </Col>
                   <Col xl="12">
-                  <CFormCheck type="radio"  name="banner" value="All" label="Select All Countries" onChange={(e) => {setCountry(e.target.value)}}  />
+                  <CFormCheck type="radio"  name="Countries" value="All" label="Select All Countries" onChange={(e) => {setCountry(e.target.value)}}  />
                   </Col>
 
                   <Col xl="6 ">
@@ -152,11 +182,11 @@ const FirstComponent = () => {
                
                 <Row  style={{paddingTop:"5px"}}>
                   <Col xl="2" >
-                  <CFormCheck type="radio"  name="banner" value="Yes" label="Yes" onChange={(e) => {setBanner(e.target.value)}}  />                  
+                  <CFormCheck type="radio"  name="banner" value="Yes" label="Yes" onChange={(e) => {setPublish(e.target.value)}}  />                  
                   </Col>
                 
                   <Col xl="2">
-                  <CFormCheck type="radio"  name="banner" value="No" label="No" onChange={(e) => {setBanner(e.target.value)}}  />
+                  <CFormCheck type="radio"  name="banner" value="No" label="No" onChange={(e) => {setPublish(e.target.value)}}  />
                   </Col>
 
                   
@@ -176,41 +206,291 @@ const FirstComponent = () => {
       
 
         </Form>
+        <button   onClick={Submit}>submit</button>
       </Container>
       </>
 )}
                  
-const secondComponent = () => {
+const SecondComponent = () => {
   
-  return <div>Second Component</div>
+  // const language = ['hindi' ];
+  // const [category, setcategory] = useState(language)
+
+
+  return <div>
+    <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 6 }}>
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>Hindi</CCardTitle>
+              <CCardTitle>હિન્દી</CCardTitle>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>Gujarati</CCardTitle>
+              <CCardTitle>ગુજરાતી</CCardTitle>
+              
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>Bengali</CCardTitle>
+              <CCardTitle>বাংলা</CCardTitle>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>kannada</CCardTitle>
+              <CCardTitle>ಕನ್ನಡ</CCardTitle>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>Malayalam</CCardTitle>
+              <CCardTitle>മലയാളം</CCardTitle>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>Marathi</CCardTitle>
+              <CCardTitle>मराठी</CCardTitle>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>Tamil</CCardTitle>
+              <CCardTitle>தமிழ்</CCardTitle>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+
+        <CCol xs>
+          <CCard>
+            <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+            <CCardBody>
+              <CCardTitle>Telugu</CCardTitle>
+              <CCardTitle>తెలుగు</CCardTitle>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+
+
+  </div>
 }
-const thirdComponent = () => {
-  return <div>Third Component</div>
+const ThirdComponent = () => {
+  return <div>
+     <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 3 }}>
+  <CCol xs>
+    <CCard>
+      <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+      <CCardBody>
+        <CCardTitle>Drama</CCardTitle>
+      </CCardBody>
+    </CCard>
+  </CCol>
+
+  <CCol xs>
+    <CCard>
+      <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+      <CCardBody>
+        <CCardTitle>Movies</CCardTitle>
+      </CCardBody>
+    </CCard>
+  </CCol>
+
+  <CCol xs>
+    <CCard>
+      <CCardImage orientation="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+      <CCardBody>
+        <CCardTitle>Web Series</CCardTitle>
+      </CCardBody>
+    </CCard>
+  </CCol>
+</CRow>
+
+
+
+  </div>
 }
-const finalComponent = () => {
-  return <div>Final Component</div>
+
+
+const FinalComponent = () => {
+  const [imageval, setImageval] = useState('')
+  const [banner_video, setbanner_video] = useState('')
+  const [Trailer_video, setTrailer_video] = useState('')
+
+  const saveFile = (e) => {
+    console.log(e)
+    setImageval(e.target.files[0])
+    // setbanner_img(e.target.files[0])
+  }
+  const saveFile1 = (e) => {
+    console.log(e.target)
+    setbanner_video(e.target.files[0])
+  }
+
+  const saveFile2 = (e) => {
+    console.log(e.target)
+    setTrailer_video(e.target.files[0])
+  }
+
+
+  const Submit = async () => {
+    alert('hedllo ')
+
+      const formData = new FormData()
+
+      formData.append('banner_video', banner_video)
+      formData.append('Trailer_video', Trailer_video)
+      formData.append('imageval', imageval)
+      
+
+      await axios.post(env.apiURL + 'viInsertBanner', formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            userId: localStorage.getItem('userId'),
+          },
+        })
+  }
+
+return <div>  
+
+<CCard style={{width:"100%"}}>
+      <CCardBody>
+        <div>
+            <p>Video Upload Type</p>
+            <CFormCheck type="radio"  name="status" value="Active" label="Streaming Upload"   />
+        </div><hr/>
+        
+
+        <CRow >
+          <div style={{display:"flex"}}>
+            <div className='video'>
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Select-Video</h6>
+                </CFormLabel>
+                <CCol sm={3}>
+                  <input type="file"
+                   onChange={saveFile1}   
+                   accept=".mp4 , video"/>
+                  <p>( Please enter .mp4 )</p>
+                </CCol>
+            </div>
+            <div className='video'>
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Trailer-video</h6>
+                </CFormLabel>
+                <CCol sm={3}>
+                  <input type="file"
+                   onChange={saveFile2}  
+                   accept=".mp4 , video" />
+                  <p>( Please enter .mp4 )</p>
+                </CCol>
+            </div>
+          </div>
+          </CRow>
+
+
+          <CRow >
+          <div style={{display:"flex"}}>
+            <div className='video'>
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>SubTitle</h6>
+                </CFormLabel>
+                <CCol sm={5}>
+                  <input type="file"   accept=".mp4 , video"/>
+                  <p>( The video subtitle must be a file of type:srt. )</p>
+                </CCol>
+            </div>
+            <div className='video'>
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>SubTitle</h6>
+                </CFormLabel>
+                <CCol sm={5}>
+                  <input type="file"  accept=".mp4 , video" />
+                  <p>( The video subtitle must be a file of type:srt. )</p>
+
+                </CCol>
+            </div>
+          </div>
+          </CRow>  
+
+          <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Mobile-Image</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormInput type="file" 
+                  onChange={saveFile}    
+                   accept=".jpg, .jpeg, .png"/>
+                </CCol>
+          </CRow>  
+
+
+
+          <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Default-Image</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormInput type="file"    accept=".jpg, .jpeg, .png"/>
+                </CCol>
+          </CRow>  
+      
+          <CRow className="mb-3">
+                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+                  <h6>Upcoming movie poster</h6>
+                </CFormLabel>
+                <CCol sm={10}>
+                  <CFormInput type="file"    accept=".jpg, .jpeg, .png"/>
+                </CCol>
+          </CRow>
+
+
+          <button onClick={Submit}>submit</button>
+      </CCardBody>
+    </CCard>
+
+</div>
 }
 
 function App () {
-  // const [id, setId] = useState(0)
-  
-  const [status, setstatus] = useState('')
-  const [banner, setBanner] = useState('')
-  
-  // const [category, setcategory] = useState('')
-  // const [category1, setcategory1] = useState([])
-  // const [subcategory1, setsubcategory1] = useState([])
-  // const [subcategory, setsubcategory] = useState('')
-  // const [imageval, setImageval] = useState('')
-  // const [banner_video, setbanner_video] = useState('')
-  // const [Trailer_video, setTrailer_video] = useState('')
-  // const [list, setList] = useState([])
 
   const [steps, setSteps] = useState([
-    { key: 'firstStep', label: 'My First Step', isDone: true, component:  FirstComponent  },
-    { key: 'secondStep', label: 'My Second Step', isDone: false, component:  secondComponent },
-    { key: 'thirdStep', label: 'My Third Step', isDone: false, component: thirdComponent },
-    { key: 'finalStep', label: 'My Final Step', isDone: false, component: finalComponent },
+    { key: 'firstStep', label: 'Video detail', isDone: true, component: FirstComponent },
+    { key: 'secondStep', label: 'Category', isDone: false, component: SecondComponent },
+    { key: 'thirdStep', label: 'Sub Category', isDone: false, component: ThirdComponent },
+    { key: 'finalStep', label: 'Upload video/image ', isDone: false, component: FinalComponent },
   ]);
 
   const [activeStep, setActiveStep] = useState(steps[0]);

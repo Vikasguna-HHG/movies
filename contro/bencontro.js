@@ -592,85 +592,90 @@ exports.kUpdate_data = async function (req, res, next) {
 };
 
 //video api
-exports.viinsert_data = async function (req, res, next) {
-  // const sid = Math.random();
-  //   var result = ""
-  //   var char = Date.now()
+// exports.viinsert_data = async function (req, res, next) {
 
-  // var charactersLength = char.length;
-  // for (var i = 0; i < 12; i++) {
-  //   result += char.charAt(Math.floor(Math.random() * charactersLength));
-  // }
-
-  // var video_id = await bcrypt.hash(result, 12);
-  // var result = "";
-  // var characters =
-  //   "abcdefghijklmnopqrstuvwxyz";
-  // var charactersLength = characters.length;
-  // for (var i = 0; i < 6; i++) {
-  //   result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  // }
-  // var video_id = result + Date.now();
-  // var newpass = await bcrypt.hash(video_id, 12);
-
-  //  const cnt=1;
-
-  //   // setrdate(e.target.value)
-  //  let date = new Date(Date.UTC(2021, 5, 28, 3, 0, 0));
-  //  console.log('Date in India: ' + date);
-  //  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });
-  //  let usDate = formatter.format(date);
-  //  console.log('Date in USA: ' + usDate);
-
-  // const changeTimezone = (e) => {
-  // setrdate(e.target.value)
-
-  //  let formatter = new Intl.DateTimeFormat('en-US', { timeZone: "America/Denver" });
-  //  let usDate = formatter.format(date);
-  //  console.log('Date in USA: ' + usDate);
-  // }
-  try {
+//   try {
     // res.status(201).json({
-    var time = moment(req.body.rdate)
-      .utc()
-      .format("YYYY-MM-DD dddd HH:mm:ss a");
+    // var time = moment(req.body.rdate)
+    //   .utc()
+    //   .format("YYYY-MM-DD dddd HH:mm:ss a");
     // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
     // });
 
-    const data = {
+    // const data = {
       // v_id : video_id,
-      method: req.body.method,
-      rdate: time,
-      edate: req.body.edate,
-      status: req.body.status,
-      banner: req.body.banner,
-      title: req.body.title,
-      category: req.body.category,
-      subcategory: req.body.subcategory,
-      Description: req.body.Description,
-      language: req.body.language,
-      image_user: req.files[0].path,
-      banner_video: req.files[1].path,
-      Trailer_video: req.files[2].path,
-      User_Id: req.headers.userid,
-    };
+    //   method: req.body.method,
+    //   rdate: time,
+    //   edate: req.body.edate,
+    //   status: req.body.status,
+    //   banner: req.body.banner,
+    //   title: req.body.title,
+    //   category: req.body.category,
+    //   subcategory: req.body.subcategory,
+    //   Description: req.body.Description,
+    //   language: req.body.language,
+    //   image_user: req.files[0].path,
+    //   banner_video: req.files[1].path,
+    //   Trailer_video: req.files[2].path,
+    //   User_Id: req.headers.userid,
+    // };
 
-    const tag = await video.create(data);
+    // const tag = await video.create(data);
 
-    res.status(201).json({
-      data: tag,
-      status: "Data insert",
-    });
-    console.log(tag);
-  } catch (error) {
-    res.status(201).json({ error });
+    // res.status(201).json({
+    //   data: tag,
+    //   status: "Data insert",
+    // });
+    // console.log(tag);
+  // } catch (error) {
+  //   res.status(201).json({ error });
     // console.log(error);
-    res.status(201).json({
+    // res.status(201).json({
       // data: tag,
-      status: "Data not insret",
-    });
-  }
+//       status: "Data not insret",
+//     });
+//   }
+// };
+
+
+exports.viinsert_data = async function (req, res, next) {
+try {
+  const data = {
+    // v_id : video_id,
+    Title: req.body.Title,
+    Age: req.body.Age,
+    Rating: req.body.Rating,
+    Discription: req.body.Discription,
+    Trailer_time: req.body.Trailer_time,
+    Video_time: req.body.Video_time,
+    Country: req.body.Country,
+    Cast: req.body.Cast,
+    Contract: req.body.Contract,
+    User_Id: req.headers.userid,
+    Publish:req.body.Publish,
+    image_user: req.files[0].path,
+    banner_video: req.files[1].path,
+    Trailer_video: req.files[2].path,
+  };
+
+  const tag = await video.create(data);
+
+  res.status(201).json({
+    data: tag,
+    status: "Data insert",
+  });
+  console.log(tag);
+} catch (error) {
+  // res.status(201).json({ error });
+  // console.log(error);
+  res.status(201).json({
+    // data: tag,
+    status: "Data not insret",
+  });
+}
 };
+
+
 
 exports.vifind_data = async function (req, res, next) {
   try {

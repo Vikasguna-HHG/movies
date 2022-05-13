@@ -220,7 +220,7 @@ const Video = () => {
       formData.append('status', status)
       formData.append('banner', banner)
       formData.append('edate', edate)
-      // formData.append('sid', sid)
+      // formData.append('sid', sid) 
 
       // try {
       await axios
@@ -778,8 +778,8 @@ const Video = () => {
               </CTableHead>
               <CTableBody>
                 {list
-                  .filter((data) => data.title.match(new RegExp(search, 'i')))
-                  .reverse()
+                  // .filter((data) => data.title.match(new RegExp(search, 'i')))
+                  // .reverse()
                   .map((item, i) => {
                     return (
                       <>
@@ -958,8 +958,8 @@ const Video = () => {
             </CInputGroup>
             <br></br>
             {list
-              .filter((data) => data.title.match(new RegExp(search, 'i')))
-              .reverse()
+              // .filter((data) => data.title.match(new RegExp(search, 'i')))
+              // .reverse()
               .map((item, i) => {
                 return (
                   <>
