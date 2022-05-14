@@ -638,6 +638,7 @@ exports.kUpdate_data = async function (req, res, next) {
 
 exports.viinsert_data = async function (req, res, next) {
 try {
+  // console.log(req.body.Title);
   const data = {
     // v_id : video_id,
     Title: req.body.Title,
@@ -664,8 +665,10 @@ try {
   });
   console.log(tag);
 } catch (error) {
-
-  res.status(403).json({
+  // res.status(201).json({ error });
+  // console.log(error);
+  res.status(201).json({
+    // data: tag,
     status: "Data not insret",
   });
 }
