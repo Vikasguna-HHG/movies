@@ -24,20 +24,21 @@ const AppHeader = () => {
 
   return (
     <>
-     <CHeader position="sticky" className="mb-4">
+     <CHeader position="sticky" className="mb-4" style={{height:"70px"}}>
        <CContainer>
           <CHeaderToggler
+          style={{marginTop:"-10px"}}
            className="ps-1"
            onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
          >
-           <CIcon icon={cilMenu} size="lg" />
+           <CIcon icon={cilMenu} size="lg"   />
          </CHeaderToggler> 
           <CHeaderBrand className="mx-auto d-md-none" to="/">
            <CIcon icon={logo} height={48} alt="Logo" />
          </CHeaderBrand>
         
          
-        <CHeaderNav style={{marginLeft:"1100px"}}>
+        <CHeaderNav style={{marginLeft:"1100px",marginTop:"-50px"}}>
           <CNavItem>
             <CNavLink href="#">
               <Button className="btn1" onClick={handleLogout} type="button" ><b>Logout</b></Button> 
