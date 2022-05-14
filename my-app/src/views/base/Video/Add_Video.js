@@ -472,7 +472,7 @@ export default function Wizard() {
 
 
 
-  <div className="tab">Login Info:
+  {/* <div className="tab">Login Info:
     <p><input placeholder="Username..." onInput={handleChange} name="uname" /></p>
     <p><input placeholder="Password..." onInput={handleChange} name="pword" type="password" /></p>
   </div>
@@ -487,7 +487,7 @@ export default function Wizard() {
     <span className="step"></span>
     <span className="step"></span>
     <span className="step"></span>
-  </div>
+                    </div>*/}
 </form>
   )
 }

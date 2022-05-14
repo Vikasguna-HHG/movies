@@ -8,7 +8,7 @@ const Pdf = React.lazy(() => import('./views/Pdf/Pdf'))
 const Contract = React.lazy(() => import('./views/Contract/Contract'))
 const Categoires = React.lazy(() => import('./views/Categories/Categoires'))
 const Video = React.lazy(() => import('./views/base/Video/View_Video'))
-const Add_Video = React.lazy(() => import('./views/base/Video/Add_Video'))
+const AddVideo = React.lazy(() => import('./views/base/Video/AddVideo'))
 const View_Contract = React.lazy(() => import('./views/View_Contract/View_Contract'))
 // const Data = React.lazy(() => import('./views/View_Contract/Data'))
 
@@ -18,7 +18,7 @@ const routes = [
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/base/subcategoires', name: 'subcategoires', element: SubCategoires },
   { path: '/base/View_Video', name: 'Video', element: Video },
-  { path: '/base/Add_Video', name: 'wizard', element: Add_Video },
+  { path: '/base/Add_Video', name: 'wizard', element: AddVideo },
   { path: '/base/Language', name: 'Language', element: Language },
   { path: '/base/Home', name: 'Home', element: Home },
   { path: '/base/Contract', name: 'Contract', element: Contract },
