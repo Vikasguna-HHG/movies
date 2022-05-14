@@ -589,6 +589,8 @@ exports.kUpdate_data = async function (req, res, next) {
   } catch (error) {}
 };
 
+
+
 //video api
 exports.viinsert_data = async function (req, res, next) {
 
@@ -624,7 +626,6 @@ exports.viinsert_data = async function (req, res, next) {
     });
   }
 };
-
 
 
 

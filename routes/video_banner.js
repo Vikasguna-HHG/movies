@@ -65,9 +65,8 @@ router.get("/", function (req, res, next) {
 //video api start
 router.get("/vifinddata",verifyToken, BannerController.vifind_data);
 router.get("/vifinddata/:id",verifyToken, BannerController.vifind_data_Id);
-// router.post("/viInsertBanner",verifyToken, BannerController.viinsert_data);
-router.post("/viInsertBanner",verifyToken, upload.any(' '), BannerController.viinsert_data);
-router.post("/viUpdateBanner",verifyToken, BannerController.viUpdate_data);
+router.post("/viInsertBanner",verifyToken, upload.any(), BannerController.viinsert_data);
+router.post("/viUpdateBanner",verifyToken, upload.any(), BannerController.viUpdate_data);
 router.delete( "/viDeleteBanner/:id",verifyToken,upload.any(),BannerController.viDelete_data);
 //video api end
 
