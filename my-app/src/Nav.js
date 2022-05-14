@@ -1,6 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import {  cilFindInPage,cilLanguage, cilMovie, cilNoteAdd, cilShareAll, cilVideo } from '@coreui/icons'
+import {  cilFindInPage,cilLanguage, cilMovie, cilNoteAdd, cilShareAll, cilVideo, cilViewStream } from '@coreui/icons'
 import { CNavItem } from '@coreui/react'
 
 var sid = localStorage.getItem('sid')
@@ -41,7 +41,7 @@ if (sid === '1') {
       component: CNavItem,
       name: 'View Video',
       to: '/base/View_Video',
-      icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+      icon: <CIcon icon={cilViewStream} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
