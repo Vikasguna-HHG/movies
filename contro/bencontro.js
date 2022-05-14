@@ -633,7 +633,7 @@ exports.vifind_data = async function (req, res, next) {
 exports.banner_find = async function (req, res, next) {
   // try {
   const tag = await video.find({
-    banner: "Yes",
+    Publish: "Yes",
   });
   res.status(200).json({
     status: "find data",
