@@ -1019,29 +1019,29 @@ const Video = () => {
                           <b>{item.title}</b>
                         </CCardTitle>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.category}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Title}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.subcategory}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Rating}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.language}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Age}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} className="font" />{' '}
-                          {item.Description}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Contract}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.method}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Country}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.rdate}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Trailer_time}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.edate}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Video_time}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.status}
+                          <FaHandPointRight style={{ color: '#3A6073' }} />
+                          {item.Discription}
                         </CCardText>
                         {/* update button */}
                         <CButton
