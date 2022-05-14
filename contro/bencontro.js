@@ -638,6 +638,7 @@ exports.kUpdate_data = async function (req, res, next) {
 
 exports.viinsert_data = async function (req, res, next) {
 try {
+  console.log(req);
   const data = {
     // v_id : video_id,
     Title: req.body.Title,
@@ -652,8 +653,8 @@ try {
     User_Id: req.headers.userid,
     Publish:req.body.Publish,
     image_user: req.files[0].path,
-    banner_video: req.files[1].path,
-    Trailer_video: req.files[2].path,
+    // banner_video: req.files[1].path,
+    // Trailer_video: req.files[2].path,
   };
 
   const tag = await video.create(data);

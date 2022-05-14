@@ -4,7 +4,7 @@ const video1 = new mongoose.Schema({
     
 
 
-        Tital:{
+        Title:{
             type:String
         },
         Rating:{
