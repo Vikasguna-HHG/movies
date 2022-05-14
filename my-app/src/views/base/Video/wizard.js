@@ -116,6 +116,9 @@ export default function Wizard() {
           formData.append('Country', Country)
           formData.append('Cast', Cast)
           formData.append('Publish', Publish)
+          formData.append('image_user', imageval)
+          formData.append('Trailer_video', Trailer_video)
+          formData.append('banner_video', banner_video)
           console.log(formData);
           
           
@@ -449,6 +452,9 @@ export default function Wizard() {
                   <CFormInput type="file"    accept=".jpg, .jpeg, .png"/>
                 </CCol>
           </CRow>           
+
+      <button type="button" className='button1' id="nextBtn" onClick={Submit}>Submit</button>
+
   </div>
 
 

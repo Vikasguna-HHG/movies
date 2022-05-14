@@ -24,10 +24,9 @@ const AppHeader = () => {
 
   return (
     <>
-     <CHeader position="sticky" className="mb-4" style={{height:"70px"}}>
+     <CHeader position="sticky" className="mb-4">
        <CContainer>
           <CHeaderToggler
-          style={{marginTop:"-10px"}}
            className="ps-1"
            onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
          >
@@ -38,7 +37,7 @@ const AppHeader = () => {
          </CHeaderBrand>
         
          
-        <CHeaderNav style={{marginLeft:"1100px",marginTop:"-50px"}}>
+        <CHeaderNav style={{marginLeft:"1100px"}}>
           <CNavItem>
             <CNavLink href="#">
               <Button className="btn1" onClick={handleLogout} type="button" ><b>Logout</b></Button> 
