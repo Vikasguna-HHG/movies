@@ -590,87 +590,77 @@ exports.kUpdate_data = async function (req, res, next) {
 };
 
 //video api
-// exports.viinsert_data = async function (req, res, next) {
-
-//   try {
-    // res.status(201).json({
-    // var time = moment(req.body.rdate)
-    //   .utc()
-    //   .format("YYYY-MM-DD dddd HH:mm:ss a");
-    // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
-    // });
-
-    // const data = {
-      // v_id : video_id,
-    //   method: req.body.method,
-    //   rdate: time,
-    //   edate: req.body.edate,
-    //   status: req.body.status,
-    //   banner: req.body.banner,
-    //   title: req.body.title,
-    //   category: req.body.category,
-    //   subcategory: req.body.subcategory,
-    //   Description: req.body.Description,
-    //   language: req.body.language,
-    //   image_user: req.files[0].path,
-    //   banner_video: req.files[1].path,
-    //   Trailer_video: req.files[2].path,
-    //   User_Id: req.headers.userid,
-    // };
-
-    // const tag = await video.create(data);
-
-    // res.status(201).json({
-    //   data: tag,
-    //   status: "Data insert",
-    // });
-    // console.log(tag);
-  // } catch (error) {
-  //   res.status(201).json({ error });
-    // console.log(error);
-    // res.status(201).json({
-      // data: tag,
-//       status: "Data not insret",
-//     });
-//   }
-// };
-
-
 exports.viinsert_data = async function (req, res, next) {
-try {
-  console.log(req);
-  const data = {
-    // v_id : video_id,
-    Title: req.body.Title,
-    Age: req.body.Age,
-    Rating: req.body.Rating,
-    Discription: req.body.Discription,
-    Trailer_time: req.body.Trailer_time,
-    Video_time: req.body.Video_time,
-    Country: req.body.Country,
-    Cast: req.body.Cast,
-    Contract: req.body.Contract,
-    User_Id: req.headers.userid,
-    Publish:req.body.Publish,
-    image_user: req.files[0].path,
-    // banner_video: req.files[1].path,
-    // Trailer_video: req.files[2].path,
-  };
 
-  const tag = await video.create(data);
+  try {
 
-  res.status(201).json({
-    data: tag,
-    status: "Data insert",
-  });
-  console.log(tag);
-} catch (error) {
+    const data = {
+      Title: req.body.Title,
+      Age: req.body.Age,
+      Rating: req.body.Rating,
+      Discription: req.body.Discription,
+      Trailer_time: req.body.Trailer_time,
+      Video_time: req.body.Video_time,
+      Country: req.body.Country,
+      Cast: req.body.Cast,
+      Contract: req.body.Contract,
+      Publish:req.body.Publish,
+      image_user: req.files[0].path,
+      banner_video: req.files[1].path,
+      Trailer_video: req.files[2].path,
+    };
 
-  res.status(403).json({
-    status: "Data not insret",
-  });
-}
+    const tag = await video.create(data);
+
+    res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
+    console.log(tag);
+  } catch (error) {
+    res.status(201).json({
+      status: "Data not insret",
+      error:error
+    });
+  }
 };
+
+
+// exports.viinsert_data = async function (req, res, next) {
+  
+// try {
+
+//   const data = {
+//     // v_id : video_id,
+//     Title: req.body.Title,
+//     Age: req.body.Age,
+//     Rating: req.body.Rating,
+//     Discription: req.body.Discription,
+//     Trailer_time: req.body.Trailer_time,
+//     Video_time: req.body.Video_time,
+//     Country: req.body.Country,
+//     Cast: req.body.Cast,
+//     Contract: req.body.Contract,
+//     Publish:req.body.Publish,
+//     image_user: req.files[0].path,
+//     banner_video: req.files[1].path,
+//     Trailer_video: req.files[2].path,
+//   };
+
+//   const tag = await video.create(data);
+
+//   res.status(201).json({
+//     data: tag,
+//     status: "Data insert",
+//   });
+//   console.log(tag);
+// } catch (error) {
+
+//   res.status(403).json({
+//     status: "Data not insret",
+//   });
+// }
+// };
 
 
 
