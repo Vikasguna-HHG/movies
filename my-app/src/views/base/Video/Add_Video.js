@@ -156,7 +156,7 @@ export default function Wizard() {
   <div className="tab">
     
       <Container>
-          <h5 style={{fontSize:"11px"}}>Note: *filds required. Please fill and click next</h5>
+          <h5 style={{fontSize:"14px"}}>Note: *filds required. Please fill and click next</h5>
           <Form>
             <Row>
               <Col>

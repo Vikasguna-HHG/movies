@@ -52,7 +52,7 @@ const axios = require('axios')
 toast.configure()
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
-const Video = () => {
+const Add_Video = () => {
   const [visible, setVisible] = useState(false)
   const [id, setId] = useState(0)
   const [title, settitle] = useState('')
@@ -1095,4 +1095,4 @@ const Video = () => {
     </>
   )
 }
-export default Video
+export default Add_Video
