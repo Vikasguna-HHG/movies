@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-var Schema = mongoose.Schema;
+// var Schema = mongoose.Schema;
 const video1 = new mongoose.Schema({
     
 

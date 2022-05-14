@@ -636,12 +636,53 @@ exports.kUpdate_data = async function (req, res, next) {
 // };
 
 
-exports.viinsert_data = async function (req, res, next) {
-try {
-  // console.log(req.body.Title);
-  const data = {
-    // v_id : video_id,
-    Title: req.body.Title,
+// exports.viinsert_data = async function (req, res, next) {
+// try {
+//   console.log("tt");
+
+//   const data = {
+
+//     // v_id : video_id,
+//     Title:req.body.Title,
+//     Age: req.body.Age,
+//     Rating: req.body.Rating,
+//     Discription: req.body.Discription,
+//     Trailer_time: req.body.Trailer_time,
+//     Video_time: req.body.Video_time,
+//     Country: req.body.Country,
+//     Cast: req.body.Cast,
+//     Contract: req.body.Contract,
+//     User_Id: req.headers.userid,
+//     Publish:req.body.Publish,
+//     // banner_video: req.files[0].path,
+//     // Trailer_video: req.files[1].path,
+//     // image_user: req.files[2].path,
+//   };
+
+//   const tag = await video.create(data);
+
+//   res.status(201).json({
+//     data: tag,
+//     status: "Data insert",
+//   });
+//   console.log(tag);
+// }
+//  catch (error) {
+//   // res.status(201).json({ error });
+//   console.log(error);
+//   res.status(201).json({
+//     // data: tag,
+//     status: "Data not insret",
+//   });
+// }
+// };
+
+exports.viinsert_data = async function (req,res, next){
+try{
+
+  var data = {
+
+    Title:req.body.Title,
     Age: req.body.Age,
     Rating: req.body.Rating,
     Discription: req.body.Discription,
@@ -652,28 +693,23 @@ try {
     Contract: req.body.Contract,
     User_Id: req.headers.userid,
     Publish:req.body.Publish,
-    image_user: req.files[0].path,
-    banner_video: req.files[1].path,
-    Trailer_video: req.files[2].path,
-  };
+    // banner_video: req.files[0].path,
+    // Trailer_video: req.files[1].path,
+    // image_user: req.files[2].path,
 
-  const tag = await video.create(data);
+  }
 
-  res.status(201).json({
-    data: tag,
-    status: "Data insert",
-  });
-  console.log(tag);
-} catch (error) {
-  // res.status(201).json({ error });
-  // console.log(error);
-  res.status(201).json({
-    // data: tag,
-    status: "Data not insret",
-  });
+var tag = await video.create(data)
+res.status(201).json({
+      data: tag,
+      status: "Data insert",
+    });
+
 }
-};
+catch{
 
+}
+}
 
 
 exports.vifind_data = async function (req, res, next) {
