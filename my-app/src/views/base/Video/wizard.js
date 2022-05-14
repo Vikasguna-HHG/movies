@@ -103,6 +103,22 @@ export default function Wizard() {
     setTrailer_video(e.target.files[0])
   }
 
+  useEffect(() => {
+    axios
+    .get(env.apiURL + `findCountry`)
+    .then(function (res) {
+      console.log(res.data)
+      setCountry1(res.data.data)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+  }, [])
+  
+  
+
+
+
   const Submit = async () => {
           const formData = new FormData()
           formData.append('Title', Title)
@@ -217,10 +233,7 @@ export default function Wizard() {
                     </Col>              
                     <Col xl="2">
                     <CFormCheck type="radio"  name="Countries" value="Exclude" label="Exclude" onChange={(e) => {setCountry(e.target.value)}}  />                
-                    </Col>
-                    <Col xl="12">
-                    <CFormCheck type="radio"  name="Countries" value="All" label="Select All Countries" onChange={(e) => {setCountry(e.target.value)}}  />
-                    </Col>
+                    </Col><br/>
                     <Col xl="6 ">
                     <CFormInput type="text"  value={Country} onChange={(e) => {setCountry(e.target.value) }}    />
                     </Col>                

@@ -760,14 +760,18 @@ const Video = () => {
                 <CTableRow style={{ backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}>
                   <CTableHeaderCell style={{ color: 'white' }}>No</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Title</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Category</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>SubCategory</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Description</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Language</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Method </CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Release Date</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Expiry Date</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>status</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Rating</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Age</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Discription</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Contract</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Trailer time </CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Video time</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Country</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Cast</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Publish</CTableHeaderCell>
+
+
+
                   <CTableHeaderCell scope="col2" style={{ color: 'white' }}>
                     image
                   </CTableHeaderCell>
@@ -779,7 +783,7 @@ const Video = () => {
               <CTableBody>
                 {list
                   // .filter((data) => data.title.match(new RegExp(search, 'i')))
-                  // .reverse()
+                  .reverse()
                   .map((item, i) => {
                     return (
                       <>
@@ -791,7 +795,7 @@ const Video = () => {
                             {i + 1}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.title}
+                            {item.Title}
                           </CTableDataCell>
                           <CTableDataCell
                             style={{
@@ -800,32 +804,35 @@ const Video = () => {
                               textTransform: 'capitalize',
                             }}
                           >
-                            {item.category}
+                            {item.Rating}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.subcategory}
+                            {item.Age}
                           </CTableDataCell>
                           <CTableDataCell
                             className="font"
                             style={{ paddingTop: '30px', color: '#FFF', height: '170px' }}
                           >
-                            {item.Description}
+                            {item.Discription}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.language}
+                            {item.Contract}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.method}
+                            {item.Trailer_time}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.rdate}
+                            {item.Video_time}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.edate}
+                            {item.Country}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.status}
+                            {item.Cast}
                             {/* <ReactPlayer url={"http://localhost:5000/" + item.banner_video } height="300px"  width="400px"  controls={true} style={{margin:"20px"}} /> */}
+                          </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
+                            {item.Publish}
                           </CTableDataCell>
 
                           <CTableDataCell style={{ paddingTop: '10px', color: '#FFF' }}>

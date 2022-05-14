@@ -5,13 +5,12 @@ var language = require("../Models/language");
 var video = require("../Models/video");
 var Contract = require("../Models/Contract");
 var User = require("../Models/User");
-var geoip = require('geoip-lite');
+var geoip = require("geoip-lite");
 var $ = require("jquery");
 var Country = require("../Models/Countrycode");
 
 var moment = require("moment");
 var csv = require("csvtojson");
-
 
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
@@ -35,7 +34,7 @@ const { match } = require("assert");
 const jwtkey = "movies-hhg";
 
 exports.findCountry = async function (req, res, next) {
-try {
+  try {
     const tag = await Country.find();
 
     res.status(200).json({
@@ -49,11 +48,9 @@ try {
     });
     // console.log("not find data........!");
   }
-}
+};
 
 exports.get_join_data = async function (req, res, next) {
-
-
   // await csv()
   // .fromFile('./upload/a1.csv')
   // .then(function(jsonArrayObj){ //when parse finished, result will be emitted here.
@@ -69,10 +66,8 @@ exports.get_join_data = async function (req, res, next) {
   //         usa_state:item.usa_state,
   //       })
   //   })
-  //    console.log(jsonArrayObj); 
+  //    console.log(jsonArrayObj);
   //  })
-
-
 
   MongoClient.connect(url, async (err, db) => {
     if (err) throw err;
@@ -93,7 +88,7 @@ exports.get_join_data = async function (req, res, next) {
           foreignField: "User_Id",
           as: "videos",
         },
-      }
+      },
     ]);
 
     res.status(200).send({
@@ -102,17 +97,15 @@ exports.get_join_data = async function (req, res, next) {
   });
 };
 
-
-exports.getlocation= async function (req, res, next) {
-  
+exports.getlocation = async function (req, res, next) {
   // var ip =  geoIp({ip:req.headers['x-forwarded-for']  || req.connection.remoteAddress})
-  var ip =  "27.57.162.145"
+  var ip = "27.57.162.145";
   // var ip = "106.205.227.72";
-var geo = geoip.lookup(ip);
+  var geo = geoip.lookup(ip);
 
   res.status(200).send({
-    ip:geo
-  })
+    ip: geo,
+  });
 };
 
 exports.insert_data = async function (req, res, next) {
@@ -258,8 +251,6 @@ exports.Minsert_data = async function (req, res, next) {
     //   res.send({ data, auth: token });
     // });
     const tag = await movie_maker.create(data);
-
- 
 
     res.status(201).json({
       data: tag,
@@ -589,13 +580,9 @@ exports.kUpdate_data = async function (req, res, next) {
   } catch (error) {}
 };
 
-
-
 //video api
 exports.viinsert_data = async function (req, res, next) {
-
   try {
-
     const data = {
       Title: req.body.Title,
       Age: req.body.Age,
@@ -606,7 +593,7 @@ exports.viinsert_data = async function (req, res, next) {
       Country: req.body.Country,
       Cast: req.body.Cast,
       Contract: req.body.Contract,
-      Publish:req.body.Publish,
+      Publish: req.body.Publish,
       image_user: req.files[0].path,
       banner_video: req.files[1].path,
       Trailer_video: req.files[2].path,
@@ -622,13 +609,10 @@ exports.viinsert_data = async function (req, res, next) {
   } catch (error) {
     res.status(201).json({
       status: "Data not insret",
-      error:error
+      error: error,
     });
   }
 };
-
-
-
 
 exports.vifind_data = async function (req, res, next) {
   try {
@@ -970,27 +954,25 @@ exports.User_data = async function (req, res, next) {
 
     const data = {
       User_Name: req.body.User_Name,
-      Mobile_No:req.body.Mobile_No,
+      Mobile_No: req.body.Mobile_No,
       Email: req.body.Email,
       Password: newpass,
-      Mobile_No:req.body.Mobile_No
+      Mobile_No: req.body.Mobile_No,
     };
 
     jwt.sign({ data }, jwtkey, async (err, token) => {
       if (err) {
         res.send({ result: "wrong...." });
       }
-   
-    const tag =  await User.create(data);
 
-    res.status(201).send({
-      status: true,
-      auth: token,
-      data: tag,
+      const tag = await User.create(data);
+
+      res.status(201).send({
+        status: true,
+        auth: token,
+        data: tag,
+      });
     });
-
-  });
-  
   }
 };
 
@@ -1000,7 +982,6 @@ exports.client_login = async function (req, res, next) {
   // console.log(User1);
 
   if (User1) {
-
     jwt.sign({ User1 }, jwtkey, async (err, token) => {
       if (err) {
         res.send({ status: false, message: "not valid username and password" });
@@ -1013,14 +994,12 @@ exports.client_login = async function (req, res, next) {
           status: true,
           data: User1,
           auth: token,
-          message:"1"
+          message: "1",
         });
-      }else{
+      } else {
         res.send({ status: false, message: "not valid username and password" });
       }
-
     });
-
   } else {
     res.send({ status: false, message: "not valid username and password" });
   }
