@@ -18,13 +18,20 @@ function AddVideo() {
   const [Country, setCountry] = useState('')
   const [Country1, setCountry1] = useState([])
   const [Cast, setCast] = useState('')
+  const [Categoires, setCategoires] = useState('')
+  const [Categoires1, setCategoires1] = useState('')
   const [Publish, setPublish] = useState('')
   const [imageval, setImageval] = useState('')
   const [banner_video, setbanner_video] = useState('')
   const [Trailer_video, setTrailer_video] = useState('')
 
   useEffect(() => {
-    axios
+      country()
+      catagory()
+  }, [])
+
+    function country () {
+      axios
       .get(env.apiURL + `findCountry`)
       .then(function (res) {
         console.log(res.data)
@@ -33,7 +40,22 @@ function AddVideo() {
       .catch(function (error) {
         console.log(error)
       })
-  }, [])
+    }
+
+  function catagory(){
+    axios
+      .get(env.apiURL + `vfinddata`,{
+        headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+      }
+      )
+      .then(function (res) {
+        console.log("hyy")
+        setCategoires1(res.data.data)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    }
 
   const saveFile = (e) => {
     console.log(e)
@@ -311,110 +333,29 @@ function AddVideo() {
         <>
          {/* <CCard className="mb-4">
           <CCardBody> */}
-          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 6 }}>
-            <CCol xs>
-              <CCard>
+          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 6 }}  value={Categoires} onChange={(e)=>{setCategoires(e.target.value)}} >
+  
+           
+          
+                {Categoires1.map((item, i) => {
+                      return(
+                        <div key={i}>
+                             <CCard>
                 <CCardImage
                   orientation="top"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
                 />
-                <CCardBody>
-                  <CCardTitle>Hindi</CCardTitle>
-                  <CCardTitle>હિન્દી</CCardTitle>
-                </CCardBody>
+              
+                <CCardTitle>
+                           <option >{item.category}</option>
+                           </CCardTitle>
               </CCard>
-            </CCol>
+  
+                        </div>
+                      )
+                    })}
+               
 
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Gujarati</CCardTitle>
-                  <CCardTitle>ગુજરાતી</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Bengali</CCardTitle>
-                  <CCardTitle>বাংলা</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>kannada</CCardTitle>
-                  <CCardTitle>ಕನ್ನಡ</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Malayalam</CCardTitle>
-                  <CCardTitle>മലയാളം</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Marathi</CCardTitle>
-                  <CCardTitle>मराठी</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Tamil</CCardTitle>
-                  <CCardTitle>தமிழ்</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Telugu</CCardTitle>
-                  <CCardTitle>తెలుగు</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
           </CRow>
           {/* </CCardBody>
           </CCard> */}
