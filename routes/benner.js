@@ -43,6 +43,8 @@ const verifyToken = (req, res, next) => {
 
 router.get('/getjoindata',BannerController.get_join_data);
 router.get('/findCountry',BannerController.findCountry);
+router.get('/singlecountry',BannerController.singlecountry);
+
 
 router.get('/getlocation', BannerController.getlocation)
 //parth

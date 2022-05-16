@@ -50,7 +50,22 @@ try {
     // console.log("not find data........!");
   }
 }
-
+exports.singlecountry = async function (req, res, next) {
+  try {
+      const tag = await Country.find({country :{$in:["Afghanistan" , "Austria","Aruba"]}});
+  
+      res.status(200).json({
+        status: "find data",
+        data: tag,
+      });
+    } catch (error) {
+      res.status(201).json({
+        // data: tag,
+        status: "Data not insert",
+      });
+      // console.log("not find data........!");
+    }
+  }
 exports.get_join_data = async function (req, res, next) {
 
 
@@ -1107,3 +1122,10 @@ exports.client_login = async function (req, res, next) {
     res.send({ status: false, message: "not valid username and password" });
   }
 };
+  exports.new = async function(req,res,next){
+    try {
+      const tag = await Country.find({})
+    } catch (error) {
+      
+    }
+  }
