@@ -7,7 +7,6 @@ import './AddVideo.css'
 
 function AddVideo() {
   const [step, setStep] = useState(1)
-
   const [Title, setTitle] = useState('')
   const [Rating, setRating] = useState('')
   const [Age, setAge] = useState('')
@@ -25,14 +24,10 @@ function AddVideo() {
   const [banner_video, setbanner_video] = useState('')
   const [Trailer_video, setTrailer_video] = useState('')
 
-  useEffect(() => {
-      country()
-      catagory()
-  }, [])
+ 
 
     function country () {
-      axios
-      .get(env.apiURL + `findCountry`)
+      axios.get(env.apiURL + `findCountry`)
       .then(function (res) {
         console.log(res.data)
         setCountry1(res.data.data)
@@ -43,8 +38,7 @@ function AddVideo() {
     }
 
   function catagory(){
-    axios
-      .get(env.apiURL + `vfinddata`,{
+    axios.get(env.apiURL + `vfinddata`,{
         headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
       }
       )
@@ -56,6 +50,11 @@ function AddVideo() {
         console.log(error)
       })
     }
+    
+    useEffect(() => {
+      country()
+      catagory()
+    }, [])
 
   const saveFile = (e) => {
     console.log(e)
@@ -79,9 +78,7 @@ function AddVideo() {
         return;
         alert("hello ")
     }
-    
-
-  e.preventDefault();
+    e.preventDefault();
     const formData = new FormData()
     formData.append('Title', Title)
     formData.append('Rating', Rating)
@@ -98,18 +95,14 @@ function AddVideo() {
     formData.append('banner_video', banner_video)
     console.log(formData);
     
-    
-
-
     await axios.post(env.apiURL + 'viInsertBanner',formData,
     {
       headers:{
       "Authorization" : `Bearer ${localStorage.getItem('token')}`,
       "User_Id": localStorage.getItem('userId')
-    }
-  })
-
-  setStep(1)
+      }
+    })
+    setStep(1)
   }
 
   return (
@@ -118,8 +111,6 @@ function AddVideo() {
     <CCardBody>
     <form onSubmit={submit}>
       {step == 1 && (
-          // <CCard className="mb-4">
-          // <CCardBody>
         <Container>
           <h5 style={{ fontSize: '14px' }}>Note: *filds required. Please fill and click next</h5>
           <Form>
@@ -326,45 +317,25 @@ function AddVideo() {
             </Row>
           </Form>
         </Container>
-        // </CCardBody>
-        // </CCard>
       )}
       {step == 2 && (
         <>
-         {/* <CCard className="mb-4">
-          <CCardBody> */}
-          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 6 }}  value={Categoires} onChange={(e)=>{setCategoires(e.target.value)}} >
-  
-           
-          
-                {Categoires1.map((item, i) => {
-                      return(
-                        <div key={i}>
-                             <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-              
-                <CCardTitle>
-                           <option >{item.category}</option>
-                           </CCardTitle>
-              </CCard>
-  
-                        </div>
-                      )
-                    })}
-               
-
+          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 5 }}  value={Categoires} onChange={(e)=>{setCategoires(e.target.value)}} >  
+            {Categoires1.map((item, i) => {
+              return(
+                <div key={i}>
+                  <CCard>
+                    <CCardImage  orientation="top"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
+                      <CCardTitle>{item.category}</CCardTitle>
+                  </CCard>
+                </div>
+              )
+            })}
           </CRow>
-          {/* </CCardBody>
-          </CCard> */}
         </>
       )}
       {step == 3 && (
         <>
-         {/* <CCard className="mb-4">
-          <CCardBody> */}
           <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 4 }}>
             <CCol xs>
               <CCard>
@@ -402,14 +373,10 @@ function AddVideo() {
               </CCard>
             </CCol>
           </CRow>
-          {/* </CCardBody>
-          </CCard> */}
         </>
       )}
       {step == 4 && (
         <>
-         {/* <CCard className="mb-4">
-          <CCardBody> */}
           <div>
             <p>Video Upload Type</p>
             <CFormCheck type="radio" name="status" value="Active" label="Streaming Upload" />
@@ -434,23 +401,6 @@ function AddVideo() {
             </CCol>
           </CRow>
 
-          {/* <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-              <h6>Mobile-Image</h6>
-            </CFormLabel>
-            <CCol sm={10}>
-              <CFormInput type="file" onChange={saveFile} accept=".jpg, .jpeg, .png" />
-            </CCol>
-          </CRow> */}
-
-          {/* <CRow className="mb-3">
-            <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-              <h6>Default-Image</h6>
-            </CFormLabel>
-            <CCol sm={10}>
-              <CFormInput type="file" accept=".jpg, .jpeg, .png" />
-            </CCol>
-          </CRow> */}
 
           <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
@@ -460,26 +410,14 @@ function AddVideo() {
               <CFormInput type="file" onChange={saveFile} accept=".jpg, .jpeg, .png" />
             </CCol>
           </CRow>
-          {/* </CCardBody>
-          </CCard> */}
         </>
       )}
-
-      
-
-        <CButton type="button" className='btn3' onClick={() => setStep(step - 1)} disabled={step == 1 ? true : false}>Prev</CButton>&nbsp;&nbsp;
-        <CButton type="button" className='btn2' onClick={() => setStep(step + 1)} disabled={step == 4 ? true : false}>Next</CButton>&nbsp;&nbsp;
-        {step >= 4 ? (<CButton className='btn2' onClick={submit}>Submit</CButton> ) : null}
-         
-         
-      </form>
-    </CCardBody>
-      </CCard>
-
-    </>
-
-    
-  )
-}
-
+      <CButton type="button" className='btn3' onClick={() => setStep(step - 1)} disabled={step == 1 ? true : false}>Prev</CButton>&nbsp;&nbsp;
+      <CButton type="button" className='btn2' onClick={() => setStep(step + 1)} disabled={step == 4 ? true : false}>Next</CButton>&nbsp;&nbsp;
+      {step >= 4 ? (<CButton className='btn2' onClick={submit}>Submit</CButton> ) : null}
+    </form>
+  </CCardBody>
+  </CCard>
+ </>
+)}
 export default AddVideo
