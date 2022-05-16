@@ -186,22 +186,6 @@ const Add_Video = () => {
       return
     }
 
-    // if(id == 0)
-    // {
-    //   const formData = new FormData()
-    //   formData.append('banner_video', banner_video)
-    //   try {
-    //     const res = await axios.post(env.apiURL+'videoInsertBanner', formData)
-    //     setList([...list, res.data.data])
-    //     toast.success('New Add...!', {
-    //       autoClose: 2000,
-    //     })
-    //     console.log(res)
-    //   } catch (ex) {
-    //     console.log(ex)
-    //   }
-    // }
-
     // -----------------INSERT DATA--------------//
 
     if (id == 0) {
@@ -415,54 +399,7 @@ const Add_Video = () => {
     cata_data()
   }, [])
 
-  function update1() {
-    setVisible5(false)
-    setVisible6(true)
-  }
-  function update2() {
-    setVisible5(false)
-    setVisible7(true)
-  }
-  function update3() {
-    setVisible5(false)
-    setVisible8(true)
-  }
-  function update4() {
-    setVisible6(false)
-    setVisible5(true)
-  }
-  function update5() {
-    setVisible6(false)
-    setVisible7(true)
-  }
-  function update6() {
-    setVisible6(false)
-    setVisible8(true)
-  }
-  function update7() {
-    setVisible7(false)
-    setVisible5(true)
-  }
-  function update8() {
-    setVisible7(false)
-    setVisible6(true)
-  }
-  function update9() {
-    setVisible7(false)
-    setVisible8(true)
-  }
-  function update10() {
-    setVisible8(false)
-    setVisible5(true)
-  }
-  function update11() {
-    setVisible8(false)
-    setVisible6(true)
-  }
-  function update12() {
-    setVisible8(false)
-    setVisible7(true)
-  }
+
 
   function videoplay() {
     alert()

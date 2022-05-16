@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import {
-  CCardImage,
-  CCardTitle,
-  CCard,
-  CCardBody,
-  CFormCheck,
-  CCol,
-  CFormLabel,
-  CFormInput,
-  CFormSelect,
-  CFormTextarea,
-  CRow,
-} from '@coreui/react'
+import { CCardImage,  CCardTitle,  CCard,  CCardBody,  CFormCheck,  CCol,  CFormLabel,  CFormInput,  CFormSelect,  CFormTextarea,  CRow,CButton} from '@coreui/react'
 import { Container, Form, Row, Col } from 'react-bootstrap'
 import { env } from 'src/environment'
 import axios from 'axios'
-import './wizard.css'
+import './AddVideo.css'
 
 function AddVideo() {
   const [step, setStep] = useState(1)
@@ -62,10 +50,16 @@ function AddVideo() {
     setTrailer_video(e.target.files[0])
   }
 
+  const submit = async (e) => { 
 
-  
-  const submit = async (e) => {
-      e.preventDefault();
+    if(!Title || !Rating || !Age || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
+    {
+        return;
+        alert("hello ")
+    }
+    
+
+  e.preventDefault();
     const formData = new FormData()
     formData.append('Title', Title)
     formData.append('Rating', Rating)
@@ -94,12 +88,16 @@ function AddVideo() {
   })
 
   setStep(1)
-}
+  }
 
   return (
     <>
+    <CCard className="mb-4 App">
+    <CCardBody>
     <form onSubmit={submit}>
       {step == 1 && (
+          // <CCard className="mb-4">
+          // <CCardBody>
         <Container>
           <h5 style={{ fontSize: '14px' }}>Note: *filds required. Please fill and click next</h5>
           <Form>
@@ -306,9 +304,13 @@ function AddVideo() {
             </Row>
           </Form>
         </Container>
+        // </CCardBody>
+        // </CCard>
       )}
       {step == 2 && (
         <>
+         {/* <CCard className="mb-4">
+          <CCardBody> */}
           <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 6 }}>
             <CCol xs>
               <CCard>
@@ -414,10 +416,14 @@ function AddVideo() {
               </CCard>
             </CCol>
           </CRow>
+          {/* </CCardBody>
+          </CCard> */}
         </>
       )}
       {step == 3 && (
         <>
+         {/* <CCard className="mb-4">
+          <CCardBody> */}
           <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 4 }}>
             <CCol xs>
               <CCard>
@@ -455,10 +461,14 @@ function AddVideo() {
               </CCard>
             </CCol>
           </CRow>
+          {/* </CCardBody>
+          </CCard> */}
         </>
       )}
       {step == 4 && (
         <>
+         {/* <CCard className="mb-4">
+          <CCardBody> */}
           <div>
             <p>Video Upload Type</p>
             <CFormCheck type="radio" name="status" value="Active" label="Streaming Upload" />
@@ -483,43 +493,50 @@ function AddVideo() {
             </CCol>
           </CRow>
 
-          <CRow className="mb-3">
+          {/* <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
               <h6>Mobile-Image</h6>
             </CFormLabel>
             <CCol sm={10}>
               <CFormInput type="file" onChange={saveFile} accept=".jpg, .jpeg, .png" />
             </CCol>
-          </CRow>
+          </CRow> */}
 
-          <CRow className="mb-3">
+          {/* <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
               <h6>Default-Image</h6>
             </CFormLabel>
             <CCol sm={10}>
               <CFormInput type="file" accept=".jpg, .jpeg, .png" />
             </CCol>
-          </CRow>
+          </CRow> */}
 
           <CRow className="mb-3">
             <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
               <h6>Upcoming movie poster</h6>
             </CFormLabel>
             <CCol sm={10}>
-              <CFormInput type="file" accept=".jpg, .jpeg, .png" />
+              <CFormInput type="file" onChange={saveFile} accept=".jpg, .jpeg, .png" />
             </CCol>
           </CRow>
+          {/* </CCardBody>
+          </CCard> */}
         </>
       )}
 
-      {step >= 4 ? (
-        <input type="submit" />
-      ) : null}
+      
 
-        <button type="button" onClick={() => setStep(step - 1)} disabled={step == 1 ? true : false}>Prev</button>
-        <button type="button"  onClick={() => setStep(step + 1)} disabled={step == 4 ? true : false}>Next</button>
-        </form>
+        <CButton type="button" className='btn3' onClick={() => setStep(step - 1)} disabled={step == 1 ? true : false}>Prev</CButton>&nbsp;&nbsp;
+        <CButton type="button" className='btn2' onClick={() => setStep(step + 1)} disabled={step == 4 ? true : false}>Next</CButton>&nbsp;&nbsp;
+        {step >= 4 ? (<CButton className='btn2' onClick={submit}>Submit</CButton> ) : null}
+         
+         
+      </form>
+    </CCardBody>
+      </CCard>
+
     </>
+
     
   )
 }
