@@ -3,7 +3,7 @@ import SubCategoires from '../base/subcategoires/subcategoires'
 import Category from '../Categories/Categoires'
 import Home from '../Home/Home'
 import Tables from '../base/Language/Language'
-import Video from '../base/Video/Video'
+import Video from '../base/Video/View_Video'
 import Login from '../pages/login/Login'
 
 function Dashboard() {

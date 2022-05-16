@@ -1,0 +1,26 @@
+
+.App
+{
+  height: 800px;
+  position: relative;
+}
+
+.btn2
+{
+  background-image: linear-gradient(to right ,#0F2027,#203A43,#2c5364);
+  border: none;
+  color:white;
+  position: absolute;
+  top: 680px;
+  left: 100px;
+}
+
+.btn3
+{
+  background-image: linear-gradient(to right ,#0F2027,#203A43,#2c5364);
+  border: none;
+  color:white;
+  position: absolute;
+  top: 680px;
+  left: 20px;
+}

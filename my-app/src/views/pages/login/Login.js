@@ -50,7 +50,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userId){
-      navigate('/base/Video')
+      navigate('/base/View_Video')
     } 
   }, [])
 

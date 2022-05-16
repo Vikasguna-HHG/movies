@@ -1,8 +1,7 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilActionRedo, cilFindInPage, cilFunctions, cilLanguage, cilMovie, cilNoteAdd, cilShareAll, cilVideo } from '@coreui/icons'
+import {  cilFindInPage,cilLanguage, cilMovie, cilNoteAdd, cilShareAll, cilVideo, cilViewStream } from '@coreui/icons'
 import { CNavItem } from '@coreui/react'
-import { ChildFriendlyTwoTone } from '@mui/icons-material'
 
 var sid = localStorage.getItem('sid')
 let nav = []
@@ -40,14 +39,14 @@ if (sid === '1') {
     },
     {
       component: CNavItem,
-      name: 'Video',
-      to: '/base/Video',
-      icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+      name: 'View Video',
+      to: '/base/View_Video',
+      icon: <CIcon icon={cilViewStream} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
-      name: 'wizard',
-      to: '/base/wizard',
+      name: 'Add Video',
+      to: '/base/Add_Video',
       icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
     },
   ]
@@ -55,16 +54,17 @@ if (sid === '1') {
   nav = [
     {
       component: CNavItem,
-      name: 'Video',
-      to: '/base/Video',
-      icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
       name: 'Contract',
       to: '/base/Contract',
       icon: <CIcon icon={cilFindInPage} customClassName="nav-icon" />,
     },
+    {
+      component: CNavItem,
+      name: 'Add Video',
+      to: '/base/Add_Video',
+      icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+    }
+    
   ]
 }
 

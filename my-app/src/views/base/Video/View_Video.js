@@ -52,7 +52,7 @@ const axios = require('axios')
 toast.configure()
 const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad']
 
-const Video = () => {
+const Add_Video = () => {
   const [visible, setVisible] = useState(false)
   const [id, setId] = useState(0)
   const [title, settitle] = useState('')
@@ -185,22 +185,6 @@ const Video = () => {
       })
       return
     }
-
-    // if(id == 0)
-    // {
-    //   const formData = new FormData()
-    //   formData.append('banner_video', banner_video)
-    //   try {
-    //     const res = await axios.post(env.apiURL+'videoInsertBanner', formData)
-    //     setList([...list, res.data.data])
-    //     toast.success('New Add...!', {
-    //       autoClose: 2000,
-    //     })
-    //     console.log(res)
-    //   } catch (ex) {
-    //     console.log(ex)
-    //   }
-    // }
 
     // -----------------INSERT DATA--------------//
 
@@ -415,54 +399,7 @@ const Video = () => {
     cata_data()
   }, [])
 
-  function update1() {
-    setVisible5(false)
-    setVisible6(true)
-  }
-  function update2() {
-    setVisible5(false)
-    setVisible7(true)
-  }
-  function update3() {
-    setVisible5(false)
-    setVisible8(true)
-  }
-  function update4() {
-    setVisible6(false)
-    setVisible5(true)
-  }
-  function update5() {
-    setVisible6(false)
-    setVisible7(true)
-  }
-  function update6() {
-    setVisible6(false)
-    setVisible8(true)
-  }
-  function update7() {
-    setVisible7(false)
-    setVisible5(true)
-  }
-  function update8() {
-    setVisible7(false)
-    setVisible6(true)
-  }
-  function update9() {
-    setVisible7(false)
-    setVisible8(true)
-  }
-  function update10() {
-    setVisible8(false)
-    setVisible5(true)
-  }
-  function update11() {
-    setVisible8(false)
-    setVisible6(true)
-  }
-  function update12() {
-    setVisible8(false)
-    setVisible7(true)
-  }
+
 
   function videoplay() {
     alert()
@@ -760,14 +697,18 @@ const Video = () => {
                 <CTableRow style={{ backgroundImage: 'linear-gradient(to right,#16222A,#3A6073)' }}>
                   <CTableHeaderCell style={{ color: 'white' }}>No</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Title</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Category</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>SubCategory</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Description</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Language</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Method </CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Release Date</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Expiry Date</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>status</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Rating</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Age</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Discription</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Contract</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Trailer time </CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Video time</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Country</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Cast</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Publish</CTableHeaderCell>
+
+
+
                   <CTableHeaderCell scope="col2" style={{ color: 'white' }}>
                     image
                   </CTableHeaderCell>
@@ -779,7 +720,7 @@ const Video = () => {
               <CTableBody>
                 {list
                   // .filter((data) => data.title.match(new RegExp(search, 'i')))
-                  // .reverse()
+                  .reverse()
                   .map((item, i) => {
                     return (
                       <>
@@ -791,7 +732,7 @@ const Video = () => {
                             {i + 1}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.title}
+                            {item.Title}
                           </CTableDataCell>
                           <CTableDataCell
                             style={{
@@ -800,32 +741,35 @@ const Video = () => {
                               textTransform: 'capitalize',
                             }}
                           >
-                            {item.category}
+                            {item.Rating}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.subcategory}
+                            {item.Age}
                           </CTableDataCell>
                           <CTableDataCell
                             className="font"
                             style={{ paddingTop: '30px', color: '#FFF', height: '170px' }}
                           >
-                            {item.Description}
+                            {item.Discription}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.language}
+                            {item.Contract}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.method}
+                            {item.Trailer_time}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.rdate}
+                            {item.Video_time}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.edate}
+                            {item.Country}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.status}
+                            {item.Cast}
                             {/* <ReactPlayer url={"http://localhost:5000/" + item.banner_video } height="300px"  width="400px"  controls={true} style={{margin:"20px"}} /> */}
+                          </CTableDataCell>
+                          <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
+                            {item.Publish}
                           </CTableDataCell>
 
                           <CTableDataCell style={{ paddingTop: '10px', color: '#FFF' }}>
@@ -1012,29 +956,29 @@ const Video = () => {
                           <b>{item.title}</b>
                         </CCardTitle>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.category}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Title}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.subcategory}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Rating}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.language}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Age}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} className="font" />{' '}
-                          {item.Description}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Contract}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.method}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Country}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.rdate}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Trailer_time}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.edate}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Video_time}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.status}
+                          <FaHandPointRight style={{ color: '#3A6073' }} />
+                          {item.Discription}
                         </CCardText>
                         {/* update button */}
                         <CButton
@@ -1088,4 +1032,4 @@ const Video = () => {
     </>
   )
 }
-export default Video
+export default Add_Video
