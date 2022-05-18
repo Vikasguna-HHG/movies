@@ -9,7 +9,7 @@ function AddVideo() {
   const [step, setStep] = useState(1)
   const [Title, setTitle] = useState('')
   const [Rating, setRating] = useState('')
-  const [Age, setAge] = useState('')
+  const [Subscribe, setSubscribe] = useState('')
   const [Discription, setDiscription] = useState('')
   const [Contract, setContract] = useState([])
   const [Trailer_time, setTrailer_time] = useState()
@@ -73,7 +73,7 @@ function AddVideo() {
 
   const submit = async (e) => { 
 
-    if(!Title || !Rating || !Age || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
+    if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
     {
         return;
        
@@ -82,7 +82,7 @@ function AddVideo() {
     const formData = new FormData()
     formData.append('Title', Title)
     formData.append('Rating', Rating)
-    formData.append('Age', Age)
+    formData.append('Subscribe', Subscribe)
     formData.append('Discription', Discription)
     formData.append('Contract', Contract)
     formData.append('Trailer_time', Trailer_time)
@@ -188,12 +188,12 @@ function AddVideo() {
                 <Row>
                   <Col xl="12">
                     <CFormLabel htmlFor="inputEmail3" className="col-sm-6 col-form-label">
-                      <h6>Censorship Rating*</h6>
+                      <h6>Subscribe Method*</h6>
                     </CFormLabel>
                     <CFormSelect
-                      value={Age}
+                      value={Subscribe}
                       onChange={(e) => {
-                        setAge(e.target.value)
+                        setSubscribe(e.target.value)
                       }}
                     >
                       <option>Select Age</option>
