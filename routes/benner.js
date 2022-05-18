@@ -94,7 +94,7 @@ router.post('/Contract_update_data',upload.single('image'), BannerController.Sta
 // router.get('/demo/:id',BannerController.demo_data);
 
 
-
+router.post('/Subscribe',upload.single(''),BannerController.Subscribe_data)
 
 router.post('/User',upload.single('image'),BannerController.User_data);
 router.post('/login',upload.single('image'),BannerController.client_login);
