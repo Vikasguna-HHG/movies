@@ -76,7 +76,7 @@ function AddVideo() {
     if(!Title || !Rating || !Age || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
     {
         return;
-        alert("hello ")
+       
     }
     e.preventDefault();
     const formData = new FormData()
@@ -155,6 +155,7 @@ function AddVideo() {
                     setTrailer_time(e.target.value)
                   }}
                 />
+                
               </Col>
               <Col>
                 <CFormLabel htmlFor="inputEmail3" className="col-sm-6 col-form-label">
