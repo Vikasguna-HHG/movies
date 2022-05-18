@@ -94,7 +94,7 @@ router.get('/demo/:id',BannerController.demo_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
 router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
 
-
+router.post('/Subscribe',upload.single(''),BannerController.Subscribe_data)
 
 //client panel login - registered
 router.post('/User',upload.single('image'),BannerController.User_data);
