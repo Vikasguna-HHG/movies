@@ -944,7 +944,7 @@ exports.Contract_find_data = async function (req, res, next) {
 exports.Contract_data = async function (req, res, next) {
   try {
     const { jsPDF } = require("jspdf");
-
+    
     const doc = new jsPDF();
     doc.text(
       "******************************* Contract *******************************",
