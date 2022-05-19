@@ -13,6 +13,9 @@ const video1 = new mongoose.Schema({
         Subscribe:{
             type:String
         },
+        Categoires:{
+            type:String
+        },
         Discription:{
             type:String
         },

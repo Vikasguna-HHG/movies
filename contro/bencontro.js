@@ -689,6 +689,7 @@ exports.viinsert_data = async function (req, res, next) {
     var data = {
       Title: req.body.Title,
       Subscribe: req.body.Subscribe,
+      Categoires: req.body.Categoires,
       Rating: req.body.Rating,
       Discription: req.body.Discription,
       Trailer_time: req.body.Trailer_time,

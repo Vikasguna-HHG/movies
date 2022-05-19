@@ -43,7 +43,7 @@ function AddVideo() {
       }
       )
       .then(function (res) {
-        console.log("hyy")
+        
         setCategoires1(res.data.data)
       })
       .catch(function (error) {
@@ -55,6 +55,9 @@ function AddVideo() {
       country()
       catagory()
     }, [])
+
+        
+
 
   const saveFile = (e) => {
     console.log(e)
@@ -71,18 +74,26 @@ function AddVideo() {
     setTrailer_video(e.target.files[0])
   }
 
-  const submit = async (e) => { 
+  const  category_submit = (e) => {
+    alert()
+    console.log(e)
+  //  setCategoires(e.target.value)
+  }
 
-    if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
-    {
-        return;
+  const submit = async (e) => { 
+  
+    
+    // if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
+    // {
+    //     return;
        
-    }
+    // }
     e.preventDefault();
     const formData = new FormData()
     formData.append('Title', Title)
     formData.append('Rating', Rating)
     formData.append('Subscribe', Subscribe)
+    formData.append('Categoires',Categoires)
     formData.append('Discription', Discription)
     formData.append('Contract', Contract)
     formData.append('Trailer_time', Trailer_time)
@@ -321,11 +332,11 @@ function AddVideo() {
       )}
       {step == 2 && (
         <>
-          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 5 }}  value={Categoires} onChange={(e)=>{setCategoires(e.target.value)}} >  
+          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 5 }}  >  
             {Categoires1.map((item, i) => {
               return(
                 <div key={i}>
-                  <CCard>
+                  <CCard value={Categoires} onClick = {category_submit()} >
                     <CCardImage  orientation="top"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
                       <CCardTitle>{item.category}</CCardTitle>
                   </CCard>
