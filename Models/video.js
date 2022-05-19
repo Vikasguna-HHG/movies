@@ -16,6 +16,9 @@ const video1 = new mongoose.Schema({
         Categoires:{
             type:String
         },
+        SubCategoires:{
+            type:String
+        },
         Discription:{
             type:String
         },

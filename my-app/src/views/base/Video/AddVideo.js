@@ -18,7 +18,10 @@ function AddVideo() {
   const [Country1, setCountry1] = useState([])
   const [Cast, setCast] = useState('')
   const [Categoires, setCategoires] = useState('')
+  const [SubCategoires, setSubCategoires] = useState('')
   const [Categoires1, setCategoires1] = useState('')
+  const [SubCategoires1, setSubCategoires1] = useState('')
+
   const [Publish, setPublish] = useState('')
   const [imageval, setImageval] = useState('')
   const [banner_video, setbanner_video] = useState('')
@@ -50,10 +53,25 @@ function AddVideo() {
         console.log(error)
       })
     }
+
+    function Subcatagory(){
+      axios.get(env.apiURL + `kfindonedata`,{
+          headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+        }
+        )
+        .then(function (res) {
+          
+          setSubCategoires1(res.data.data)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      }
     
     useEffect(() => {
       country()
       catagory()
+      Subcatagory()
     }, [])
 
         
@@ -79,22 +97,30 @@ function AddVideo() {
     // console.log(e)
    setCategoires(e)
   }
+  const  subcategory_submit = (e) => {
+    // debugger
+        // console.log(e)
+       setSubCategoires(e)
+      }
 
   const submit = async (e) => { 
   
-
+    // var User_Id =  localStorage.getItem('userId')
+      //  console.log(User_Id)
     
-    // if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
-    // {
-    //     return;
+    if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
+    {
+      
+        return;
        
-    // }
+    }
     e.preventDefault();
     const formData = new FormData()
     formData.append('Title', Title)
     formData.append('Rating', Rating)
     formData.append('Subscribe', Subscribe)
     formData.append('Categoires',Categoires)
+    formData.append('SubCategoires',SubCategoires)
     formData.append('Discription', Discription)
     formData.append('Contract', Contract)
     formData.append('Trailer_time', Trailer_time)
@@ -111,12 +137,28 @@ function AddVideo() {
       
       headers:{
       "Authorization" : `Bearer ${localStorage.getItem('token')}`,
-      "User_Id": localStorage.getItem('userId')
+      "UserId": localStorage.getItem('userId')
       
       }
 
     })
     setStep(1)
+    setTitle('')
+    setRating('')
+    setSubscribe('')
+    setCategoires('')
+    setSubCategoires('')
+    setDiscription('')
+    setDiscription('')
+    setContract('')
+    setTrailer_time('')
+    setVideo_time('')
+    setCountry('')
+    setCast('')
+    setPublish('')
+    setImageval('')
+    setbanner_video('')
+    setTrailer_video('')
   }
   
 
@@ -352,42 +394,17 @@ function AddVideo() {
       )}
       {step == 3 && (
         <>
-          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 4 }}>
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Drama</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Movies</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs>
-              <CCard>
-                <CCardImage
-                  orientation="top"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU"
-                />
-                <CCardBody>
-                  <CCardTitle>Web Series</CCardTitle>
-                </CCardBody>
-              </CCard>
-            </CCol>
+          <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 5 }}  >  
+            {SubCategoires1.map((item, i) => {
+              return(
+                <div key={i}>
+                  <CCard  value={SubCategoires} onClick={() => { subcategory_submit(item.subcategorie) }}> 
+                    <CCardImage   orientation="top" style={{width:"100%",height:"150px"}}  src={env.apiURL + `${item.image_user}`} />
+                      <CCardTitle style={{textAlign:"center",backgroundColor:"black",color:"white",marginTop:"10px"}}  >{item.subcategorie}</CCardTitle>
+                  </CCard>
+                </div>
+              )
+            })}
           </CRow>
         </>
       )}

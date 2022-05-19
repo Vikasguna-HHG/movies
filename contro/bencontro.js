@@ -686,11 +686,12 @@ exports.kUpdate_data = async function (req, res, next) {
 
 exports.viinsert_data = async function (req, res, next) {
   try {
-    console.log(req.headers.userid);
+    // console.log(req.headers);
     var data = {
       Title: req.body.Title,
       Subscribe: req.body.Subscribe,
       Categoires: req.body.Categoires,
+      SubCategoires: req.body.SubCategoires,
       Rating: req.body.Rating,
       Discription: req.body.Discription,
       Trailer_time: req.body.Trailer_time,
@@ -702,7 +703,7 @@ exports.viinsert_data = async function (req, res, next) {
       image_user: req.files[0].path,
       Trailer_video: req.files[1].path,
       banner_video: req.files[2].path,
-      User_Id: req.headers.userId,
+      User_Id: req.headers.userid,
 
     };
 
@@ -958,7 +959,7 @@ exports.Contract_data = async function (req, res, next) {
     var name = "Contact pdf-" + Date.now();
     var pdf = `upload/pdf/${name}.pdf`;
     doc.save(pdf);
-    console.log(req);
+    // console.log(req.headers.user_id);
     const data = {
       Movie_Name: req.body.Movie_Name,
       Provider_Name: req.body.Provider_Name,
