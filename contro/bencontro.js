@@ -5,13 +5,12 @@ var language = require("../Models/language");
 var video = require("../Models/video");
 var Contract = require("../Models/Contract");
 var User = require("../Models/User");
-var geoip = require('geoip-lite');
+var geoip = require("geoip-lite");
 var $ = require("jquery");
 var Country = require("../Models/Countrycode");
 
 var moment = require("moment");
 var csv = require("csvtojson");
-
 
 // var banner_schema = require("../Models/banner_video");
 var nodemailer = require("nodemailer");
@@ -35,7 +34,7 @@ const { match } = require("assert");
 const jwtkey = "movies-hhg";
 
 exports.findCountry = async function (req, res, next) {
-try {
+  try {
     const tag = await Country.find();
 
     res.status(200).json({
@@ -49,26 +48,26 @@ try {
     });
     // console.log("not find data........!");
   }
-}
+};
 exports.singlecountry = async function (req, res, next) {
   try {
-      const tag = await Country.find({country :{$in:["Afghanistan" , "Austria","Aruba"]}});
-  
-      res.status(200).json({
-        status: "find data",
-        data: tag,
-      });
-    } catch (error) {
-      res.status(201).json({
-        // data: tag,
-        status: "Data not insert",
-      });
-      // console.log("not find data........!");
-    }
+    const tag = await Country.find({
+      country: { $in: ["Afghanistan", "Austria", "Aruba"] },
+    });
+
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insert",
+    });
+    // console.log("not find data........!");
   }
+};
 exports.get_join_data = async function (req, res, next) {
-
-
   // await csv()
   // .fromFile('./upload/a1.csv')
   // .then(function(jsonArrayObj){ //when parse finished, result will be emitted here.
@@ -84,10 +83,8 @@ exports.get_join_data = async function (req, res, next) {
   //         usa_state:item.usa_state,
   //       })
   //   })
-  //    console.log(jsonArrayObj); 
+  //    console.log(jsonArrayObj);
   //  })
-
-
 
   MongoClient.connect(url, async (err, db) => {
     if (err) throw err;
@@ -108,7 +105,7 @@ exports.get_join_data = async function (req, res, next) {
           foreignField: "User_Id",
           as: "videos",
         },
-      }
+      },
     ]);
 
     res.status(200).send({
@@ -117,17 +114,15 @@ exports.get_join_data = async function (req, res, next) {
   });
 };
 
-
-exports.getlocation= async function (req, res, next) {
-  
+exports.getlocation = async function (req, res, next) {
   // var ip =  geoIp({ip:req.headers['x-forwarded-for']  || req.connection.remoteAddress})
-  var ip =  "27.57.162.145"
+  var ip = "27.57.162.145";
   // var ip = "106.205.227.72";
-var geo = geoip.lookup(ip);
+  var geo = geoip.lookup(ip);
 
   res.status(200).send({
-    ip:geo
-  })
+    ip: geo,
+  });
 };
 
 exports.insert_data = async function (req, res, next) {
@@ -273,8 +268,6 @@ exports.Minsert_data = async function (req, res, next) {
     //   res.send({ data, auth: token });
     // });
     const tag = await movie_maker.create(data);
-
- 
 
     res.status(201).json({
       data: tag,
@@ -608,48 +601,47 @@ exports.kUpdate_data = async function (req, res, next) {
 // exports.viinsert_data = async function (req, res, next) {
 
 //   try {
-    // res.status(201).json({
-    // var time = moment(req.body.rdate)
-    //   .utc()
-    //   .format("YYYY-MM-DD dddd HH:mm:ss a");
-    // date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
-    // });
+// res.status(201).json({
+// var time = moment(req.body.rdate)
+//   .utc()
+//   .format("YYYY-MM-DD dddd HH:mm:ss a");
+// date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
+// });
 
-    // const data = {
-      // v_id : video_id,
-    //   method: req.body.method,
-    //   rdate: time,
-    //   edate: req.body.edate,
-    //   status: req.body.status,
-    //   banner: req.body.banner,
-    //   title: req.body.title,
-    //   category: req.body.category,
-    //   subcategory: req.body.subcategory,
-    //   Description: req.body.Description,
-    //   language: req.body.language,
-    //   image_user: req.files[0].path,
-    //   banner_video: req.files[1].path,
-    //   Trailer_video: req.files[2].path,
-    //   User_Id: req.headers.userid,
-    // };
+// const data = {
+// v_id : video_id,
+//   method: req.body.method,
+//   rdate: time,
+//   edate: req.body.edate,
+//   status: req.body.status,
+//   banner: req.body.banner,
+//   title: req.body.title,
+//   category: req.body.category,
+//   subcategory: req.body.subcategory,
+//   Description: req.body.Description,
+//   language: req.body.language,
+//   image_user: req.files[0].path,
+//   banner_video: req.files[1].path,
+//   Trailer_video: req.files[2].path,
+//   User_Id: req.headers.userid,
+// };
 
-    // const tag = await video.create(data);
+// const tag = await video.create(data);
 
-    // res.status(201).json({
-    //   data: tag,
-    //   status: "Data insert",
-    // });
-    // console.log(tag);
-  // } catch (error) {
-  //   res.status(201).json({ error });
-    // console.log(error);
-    // res.status(201).json({
-      // data: tag,
+// res.status(201).json({
+//   data: tag,
+//   status: "Data insert",
+// });
+// console.log(tag);
+// } catch (error) {
+//   res.status(201).json({ error });
+// console.log(error);
+// res.status(201).json({
+// data: tag,
 //       status: "Data not insret",
 //     });
 //   }
 // };
-
 
 // exports.viinsert_data = async function (req, res, next) {
 // try {
@@ -692,40 +684,36 @@ exports.kUpdate_data = async function (req, res, next) {
 // }
 // };
 
-exports.viinsert_data = async function (req,res, next){
-try{
+exports.viinsert_data = async function (req, res, next) {
+  try {
+    // console.log(req.headers);
+    var data = {
+      Title: req.body.Title,
+      Subscribe: req.body.Subscribe,
+      Categoires: req.body.Categoires,
+      SubCategoires: req.body.SubCategoires,
+      Rating: req.body.Rating,
+      Discription: req.body.Discription,
+      Trailer_time: req.body.Trailer_time,
+      Video_time: req.body.Video_time,
+      Country: req.body.Country,
+      Cast: req.body.Cast,
+      Contract: req.body.Contract,
+      Publish: req.body.Publish,
+      image_user: req.files[0].path,
+      Trailer_video: req.files[1].path,
+      banner_video: req.files[2].path,
+      User_Id: req.headers.userid,
 
-  var data = {
+    };
 
-    Title:req.body.Title,
-    Age: req.body.Age,
-    Rating: req.body.Rating,
-    Discription: req.body.Discription,
-    Trailer_time: req.body.Trailer_time,
-    Video_time: req.body.Video_time,
-    Country: req.body.Country,
-    Cast: req.body.Cast,
-    Contract: req.body.Contract,
-    User_Id: req.headers.userid,
-    Publish:req.body.Publish,
-    // banner_video: req.files[0].path,
-    // Trailer_video: req.files[1].path,
-    // image_user: req.files[2].path,
-
-  }
-
-var tag = await video.create(data)
-res.status(201).json({
+    var tag = await video.create(data);
+    res.status(201).json({
       data: tag,
       status: "Data insert",
     });
-
-}
-catch{
-
-}
-}
-
+  } catch {}
+};
 
 exports.vifind_data = async function (req, res, next) {
   try {
@@ -776,33 +764,35 @@ exports.banner_find = async function (req, res, next) {
 // };
 
 exports.demo_data = async function (req, res, next) {
-  // try {
-  // console.log(req.body)
-
   const tag = await video.findById(req.params.id);
   var filePath = tag.banner_video;
 
-  var a = fs.statSync(filePath);
 
-  res.writeHead(200, {
-    "Content-Type": "video/mp4",
-    "Content-Length": a.size,
-    "Accept-Ranges": "bytes",
-  });
+  // var a = fs.statSync(filePath);
 
-  var readStream = fs.createReadStream(filePath);
-  readStream.pipe(res);
-
-  // res.status(200).json({
-  //   status: "find data",
-  //   data: [tag],
+  // res.writeHead(200, {
+  //   "Content-Type": "video/mp4",
+  //   "Content-Length": a.size,
+  //   "Accept-Ranges": "bytes",
   // });
-  // } catch (error) {
-  //   res.status(200).json({
-  //     status: "find data",
-  //     data: [],
-  //   });
-  // }
+
+  // var readStream = fs.createReadStream(filePath);
+  // readStream.pipe(res);
+
+  if (tag.Subscribe == "Free") {
+    var a = fs.statSync(filePath);
+
+    res.writeHead(200, {
+      "Content-Type": "video/mp4",
+      "Content-Length": a.size,
+      "Accept-Ranges": "bytes",
+    });
+
+    var readStream = fs.createReadStream(filePath);
+    readStream.pipe(res);
+  } else {
+    console.log("this is Paid...");
+  }
 };
 
 exports.latest_find = async function (req, res, next) {
@@ -969,7 +959,7 @@ exports.Contract_data = async function (req, res, next) {
     var name = "Contact pdf-" + Date.now();
     var pdf = `upload/pdf/${name}.pdf`;
     doc.save(pdf);
-    console.log(req);
+    // console.log(req.headers.user_id);
     const data = {
       Movie_Name: req.body.Movie_Name,
       Provider_Name: req.body.Provider_Name,
@@ -1067,27 +1057,25 @@ exports.User_data = async function (req, res, next) {
 
     const data = {
       User_Name: req.body.User_Name,
-      Mobile_No:req.body.Mobile_No,
+      Mobile_No: req.body.Mobile_No,
       Email: req.body.Email,
       Password: newpass,
-      Mobile_No:req.body.Mobile_No
+      Mobile_No: req.body.Mobile_No,
     };
 
     jwt.sign({ data }, jwtkey, async (err, token) => {
       if (err) {
         res.send({ result: "wrong...." });
       }
-   
-    const tag =  await User.create(data);
 
-    res.status(201).send({
-      status: true,
-      auth: token,
-      data: tag,
+      const tag = await User.create(data);
+
+      res.status(201).send({
+        status: true,
+        auth: token,
+        data: tag,
+      });
     });
-
-  });
-  
   }
 };
 
@@ -1097,7 +1085,6 @@ exports.client_login = async function (req, res, next) {
   // console.log(User1);
 
   if (User1) {
-
     jwt.sign({ User1 }, jwtkey, async (err, token) => {
       if (err) {
         res.send({ status: false, message: "not valid username and password" });
@@ -1110,22 +1097,32 @@ exports.client_login = async function (req, res, next) {
           status: true,
           data: User1,
           auth: token,
-          message:"1"
+          message: "1",
         });
-      }else{
+      } else {
         res.send({ status: false, message: "not valid username and password" });
       }
-
     });
-
   } else {
     res.send({ status: false, message: "not valid username and password" });
   }
 };
-  exports.new = async function(req,res,next){
-    try {
-      const tag = await Country.find({})
-    } catch (error) {
-      
-    }
+
+exports.new = async function (req, res, next) {
+  try {
+    const tag = await Country.find({});
+  } catch (error) {}
+};
+
+
+exports.Subscribe_data = async function (req, res, next) {
+  try {
+  const tag = await video.find();
+  res.status(200).json({
+    status: "find data",
+    data: tag,
+  });
+  } catch (error) {
+    console.log("not find data........!");
   }
+};

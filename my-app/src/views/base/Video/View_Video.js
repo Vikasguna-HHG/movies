@@ -24,12 +24,6 @@ import {
   CTableDataCell,
   CInputGroup,
   CInputGroupText,
-  CModalBody,
-  CModalTitle,
-  CModalHeader,
-  CModalFooter,
-  CModal,
-  CRow,
 } from '@coreui/react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -72,40 +66,13 @@ const Add_Video = () => {
   const [banner_video, setbanner_video] = useState('')
   const [Trailer_video, setTrailer_video] = useState('')
   const [list, setList] = useState([])
-  const [visible1, setVisible1] = useState(false)
-  const [visible2, setVisible2] = useState(false)
-  const [visible3, setVisible3] = useState(false)
-  const [visible4, setVisible4] = useState(false)
-
-  const [visible5, setVisible5] = useState(false)
-  const [visible6, setVisible6] = useState(false)
-  const [visible7, setVisible7] = useState(false)
-  const [visible8, setVisible8] = useState(false)
   const [search, setSearch] = useState('')
   const [currentImage, setCurrentImage] = useState(0)
   const [isViewerOpen, setIsViewerOpen] = useState(false)
 
   const [alignment, setAlignment] = React.useState('left')
 
-  function Openpopup() {
-    setcategory('')
-    setsubcategory('')
-    settitle('')
-    setmethod('')
-    setrdate('')
-    setstatus('')
-    setBanner('')
-    setedate('')
-    setLanguage('')
-    setDescription('')
-    setImageval('')
-    setbanner_video('')
-    setTrailer_video('')
-    setId(0)
-    // setsid()
-
-    setVisible1(true)
-  }
+  
 
   //toggle button
   const handleAlignment = (event, newAlignment) => {
@@ -133,49 +100,7 @@ const Add_Video = () => {
     setTrailer_video(e.target.files[0])
   }
 
-  // ------------------NEXT BUTTOON------------------//
-
-  function model1() {
-    if (!title || !category || !language) {
-      toast.warning('data Fild...!', {
-        autoClose: 2000,
-      })
-      return
-    }
-
-    setVisible1(false)
-    setVisible2(true)
-    //setVisible5(false)
-    //setVisible6(true)
-  }
-  function model2() {
-    if (!imageval || !subcategory) {
-      toast.warning('data Fild...!', {
-        autoClose: 2000,
-      })
-      return
-    }
-    setVisible2(false)
-    setVisible3(true)
-    //setVisible6(false)
-    //setVisible7(true)
-  }
-  function model3() {
-    if (!banner_video) {
-      toast.warning('data Fild...!', {
-        autoClose: 2000,
-      })
-      return
-    }
-    setVisible3(false)
-    setVisible4(true)
-    //setVisible7(false)
-    //setVisible8(true)
-  }
-
-  // const timezoneOffset = (new Date()).getTimezoneOffset();
-
-  // console.log(timezoneOffset);
+  
   // --------------------ONSUBMIT--------------------//
 
   const submit = async () => {
@@ -227,7 +152,6 @@ const Add_Video = () => {
       // } catch (ex) {
       //   console.log(ex)
       // }
-      setVisible4(false)
       settitle('')
       setmethod('')
       // setsid('')
@@ -276,10 +200,7 @@ const Add_Video = () => {
         console.log(ex)
       }
     }
-    setVisible5(false)
-    setVisible6(false)
-    setVisible7(false)
-    setVisible8(false)
+   
     setcategory('')
     setsubcategory('')
     settitle('')
@@ -297,13 +218,13 @@ const Add_Video = () => {
     // setsid('')
   
   
-    setVisible1(false)
+   
   }
 
   // --------------------EDIT DATA--------------------//
 
   const edithandler = async (id) => {
-    setVisible1(true)
+    
     axios
       .get(env.apiURL + `vifinddata/${id}`, {
         method: 'GET',
@@ -443,194 +364,6 @@ const Add_Video = () => {
     <>
       <br />
       <br />
-      {/* insert data  */}
-      <CModal className="w3-modal-content w3-animate-zoom" size="lg" visible={visible1} onClose={() => setVisible1(false)}>
-      <CModalHeader>
-        <CModalTitle><b>Add Video</b></CModalTitle>
-      </CModalHeader>
-      <CModalBody>
-      <CForm>
-            <CCard className="mb-4">
-            <CCardBody>
-            <CRow className="mb-3">
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>Title</h6>
-                </CFormLabel>
-                <CCol sm={10}>
-                  <CFormInput type="text"  placeholder="Enter Title" value={title} onChange={(e) => {settitle(e.target.value) }} />
-                </CCol>
-              </CRow>
-
-              <CRow className="mb-3">
-                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                    <h6>Method</h6>
-                  </CFormLabel>
-                <CCol sm={10}>
-                  <CFormSelect  value={method} onChange={(e) => {setmethod(e.target.value)}}>
-                    <option align="center" selected>
-                        Select Method
-                    </option>
-                    <option value="Free">Free</option>
-                    <option value="Paid">Paid</option>
-                  </CFormSelect>
-                </CCol>
-              </CRow>
-
-
-
-
-              <CRow className="mb-3">
-                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                    <h6>Language</h6>
-                  </CFormLabel>
-                <CCol sm={10}>
-                  <CFormSelect  value={language} onChange={(e) => {setLanguage(e.target.value)}}>
-                    <option align="center" selected>
-                      Select Language
-                    </option>
-                    {language1.map((item, i) => (
-                      <option key={i}>{item.language}</option>
-                    ))}
-                  </CFormSelect>
-                </CCol>
-              </CRow>
-
-
-
-              <CRow className="mb-3">
-                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                    <h6>Category</h6>
-                  </CFormLabel>
-                <CCol sm={10}>
-                  <CFormSelect  value={category} onChange={(e) => {setcategory(e.target.value)}}>
-                    <option align="center" selected>
-                      Select Category
-                    </option>
-                    {category1.map((item, i) => (
-                      <option key={i}>{item.category}</option>
-                    ))}   
-                  </CFormSelect>
-                </CCol>
-              </CRow>       
-
-
-              <CRow className="mb-3">
-                  <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                    <h6>SubCategory</h6>
-                  </CFormLabel>
-                <CCol sm={10}>
-                  <CFormSelect  value={subcategory} onChange={(e) => {setsubcategory(e.target.value)}}>
-                    <option align="center" selected>
-                      Select SubCategory
-                    </option>
-                    {subcategory1.map((item, i) => (
-                        <option key={i}>{item.subcategorie}</option>
-                      ))}  
-                  </CFormSelect>
-                </CCol>
-              </CRow>   
-
-
-
-              <CRow className="mb-3">
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>Release Date</h6>
-                </CFormLabel>
-                <CCol sm={4}>
-                  <CFormInput type="date" value={rdate} onChange={(e) => {setrdate(e.target.value)}} id="num" />
-                </CCol>
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>Expiry Date</h6>
-                </CFormLabel>
-                <CCol sm={4}>
-                  <CFormInput type="date" value={edate} onChange={(e) => {setedate(e.target.value)}} />
-                </CCol>
-              </CRow>
-
-
-              <CRow className="mb-3">
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>Status</h6>
-                </CFormLabel>
-                <CCol sm={4}>
-                  <CFormCheck type="radio"  name="status" value="Active" label="Active" onChange={(e) => {setstatus(e.target.value)}}  />
-                  <CFormCheck type="radio"  name="status" value="Inactive" label="Inactive" onChange={(e) => {setstatus(e.target.value)}}  />
-                </CCol>
-                
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>Is In Banner</h6>
-                </CFormLabel>
-                <CCol sm={4}>
-                  <CFormCheck type="radio"  name="banner" value="Yes" label="Yes" onChange={(e) => {setBanner(e.target.value)}}  />
-                  <CFormCheck type="radio"  name="banner" value="No" label="No" onChange={(e) => {setBanner(e.target.value)}}  />
-                </CCol>
-              </CRow>
-
-
-              <CRow className="mb-3">
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>SELECT-IMAGE</h6>
-                </CFormLabel>
-                <CCol sm={10}>
-                  <CFormInput type="file"   onChange={saveFile}  accept=".jpg, .jpeg, .png"/>
-                </CCol>
-              </CRow>        
-
-
-
-              <CRow className="mb-3">
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>Trailer-video</h6>
-                </CFormLabel>
-                <CCol sm={10}>
-                  <CFormInput type="file" onChange={saveFile2}  accept=".mp4 , video" />
-                </CCol>
-              </CRow> 
-
-
-              <CRow className="mb-3">
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6>SELECT-Video</h6>
-                </CFormLabel>
-                <CCol sm={10}>
-                  <CFormInput type="file" onChange={saveFile1}  accept=".mp4 , video"/>
-                </CCol>
-              </CRow> 
-
-
-
-
-              <CRow className="mb-3">
-                <CFormLabel htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                  <h6> Description</h6>
-                </CFormLabel>
-                <CCol sm={10}>
-                  <CFormTextarea
-                    type="textarea"
-                    placeholder="Enter Description"
-                    value={Description}
-                    onChange={(e) => {
-                      setDescription(e.target.value)
-                    }}
-                  />
-                </CCol>
-              </CRow>
-
-              <CModalFooter>
-                <CButton className="btn1" id="submit" onClick={submit}>
-                  Save
-                </CButton>
-              </CModalFooter>
-            </CCardBody>
-            </CCard>
-            </CForm>
-
-
-      </CModalBody>
-    </CModal>
-
-
-
       {/*Table and search  */}
 
       <CCol xs={12} id="table2">
@@ -683,13 +416,11 @@ const Add_Video = () => {
                 
               </Link> */}
 
-              <CButton
-                style={{ marginLeft: '50px', borderRadius: '5px' }}
-                className="btn1"
-                onClick={() => Openpopup()}
-              >
-                Add Video
-              </CButton>
+            <Link to="/base/Add_Video">
+                  <CButton style={{ marginLeft: '50px', borderRadius: '5px' }}  className="btn1" >
+                    Add Video
+                  </CButton>
+             </Link>
             </CInputGroup>
             <br></br>
             <CTable style={{ textAlign: 'center' }} hover>
@@ -698,7 +429,7 @@ const Add_Video = () => {
                   <CTableHeaderCell style={{ color: 'white' }}>No</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Title</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Rating</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Age</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Subscribe</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Discription</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Contract</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Trailer time </CTableHeaderCell>
@@ -744,7 +475,7 @@ const Add_Video = () => {
                             {item.Rating}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.Age}
+                            {item.Subscribe}
                           </CTableDataCell>
                           <CTableDataCell
                             className="font"
@@ -892,13 +623,11 @@ const Add_Video = () => {
                 </ToggleButton>
               </ToggleButtonGroup>
 
-              <CButton
-                style={{ marginLeft: '50px', borderRadius: '5px' }}
-                className="btn1"
-                onClick={() => setVisible1(true)}
-              >
-                Add Video
-              </CButton>
+              <Link to="/base/Add_Video">
+                  <CButton style={{ marginLeft: '50px', borderRadius: '5px' }}  className="btn1" >
+                    Add Video
+                  </CButton>
+             </Link>
             </CInputGroup>
             <br></br>
             {list
@@ -962,7 +691,7 @@ const Add_Video = () => {
                           <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Rating}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Age}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Subscribe}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
                           <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Contract}

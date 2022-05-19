@@ -93,14 +93,12 @@ router.post('/Contract',verifyToken,upload.single('image'), BannerController.Con
 router.get('/demo/:id',BannerController.demo_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
 router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
-// router.get('/demo/:id',BannerController.demo_data);
 
 
-
-
+//client panel login - registered
 router.post('/User',upload.single('image'),BannerController.User_data);
 router.post('/login',upload.single('image'),BannerController.client_login);
-// router.post('/Userfind',upload.single('image'),BannerController.User_find);
-// router.post('/Register',upload.single('image'),BannerController.Register_data);
+router.get('/Subscribe',BannerController.Subscribe_data);
+
 
 module.exports = router;

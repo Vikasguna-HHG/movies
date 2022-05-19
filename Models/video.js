@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-// var Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 const video1 = new mongoose.Schema({
     
 
@@ -10,7 +10,13 @@ const video1 = new mongoose.Schema({
         Rating:{
             type:String
         },
-        Age:{
+        Subscribe:{
+            type:String
+        },
+        Categoires:{
+            type:String
+        },
+        SubCategoires:{
             type:String
         },
         Discription:{
@@ -46,6 +52,10 @@ const video1 = new mongoose.Schema({
 
             type:String
         },
+        User_Id:{
+
+             type: Schema.ObjectId
+        }
 
 
 
