@@ -934,7 +934,7 @@ exports.Contract_find_data = async function (req, res, next) {
 exports.Contract_data = async function (req, res, next) {
   try {
     const { jsPDF } = require("jspdf");
-
+    var status = 2;
     const doc = new jsPDF();
     doc.text(
       "******************************* Contract *******************************",
@@ -976,6 +976,7 @@ exports.Contract_data = async function (req, res, next) {
       DIN: req.body.DIN,
       Contract_pdf: pdf,
       User_Id: req.headers.user_id,
+      Status:status,
     };
 
     const tag = await Contract.create(data);
@@ -997,9 +998,10 @@ exports.Status_data = async function (req, res, next) {
   try {
     var BannerData = await Contract.findById(req.body.Id);
     BannerData.Status = req.body.Status;
-    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
-
+      console.log(req.body.Status);
     if (req.body.Status == 2) {
+
+
       var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -1033,7 +1035,8 @@ exports.Status_data = async function (req, res, next) {
     } else {
       console.log("Email Not Send....!");
     }
-
+    console.log(req.body.Id);
+    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: tag,
