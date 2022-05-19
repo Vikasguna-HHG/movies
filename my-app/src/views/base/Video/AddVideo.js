@@ -196,7 +196,7 @@ function AddVideo() {
                         setSubscribe(e.target.value)
                       }}
                     >
-                      <option>Select Age</option>
+                      <option>Select Method</option>
                       <option value="Free">Free</option>
                       <option value="Paid">Paid</option>
                     </CFormSelect>

@@ -698,7 +698,7 @@ const Add_Video = () => {
                   <CTableHeaderCell style={{ color: 'white' }}>No</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Title</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Rating</CTableHeaderCell>
-                  <CTableHeaderCell style={{ color: 'white' }}>Age</CTableHeaderCell>
+                  <CTableHeaderCell style={{ color: 'white' }}>Subscribe</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Discription</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Contract</CTableHeaderCell>
                   <CTableHeaderCell style={{ color: 'white' }}>Trailer time </CTableHeaderCell>
@@ -744,7 +744,7 @@ const Add_Video = () => {
                             {item.Rating}
                           </CTableDataCell>
                           <CTableDataCell style={{ paddingTop: '30px', color: '#FFF' }}>
-                            {item.Age}
+                            {item.Subscribe}
                           </CTableDataCell>
                           <CTableDataCell
                             className="font"
@@ -962,7 +962,7 @@ const Add_Video = () => {
                           <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Rating}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
-                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Age}
+                          <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Subscribe}
                         </CCardText>
                         <CCardText style={{ color: 'white' }}>
                           <FaHandPointRight style={{ color: '#3A6073' }} /> {item.Contract}

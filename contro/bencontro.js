@@ -688,7 +688,7 @@ exports.viinsert_data = async function (req, res, next) {
   try {
     var data = {
       Title: req.body.Title,
-      Age: req.body.Age,
+      Subscribe: req.body.Subscribe,
       Rating: req.body.Rating,
       Discription: req.body.Discription,
       Trailer_time: req.body.Trailer_time,
@@ -698,9 +698,9 @@ exports.viinsert_data = async function (req, res, next) {
       Contract: req.body.Contract,
       User_Id: req.headers.userid,
       Publish: req.body.Publish,
-      // banner_video: req.files[0].path,
-      // Trailer_video: req.files[1].path,
-      // image_user: req.files[2].path,
+      image_user: req.files[0].path,
+      Trailer_video: req.files[1].path,
+      banner_video: req.files[2].path,
     };
 
     var tag = await video.create(data);
@@ -760,33 +760,23 @@ exports.banner_find = async function (req, res, next) {
 // };
 
 exports.demo_data = async function (req, res, next) {
-  // try {
-  // console.log(req.body)
-
   const tag = await video.findById(req.params.id);
   var filePath = tag.banner_video;
 
-  var a = fs.statSync(filePath);
+  if (tag.Subscribe == "Free") {
+    var a = fs.statSync(filePath);
 
-  res.writeHead(200, {
-    "Content-Type": "video/mp4",
-    "Content-Length": a.size,
-    "Accept-Ranges": "bytes",
-  });
+    res.writeHead(200, {
+      "Content-Type": "video/mp4",
+      "Content-Length": a.size,
+      "Accept-Ranges": "bytes",
+    });
 
-  var readStream = fs.createReadStream(filePath);
-  readStream.pipe(res);
-
-  // res.status(200).json({
-  //   status: "find data",
-  //   data: [tag],
-  // });
-  // } catch (error) {
-  //   res.status(200).json({
-  //     status: "find data",
-  //     data: [],
-  //   });
-  // }
+    var readStream = fs.createReadStream(filePath);
+    readStream.pipe(res);
+  } else {
+    console.log("this is Paid...");
+  }
 };
 
 exports.latest_find = async function (req, res, next) {
@@ -1106,4 +1096,17 @@ exports.new = async function (req, res, next) {
   try {
     const tag = await Country.find({});
   } catch (error) {}
+};
+
+
+exports.Subscribe_data = async function (req, res, next) {
+  try {
+  const tag = await video.find({Subscribe: "Free"});
+  res.status(200).json({
+    status: "find data",
+    data: tag,
+  });
+  } catch (error) {
+    console.log("not find data........!");
+  }
 };

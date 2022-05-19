@@ -10,7 +10,7 @@ const video1 = new mongoose.Schema({
         Rating:{
             type:String
         },
-        Age:{
+        Subscribe:{
             type:String
         },
         Discription:{
