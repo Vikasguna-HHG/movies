@@ -686,6 +686,7 @@ exports.kUpdate_data = async function (req, res, next) {
 
 exports.viinsert_data = async function (req, res, next) {
   try {
+    console.log(req.headers.userid);
     var data = {
       Title: req.body.Title,
       Subscribe: req.body.Subscribe,
@@ -697,11 +698,12 @@ exports.viinsert_data = async function (req, res, next) {
       Country: req.body.Country,
       Cast: req.body.Cast,
       Contract: req.body.Contract,
-      User_Id: req.headers.userid,
       Publish: req.body.Publish,
       image_user: req.files[0].path,
       Trailer_video: req.files[1].path,
       banner_video: req.files[2].path,
+      User_Id: req.headers.userId,
+
     };
 
     var tag = await video.create(data);

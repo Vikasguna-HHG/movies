@@ -75,13 +75,14 @@ function AddVideo() {
   }
 
   const  category_submit = (e) => {
-    alert()
-    console.log(e)
-  //  setCategoires(e.target.value)
+// debugger
+    // console.log(e)
+   setCategoires(e)
   }
 
   const submit = async (e) => { 
   
+
     
     // if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
     // {
@@ -104,17 +105,20 @@ function AddVideo() {
     formData.append('image_user', imageval)
     formData.append('Trailer_video', Trailer_video)
     formData.append('banner_video', banner_video)
-    console.log(formData);
-    
+
     await axios.post(env.apiURL + 'viInsertBanner',formData,
     {
+      
       headers:{
       "Authorization" : `Bearer ${localStorage.getItem('token')}`,
       "User_Id": localStorage.getItem('userId')
+      
       }
+
     })
     setStep(1)
   }
+  
 
   return (
     <>
@@ -336,9 +340,9 @@ function AddVideo() {
             {Categoires1.map((item, i) => {
               return(
                 <div key={i}>
-                  <CCard value={Categoires} onClick = {category_submit()} >
+                  <CCard  value={Categoires} onClick={() => { category_submit(item.category) }}> 
                     <CCardImage  orientation="top"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs5eQ5Opr0NqjS3ue3GJSUJkFNauKAkv5rBw&usqp=CAU" />
-                      <CCardTitle>{item.category}</CCardTitle>
+                      <CCardTitle  >{item.category}</CCardTitle>
                   </CCard>
                 </div>
               )
