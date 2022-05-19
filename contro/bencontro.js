@@ -704,7 +704,6 @@ exports.viinsert_data = async function (req, res, next) {
       Trailer_video: req.files[1].path,
       banner_video: req.files[2].path,
       User_Id: req.headers.userid,
-
     };
 
     var tag = await video.create(data);
@@ -767,18 +766,6 @@ exports.demo_data = async function (req, res, next) {
   const tag = await video.findById(req.params.id);
   var filePath = tag.banner_video;
 
-
-  // var a = fs.statSync(filePath);
-
-  // res.writeHead(200, {
-  //   "Content-Type": "video/mp4",
-  //   "Content-Length": a.size,
-  //   "Accept-Ranges": "bytes",
-  // });
-
-  // var readStream = fs.createReadStream(filePath);
-  // readStream.pipe(res);
-
   if (tag.Subscribe == "Free") {
     var a = fs.statSync(filePath);
 
@@ -786,12 +773,15 @@ exports.demo_data = async function (req, res, next) {
       "Content-Type": "video/mp4",
       "Content-Length": a.size,
       "Accept-Ranges": "bytes",
+      // status: true
     });
 
     var readStream = fs.createReadStream(filePath);
     readStream.pipe(res);
   } else {
-    console.log("this is Paid...");
+    res.status(200).json({
+      status: false,
+    });
   }
 };
 
@@ -1114,14 +1104,13 @@ exports.new = async function (req, res, next) {
   } catch (error) {}
 };
 
-
 exports.Subscribe_data = async function (req, res, next) {
   try {
-  const tag = await video.find();
-  res.status(200).json({
-    status: "find data",
-    data: tag,
-  });
+    const tag = await video.find();
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
   } catch (error) {
     console.log("not find data........!");
   }

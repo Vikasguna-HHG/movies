@@ -25,7 +25,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
-  const [_, userId,sid, handleLoginState] = useContext(AppContext)
+  const [_, userId, sid, handleLoginState] = useContext(AppContext)
 
   localStorage.removeItem('user-info')
 
@@ -49,12 +49,10 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (userId){
+    if (userId) {
       navigate('/base/View_Video')
-    } 
+    }
   }, [])
-
-
 
   // const data = useContext(Appcontext)
   return (
