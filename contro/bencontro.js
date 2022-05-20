@@ -767,18 +767,6 @@ exports.demo_data = async function (req, res, next) {
   const tag = await video.findById(req.params.id);
   var filePath = tag.banner_video;
 
-
-  // var a = fs.statSync(filePath);
-
-  // res.writeHead(200, {
-  //   "Content-Type": "video/mp4",
-  //   "Content-Length": a.size,
-  //   "Accept-Ranges": "bytes",
-  // });
-
-  // var readStream = fs.createReadStream(filePath);
-  // readStream.pipe(res);
-
   if (tag.Subscribe == "Free") {
     var a = fs.statSync(filePath);
 
@@ -786,7 +774,6 @@ exports.demo_data = async function (req, res, next) {
       "Content-Type": "video/mp4",
       "Content-Length": a.size,
       "Accept-Ranges": "bytes",
-
       status: true,
 
     });
@@ -794,7 +781,9 @@ exports.demo_data = async function (req, res, next) {
     var readStream = fs.createReadStream(filePath);
     readStream.pipe(res);
   } else {
-    console.log("this is Paid...");
+    res.status(200).json({
+      status: false,
+    });
   }
 };
 

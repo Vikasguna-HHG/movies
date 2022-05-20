@@ -106,7 +106,7 @@ const Add_Video = () => {
   const submit = async () => {
     if (!Description) {
       toast.warning('data Fild...!', {
-        autoClose: 2000,
+        autoClose: 200,
       })
       return
     }
