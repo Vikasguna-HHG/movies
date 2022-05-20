@@ -704,6 +704,7 @@ exports.viinsert_data = async function (req, res, next) {
       Trailer_video: req.files[1].path,
       banner_video: req.files[2].path,
       User_Id: req.headers.userid,
+
     };
 
     var tag = await video.create(data);
@@ -766,6 +767,18 @@ exports.demo_data = async function (req, res, next) {
   const tag = await video.findById(req.params.id);
   var filePath = tag.banner_video;
 
+
+  // var a = fs.statSync(filePath);
+
+  // res.writeHead(200, {
+  //   "Content-Type": "video/mp4",
+  //   "Content-Length": a.size,
+  //   "Accept-Ranges": "bytes",
+  // });
+
+  // var readStream = fs.createReadStream(filePath);
+  // readStream.pipe(res);
+
   if (tag.Subscribe == "Free") {
     var a = fs.statSync(filePath);
 
@@ -773,15 +786,15 @@ exports.demo_data = async function (req, res, next) {
       "Content-Type": "video/mp4",
       "Content-Length": a.size,
       "Accept-Ranges": "bytes",
+
       status: true,
+
     });
 
     var readStream = fs.createReadStream(filePath);
     readStream.pipe(res);
   } else {
-    res.status(200).json({
-      status: false,
-    });
+    console.log("this is Paid...");
   }
 };
 
@@ -925,6 +938,10 @@ exports.Contract_data = async function (req, res, next) {
   try {
     const { jsPDF } = require("jspdf");
 
+
+
+    var status = 2;
+
     const doc = new jsPDF();
     doc.text(
       "******************************* Contract *******************************",
@@ -966,6 +983,7 @@ exports.Contract_data = async function (req, res, next) {
       DIN: req.body.DIN,
       Contract_pdf: pdf,
       User_Id: req.headers.user_id,
+      Status:status,
     };
 
     const tag = await Contract.create(data);
@@ -987,9 +1005,10 @@ exports.Status_data = async function (req, res, next) {
   try {
     var BannerData = await Contract.findById(req.body.Id);
     BannerData.Status = req.body.Status;
-    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
-
+      console.log(req.body.Status);
     if (req.body.Status == 2) {
+
+
       var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -1023,7 +1042,8 @@ exports.Status_data = async function (req, res, next) {
     } else {
       console.log("Email Not Send....!");
     }
-
+    console.log(req.body.Id);
+    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: tag,
@@ -1104,13 +1124,14 @@ exports.new = async function (req, res, next) {
   } catch (error) {}
 };
 
+
 exports.Subscribe_data = async function (req, res, next) {
   try {
-    const tag = await video.find();
-    res.status(200).json({
-      status: "find data",
-      data: tag,
-    });
+  const tag = await video.find();
+  res.status(200).json({
+    status: "find data",
+    data: tag,
+  });
   } catch (error) {
     console.log("not find data........!");
   }

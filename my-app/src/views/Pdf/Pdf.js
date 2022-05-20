@@ -26,7 +26,7 @@ export default function Pdf() {
 
   //Submit data
   const Approval = async (id) => {
-    var Status = '2'
+    var Status = '0'
     const formData = new FormData()
     formData.append('Id', id)
     formData.append('Status', Status)
