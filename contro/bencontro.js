@@ -773,7 +773,7 @@ exports.demo_data = async function (req, res, next) {
       "Content-Type": "video/mp4",
       "Content-Length": a.size,
       "Accept-Ranges": "bytes",
-      // status: true
+      status: true,
     });
 
     var readStream = fs.createReadStream(filePath);
@@ -924,7 +924,7 @@ exports.Contract_find_data = async function (req, res, next) {
 exports.Contract_data = async function (req, res, next) {
   try {
     const { jsPDF } = require("jspdf");
-    
+
     const doc = new jsPDF();
     doc.text(
       "******************************* Contract *******************************",
