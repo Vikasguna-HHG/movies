@@ -84,6 +84,7 @@ router.delete('/kDeleteBanner/:id', verifyToken,upload.single('image'), BannerCo
 //keyur api end
 
 router.get('/bannerfind',verifyToken,BannerController.banner_find);
+router.get('/bannerfind_id/:id',BannerController.banner_find_id);
 // router.post('/videofind',BannerController.video_find);
 router.get('/Latest',verifyToken,BannerController.latest_find);
 router.get('/Upcoming',verifyToken,BannerController.Upcoming_find);

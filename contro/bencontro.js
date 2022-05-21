@@ -745,6 +745,22 @@ exports.banner_find = async function (req, res, next) {
   // }
 };
 
+exports.banner_find_id = async function (req, res, next) {
+ 
+try {
+  const tag = await video.findById(req.params.id);
+  res.status(200).json({
+    status: "find data",
+    data: tag,
+  });
+} catch (error) {
+  res.status(200).json({
+    status: false,
+  });
+}
+  
+};
+
 // exports.video_find = async function (req, res, next) {
 //   try {
 //     // console.log(req.body)
@@ -786,12 +802,16 @@ exports.demo_data = async function (req, res, next) {
       "Content-Type": "video/mp4",
       "Content-Length": a.size,
       "Accept-Ranges": "bytes",
+      status: true
     });
 
     var readStream = fs.createReadStream(filePath);
     readStream.pipe(res);
   } else {
     console.log("this is Paid...");
+    res.json({
+      status: false
+    })
   }
 };
 
