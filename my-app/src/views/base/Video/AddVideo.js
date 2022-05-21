@@ -4,6 +4,7 @@ import { Container, Form, Row, Col } from 'react-bootstrap'
 import { env } from 'src/environment'
 import axios from 'axios'
 import './AddVideo.css'
+import { toast } from 'react-toastify'
 
 function AddVideo() {
   const [step, setStep] = useState(1)
@@ -108,40 +109,53 @@ function AddVideo() {
     // var User_Id =  localStorage.getItem('userId')
       //  console.log(User_Id)
     
-    if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish || !imageval || !Trailer_video || !banner_video)
+    if(!Title || !Rating || !Subscribe || !Discription || !Contract || !Trailer_time || !Video_time || !Country ||  !Cast  || !Publish)
     {
-      
-        return;
-       
+      toast.warning('please fil data', {
+        autoClose: 1000,
+      })
+      return
     }
-    e.preventDefault();
-    const formData = new FormData()
-    formData.append('Title', Title)
-    formData.append('Rating', Rating)
-    formData.append('Subscribe', Subscribe)
-    formData.append('Categoires',Categoires)
-    formData.append('SubCategoires',SubCategoires)
-    formData.append('Discription', Discription)
-    formData.append('Contract', Contract)
-    formData.append('Trailer_time', Trailer_time)
-    formData.append('Video_time', Video_time)
-    formData.append('Country', Country)
-    formData.append('Cast', Cast)
-    formData.append('Publish', Publish)
-    formData.append('image_user', imageval)
-    formData.append('Trailer_video', Trailer_video)
-    formData.append('banner_video', banner_video)
 
-    await axios.post(env.apiURL + 'viInsertBanner',formData,
-    {
-      
-      headers:{
-      "Authorization" : `Bearer ${localStorage.getItem('token')}`,
-      "UserId": localStorage.getItem('userId')
-      
-      }
+    
+    // if(Title == '')
+    // {
+            e.preventDefault();
+            const formData = new FormData()
+            formData.append('Title', Title)
+            formData.append('Rating', Rating)
+            formData.append('Subscribe', Subscribe)
+            formData.append('Categoires',Categoires)
+            formData.append('SubCategoires',SubCategoires)
+            formData.append('Discription', Discription)
+            formData.append('Contract', Contract)
+            formData.append('Trailer_time', Trailer_time)
+            formData.append('Video_time', Video_time)
+            formData.append('Country', Country)
+            formData.append('Cast', Cast)
+            formData.append('Publish', Publish)
+            formData.append('image_user', imageval)
+            formData.append('Trailer_video', Trailer_video)
+            formData.append('banner_video', banner_video)
 
-    })
+            await axios.post(env.apiURL + 'viInsertBanner',formData,
+            {
+              
+              headers:{
+              "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+              "UserId": localStorage.getItem('userId')
+              
+              }
+
+            })
+        //   }
+        
+        // else
+        // {
+        //   alert("Fill")
+        // }
+          
+      
     setStep(1)
     setTitle('')
     setRating('')
@@ -159,8 +173,8 @@ function AddVideo() {
     setImageval('')
     setbanner_video('')
     setTrailer_video('')
-  }
-  
+ 
+          } 
 
   return (
     <>
