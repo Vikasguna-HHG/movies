@@ -37,7 +37,7 @@ const Login = () => {
         localStorage.setItem('sid', res.data.User.sid)
         localStorage.setItem('userId', res.data.User._id)
         localStorage.setItem('token', res.data.auth)
-        localStorage.setItem('userName', res.data.User.User_Name)
+        // localStorage.setItem('userName', res.data.User.User_Name)
 
         window.location.href = window.location.href
       } else {
