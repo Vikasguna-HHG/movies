@@ -28,6 +28,9 @@ const { data } = require("jquery");
 const { time } = require("console");
 // const { token } = require("morgan");
 
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
+
 //jwt ...
 const jwt = require("jsonwebtoken");
 const { match } = require("assert");
@@ -704,7 +707,6 @@ exports.viinsert_data = async function (req, res, next) {
       Trailer_video: req.files[1].path,
       banner_video: req.files[2].path,
       User_Id: req.headers.userid,
-
     };
 
     var tag = await video.create(data);
@@ -746,19 +748,17 @@ exports.banner_find = async function (req, res, next) {
 };
 
 exports.banner_find_id = async function (req, res, next) {
- 
-try {
-  const tag = await video.findById(req.params.id);
-  res.status(200).json({
-    status: "find data",
-    data: tag,
-  });
-} catch (error) {
-  res.status(200).json({
-    status: false,
-  });
-}
-  
+  try {
+    const tag = await video.findById(req.params.id);
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    res.status(200).json({
+      status: false,
+    });
+  }
 };
 
 // exports.video_find = async function (req, res, next) {
@@ -783,7 +783,6 @@ exports.demo_data = async function (req, res, next) {
   const tag = await video.findById(req.params.id);
   var filePath = tag.banner_video;
 
-
   // var a = fs.statSync(filePath);
 
   // res.writeHead(200, {
@@ -802,7 +801,7 @@ exports.demo_data = async function (req, res, next) {
       "Content-Type": "video/mp4",
       "Content-Length": a.size,
       "Accept-Ranges": "bytes",
-      status: true
+      status: true,
     });
 
     var readStream = fs.createReadStream(filePath);
@@ -810,8 +809,8 @@ exports.demo_data = async function (req, res, next) {
   } else {
     console.log("this is Paid...");
     res.json({
-      status: false
-    })
+      status: false,
+    });
   }
 };
 
@@ -996,7 +995,7 @@ exports.Contract_data = async function (req, res, next) {
       DIN: req.body.DIN,
       Contract_pdf: pdf,
       User_Id: req.headers.user_id,
-      Status:status,
+      Status: status,
     };
 
     const tag = await Contract.create(data);
@@ -1018,10 +1017,8 @@ exports.Status_data = async function (req, res, next) {
   try {
     var BannerData = await Contract.findById(req.body.Id);
     BannerData.Status = req.body.Status;
-      console.log(req.body.Status);
+    console.log(req.body.Status);
     if (req.body.Status == 2) {
-
-
       var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -1137,15 +1134,61 @@ exports.new = async function (req, res, next) {
   } catch (error) {}
 };
 
-
 exports.Subscribe_data = async function (req, res, next) {
   try {
-  const tag = await video.find();
-  res.status(200).json({
-    status: "find data",
-    data: tag,
-  });
+    const tag = await video.find();
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
   } catch (error) {
     console.log("not find data........!");
+  }
+};
+
+exports.orders = async function (req, res, next) {
+  try {
+    var instance = new Razorpay({
+      key_id: "rzp_test_ii0W1QDV7ASF82",
+      key_secret: "IT15QuqA3ITcGyygcZdogiPt",
+    });
+
+    const options = {
+      amount: req.body.amount * 100,
+      currency: "INR",
+      receipt: crypto.randomBytes(10).toString("hex"),
+    };
+
+    instance.orders.create(options, (error, order) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Something Went Wrong!" });
+      }
+      res.status(200).json({ data: order });
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(error);
+  }
+};
+
+exports.verify = async function (req, res, next) {
+  try {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+      req.body;
+    const sign = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSign = crypto
+      .createHmac("sha256", IT15QuqA3ITcGyygcZdogiPt)
+      .update(sign.toString())
+      .digest("hex");
+
+    if (razorpay_signature === expectedSign) {
+      return res.status(200).json({ message: "Payment verified successfully" });
+    } else {
+      return res.status(400).json({ message: "Invalid signature sent!" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error!" });
+    console.log(error);
   }
 };

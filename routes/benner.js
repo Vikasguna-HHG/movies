@@ -85,7 +85,6 @@ router.delete('/kDeleteBanner/:id', verifyToken,upload.single('image'), BannerCo
 
 router.get('/bannerfind',verifyToken,BannerController.banner_find);
 router.get('/bannerfind_id/:id',BannerController.banner_find_id);
-// router.post('/videofind',BannerController.video_find);
 router.get('/Latest',verifyToken,BannerController.latest_find);
 router.get('/Upcoming',verifyToken,BannerController.Upcoming_find);
 
@@ -101,5 +100,8 @@ router.post('/User',upload.single('image'),BannerController.User_data);
 router.post('/login',upload.single('image'),BannerController.client_login);
 router.get('/Subscribe',BannerController.Subscribe_data);
 
+//payment getway
+router.post('/orders',BannerController.orders);
+router.post('/verify',BannerController.verify);
 
 module.exports = router;
