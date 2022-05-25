@@ -21,7 +21,7 @@ if (sid === '1') {
     },
     {
       component: CNavItem,
-      name: 'View_Contract',
+      name: 'View Contract',
       to: '/base/View_Contract',
       icon: <CIcon icon={cilShareAll} customClassName="nav-icon" />,
     },

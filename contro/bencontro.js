@@ -28,6 +28,9 @@ const { data } = require("jquery");
 const { time } = require("console");
 // const { token } = require("morgan");
 
+const Razorpay = require("razorpay");
+const crypto = require("crypto");
+
 //jwt ...
 const jwt = require("jsonwebtoken");
 const { match } = require("assert");
@@ -68,7 +71,24 @@ exports.findCountry = async function (req, res, next) {
     // console.log("not find data........!");
   }
 };
+exports.singlecountry = async function (req, res, next) {
+  try {
+    const tag = await Country.find({
+      country: { $in: ["Afghanistan", "Austria", "Aruba"] },
+    });
 
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    res.status(201).json({
+      // data: tag,
+      status: "Data not insert",
+    });
+    // console.log("not find data........!");
+  }
+};
 exports.get_join_data = async function (req, res, next) {
   // await csv()
   // .fromFile('./upload/a1.csv')
@@ -600,11 +620,100 @@ exports.kUpdate_data = async function (req, res, next) {
 };
 
 //video api
+// exports.viinsert_data = async function (req, res, next) {
+
+//   try {
+// res.status(201).json({
+// var time = moment(req.body.rdate)
+//   .utc()
+//   .format("YYYY-MM-DD dddd HH:mm:ss a");
+// date:moment(req.body.rdate).format('YYYY-MM-DD dddd HH:mm:ss a')
+// });
+
+// const data = {
+// v_id : video_id,
+//   method: req.body.method,
+//   rdate: time,
+//   edate: req.body.edate,
+//   status: req.body.status,
+//   banner: req.body.banner,
+//   title: req.body.title,
+//   category: req.body.category,
+//   subcategory: req.body.subcategory,
+//   Description: req.body.Description,
+//   language: req.body.language,
+//   image_user: req.files[0].path,
+//   banner_video: req.files[1].path,
+//   Trailer_video: req.files[2].path,
+//   User_Id: req.headers.userid,
+// };
+
+// const tag = await video.create(data);
+
+// res.status(201).json({
+//   data: tag,
+//   status: "Data insert",
+// });
+// console.log(tag);
+// } catch (error) {
+//   res.status(201).json({ error });
+// console.log(error);
+// res.status(201).json({
+// data: tag,
+//       status: "Data not insret",
+//     });
+//   }
+// };
+
+// exports.viinsert_data = async function (req, res, next) {
+// try {
+//   console.log("tt");
+
+//   const data = {
+
+//     // v_id : video_id,
+//     Title:req.body.Title,
+//     Age: req.body.Age,
+//     Rating: req.body.Rating,
+//     Discription: req.body.Discription,
+//     Trailer_time: req.body.Trailer_time,
+//     Video_time: req.body.Video_time,
+//     Country: req.body.Country,
+//     Cast: req.body.Cast,
+//     Contract: req.body.Contract,
+//     User_Id: req.headers.userid,
+//     Publish:req.body.Publish,
+//     // banner_video: req.files[0].path,
+//     // Trailer_video: req.files[1].path,
+//     // image_user: req.files[2].path,
+//   };
+
+//   const tag = await video.create(data);
+
+//   res.status(201).json({
+//     data: tag,
+//     status: "Data insert",
+//   });
+//   console.log(tag);
+// }
+//  catch (error) {
+//   // res.status(201).json({ error });
+//   console.log(error);
+//   res.status(201).json({
+//     // data: tag,
+//     status: "Data not insret",
+//   });
+// }
+// };
+
 exports.viinsert_data = async function (req, res, next) {
   try {
-    const data = {
+    // console.log(req.headers);
+    var data = {
       Title: req.body.Title,
-      Age: req.body.Age,
+      Subscribe: req.body.Subscribe,
+      Categoires: req.body.Categoires,
+      SubCategoires: req.body.SubCategoires,
       Rating: req.body.Rating,
       Discription: req.body.Discription,
       Trailer_time: req.body.Trailer_time,
@@ -614,23 +723,17 @@ exports.viinsert_data = async function (req, res, next) {
       Contract: req.body.Contract,
       Publish: req.body.Publish,
       image_user: req.files[0].path,
-      banner_video: req.files[1].path,
-      Trailer_video: req.files[2].path,
+      Trailer_video: req.files[1].path,
+      banner_video: req.files[2].path,
+      User_Id: req.headers.userid,
     };
 
-    const tag = await video.create(data);
-
+    var tag = await video.create(data);
     res.status(201).json({
       data: tag,
       status: "Data insert",
     });
-    console.log(tag);
-  } catch (error) {
-    res.status(201).json({
-      status: "Data not insret",
-      error: error,
-    });
-  }
+  } catch {}
 };
 
 exports.vifind_data = async function (req, res, next) {
@@ -652,7 +755,7 @@ exports.vifind_data = async function (req, res, next) {
 exports.banner_find = async function (req, res, next) {
   // try {
   const tag = await video.find({
-    Publish: "Yes",
+    banner: "Yes",
   });
   res.status(200).json({
     status: "find data",
@@ -661,6 +764,20 @@ exports.banner_find = async function (req, res, next) {
   // } catch (error) {
   //   console.log("not find data........!");
   // }
+};
+
+exports.banner_find_id = async function (req, res, next) {
+  try {
+    const tag = await video.findById(req.params.id);
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    res.status(200).json({
+      status: false,
+    });
+  }
 };
 
 // exports.video_find = async function (req, res, next) {
@@ -682,33 +799,38 @@ exports.banner_find = async function (req, res, next) {
 // };
 
 exports.demo_data = async function (req, res, next) {
-  // try {
-  // console.log(req.body)
-
   const tag = await video.findById(req.params.id);
   var filePath = tag.banner_video;
 
-  var a = fs.statSync(filePath);
+  // var a = fs.statSync(filePath);
 
-  res.writeHead(200, {
-    "Content-Type": "video/mp4",
-    "Content-Length": a.size,
-    "Accept-Ranges": "bytes",
-  });
-
-  var readStream = fs.createReadStream(filePath);
-  readStream.pipe(res);
-
-  // res.status(200).json({
-  //   status: "find data",
-  //   data: [tag],
+  // res.writeHead(200, {
+  //   "Content-Type": "video/mp4",
+  //   "Content-Length": a.size,
+  //   "Accept-Ranges": "bytes",
   // });
-  // } catch (error) {
-  //   res.status(200).json({
-  //     status: "find data",
-  //     data: [],
-  //   });
-  // }
+
+  // var readStream = fs.createReadStream(filePath);
+  // readStream.pipe(res);
+
+  if (tag.Subscribe == "Free") {
+    var a = fs.statSync(filePath);
+
+    res.writeHead(200, {
+      "Content-Type": "video/mp4",
+      "Content-Length": a.size,
+      "Accept-Ranges": "bytes",
+      status: true,
+    });
+
+    var readStream = fs.createReadStream(filePath);
+    readStream.pipe(res);
+  } else {
+    console.log("this is Paid...");
+    res.json({
+      status: false,
+    });
+  }
 };
 
 exports.latest_find = async function (req, res, next) {
@@ -850,7 +972,7 @@ exports.Contract_find_data = async function (req, res, next) {
 exports.Contract_data = async function (req, res, next) {
   try {
     const { jsPDF } = require("jspdf");
-
+    var status = 2;
     const doc = new jsPDF();
     doc.text(
       "******************************* Contract *******************************",
@@ -875,7 +997,7 @@ exports.Contract_data = async function (req, res, next) {
     var name = "Contact pdf-" + Date.now();
     var pdf = `upload/pdf/${name}.pdf`;
     doc.save(pdf);
-    console.log(req);
+    // console.log(req.headers.user_id);
     const data = {
       Movie_Name: req.body.Movie_Name,
       Provider_Name: req.body.Provider_Name,
@@ -892,6 +1014,7 @@ exports.Contract_data = async function (req, res, next) {
       DIN: req.body.DIN,
       Contract_pdf: pdf,
       User_Id: req.headers.user_id,
+      Status: status,
     };
 
     const tag = await Contract.create(data);
@@ -913,8 +1036,7 @@ exports.Status_data = async function (req, res, next) {
   try {
     var BannerData = await Contract.findById(req.body.Id);
     BannerData.Status = req.body.Status;
-    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
-
+    console.log(req.body.Status);
     if (req.body.Status == 2) {
       var transporter = nodemailer.createTransport({
         service: "gmail",
@@ -949,7 +1071,8 @@ exports.Status_data = async function (req, res, next) {
     } else {
       console.log("Email Not Send....!");
     }
-
+    console.log(req.body.Id);
+    var tag = await Contract.findByIdAndUpdate(req.body.Id, BannerData);
     res.status(201).json({
       status: "success",
       data: tag,
@@ -1021,5 +1144,70 @@ exports.client_login = async function (req, res, next) {
     });
   } else {
     res.send({ status: false, message: "not valid username and password" });
+  }
+};
+
+exports.new = async function (req, res, next) {
+  try {
+    const tag = await Country.find({});
+  } catch (error) {}
+};
+
+exports.Subscribe_data = async function (req, res, next) {
+  try {
+    const tag = await video.find();
+    res.status(200).json({
+      status: "find data",
+      data: tag,
+    });
+  } catch (error) {
+    console.log("not find data........!");
+  }
+};
+
+exports.orders = async function (req, res, next) {
+  try {
+    var instance = new Razorpay({
+      key_id: "rzp_test_ii0W1QDV7ASF82",
+      key_secret: "IT15QuqA3ITcGyygcZdogiPt",
+    });
+
+    const options = {
+      amount: req.body.amount * 100,
+      currency: "INR",
+      receipt: crypto.randomBytes(10).toString("hex"),
+    };
+
+    instance.orders.create(options, (error, order) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Something Went Wrong!" });
+      }
+      res.status(200).json({ data: order });
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(error);
+  }
+};
+
+exports.verify = async function (req, res, next) {
+  try {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+      req.body;
+    const sign = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSign = crypto
+      .createHmac("sha256", IT15QuqA3ITcGyygcZdogiPt)
+      .update(sign.toString())
+      .digest("hex");
+
+    if (razorpay_signature === expectedSign) {
+      return res.status(200).json({ message: "Payment verified successfully" });
+    } else {
+      return res.status(400).json({ message: "Invalid signature sent!" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error!" });
+    console.log(error);
   }
 };

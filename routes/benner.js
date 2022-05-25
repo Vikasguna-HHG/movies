@@ -44,6 +44,8 @@ router.get('/search/:key',BannerController.search_data);
 
 router.get('/getjoindata',BannerController.get_join_data);
 router.get('/findCountry',BannerController.findCountry);
+router.get('/singlecountry',BannerController.singlecountry);
+
 
 router.get('/getlocation', BannerController.getlocation)
 //parth
@@ -83,7 +85,7 @@ router.delete('/kDeleteBanner/:id', verifyToken,upload.single('image'), BannerCo
 //keyur api end
 
 router.get('/bannerfind',verifyToken,BannerController.banner_find);
-// router.post('/videofind',BannerController.video_find);
+router.get('/bannerfind_id/:id',BannerController.banner_find_id);
 router.get('/Latest',verifyToken,BannerController.latest_find);
 router.get('/Upcoming',verifyToken,BannerController.Upcoming_find);
 
@@ -92,14 +94,15 @@ router.post('/Contract',verifyToken,upload.single('image'), BannerController.Con
 router.get('/demo/:id',BannerController.demo_data);
 router.get('/Contract_find_data',BannerController.Contract_find_data)
 router.post('/Contract_update_data',upload.single('image'), BannerController.Status_data);  
-// router.get('/demo/:id',BannerController.demo_data);
 
 
-
-
+//client panel login - registered
 router.post('/User',upload.single('image'),BannerController.User_data);
 router.post('/login',upload.single('image'),BannerController.client_login);
-// router.post('/Userfind',upload.single('image'),BannerController.User_find);
-// router.post('/Register',upload.single('image'),BannerController.Register_data);
+router.get('/Subscribe',BannerController.Subscribe_data);
+
+//payment getway
+router.post('/orders',BannerController.orders);
+router.post('/verify',BannerController.verify);
 
 module.exports = router;

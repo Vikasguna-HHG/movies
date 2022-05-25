@@ -25,7 +25,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [User_Name, setUser_Name] = useState('')
   const [Password, setPassword] = useState('')
-  const [_, userId,sid, handleLoginState] = useContext(AppContext)
+  const [_, userId, sid, handleLoginState] = useContext(AppContext)
 
   localStorage.removeItem('user-info')
 
@@ -37,7 +37,7 @@ const Login = () => {
         localStorage.setItem('sid', res.data.User.sid)
         localStorage.setItem('userId', res.data.User._id)
         localStorage.setItem('token', res.data.auth)
-        localStorage.setItem('userName', res.data.User.User_Name)
+        // localStorage.setItem('userName', res.data.User.User_Name)
 
         window.location.href = window.location.href
       } else {
@@ -49,12 +49,10 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (userId){
+    if (userId) {
       navigate('/base/View_Video')
-    } 
+    }
   }, [])
-
-
 
   // const data = useContext(Appcontext)
   return (
