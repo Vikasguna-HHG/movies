@@ -40,6 +40,7 @@ const verifyToken = (req, res, next) => {
     res.status(403).send({ result: "403 Forbidden" });
   }
 };
+router.get('/search/:key',BannerController.search_data);
 
 router.get('/getjoindata',BannerController.get_join_data);
 router.get('/findCountry',BannerController.findCountry);

@@ -33,6 +33,25 @@ const jwt = require("jsonwebtoken");
 const { match } = require("assert");
 const jwtkey = "movies-hhg";
 
+exports.search_data = async function(req,res,next){
+
+  let data = await video.find(
+    {
+      "$or":[
+        {Title:{$regex:req.params.key}},
+        // {Discription:{$regex:req.params.key}},
+        // {Cast:{$regex:req.params.key}},
+        // {Country:{$regex:req.params.key}},
+        // {Categoires:{$regex:req.params.key}},
+      ]
+    }
+  );
+  res.send(data);
+  console.log(data);
+
+}
+
+
 exports.findCountry = async function (req, res, next) {
   try {
     const tag = await Country.find();
