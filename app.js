@@ -57,3 +57,11 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+
+
+// git init
+// git add .
+// git commit -m "My first commit"
+// heroku create
+// git push heroku master
