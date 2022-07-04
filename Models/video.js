@@ -46,9 +46,9 @@ const video1 = new mongoose.Schema({
   banner_video: {
     type: String,
   },
-  User_Id: {
-    type: Schema.ObjectId,
-  },
+  // User_Id: {
+  //   type: Schema.ObjectId,
+  // },
 });
 const video = new mongoose.model("video", video1);
 module.exports = video;

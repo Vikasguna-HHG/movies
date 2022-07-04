@@ -711,29 +711,35 @@ exports.viinsert_data = async function (req, res, next) {
     // console.log(req.headers);
     var data = {
       Title: req.body.Title,
+      Rating: req.body.Rating,
       Subscribe: req.body.Subscribe,
       Categoires: req.body.Categoires,
       SubCategoires: req.body.SubCategoires,
-      Rating: req.body.Rating,
       Discription: req.body.Discription,
+      Contract: req.body.Contract,
       Trailer_time: req.body.Trailer_time,
       Video_time: req.body.Video_time,
       Country: req.body.Country,
-      Cast: req.body.Cast,
-      Contract: req.body.Contract,
+      Cast: req.body.Cast,      
       Publish: req.body.Publish,
       image_user: req.files[0].path,
       Trailer_video: req.files[1].path,
       banner_video: req.files[2].path,
-      User_Id: req.headers.userid,
+      // User_Id: req.headers.userid,
     };
 
+    // console.log(data);
     var tag = await video.create(data);
     res.status(201).json({
+      
       data: tag,
       status: "Data insert",
     });
-  } catch {}
+
+  } catch(error) {
+    console.log("hello ");
+  }
+
 };
 
 exports.vifind_data = async function (req, res, next) {
@@ -1024,7 +1030,7 @@ exports.Contract_data = async function (req, res, next) {
     });
     // console.log(tag);
   } catch (error) {
-    res.status(201).json({ error });
+    // res.status(201).json({ error });
     res.status(201).json({
       // data: tag,
       status: "Data not insert",

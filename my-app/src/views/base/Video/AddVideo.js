@@ -79,17 +79,18 @@ function AddVideo() {
 
 
   const saveFile = (e) => {
-    console.log(e)
+    // console.log(e)
     setImageval(e.target.files[0])
     // setbanner_img(e.target.files[0])
   }
   const saveFile1 = (e) => {
-    console.log(e.target)
+    // console.log(e.target)
     setbanner_video(e.target.files[0])
   }
 
+  debugger
   const saveFile2 = (e) => {
-    console.log(e.target)
+    // console.log(e.target)
     setTrailer_video(e.target.files[0])
   }
 
